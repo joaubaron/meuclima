@@ -1819,8 +1819,34 @@ const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
 const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
 const openMoonModal = () => {
-window.open('https://moon.nasa.gov/module/17/#fullscreen', '_system');
+const modal = document.createElement('div');
+modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000c1a;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;color:white;';
+const titulo = document.createElement('div');
+titulo.style.cssText = 'font-size:22px;font-weight:bold;color:#ffeb3b;margin-bottom:8px;';
+titulo.textContent = moonInfo.emoji + ' ' + moonInfo.pt;
+const sub = document.createElement('div');
+sub.style.cssText = 'font-size:14px;color:#ccc;margin-bottom:24px;';
+sub.textContent = 'Iluminação: ' + iluminacaoValor + '%';
+const svgNS = 'http://www.w3.org/2000/svg';
+const svg = document.createElementNS(svgNS, 'svg');
+svg.setAttribute('width','200');svg.setAttribute('height','200');svg.setAttribute('viewBox','0 0 200 200');
+const defs = document.createElementNS(svgNS,'defs');
+const clip = document.createElementNS(svgNS,'clipPath');clip.setAttribute('id','mc');
+const cc = document.createElementNS(svgNS,'circle');cc.setAttribute('cx','100');cc.setAttribute('cy','100');cc.setAttribute('r','80');
+clip.appendChild(cc);defs.appendChild(clip);svg.appendChild(defs);
+const bg = document.createElementNS(svgNS,'circle');bg.setAttribute('cx','100');bg.setAttribute('cy','100');bg.setAttribute('r','80');bg.setAttribute('fill','#1a1a2e');svg.appendChild(bg);
+const pct = iluminacaoValor / 100;
+const isMinguante = moonInfo.pt.toLowerCase().includes('minguante');
+const lit = document.createElementNS(svgNS,'ellipse');lit.setAttribute('cx','100');lit.setAttribute('cy','100');lit.setAttribute('ry','80');lit.setAttribute('fill','#fffde7');lit.setAttribute('clip-path','url(#mc)');
+const rx = Math.round(Math.abs(pct * 2 - 1) * 80);lit.setAttribute('rx',rx);
+const offset = 80 - rx;
+if (!isMinguante) { lit.setAttribute('transform','translate(' + (pct<=0.5 ? offset : -offset) + ',0)'); }
+else { lit.setAttribute('transform','translate(' + (pct<=0.5 ? -offset : offset) + ',0)'); }
+svg.appendChild(lit);
+const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:1px solid #ffeb3b;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer;';closeBtn.onclick=()=>document.body.removeChild(modal);
+modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.appendChild(closeBtn);document.body.appendChild(modal);
 };
+
 
 const moonHTML = `
 <div class="info-inline moon-text" style="font-size: 1.1em; overflow-x: auto;">
