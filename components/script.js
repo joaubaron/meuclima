@@ -1831,7 +1831,6 @@ z-index: 10000;
 display: flex;
 flex-direction: column;
 `;
-
 const closeBtn = document.createElement('button');
 closeBtn.innerHTML = 'Fechar';
 closeBtn.style.cssText = `
@@ -1847,7 +1846,6 @@ z-index: 10001;
 font-size: 12px;
 font-weight: bold;
 `;
-
 const iframe = document.createElement('iframe');
 iframe.src = 'https://moon.nasa.gov/module/17/#fullscreen';
 iframe.style.cssText = `
@@ -1856,11 +1854,9 @@ height: 100%;
 border: none;
 background: white;
 `;
-
 closeBtn.onclick = () => {
 document.body.removeChild(modal);
 };
-
 modal.appendChild(closeBtn);
 modal.appendChild(iframe);
 document.body.appendChild(modal);
