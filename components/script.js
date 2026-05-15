@@ -1819,47 +1819,7 @@ const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
 const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
 const openMoonModal = () => {
-const modal = document.createElement('div');
-modal.style.cssText = `
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0,0,0,0.9);
-z-index: 10000;
-display: flex;
-flex-direction: column;
-`;
-const closeBtn = document.createElement('button');
-closeBtn.innerHTML = 'Fechar';
-closeBtn.style.cssText = `
-position: absolute;
-top: 10px;
-left: 15px;
-background: transparent;
-color: #fff;
-border: none;
-padding: 8px 12px;
-cursor: pointer;
-z-index: 10001;
-font-size: 12px;
-font-weight: bold;
-`;
-const iframe = document.createElement('iframe');
-iframe.src = 'https://moon.nasa.gov/module/17/#fullscreen';
-iframe.style.cssText = `
-width: 100%;
-height: 100%;
-border: none;
-background: white;
-`;
-closeBtn.onclick = () => {
-document.body.removeChild(modal);
-};
-modal.appendChild(closeBtn);
-modal.appendChild(iframe);
-document.body.appendChild(modal);
+window.open('https://moon.nasa.gov/module/17/#fullscreen', '_system');
 };
 
 const moonHTML = `
