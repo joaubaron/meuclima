@@ -1834,6 +1834,20 @@ const clip = document.createElementNS(svgNS,'clipPath');clip.setAttribute('id','
 const cc = document.createElementNS(svgNS,'circle');cc.setAttribute('cx','100');cc.setAttribute('cy','100');cc.setAttribute('r','80');
 clip.appendChild(cc);defs.appendChild(clip);svg.appendChild(defs);
 const bg = document.createElementNS(svgNS,'circle');bg.setAttribute('cx','100');bg.setAttribute('cy','100');bg.setAttribute('r','80');bg.setAttribute('fill','#1a1a2e');svg.appendChild(bg);
+// Textura lunar: crateras sobre o fundo escuro
+const cratersData = [
+  [72,65,10],[130,80,7],[55,120,6],[140,130,12],[90,150,5],
+  [115,50,8],[60,90,4],[145,75,5],[80,105,7],[120,155,6],
+  [100,85,9],[50,145,5],[135,110,4],[75,55,5],[110,130,8]
+];
+cratersData.forEach(([cx,cy,r]) => {
+  const cr = document.createElementNS(svgNS,'circle');
+  cr.setAttribute('cx',cx);cr.setAttribute('cy',cy);cr.setAttribute('r',r);
+  cr.setAttribute('fill','#0d0d1f');
+  cr.setAttribute('opacity','0.55');
+  cr.setAttribute('clip-path','url(#mc)');
+  svg.appendChild(cr);
+});
 const pct = iluminacaoValor / 100;
 const isMinguante = moonInfo.pt.toLowerCase().includes('minguante');
 // Elipse clipada: rx proporcional ao pct, deslocada para a borda iluminada
