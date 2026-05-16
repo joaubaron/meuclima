@@ -1820,12 +1820,12 @@ const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
 const openMoonModal = () => {
 const modal = document.createElement('div');
-modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000c1a;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;color:white;';
+modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#002244;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;color:white;';
 const titulo = document.createElement('div');
 titulo.style.cssText = 'font-size:22px;font-weight:bold;color:#ffeb3b;margin-bottom:8px;';
 titulo.textContent = moonInfo.emoji + ' ' + moonInfo.pt;
 const sub = document.createElement('div');
-sub.style.cssText = 'font-size:14px;color:#ccc;margin-bottom:24px;';
+sub.style.cssText = 'font-size:14px;color:#ccc;margin-top:16px;margin-bottom:0;';
 sub.textContent = 'Iluminação: ' + iluminacaoValor + '%';
 const svgNS = 'http://www.w3.org/2000/svg';
 const svg = document.createElementNS(svgNS, 'svg');
@@ -1843,7 +1843,7 @@ const offset = 80 - rx;
 if (!isMinguante) { lit.setAttribute('transform','translate(' + (pct<=0.5 ? offset : -offset) + ',0)'); }
 else { lit.setAttribute('transform','translate(' + (pct<=0.5 ? -offset : offset) + ',0)'); }
 svg.appendChild(lit);
-const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:1px solid #ffeb3b;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer;';closeBtn.onclick=()=>document.body.removeChild(modal);
+const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:none;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer;';closeBtn.onclick=()=>document.body.removeChild(modal);
 modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.appendChild(closeBtn);document.body.appendChild(modal);
 };
 
