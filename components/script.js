@@ -1858,6 +1858,7 @@ cratersData.forEach(([cx,cy,r]) => {
   cdark.setAttribute('clip-path','url(#mc)');
   svg.appendChild(cdark);
 });
+const pct = iluminacaoValor / 100;
 const isMinguante = moonInfo.pt.toLowerCase().includes('minguante');
 // Elipse clipada: rx proporcional ao pct, deslocada para a borda iluminada
 const rxLit = Math.max(0.5, pct * 80);
