@@ -1818,228 +1818,34 @@ const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
 const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
 const openMoonModal = () => {
-    const modal = document.createElement('div');
-
-    modal.style.cssText = `
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background:#000c1a;
-        z-index:10000;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-        font-family:sans-serif;
-        color:white;
-    `;
-
-    const titulo = document.createElement('div');
-    titulo.style.cssText = `
-        font-size:22px;
-        font-weight:bold;
-        color:#ffeb3b;
-        margin-bottom:8px;
-    `;
-    titulo.textContent = moonInfo.emoji + ' ' + moonInfo.pt;
-
-    const sub = document.createElement('div');
-    sub.style.cssText = `
-        font-size:14px;
-        color:#ccc;
-        margin-bottom:24px;
-    `;
-    sub.textContent = 'Iluminação: ' + iluminacaoValor + '%';
-
-    const svgNS = 'http://www.w3.org/2000/svg';
-
-    const svg = document.createElementNS(svgNS, 'svg');
-    svg.setAttribute('width', '200');
-    svg.setAttribute('height', '200');
-    svg.setAttribute('viewBox', '0 0 200 200');
-
-    // Fundo escuro da lua
-    const darkMoon = document.createElementNS(svgNS, 'circle');
-    darkMoon.setAttribute('cx', '100');
-    darkMoon.setAttribute('cy', '100');
-    darkMoon.setAttribute('r', '80');
-    darkMoon.setAttribute('fill', '#1a1a2e');
-
-    svg.appendChild(darkMoon);
-
-    // Área iluminada
-    const illumination = iluminacaoValor / 100;
-
-    const lightMoon = document.createElementNS(svgNS, 'ellipse');
-    lightMoon.setAttribute('cx', '100');
-    lightMoon.setAttribute('cy', '100');
-
-    // CORREÇÃO AQUI
-    lightMoon.setAttribute('rx', Math.max(1, illumination * 80));
-
-    lightMoon.setAttribute('ry', '80');
-    lightMoon.setAttribute('fill', '#fffde7');
-
-    const isMinguante =
-        moonInfo.pt.toLowerCase().includes('minguante');
-
-    // deslocamento correto
-    const offset = 80 - (illumination * 80);
-
-    if (isMinguante) {
-        lightMoon.setAttribute(
-            'transform',
-            `translate(${offset},0)`
-        );
-    } else {
-        lightMoon.setAttribute(
-            'transform',
-            `translate(${-offset},0)`
-        );
-    }
-const openMoonModal = () => {
-
-    const modal = document.createElement('div');
-
-    modal.style.cssText = `
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background:#000c1a;
-        z-index:10000;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-        font-family:sans-serif;
-        color:white;
-    `;
-
-    const titulo = document.createElement('div');
-
-    titulo.style.cssText = `
-        font-size:22px;
-        font-weight:bold;
-        color:#ffeb3b;
-        margin-bottom:8px;
-    `;
-
-    titulo.textContent = moonInfo.emoji + ' ' + moonInfo.pt;
-
-    const sub = document.createElement('div');
-
-    sub.style.cssText = `
-        font-size:14px;
-        color:#ccc;
-        margin-bottom:24px;
-    `;
-
-    sub.textContent = `Iluminação: ${iluminacaoValor}%`;
-
-    const svgNS = 'http://www.w3.org/2000/svg';
-
-    const svg = document.createElementNS(svgNS, 'svg');
-
-    svg.setAttribute('width', '220');
-    svg.setAttribute('height', '220');
-    svg.setAttribute('viewBox', '0 0 220 220');
-
-    // círculo base
-    const base = document.createElementNS(svgNS, 'circle');
-
-    base.setAttribute('cx', '110');
-    base.setAttribute('cy', '110');
-    base.setAttribute('r', '80');
-    base.setAttribute('fill', '#1b1b35');
-
-    svg.appendChild(base);
-
-    // iluminação
-    const pct = iluminacaoValor / 100;
-
-    // largura iluminada REAL
-    const lightWidth = Math.max(1, pct * 160);
-
-    const light = document.createElementNS(svgNS, 'rect');
-
-    light.setAttribute('y', '30');
-    light.setAttribute('height', '160');
-    light.setAttribute('fill', '#fffde7');
-
-    const isMinguante =
-        moonInfo.pt.toLowerCase().includes('minguante');
-
-    if (isMinguante) {
-        light.setAttribute('x', 190 - lightWidth);
-    } else {
-        light.setAttribute('x', 30);
-    }
-
-    light.setAttribute('width', lightWidth);
-
-    // clip dentro da lua
-    const defs = document.createElementNS(svgNS, 'defs');
-
-    const clip = document.createElementNS(svgNS, 'clipPath');
-
-    clip.setAttribute('id', 'moonClip');
-
-    const clipCircle = document.createElementNS(svgNS, 'circle');
-
-    clipCircle.setAttribute('cx', '110');
-    clipCircle.setAttribute('cy', '110');
-    clipCircle.setAttribute('r', '80');
-
-    clip.appendChild(clipCircle);
-
-    defs.appendChild(clip);
-
-    svg.appendChild(defs);
-
-    light.setAttribute('clip-path', 'url(#moonClip)');
-
-    svg.appendChild(light);
-
-    // borda
-    const border = document.createElementNS(svgNS, 'circle');
-
-    border.setAttribute('cx', '110');
-    border.setAttribute('cy', '110');
-    border.setAttribute('r', '80');
-    border.setAttribute('fill', 'none');
-    border.setAttribute('stroke', '#2d2d55');
-    border.setAttribute('stroke-width', '2');
-
-    svg.appendChild(border);
-
-    const closeBtn = document.createElement('button');
-
-    closeBtn.textContent = 'Fechar';
-
-    closeBtn.style.cssText = `
-        margin-top:28px;
-        background:transparent;
-        border:1px solid #ffeb3b;
-        color:#ffeb3b;
-        padding:8px 28px;
-        border-radius:20px;
-        font-size:14px;
-        cursor:pointer;
-    `;
-
-    closeBtn.onclick = () => document.body.removeChild(modal);
-
-    modal.appendChild(titulo);
-    modal.appendChild(svg);
-    modal.appendChild(sub);
-    modal.appendChild(closeBtn);
-
-    document.body.appendChild(modal);
+const modal = document.createElement('div');
+modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000c1a;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;color:white;';
+const titulo = document.createElement('div');
+titulo.style.cssText = 'font-size:22px;font-weight:bold;color:#ffeb3b;margin-bottom:8px;';
+titulo.textContent = moonInfo.emoji + ' ' + moonInfo.pt;
+const sub = document.createElement('div');
+sub.style.cssText = 'font-size:14px;color:#ccc;margin-bottom:24px;';
+sub.textContent = 'Iluminação: ' + iluminacaoValor + '%';
+const svgNS = 'http://www.w3.org/2000/svg';
+const svg = document.createElementNS(svgNS, 'svg');
+svg.setAttribute('width','200');svg.setAttribute('height','200');svg.setAttribute('viewBox','0 0 200 200');
+const defs = document.createElementNS(svgNS,'defs');
+const clip = document.createElementNS(svgNS,'clipPath');clip.setAttribute('id','mc');
+const cc = document.createElementNS(svgNS,'circle');cc.setAttribute('cx','100');cc.setAttribute('cy','100');cc.setAttribute('r','80');
+clip.appendChild(cc);defs.appendChild(clip);svg.appendChild(defs);
+const bg = document.createElementNS(svgNS,'circle');bg.setAttribute('cx','100');bg.setAttribute('cy','100');bg.setAttribute('r','80');bg.setAttribute('fill','#1a1a2e');svg.appendChild(bg);
+const pct = iluminacaoValor / 100;
+const isMinguante = moonInfo.pt.toLowerCase().includes('minguante');
+const lit = document.createElementNS(svgNS,'ellipse');lit.setAttribute('cx','100');lit.setAttribute('cy','100');lit.setAttribute('ry','80');lit.setAttribute('fill','#fffde7');lit.setAttribute('clip-path','url(#mc)');
+const rx = Math.round(Math.abs(pct * 2 - 1) * 80);lit.setAttribute('rx',rx);
+const offset = 80 - rx;
+if (!isMinguante) { lit.setAttribute('transform','translate(' + (pct<=0.5 ? offset : -offset) + ',0)'); }
+else { lit.setAttribute('transform','translate(' + (pct<=0.5 ? -offset : offset) + ',0)'); }
+svg.appendChild(lit);
+const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:1px solid #ffeb3b;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer;';closeBtn.onclick=()=>document.body.removeChild(modal);
+modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.appendChild(closeBtn);document.body.appendChild(modal);
 };
+
 
 const moonHTML = `
 <div class="info-inline moon-text" style="font-size: 1.1em; overflow-x: auto;">
