@@ -1,4 +1,3 @@
-// ── Variáveis globais ──────────────────────────────────────────────────────
 let touchStartY = 0;
 let isPulling = false;
 let isRefreshing = false;
@@ -1838,9 +1837,7 @@ const bg = document.createElementNS(svgNS,'circle');bg.setAttribute('cx','100');
 const pct = iluminacaoValor / 100;
 const isMinguante = moonInfo.pt.toLowerCase().includes('minguante');
 const lit = document.createElementNS(svgNS,'ellipse');lit.setAttribute('cx','100');lit.setAttribute('cy','100');lit.setAttribute('ry','80');lit.setAttribute('fill','#fffde7');lit.setAttribute('clip-path','url(#mc)');
-// CORREÇÃO AQUI: removeu o Math.abs(pct * 2 - 1)
-const rx = Math.round(pct * 80);
-lit.setAttribute('rx', rx);
+const rx = Math.round(Math.abs(pct * 2 - 1) * 80);lit.setAttribute('rx',rx);
 const offset = 80 - rx;
 if (!isMinguante) { lit.setAttribute('transform','translate(' + (pct<=0.5 ? offset : -offset) + ',0)'); }
 else { lit.setAttribute('transform','translate(' + (pct<=0.5 ? -offset : offset) + ',0)'); }
