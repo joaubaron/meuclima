@@ -1837,10 +1837,10 @@ const bg = document.createElementNS(svgNS,'circle');bg.setAttribute('cx','100');
 const pct = iluminacaoValor / 100;
 const isMinguante = moonInfo.pt.toLowerCase().includes('minguante');
 const lit = document.createElementNS(svgNS,'ellipse');lit.setAttribute('cx','100');lit.setAttribute('cy','100');lit.setAttribute('ry','80');lit.setAttribute('fill','#fffde7');lit.setAttribute('clip-path','url(#mc)');
-const rx = Math.round(Math.abs(pct * 2 - 1) * 80);lit.setAttribute('rx',rx);
+const rx = Math.round(pct * 80);lit.setAttribute('rx',rx);
 const offset = 80 - rx;
-if (!isMinguante) { lit.setAttribute('transform','translate(' + (pct<=0.5 ? offset : -offset) + ',0)'); }
-else { lit.setAttribute('transform','translate(' + (pct<=0.5 ? -offset : offset) + ',0)'); }
+if (!isMinguante) { lit.setAttribute('transform','translate(' + offset + ',0)'); }
+else { lit.setAttribute('transform','translate(' + (-offset) + ',0)'); }
 svg.appendChild(lit);
 const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:1px solid #ffeb3b;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer;';closeBtn.onclick=()=>document.body.removeChild(modal);
 modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.appendChild(closeBtn);document.body.appendChild(modal);
