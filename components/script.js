@@ -1899,15 +1899,119 @@ const openMoonModal = () => {
             `translate(${-offset},0)`
         );
     }
+const openMoonModal = () => {
 
-    svg.appendChild(lightMoon);
+    const modal = document.createElement('div');
 
+    modal.style.cssText = `
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:#000c1a;
+        z-index:10000;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        font-family:sans-serif;
+        color:white;
+    `;
+
+    const titulo = document.createElement('div');
+
+    titulo.style.cssText = `
+        font-size:22px;
+        font-weight:bold;
+        color:#ffeb3b;
+        margin-bottom:8px;
+    `;
+
+    titulo.textContent = moonInfo.emoji + ' ' + moonInfo.pt;
+
+    const sub = document.createElement('div');
+
+    sub.style.cssText = `
+        font-size:14px;
+        color:#ccc;
+        margin-bottom:24px;
+    `;
+
+    sub.textContent = `Iluminação: ${iluminacaoValor}%`;
+
+    const svgNS = 'http://www.w3.org/2000/svg';
+
+    const svg = document.createElementNS(svgNS, 'svg');
+
+    svg.setAttribute('width', '220');
+    svg.setAttribute('height', '220');
+    svg.setAttribute('viewBox', '0 0 220 220');
+
+    // círculo base
+    const base = document.createElementNS(svgNS, 'circle');
+
+    base.setAttribute('cx', '110');
+    base.setAttribute('cy', '110');
+    base.setAttribute('r', '80');
+    base.setAttribute('fill', '#1b1b35');
+
+    svg.appendChild(base);
+
+    // iluminação
+    const pct = iluminacaoValor / 100;
+
+    // largura iluminada REAL
+    const lightWidth = Math.max(1, pct * 160);
+
+    const light = document.createElementNS(svgNS, 'rect');
+
+    light.setAttribute('y', '30');
+    light.setAttribute('height', '160');
+    light.setAttribute('fill', '#fffde7');
+
+    const isMinguante =
+        moonInfo.pt.toLowerCase().includes('minguante');
+
+    if (isMinguante) {
+        light.setAttribute('x', 190 - lightWidth);
+    } else {
+        light.setAttribute('x', 30);
+    }
+
+    light.setAttribute('width', lightWidth);
+
+    // clip dentro da lua
+    const defs = document.createElementNS(svgNS, 'defs');
+
+    const clip = document.createElementNS(svgNS, 'clipPath');
+
+    clip.setAttribute('id', 'moonClip');
+
+    const clipCircle = document.createElementNS(svgNS, 'circle');
+
+    clipCircle.setAttribute('cx', '110');
+    clipCircle.setAttribute('cy', '110');
+    clipCircle.setAttribute('r', '80');
+
+    clip.appendChild(clipCircle);
+
+    defs.appendChild(clip);
+
+    svg.appendChild(defs);
+
+    light.setAttribute('clip-path', 'url(#moonClip)');
+
+    svg.appendChild(light);
+
+    // borda
     const border = document.createElementNS(svgNS, 'circle');
-    border.setAttribute('cx', '100');
-    border.setAttribute('cy', '100');
+
+    border.setAttribute('cx', '110');
+    border.setAttribute('cy', '110');
     border.setAttribute('r', '80');
     border.setAttribute('fill', 'none');
-    border.setAttribute('stroke', '#222');
+    border.setAttribute('stroke', '#2d2d55');
     border.setAttribute('stroke-width', '2');
 
     svg.appendChild(border);
