@@ -1836,11 +1836,23 @@ clip.appendChild(cc);defs.appendChild(clip);svg.appendChild(defs);
 const bg = document.createElementNS(svgNS,'circle');bg.setAttribute('cx','100');bg.setAttribute('cy','100');bg.setAttribute('r','80');bg.setAttribute('fill','#1a1a2e');svg.appendChild(bg);
 const pct = iluminacaoValor / 100;
 const isMinguante = moonInfo.pt.toLowerCase().includes('minguante');
-const ellipseRx = Math.abs(80 * (2 * pct - 1));
-const sweep1 = isMinguante ? 1 : 0;
-const sweep2 = isMinguante ? (pct <= 0.5 ? 1 : 0) : (pct <= 0.5 ? 0 : 1);
+// Fase lunar correta via path SVG:
+// Arco externo: semicírculo do lado iluminado (direito=crescente, esquerdo=minguante)
+// Arco interno: elipse que varia de côncavo (nova) a 0 (quarto) a convexo (cheia)
+const rx2 = Math.round(Math.abs(2 * pct - 1) * 80); // 0..80
 const litPath = document.createElementNS(svgNS,'path');
-const d = 'M 100 20 A 80 80 0 0 ' + sweep1 + ' 100 180 A ' + ellipseRx + ' 80 0 0 ' + sweep2 + ' 100 20 Z';
+let d;
+if (!isMinguante) {
+  // Crescente: lado direito
+  // pct<=0.5: arco externo direito (sweep=0) + arco interno convexo para esquerda (sweep=0)
+  // pct>0.5:  arco externo direito (sweep=0) + arco interno côncavo para direita (sweep=1)
+  const innerSweep = pct <= 0.5 ? 0 : 1;
+  d = 'M 100 20 A 80 80 0 0 1 100 180 A ' + rx2 + ' 80 0 0 ' + innerSweep + ' 100 20 Z';
+} else {
+  // Minguante: lado esquerdo
+  const innerSweep = pct <= 0.5 ? 1 : 0;
+  d = 'M 100 20 A 80 80 0 0 0 100 180 A ' + rx2 + ' 80 0 0 ' + innerSweep + ' 100 20 Z';
+}
 litPath.setAttribute('d', d);
 litPath.setAttribute('fill','#fffde7');
 svg.appendChild(litPath);
