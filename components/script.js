@@ -1861,6 +1861,15 @@ litEl.setAttribute('ry','80');
 litEl.setAttribute('fill','#fffde7');
 litEl.setAttribute('clip-path','url(#mc)');
 svg.appendChild(litEl);
+// Camada de crateras sobre a área iluminada (cor escura translúcida visível no claro)
+cratersData.forEach(([cx,cy,r]) => {
+  const cr2 = document.createElementNS(svgNS,'circle');
+  cr2.setAttribute('cx',cx);cr2.setAttribute('cy',cy);cr2.setAttribute('r',r);
+  cr2.setAttribute('fill','#c8a800');
+  cr2.setAttribute('opacity','0.28');
+  cr2.setAttribute('clip-path','url(#mc)');
+  svg.appendChild(cr2);
+});
 const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:none;outline:none;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer;';closeBtn.addEventListener('focus',()=>closeBtn.style.outline='none');closeBtn.addEventListener('mousedown',e=>e.preventDefault());closeBtn.onclick=()=>document.body.removeChild(modal);
 modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.appendChild(closeBtn);document.body.appendChild(modal);
 };
