@@ -1821,7 +1821,7 @@ const openMoonModal = () => {
 const modal = document.createElement('div');
 modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000c1a;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;color:white;';
 const titulo = document.createElement('div');
-titulo.style.cssText = 'font-size:22px;font-weight:bold;color:#ffeb3b;margin-bottom:8px;';
+titulo.style.cssText = 'font-size:18px;font-weight:bold;color:#ffeb3b;margin-bottom:8px;';
 titulo.textContent = moonInfo.emoji + ' ' + moonInfo.pt;
 const sub = document.createElement('div');
 sub.style.cssText = 'font-size:14px;color:#ccc;margin-bottom:24px;';
