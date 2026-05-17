@@ -1861,10 +1861,9 @@ litEl.setAttribute('ry','80');
 litEl.setAttribute('fill','#fffde7');
 litEl.setAttribute('clip-path','url(#mc)');
 svg.appendChild(litEl);
-const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:1px solid #ffeb3b;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer;';closeBtn.onclick=()=>document.body.removeChild(modal);
+const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer;';closeBtn.onclick=()=>document.body.removeChild(modal);
 modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.appendChild(closeBtn);document.body.appendChild(modal);
 };
-
 
 const moonHTML = `
 <div class="info-inline moon-text" style="font-size: 1.1em; overflow-x: auto;">
