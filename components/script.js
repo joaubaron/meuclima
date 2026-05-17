@@ -1834,25 +1834,30 @@ const clip = document.createElementNS(svgNS,'clipPath');clip.setAttribute('id','
 const cc = document.createElementNS(svgNS,'circle');cc.setAttribute('cx','100');cc.setAttribute('cy','100');cc.setAttribute('r','80');
 clip.appendChild(cc);defs.appendChild(clip);svg.appendChild(defs);
 const bg = document.createElementNS(svgNS,'circle');bg.setAttribute('cx','100');bg.setAttribute('cy','100');bg.setAttribute('r','80');bg.setAttribute('fill','#1a1a2e');svg.appendChild(bg);
-// Textura lunar: crateras sobre o fundo escuro
 const cratersData = [
   [72,65,10],[130,80,7],[55,120,6],[140,130,12],[90,150,5],
   [115,50,8],[60,90,4],[145,75,5],[80,105,7],[120,155,6],
   [100,85,9],[50,145,5],[135,110,4],[75,55,5],[110,130,8]
 ];
+// Crateras sutis na parte escura
 cratersData.forEach(([cx,cy,r]) => {
   const cr = document.createElementNS(svgNS,'circle');
   cr.setAttribute('cx',cx);cr.setAttribute('cy',cy);cr.setAttribute('r',r);
   cr.setAttribute('fill','#0d0d1f');
-  cr.setAttribute('opacity','0.55');
+  cr.setAttribute('opacity','0.22');
   cr.setAttribute('clip-path','url(#mc)');
   svg.appendChild(cr);
 });
 const pct = iluminacaoValor / 100;
 const isMinguante = moonInfo.pt.toLowerCase().includes('minguante');
-// Elipse clipada: rx proporcional ao pct, deslocada para a borda iluminada
 const rxLit = Math.max(0.5, pct * 80);
 const cxLit = isMinguante ? (100 - (80 - rxLit)) : (100 + (80 - rxLit));
+// ClipPath exclusivo para a área iluminada
+const clipLit = document.createElementNS(svgNS,'clipPath');clipLit.setAttribute('id','mclit');
+const ellipseClip = document.createElementNS(svgNS,'ellipse');
+ellipseClip.setAttribute('cx',cxLit.toFixed(1));ellipseClip.setAttribute('cy','100');
+ellipseClip.setAttribute('rx',rxLit.toFixed(1));ellipseClip.setAttribute('ry','80');
+clipLit.appendChild(ellipseClip);defs.appendChild(clipLit);
 const litEl = document.createElementNS(svgNS,'ellipse');
 litEl.setAttribute('cx', cxLit.toFixed(1));
 litEl.setAttribute('cy','100');
@@ -1861,13 +1866,13 @@ litEl.setAttribute('ry','80');
 litEl.setAttribute('fill','#fffde7');
 litEl.setAttribute('clip-path','url(#mc)');
 svg.appendChild(litEl);
-// Camada de crateras sobre a área iluminada (cor escura translúcida visível no claro)
+// Crateras sutis APENAS na parte iluminada
 cratersData.forEach(([cx,cy,r]) => {
   const cr2 = document.createElementNS(svgNS,'circle');
   cr2.setAttribute('cx',cx);cr2.setAttribute('cy',cy);cr2.setAttribute('r',r);
-  cr2.setAttribute('fill','#c8a800');
-  cr2.setAttribute('opacity','0.28');
-  cr2.setAttribute('clip-path','url(#mc)');
+  cr2.setAttribute('fill','#b8940a');
+  cr2.setAttribute('opacity','0.18');
+  cr2.setAttribute('clip-path','url(#mclit)');
   svg.appendChild(cr2);
 });
 const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:none;outline:none;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer;';closeBtn.addEventListener('focus',()=>closeBtn.style.outline='none');closeBtn.addEventListener('mousedown',e=>e.preventDefault());closeBtn.onclick=()=>document.body.removeChild(modal);
