@@ -1881,7 +1881,7 @@ modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.ap
 
 
 const moonHTML = `
-<div class="info-inline moon-text" style="font-size: 0.8em; overflow-x: auto;">
+<div class="info-inline moon-text" style="font-size: 1em; overflow-x: auto;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
 <span>
 <a href="#" 
