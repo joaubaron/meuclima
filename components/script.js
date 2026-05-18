@@ -1662,8 +1662,7 @@ cratersData.forEach(([cx,cy,r]) => {
   cr2.setAttribute('clip-path','url(#mclit)');
   svg.appendChild(cr2);
 });
-const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:none;outline:none;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer;';closeBtn.addEventListener('focus',()=>closeBtn.style.outline='none');closeBtn.addEventListener('mousedown',e=>e.preventDefault());closeBtn.onclick=()=>document.body.removeChild(modal);
-modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.appendChild(closeBtn);document.body.appendChild(modal);
+const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:none;outline:none;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;';closeBtn.addEventListener('focus',()=>closeBtn.style.outline='none');closeBtn.addEventListener('mousedown',e=>e.preventDefault());closeBtn.onclick=()=>document.body.removeChild(modal);
 };
 
 
@@ -1673,7 +1672,7 @@ const moonHTML = `
 <span>
 <a href="#" 
 onclick="openMoonModal(); return false;"
-style="color: inherit; text-decoration: none; cursor: pointer;">
+style="color: inherit; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none;">
 Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% ✨
 </a>
 </span>
