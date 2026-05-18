@@ -357,39 +357,39 @@ const faixaTemp = obterFaixaTemperatura(temp);
 
 const sugestoesTemp = {
 frio: [
-"Dia muito frio, vale um casaco confortável.",
-"Está bem frio, agasalhe-se bem para não sentir.",
-"Clima gelado, use várias camadas de roupa.",
-"Muito frio, não esqueça gorro e luvas.",
-"Temperaturas baixas, prefira roupas quentinhas."
+"Frio, use casaco.",
+"Bem frio, agasalhe-se.",
+"Gelado, use várias camadas.",
+"Muito frio, use gorro e luvas.",
+"Baixas, roupas quentes."
 ],
 fresco: [
-"Clima fresco, um casaco leve resolve fácil.",
-"Fresco e agradável, vista-se com uma blusa leve.",
-"Temperatura amena, um suéter é suficiente.",
-"Fresco, leve um casaco para o começo do dia.",
-"Fresquinho, ideal para roupas de meia estação."
+"Fresco, casaco leve.",
+"Fresco, blusa leve.",
+"Ameno, suéter basta.",
+"Fresco, leve casaco.",
+"Fresquinho, meia estação."
 ],
 agradável: [
-"Tempo agradável, roupas confortáveis e leves já bastam.",
-"Clima ideal, pode usar roupas casuais confortáveis.",
-"Temperatura boa, nada muito pesado ou muito leve.",
-"Agradável, ótimo para passeios ao ar livre.",
-"Temperatura amena, roupas confortáveis são ideais."
+"Agradável, roupas leves.",
+"Ideal, roupas casuais.",
+"Boa, nada pesado ou leve.",
+"Agradável, ótimo para passear.",
+"Amena, roupas confortáveis."
 ],
 calor: [
-"Dia quente, prefira roupas leves e tecidos que respiram.",
-"Calor moderado, roupa leve e protetor solar.",
-"Temperatura alta, prefira algodão e roupas frescas.",
-"Calor, ideal para roupas confortáveis e ventiladas.",
-"Dia quente, hidratante e roupas leves são essenciais."
+"Quente, roupas leves.",
+"Calor moderado, roupa leve e protetor.",
+"Alta, prefira algodão.",
+"Calor, roupas ventiladas.",
+"Quente, hidrate-se e use roupas leves."
 ],
 muitoCalor: [
-"Muito calor, vista-se bem leve e não esqueça de se hidratar.",
-"Calor intenso, evite roupas apertadas e fique na sombra.",
-"Temperaturas muito altas, use chapéu e roupas claras.",
-"Calor forte, roupas muito leves e bastante água.",
-"Dia de calorão, prefira tecidos naturais e refrescantes."
+"Muito calor, vista leve e hidrate-se.",
+"Calor intenso, evite roupas apertadas.",
+"Altas, use chapéu e roupas claras.",
+"Calor forte, roupas leves e água.",
+"Calorão, tecidos naturais."
 ]
 };
 
@@ -401,50 +401,50 @@ return lista[indice];
 let chaveTemp = faixaTemp;
 if (faixaTemp === "muito calor") chaveTemp = "muitoCalor";
 
-const parteTemp = pegarSugestaoAleatoria(sugestoesTemp[chaveTemp] || ["Clima desconhecido, vista-se conforme preferir"]);
+const parteTemp = pegarSugestaoAleatoria(sugestoesTemp[chaveTemp] || ["Clima desconhecido"]);
 
 const sugestoesChuva = {
 garoa: [
-" Pode garoar, vale levar uma proteção extra.",
-" Leve um capa leve para garantir.",
-" Chuvisco esperado, fique atento.",
-" Leve um guarda-chuva pequeno.",
-" Garoa leve, mas não esqueça a proteção."
+" Pode garoar, leve proteção.",
+" Leve capa leve.",
+" Chuvisco, atenção.",
+" Leve guarda-chuva pequeno.",
+" Garoa leve, não esqueça proteção."
 ],
 fraca: [
-" Chance de chuva fraca, então leve seu guarda-chuva.",
-" Pode chover de leve, tenha seu guarda-chuva à mão.",
-" Chuva leve prevista, vale proteger-se.",
-" Previsão de chuva fraca, não esqueça do guarda-chuva.",
-" Leve chuva esperada, prepare-se."
+" Chuva fraca, leve guarda-chuva.",
+" Pode chover leve, tenha guarda-chuva.",
+" Chuva leve, proteja-se.",
+" Chuva fraca, não esqueça guarda-chuva.",
+" Chuva leve esperada, prepare-se."
 ],
 moderada: [
-" Previsão de chuva moderada, não esqueça o guarda-chuva.",
-" Chuva moderada prevista, fique protegido.",
-" Vai chover, melhor levar guarda-chuva resistente.",
-" Chuva prevista, não esqueça a proteção.",
-" Previsão de chuva, prepare-se para se molhar."
+" Chuva moderada, não esqueça guarda-chuva.",
+" Chuva moderada, proteja-se.",
+" Vai chover, leve guarda-chuva.",
+" Chuva prevista, proteja-se.",
+" Previsão de chuva, prepare-se."
 ],
 forte: [
-" Chuva forte prevista, proteja-se bem para não molhar tudo.",
-" Chuva intensa, evite sair sem proteção.",
-" Fortes chuvas esperadas, cuidado ao sair.",
-" Chuva pesada, melhor evitar locais abertos.",
-" Previsão de tempestade, fique atento."
+" Chuva forte, proteja-se bem.",
+" Chuva intensa, não saia sem proteção.",
+" Chuvas fortes, cuidado.",
+" Chuva pesada, evite áreas abertas.",
+" Tempestade prevista, atenção."
 ],
 intensa: [
-" Muita chuva esperada, se puder, melhor ficar em casa.",
+" Muita chuva, melhor ficar em casa.",
 " Tempestade forte, evite sair.",
-" Risco alto de enchentes, tome cuidado.",
-" Chuva torrencial, segurança em primeiro lugar.",
-" Muita água prevista, proteja-se ao máximo."
+" Risco de enchentes, cuidado.",
+" Chuva torrencial, segurança primeiro.",
+" Muita água, proteja-se."
 ],
 semChuva: [
-" Sem previsão de chuva, pode sair tranquilo.",
-" Céu limpo, sem chuva esperada.",
-" Tempo seco, aproveite o dia.",
-" Sem chuva, dia perfeito para atividades ao ar livre.",
-" Clima seco, sem necessidade de proteção extra."
+" Sem chuva, pode sair.",
+" Céu limpo, sem chuva.",
+" Tempo seco, aproveite.",
+" Sem chuva, dia perfeito.",
+" Clima seco, sem proteção extra."
 ]
 };
 
@@ -461,77 +461,77 @@ const parteChuva = pegarSugestaoAleatoria(sugestoesChuva[chaveChuva]);
 
 const sugestoesVento = {
 calminho: [
-" Quase sem vento, dia bem calminho.",
-" Vento quase inexistente, perfeito para relaxar.",
-" Dia tranquilo, sem vento para atrapalhar.",
-" Ventania zero, aproveite a calmaria.",
-" Clima estável, vento quase nulo."
+" Quase sem vento, dia calmo.",
+" Vento quase zero, relaxe.",
+" Dia tranquilo, sem vento.",
+" Ventania zero, calmaria.",
+" Clima estável, vento nulo."
 ],
 brisaLeve: [
-" Brisa leve, perfeita para aproveitar ao ar livre.",
-" Ventinho agradável, bom para um passeio.",
+" Brisa leve, aproveite.",
+" Ventinho agradável.",
 " Brisa suave, clima gostoso.",
-" Vento leve, nada que incomode.",
+" Vento leve, não incomoda.",
 " Clima fresco com leve brisa."
 ],
 moderado: [
-" Vento moderado, prepare-se para aquela ventania.",
-" Ventania moderada, segure os chapéus.",
-" Vento presente, cuidado com papéis e folhas.",
-" Clima ventoso, bom para esportes ao ar livre.",
-" Vento médio, mantenha-se atento."
+" Vento moderado, prepare-se.",
+" Ventania moderada, segure chapéus.",
+" Vento presente, cuidado.",
+" Clima ventoso, bom para esportes.",
+" Vento médio, atenção."
 ],
 forte: [
-" Vento forte, atenção para não bagunçar o visual.",
-" Ventania forte, cuidado ao sair de casa.",
-" Vento potente, segure os objetos leves.",
-" Dia ventoso, melhor evitar locais abertos.",
+" Vento forte, atenção.",
+" Ventania forte, cuidado.",
+" Vento potente, segure objetos.",
+" Dia ventoso, evite áreas abertas.",
 " Vento agressivo, proteja-se."
 ],
 muitoForte: [
-" Vento muito forte, evite áreas abertas e cuide-se.",
-" Ventania intensa, melhor ficar protegido.",
-" Vento forte demais, evite sair sem necessidade.",
-" Ventos muito intensos, segurança em primeiro lugar.",
-" Clima perigoso devido ao vento, evite riscos."
+" Vento muito forte, evite áreas abertas.",
+" Ventania intensa, fique protegido.",
+" Vento forte, evite sair.",
+" Ventos intensos, segurança primeiro.",
+" Clima perigoso, evite riscos."
 ]
 };
 
 const sugestoesVentoComChuva = {
 calminho: [
-" Vento calmo, mas atenção com a chuva.",
-" Sem vento, mas não esqueça a proteção contra a chuva.",
-" Clima tranquilo, apenas se proteja da chuva.",
-" Pouco vento e chuva leve - guarda-chuva é essencial.",
-" Apesar do clima calmo, a chuva pede precaução."
+" Vento calmo, mas atenção à chuva.",
+" Sem vento, proteja-se da chuva.",
+" Clima tranquilo, só proteja da chuva.",
+" Pouco vento e chuva - guarda-chuva essencial.",
+" Clima calmo, mas chuva pede cuidado."
 ],
 brisaLeve: [
-" Leve vento e chuva, atenção redobrada.",
-" Brisa leve com possibilidade de chuva, fique atento.",
-" Mesmo com brisa suave, proteja-se da chuva.",
-" Brisa agradável, mas a chuva exige cuidado.",
-" Leve vento e chuvisco - não baixe a guarda."
+" Vento leve e chuva, atenção.",
+" Brisa leve com chuva, atenção.",
+" Brisa suave, proteja-se da chuva.",
+" Brisa agradável, mas chuva exige cuidado.",
+" Vento leve e chuvisco - atenção."
 ],
 moderado: [
-" Vento e chuva moderados, proteja-se bem.",
-" Clima instável, com vento e chuva combinados.",
-" Vento presente, junto com a chuva - atenção redobrada.",
-" Condições medianas de vento e chuva - agasalho e capa são ideais.",
-" Vento moderado e chuva contínua - evite longas exposições."
+" Vento e chuva moderados, proteja-se.",
+" Clima instável, vento e chuva.",
+" Vento e chuva - atenção redobrada.",
+" Vento e chuva medianos - capa e agasalho.",
+" Vento moderado e chuva - evite exposição."
 ],
 forte: [
-" Vento forte com chuva, melhor se proteger bem.",
+" Vento forte com chuva, proteja-se.",
 " Ventania e chuva, evite áreas abertas.",
-" Dia instável com vento e chuva fortes.",
-" Clima severo: ventos fortes e chuva intensa - máxima cautela.",
-" Chuvas fortes com vento - evite sair sem necessidade."
+" Dia instável, vento e chuva fortes.",
+" Clima severo - máxima cautela.",
+" Chuva forte com vento - evite sair."
 ],
 muitoForte: [
-" Vento muito forte e chuva, se possível, fique abrigado.",
-" Condições adversas: vento intenso com chuva.",
-" Riscos com vento e chuva intensos, evite sair.",
-" Tempestade com vento muito forte - permaneça seguro em local fechado.",
-" Chuva e ventos extremos - saídas devem ser evitadas ao máximo."
+" Vento muito forte e chuva, fique abrigado.",
+" Condições adversas, vento intenso e chuva.",
+" Riscos com vento e chuva intensos.",
+" Tempestade com vento forte - fique seguro.",
+" Chuva e ventos extremos - evite sair."
 ]
 };
 
