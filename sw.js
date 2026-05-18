@@ -7,6 +7,8 @@ const ASSETS = [
   '/meuclima/icon-192.png',
   '/meuclima/icon-512.png',
   '/meuclima/img/splash.png'
+  '/meuclima/img/meuclima.png'
+  '/meuclima/img/yr.png'
 ];
 
 self.addEventListener('install', e => {
