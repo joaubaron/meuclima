@@ -946,7 +946,7 @@ sugestaoDiv.style.marginTop = '15px';
 sugestaoDiv.style.padding = '10px';
 sugestaoDiv.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
 sugestaoDiv.style.borderRadius = '8px';
-sugestaoDiv.style.fontSize = '10.5px';
+sugestaoDiv.style.fontSize = '12px';
 sugestaoDiv.style.textAlign = 'left';
 sugestaoDiv.style.lineHeight = '1.4';
 sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">Dica para o dia:</strong> ${sugestaoVestuario}`;
@@ -1668,7 +1668,7 @@ modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.ap
 
 
 const moonHTML = `
-<div class="info-inline moon-text" style="font-size: 1em; overflow-x: auto;">
+<div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
 <span>
 <a href="#" 
