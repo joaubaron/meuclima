@@ -11,34 +11,34 @@ let currentTemperatureMessage = '';
 // ── Utilitários: retry e reconexão automática ──────────────────────────────
 
 /**
- * Tenta executar fn até maxTentativas vezes, aguardando intervalo ms entre elas.
- */
+* Tenta executar fn até maxTentativas vezes, aguardando intervalo ms entre elas.
+*/
 function tentarComRetry(fn, maxTentativas = 3, intervalo = 4000) {
-  return new Promise(async (resolve, reject) => {
-    for (let i = 0; i < maxTentativas; i++) {
-      try {
-        const resultado = await fn();
-        return resolve(resultado);
-      } catch (err) {
-        console.warn(`Tentativa ${i + 1}/${maxTentativas} falhou:`, err.message);
-        if (i < maxTentativas - 1) {
-          await new Promise(r => setTimeout(r, intervalo));
-        }
-      }
-    }
-    reject(new Error(`Falhou após ${maxTentativas} tentativas`));
-  });
+return new Promise(async (resolve, reject) => {
+for (let i = 0; i < maxTentativas; i++) {
+try {
+const resultado = await fn();
+return resolve(resultado);
+} catch (err) {
+console.warn(`Tentativa ${i + 1}/${maxTentativas} falhou:`, err.message);
+if (i < maxTentativas - 1) {
+await new Promise(r => setTimeout(r, intervalo));
+}
+}
+}
+reject(new Error(`Falhou após ${maxTentativas} tentativas`));
+});
 }
 
 /** Tenta recarregar os dados do tempo após 5 segundos. */
 function reiniciarBuscaAutomatica() {
-  setTimeout(() => buscarPrevisaoPorGeolocalizacao(false), 5000);
+setTimeout(() => buscarPrevisaoPorGeolocalizacao(false), 5000);
 }
 
 
 /** Reinicia a busca manualmente (chamada pelos botões de erro). */
 function reiniciarBusca() {
-  buscarPrevisaoPorGeolocalizacao(false);
+buscarPrevisaoPorGeolocalizacao(false);
 }
 document.addEventListener('touchstart', function (e) {
 if (window.scrollY === 0) {
@@ -781,8 +781,8 @@ ventoChart = null;
 }
 
 function getEmojiFromTemperature(temp) {
-  const faixa = emojiByTemperature.find(range => temp >= range.min && temp <= range.max);
-  return faixa.emoji;
+const faixa = emojiByTemperature.find(range => temp >= range.min && temp <= range.max);
+return faixa.emoji;
 }
 
 async function carregarGraficos() {
@@ -958,63 +958,63 @@ ultimoGrafico.parentNode.appendChild(sugestaoDiv);
 }
 
 const messagesByTemperature = [
-  {
-    min: -Infinity,
-    max: 0.9,
-    messages: ['Frio intenso! ❄️', 'Muito frio! 🥶']
-  },
-  {
-    min: 1.0,
-    max: 10.9,
-    messages: ['Frio! 🧣', 'Temperatura baixa! 🧥']
-  },
-  {
-    min: 11.0,
-    max: 20.9,
-    messages: ['Temperatura amena! 🍃', 'Clima agradável! ⛅']
-  },
-  {
-    min: 21.0,
-    max: 30.9,
-    messages: ['Clima quente! ☀️', 'Dia ensolarado! 🕶️']
-  },
-  {
-    min: 31.0,
-    max: Infinity,
-    messages: ['Calor intenso! 🔥', 'Muito calor! 🥵']
-  }
+{
+min: -Infinity,
+max: 0.9,
+messages: ['Frio intenso! ❄️', 'Muito frio! 🥶']
+},
+{
+min: 1.0,
+max: 10.9,
+messages: ['Frio! 🧣', 'Temperatura baixa! 🧥']
+},
+{
+min: 11.0,
+max: 20.9,
+messages: ['Temperatura amena! 🍃', 'Clima agradável! ⛅']
+},
+{
+min: 21.0,
+max: 30.9,
+messages: ['Clima quente! ☀️', 'Dia ensolarado! 🕶️']
+},
+{
+min: 31.0,
+max: Infinity,
+messages: ['Calor intenso! 🔥', 'Muito calor! 🥵']
+}
 ];
 
 const descricoes = {
-  "🧊": "Congelante",
-  "🥶": "Gélido",
-  "❄️": "Frio",
-  "🧥": "Fresco",
-  "🧣": "Suave",
-  "🍃": "Ameno",
-  "⛅": "Temperado",
-  "🌤️": "Quente",
-  "☀️": "Tórrido",
-  "🕶️": "Escaldante",
-  "🔥": "Abrassador",
-  "🥵": "Intenso",
-  "♨️": "Extremo"
+"🧊": "Congelante",
+"🥶": "Gélido",
+"❄️": "Frio",
+"🧥": "Fresco",
+"🧣": "Suave",
+"🍃": "Ameno",
+"⛅": "Temperado",
+"🌤️": "Quente",
+"☀️": "Tórrido",
+"🕶️": "Escaldante",
+"🔥": "Abrassador",
+"🥵": "Intenso",
+"♨️": "Extremo"
 };
 
 const emojiByTemperature = [
-  { min: -50, max: -0.1, emoji: "🧊" },
-  { min: 0,   max: 2.9, emoji: "🥶" },
-  { min: 3,   max: 5.9, emoji: "❄️" },
-  { min: 6,   max: 8.9, emoji: "🧥" },
-  { min: 9,   max: 11.9, emoji: "🧣" },
-  { min: 12,  max: 14.9, emoji: "🍃" },
-  { min: 15,  max: 17.9, emoji: "⛅" },
-  { min: 18,  max: 20.9, emoji: "🌤️" },
-  { min: 21,  max: 24.9, emoji: "☀️" },
-  { min: 25,  max: 28.9, emoji: "🕶️" },
-  { min: 29,  max: 32.9, emoji: "🔥" },
-  { min: 33,  max: 36.9, emoji: "🥵" },
-  { min: 37,  max: 100, emoji: "♨️" }
+{ min: -50, max: -0.1, emoji: "🧊" },
+{ min: 0,   max: 2.9, emoji: "🥶" },
+{ min: 3,   max: 5.9, emoji: "❄️" },
+{ min: 6,   max: 8.9, emoji: "🧥" },
+{ min: 9,   max: 11.9, emoji: "🧣" },
+{ min: 12,  max: 14.9, emoji: "🍃" },
+{ min: 15,  max: 17.9, emoji: "⛅" },
+{ min: 18,  max: 20.9, emoji: "🌤️" },
+{ min: 21,  max: 24.9, emoji: "☀️" },
+{ min: 25,  max: 28.9, emoji: "🕶️" },
+{ min: 29,  max: 32.9, emoji: "🔥" },
+{ min: 33,  max: 36.9, emoji: "🥵" },
+{ min: 37,  max: 100, emoji: "♨️" }
 ];
 
 function getSpecialDateMessage() {
@@ -1576,11 +1576,11 @@ const forecast = weatherData.forecast;
 
 const agora24 = new Date();
 const horas24 = [...forecast.forecast.forecastday[0].hour, ...(forecast.forecast.forecastday[1]?.hour || [])]
-  .filter(h => { const diff = (new Date(h.time) - agora24) / 3.6e6; return diff >= 0 && diff <= 24; });
+.filter(h => { const diff = (new Date(h.time) - agora24) / 3.6e6; return diff >= 0 && diff <= 24; });
 const medias = {
-  mediaTemp:   calcularMedia(horas24.map(h => h.temp_c)),
-  mediaPrecip: calcularMedia(horas24.map(h => h.precip_mm)),
-  mediaVento:  calcularMedia(horas24.map(h => h.wind_kph))
+mediaTemp:   calcularMedia(horas24.map(h => h.temp_c)),
+mediaPrecip: calcularMedia(horas24.map(h => h.precip_mm)),
+mediaVento:  calcularMedia(horas24.map(h => h.wind_kph))
 };
 const sugestaoVestuario = gerarSugestaoVestuario(
 medias.mediaTemp,
@@ -1622,18 +1622,18 @@ const cc = document.createElementNS(svgNS,'circle');cc.setAttribute('cx','100');
 clip.appendChild(cc);defs.appendChild(clip);svg.appendChild(defs);
 const bg = document.createElementNS(svgNS,'circle');bg.setAttribute('cx','100');bg.setAttribute('cy','100');bg.setAttribute('r','80');bg.setAttribute('fill','#1a1a2e');svg.appendChild(bg);
 const cratersData = [
-  [72,65,10],[130,80,7],[55,120,6],[140,130,12],[90,150,5],
-  [115,50,8],[60,90,4],[145,75,5],[80,105,7],[120,155,6],
-  [100,85,9],[50,145,5],[135,110,4],[75,55,5],[110,130,8]
+[72,65,10],[130,80,7],[55,120,6],[140,130,12],[90,150,5],
+[115,50,8],[60,90,4],[145,75,5],[80,105,7],[120,155,6],
+[100,85,9],[50,145,5],[135,110,4],[75,55,5],[110,130,8]
 ];
 // Crateras sutis na parte escura
 cratersData.forEach(([cx,cy,r]) => {
-  const cr = document.createElementNS(svgNS,'circle');
-  cr.setAttribute('cx',cx);cr.setAttribute('cy',cy);cr.setAttribute('r',r);
-  cr.setAttribute('fill','#0d0d1f');
-  cr.setAttribute('opacity','0.22');
-  cr.setAttribute('clip-path','url(#mc)');
-  svg.appendChild(cr);
+const cr = document.createElementNS(svgNS,'circle');
+cr.setAttribute('cx',cx);cr.setAttribute('cy',cy);cr.setAttribute('r',r);
+cr.setAttribute('fill','#0d0d1f');
+cr.setAttribute('opacity','0.22');
+cr.setAttribute('clip-path','url(#mc)');
+svg.appendChild(cr);
 });
 const pct = iluminacaoValor / 100;
 const isMinguante = moonInfo.pt.toLowerCase().includes('minguante');
@@ -1655,12 +1655,12 @@ litEl.setAttribute('clip-path','url(#mc)');
 svg.appendChild(litEl);
 // Crateras sutis APENAS na parte iluminada
 cratersData.forEach(([cx,cy,r]) => {
-  const cr2 = document.createElementNS(svgNS,'circle');
-  cr2.setAttribute('cx',cx);cr2.setAttribute('cy',cy);cr2.setAttribute('r',r);
-  cr2.setAttribute('fill','#b8940a');
-  cr2.setAttribute('opacity','0.18');
-  cr2.setAttribute('clip-path','url(#mclit)');
-  svg.appendChild(cr2);
+const cr2 = document.createElementNS(svgNS,'circle');
+cr2.setAttribute('cx',cx);cr2.setAttribute('cy',cy);cr2.setAttribute('r',r);
+cr2.setAttribute('fill','#b8940a');
+cr2.setAttribute('opacity','0.18');
+cr2.setAttribute('clip-path','url(#mclit)');
+svg.appendChild(cr2);
 });
 const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:none;outline:none;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:12px;cursor:pointer;';closeBtn.addEventListener('focus',()=>closeBtn.style.outline='none');closeBtn.addEventListener('mousedown',e=>e.preventDefault());closeBtn.onclick=()=>document.body.removeChild(modal);
 modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.appendChild(closeBtn);document.body.appendChild(modal);
