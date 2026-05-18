@@ -1672,7 +1672,7 @@ const moonHTML = `
 <span>
 <a href="#" 
 onclick="openMoonModal(); return false;"
-style="color: inherit; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none;">
+style="color: inherit; text-decoration: none; cursor: pointer;">
 Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% ✨
 </a>
 </span>
