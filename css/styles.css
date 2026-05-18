@@ -621,3 +621,17 @@ margin-top: 6px;
 .river-line a {
 font-size: 0.75rem !important;  /* ou o tamanho que quiser */
 }
+
+/* AJUSTE RÁPIDO - MAIS VISÍVEL */
+#sugestaoReceita p.descricao {
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+}
+
+#sugestaoReceita p {
+  font-size: 13px !important;
+}
+
+.moon-text {
+  font-size: 13px !important;
+}
