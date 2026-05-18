@@ -1,4 +1,4 @@
-const CACHE_VERSION = '18.05.2026-1032';
+const CACHE_VERSION = '18.05.2026-1033';
 const CACHE_NAME = `cozinha-baron-${CACHE_VERSION}`;
 const ASSETS = [
   '/meuclima/',
@@ -9,6 +9,8 @@ const ASSETS = [
   '/meuclima/img/splash.png'
   '/meuclima/img/meuclima.png'
   '/meuclima/img/yr.png'
+  '/meuclima/receitas.json'
+receitas.json
 ];
 
 self.addEventListener('install', e => {
