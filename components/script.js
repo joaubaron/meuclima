@@ -1024,7 +1024,7 @@ const mes = hoje.getMonth() + 1;
 const anoAtual = hoje.getFullYear();
 
 const mensagensEspeciais = {
-'1-1'  : `Feliz Ano Novo Baron! Que ${anoAtual} seja repleto de conquistas!`,
+'18-5'  : `Feliz Ano Novo Baron! Que ${anoAtual} seja repleto de conquistas!`,
 '28-1' : `Hoje a Bruna está comemorando aniversário!`,
 '30-1' : `Hoje Marlon está de niver e comemora ${anoAtual - 1988} anos!`,
 '7-2'  : `Parabéns para Clara! Hoje ela comemora ${anoAtual - 2016} anos!`,
