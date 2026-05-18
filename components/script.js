@@ -1024,24 +1024,24 @@ const mes = hoje.getMonth() + 1;
 const anoAtual = hoje.getFullYear();
 
 const mensagensEspeciais = {
-'18-5'  : `Feliz Ano Novo Baron! Que ${anoAtual} seja repleto de conquistas!`,
-'28-1' : `Hoje a Bruna está comemorando aniversário!`,
+'1-1'  : `Feliz Ano Novo! Que ${anoAtual} seja ótimo!`,
+'28-1' : `Hoje a Bruna está de aniversário!`,
 '30-1' : `Hoje Marlon está de niver e comemora ${anoAtual - 1988} anos!`,
-'7-2'  : `Parabéns para Clara! Hoje ela comemora ${anoAtual - 2016} anos!`,
-'12-2' : `Hoje é aniversário do Sérgio. Ele comemora ${anoAtual - 1969} anos!`,
-'5-3'  : 'Hoje é seu aniversário! Parabéns!',
-'9-3'  : 'Seu pai está fazendo aniversário hoje! Parabéns pra ele!',
-'23-3' : `Amanhã é o niver do seu filho Eduardo. Ele faz ${anoAtual - 2003} anos!`,
-'5-4'  : 'Hoje é uma data especial: você conheceu a Cláudia.',
-'2-5'  : `Feliz aniversário para Mateus que comemora ${anoAtual - 2001} anos!`,
-'5-6'  : 'Hoje você e Cláudia começaram a dividir a vida.',
-'12-6' : 'Feliz Dia dos Namorados! Que o amor de vocês cresça a cada dia.',
-'5-7'  : `Sua irmã Débora está de aniversário. Ela comemora ${anoAtual - 1973} anos!`,
-'5-9'  : 'Feliz aniversário para Cláudia! Que tal um jantar especial?',
-'23-10': 'Hoje sua mãe comemora aniversário. Parabéns pra ela!',
-'5-11' : 'Aniversário de casamento. Juntos e fortes! Que tal levar um bom vinho?',
-'25-11': `Hoje a sua irmã Morgama está de niver. Ela comemora ${anoAtual - 1984} anos!`,
-'25-12': 'Feliz Natal Baron! Que esse feriado envolva você com muita paz.'
+'7-2'  : `Parabéns para Clara! Ela faz ${anoAtual - 2016} anos!`,
+'12-2' : `Niver do Sérgio. Ele comemora ${anoAtual - 1969} anos!`,
+'5-3'  : 'Feliz aniversário Baron!',
+'9-3'  : 'Seu pai está fazendo aniversário hoje!',
+'23-3' : `Niver do seu filho Eduardo. Ele faz ${anoAtual - 2003} anos!`,
+'5-4'  : 'Data especial: você conheceu a Cláudia.',
+'2-5'  : `Mateus que comemora ${anoAtual - 2001} anos!`,
+'5-6'  : 'Você e Cláudia começaram a dividir a vida.',
+'12-6' : 'Feliz Dia dos Namorados!',
+'5-7'  : `Débora está de niver. Ela comemora ${anoAtual - 1973} anos!`,
+'5-9'  : 'Feliz niver Cláudia! Que tal um jantar especial?',
+'23-10': 'Hoje sua mãe comemora aniversário.',
+'5-11' : 'Juntos e fortes! Que tal levar um bom vinho?',
+'25-11': `Morgama está de niver. Ela comemora ${anoAtual - 1984} anos!`,
+'25-12': 'Que esse feriado seja de muita paz.'
 };
 
 const chave1 = `${dia}-${mes}`;
