@@ -1,6 +1,6 @@
 {
-"name": "Meu Clima",
-"short_name": "Meu Clima",
+"name": "MeuClima",
+"short_name": "MeuClima",
 "description": "Previsão do tempo com informações detalhadas",
 "start_url": "/meuclima/",
 "scope": "/meuclima/",
