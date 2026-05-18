@@ -624,14 +624,14 @@ font-size: 0.75rem !important;  /* ou o tamanho que quiser */
 
 /* AJUSTE RÁPIDO - MAIS VISÍVEL */
 #sugestaoReceita p.descricao {
-  font-size: 13px !important;
+  font-size: 12px !important;
   line-height: 1.35 !important;
 }
 
 #sugestaoReceita p {
-  font-size: 13px !important;
+  font-size: 12px !important;
 }
 
 .moon-text {
-  font-size: 13px !important;
+  font-size: 14px !important;
 }
