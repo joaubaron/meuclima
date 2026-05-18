@@ -35,6 +35,11 @@ function reiniciarBuscaAutomatica() {
   setTimeout(() => buscarPrevisaoPorGeolocalizacao(false), 5000);
 }
 
+
+/** Reinicia a busca manualmente (chamada pelos botões de erro). */
+function reiniciarBusca() {
+  buscarPrevisaoPorGeolocalizacao(false);
+}
 document.addEventListener('touchstart', function (e) {
 if (window.scrollY === 0) {
 touchStartY = e.touches[0].clientY;
@@ -115,106 +120,7 @@ location.reload();
 // tempo máximo que o splash pode permanecer (ms)
 const SPLASH_TIMEOUT = 25000;  // 25 segundos
 
-function abrirCameraExterna() {
-    const streamUrl = 'https://5a8d73edc0407.streamlock.net:443/bnutv20/bnutv2004.stream/playlist.m3u8';
-    
-    // Cria modal fullscreen com player de vídeo
-    const modal = document.createElement('div');
-    modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000;
-        z-index: 10000;
-        display: flex;
-        flex-direction: column;
-    `;
-    
-    const closeBtn = document.createElement('button');
-    closeBtn.innerHTML = '✕ Fechar';
-    closeBtn.style.cssText = `
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        background: #ff6f00;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        z-index: 10001;
-        border-radius: 5px;
-        font-weight: bold;
-    `;
-    
-    const video = document.createElement('video');
-    video.style.cssText = `
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    `;
-    video.controls = true;
-    video.autoplay = true;
-    video.playsInline = true;
-    
-    const source = document.createElement('source');
-    source.src = streamUrl;
-    source.type = 'application/x-mpegURL';
-    
-    video.appendChild(source);
-    
-    closeBtn.onclick = () => document.body.removeChild(modal);
-    
-    modal.appendChild(closeBtn);
-    modal.appendChild(video);
-    document.body.appendChild(modal);
-    
-    // Tenta reproduzir
-    video.play().catch(err => console.log('Erro ao reproduzir:', err));
-}
-
 // Função para obter o nome da localização
-async function obterNomeLocalizacao(lat, lon) {
-let cidade = '', bairro = '';
-
-try {
-const NOMINATIM_URL = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&accept-language=pt-BR`;
-const controller = new AbortController();
-const timeoutId = setTimeout(() => controller.abort(), 10000);
-
-const resGeo = await fetch(NOMINATIM_URL, {
-headers: { 'User-Agent': 'MeuClima/1.0 (local testing)' },
-mode: 'cors',
-cache: 'no-cache',
-credentials: 'omit',
-signal: controller.signal
-});
-
-clearTimeout(timeoutId);
-
-if (!resGeo.ok) throw new Error(`HTTP ${resGeo.status}`);
-
-const dataGeo = await resGeo.json();
-
-bairro = dataGeo.address?.suburb ?? dataGeo.address?.neighbourhood ?? '';
-cidade = dataGeo.address?.city ?? dataGeo.address?.town ?? dataGeo.address?.state ?? '';
-
-if (!cidade) {
-cidade = `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
-bairro = '';
-console.warn('Cidade não encontrada, usando coordenadas como fallback.');
-}
-
-} catch (e) {
-console.error('Erro ao obter nome da localização:', e);
-bairro = '';
-cidade = `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
-}
-
-return { cidade, bairro };
-}
-
 // Função para mostrar mensagem de erro
 function mostrarMensagemErro(mensagem) {
 const resultDiv = document.getElementById('weatherResult');
@@ -232,52 +138,9 @@ Tentar novamente
 }
 
 // Função para abrir o site yr.no
-function abrirYrNoFallback() {
-const url = "https://www.yr.no/en/forecast/graph/2-3469968/Brazil/Santa%20Catarina/Blumenau/Blumenau";
-window.open(url, "_blank");
-}
-
 function atualizarHTML(id, html) {
 const el = document.getElementById(id);
 if (el) el.innerHTML = html;
-}
-
-function temEspacoDisponivel(tamanhoNecessario) {
-let tamanhoUsado = 0;
-for (let i = 0; i < localStorage.length; i++) {
-const chave = localStorage.key(i);
-const valor = localStorage.getItem(chave);
-if (valor !== null) {
-tamanhoUsado += chave.length + valor.length;
-}
-}
-return (tamanhoUsado + tamanhoNecessario) < 4.5 * 1024 * 1024;
-}
-
-function limparCachePreventivo() {
-const itens = [];
-for (let i = 0; i < localStorage.length; i++) {
-const chave = localStorage.key(i);
-if (chave.startsWith('cache_')) {
-try {
-const item = JSON.parse(localStorage.getItem(chave));
-itens.push({
-chave,
-timestamp: item.timestamp,
-prioridade: item.prioridade || 0
-});
-} catch {
-localStorage.removeItem(chave);
-}
-}
-}
-
-itens.sort((a, b) => a.prioridade - b.prioridade || a.timestamp - b.timestamp);
-
-const itensParaRemover = Math.ceil(itens.length * 0.2);
-for (let i = 0; i < itensParaRemover; i++) {
-localStorage.removeItem(itens[i].chave);
-}
 }
 
 function limparCachePorPrioridade() {
@@ -414,19 +277,6 @@ if (pullElement) {
 pullElement.style.transform = 'translateY(0)';
 pullElement.style.transition = 'transform 0.3s ease';
 }
-}
-
-function abrirMapa(){
-const t = document.getElementById('telaMapa');
-t.style.display = 'block';
-document.body.classList.add('modal-aberto');
-setTimeout(()=> t.style.opacity = '1', 10);
-}
-
-function fecharMapa(){
-const t = document.getElementById('telaMapa');
-t.style.display = 'none';
-document.body.classList.remove('modal-aberto');
 }
 
 function verificarAlertas(weatherData) {
@@ -910,21 +760,6 @@ if (kph <= 102) return "Muito forte";
 return "Destrutivo";
 }
 
-function atualizarGraficos(dados) {
-if (temperaturaChart) {
-temperaturaChart.data.datasets[0].data = dados.temperatura;
-temperaturaChart.update();
-}
-if (precipitacaoChart) {
-precipitacaoChart.data.datasets[0].data = dados.precipitacao;
-precipitacaoChart.update();
-}
-if (ventoChart) {
-ventoChart.data.datasets[0].data = dados.vento;
-ventoChart.update();
-}
-}
-
 function calcularMedia(dados) {
 if (!dados || dados.length === 0) return 0;
 return dados.reduce((soma, valor) => soma + valor, 0) / dados.length;
@@ -948,11 +783,6 @@ ventoChart = null;
 function getEmojiFromTemperature(temp) {
   const faixa = emojiByTemperature.find(range => temp >= range.min && temp <= range.max);
   return faixa.emoji;
-}
-
-function getDescricaoFromTemperature(temp) {
-const emoji = getEmojiFromTemperature(temp);
-return descricoes[emoji] || "Desconhecido";
 }
 
 async function carregarGraficos() {
@@ -1005,15 +835,6 @@ const diff = calcularMedia(tempData.slice(1, 5)) - tempData[0];
 return Math.abs(diff) > 0.5 ? diff : 0;
 })();
 const setaTendencia = tendencia > 0 ? "▲" : tendencia < 0 ? "▼" : "⬤";
-
-if (temperaturaChart && precipitacaoChart && ventoChart) {
-atualizarGraficos({
-temperatura: tempData,
-precipitacao: precipData,
-vento: ventoData
-});
-return;
-}
 
 const tempCtx = document.getElementById('temperaturaChart').getContext('2d');
 temperaturaChart = new Chart(tempCtx, {
@@ -1135,47 +956,6 @@ if (ultimoGrafico && ultimoGrafico.parentNode) {
 ultimoGrafico.parentNode.appendChild(sugestaoDiv);
 }
 }
-
-async function carregarChartJS() {
-return new Promise((resolve, reject) => {
-if (typeof Chart !== 'undefined') {
-resolve();
-return;
-}
-
-const script = document.createElement('script');
-script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
-script.onload = () => resolve();
-script.onerror = () => reject(new Error('Falha ao carregar Chart.js'));
-document.head.appendChild(script);
-});
-}
-
-function calcularMedias24h(forecastData) {
-const agora = new Date();
-const horasDia1 = forecastData.forecast.forecastday[0].hour;
-const horasDia2 = forecastData.forecast.forecastday[1]?.hour || [];
-const todasHoras = [...horasDia1, ...horasDia2];
-
-const proximas24h = todasHoras.filter(h => {
-const diff = (new Date(h.time) - agora) / 3.6e6;
-return diff >= 0 && diff <= 24;
-});
-
-const temp = proximas24h.map(h => h.temp_c);
-const precip = proximas24h.map(h => h.precip_mm);
-const vento = proximas24h.map(h => h.wind_kph);
-
-return {
-mediaTemp: calcularMedia(temp),
-mediaPrecip: calcularMedia(precip),
-mediaVento: calcularMedia(vento)
-};
-}
-
-const faixaEmojis = [
-'🧊', '🥶', '❄️', '🧥', '🧣', '🍃', '⛅', '🌤️', '☀️', '🕶️', '🔥', '🥵', '♨️'
-];
 
 const messagesByTemperature = [
   {
@@ -1794,7 +1574,14 @@ throw new Error("Dados astronômicos ou de previsão insuficientes.");
 const astronomy = weatherData.astronomy;
 const forecast = weatherData.forecast;
 
-const medias = calcularMedias24h(forecast);
+const agora24 = new Date();
+const horas24 = [...forecast.forecast.forecastday[0].hour, ...(forecast.forecast.forecastday[1]?.hour || [])]
+  .filter(h => { const diff = (new Date(h.time) - agora24) / 3.6e6; return diff >= 0 && diff <= 24; });
+const medias = {
+  mediaTemp:   calcularMedia(horas24.map(h => h.temp_c)),
+  mediaPrecip: calcularMedia(horas24.map(h => h.precip_mm)),
+  mediaVento:  calcularMedia(horas24.map(h => h.wind_kph))
+};
 const sugestaoVestuario = gerarSugestaoVestuario(
 medias.mediaTemp,
 medias.mediaPrecip,
