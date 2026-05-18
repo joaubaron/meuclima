@@ -84,7 +84,7 @@ backface-visibility: hidden;
 margin-top: 12px;
 margin-bottom: 2px;
 font-weight: 500;
-font-size: 10px;
+font-size: 14px;
 text-align: center;
 line-height: 1em;
 user-select: none;
@@ -102,7 +102,7 @@ max-width: 380px;
 backdrop-filter: blur(5px);
 text-align: center;
 line-height: 1.1;
-font-size: 1.1em;
+font-size: 1em;
 }
 
 .moon-phase-container {
@@ -146,7 +146,7 @@ padding: 1px 0;
 
 /* Informações em linha */
 .info-inline {
-font-size: 0.85em;
+font-size: 1em;
 display: flex;
 justify-content: center;
 gap: 16px;
@@ -188,13 +188,13 @@ min-width: 0;
 }
 
 .previsao-amanha .titulo-previsao {
-font-size: 12px;
+font-size: 14px;
 font-weight: bold;
 color: #ffffff;
 }
 
 .previsao-amanha .temp-previsao {
-font-size: 12px;
+font-size: 14px;
 color: #ffeb3b;
 margin-top: 2px;
 }
@@ -287,23 +287,23 @@ text-align: center;
 color: #ffeb3b;
 font-weight: 500;
 border-radius: 8px;
-font-size: 13px !important;
+font-size: 14px !important;
 }
 
 #weatherResult {
-font-size: 10.5px;
+font-size: 14px;
 font-weight: bold;
 }
 
 #estacaoContainer {
 text-align: center;
-font-size: 1.1em;
+font-size: 1em;
 line-height: 1.5;
 }
 
 #status {
 margin-top: 8px;
-font-size: 0.9em;
+font-size: 1em;
 color: #fff;
 font-weight: bold;
 }
@@ -370,7 +370,7 @@ animation: dot-fade 1.5s infinite both;
 .custom-credits {
 color: #ffeb3b;
 font-family: 'Segoe UI', sans-serif;
-font-size: 0.73rem;
+font-size: 14px;
 text-align: center;
 line-height: 0.6;
 position: relative;
@@ -410,7 +410,7 @@ border-top: 1px solid rgba(255, 255, 255, 0.3);
 background: none;
 border: none;
 color: inherit;
-font-size: 11px;
+font-size: 14px;
 font-family: inherit;
 cursor: pointer;
 display: inline-flex;
@@ -594,7 +594,7 @@ transform: translateY(10px);
 }
 
 #weatherMessage {
-font-size: 12px;
+font-size: 14px;
 padding: 6.5px;
 }
 }
