@@ -621,3 +621,11 @@ margin-top: 6px;
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
 }
+
+.custom-credits a,
+.credit-link,
+.credit-line,
+.river-line,
+.river-line a {
+font-size: 0.65rem !important;  /* ou o tamanho que quiser */
+}
