@@ -1592,7 +1592,7 @@ const sugestaoDiv = document.createElement('div');
 sugestaoDiv.style.marginTop = '1px';
 sugestaoDiv.style.padding = '10px';
 sugestaoDiv.style.borderRadius = '8px';
-sugestaoDiv.style.fontSize = '10.5px';
+sugestaoDiv.style.fontSize = '12px';
 sugestaoDiv.style.textAlign = 'center';
 sugestaoDiv.style.lineHeight = '1.4';
 sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">Dica para o dia:</strong> ${sugestaoVestuario}`;
