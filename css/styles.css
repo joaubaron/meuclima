@@ -1,11 +1,3 @@
-/* =============================================================================
-WEATHER APP STYLES - ORGANIZADO PARA MANUTENÇÃO
-============================================================================= */
-
-/* -----------------------------------------------------------------------------
-1. RESET E CONFIGURAÇÕES GLOBAIS
------------------------------------------------------------------------------ */
-
 * {
 box-sizing: border-box;
 }
@@ -627,5 +619,5 @@ margin-top: 6px;
 .credit-line,
 .river-line,
 .river-line a {
-font-size: 0.65rem !important;  /* ou o tamanho que quiser */
+font-size: 0.75rem !important;  /* ou o tamanho que quiser */
 }
