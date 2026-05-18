@@ -1741,13 +1741,12 @@ const symbol = getPeriodSymbol(periodo.horas);
 periodosHTML += `
 <div class="info-item" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 8px; ${i < periodos.length - 1 ? 'border-right: 1px solid #ffeb3b; padding-right: 12px;' : ''}">
 <div style="display: flex; align-items: baseline; gap: 6px;">
-<div style="font-weight: 600; color: #ffffff;">${periodo.nome}</div>
-<div style="font-size: 1.1em; font-weight: bold; color: #ffeb3b;">${temp}°C</div>
+<div style="font-weight: 600; color: #ffffff; font-size: 0.95em;">${periodo.nome}</div>
+<div style="font-size: 1.2em; font-weight: bold; color: #ffeb3b;">${temp}°C</div>
 </div>
 <img src="${await getWeatherIcon(symbol, periodo.isDay)}" alt="" class="weather-icon small-weather-icon" style="margin-top: 4px;">
 </div>
 `;
-}
 
 const amanha = forecast.forecast.forecastday[1];
 const diasSemana = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
