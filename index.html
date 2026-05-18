@@ -111,32 +111,30 @@ CRÉDITOS E LINKS EXTERNOS
 <!-- Links do Rio -->
 <div class="river-line" style="display: flex; align-items: center; gap: 8px; font-size: 12px; line-height: 1.0;">
 
-  <!-- Botão Ao Vivo -->
-  <a href="https://streaming3.climaaovivo.com.br/blumenau1.sc/tracks-v1/mono.m3u8?autoplay=true&remote=no_check_ip&token=cdcd3e4f62e663f75822979062c3550d1b742dd2-72f649dca4fbfcd912389d06ba6e18da-1779122302-1779119602"
-     target="_blank"
-     rel="noopener noreferrer"
-     onclick="alert('Para melhor visualização, vire o celular na horizontal.');"
-     style="
-       background: #e53935;
-       color: white;
-       padding: 2px 8px;
-       border-radius: 12px;
-       font-size: 11px;
-       font-weight: bold;
-       text-decoration: none;
-       white-space: nowrap;
-     ">
-    Ao vivo
-  </a>
+<!-- Botão Ao Vivo -->
+<a href="#"
+onclick="abrirCameraAoVivo(); return false;"
+style="
+background: #e53935;
+color: white;
+padding: 2px 8px;
+border-radius: 12px;
+font-size: 11px;
+font-weight: bold;
+text-decoration: none;
+white-space: nowrap;
+">
+Ao vivo
+</a>
 
-  <!-- Link nível do rio -->
-  <a href="https://defesacivil.blumenau.sc.gov.br/d/nivel-do-rio"
-     target="_system"
-     rel="noopener noreferrer"
-     class="credit-link"
-     style="color: inherit; text-decoration: none;">
-    💧 Nível do rio Itajaí-Açu
-  </a>
+<!-- Link nível do rio -->
+<a href="https://defesacivil.blumenau.sc.gov.br/d/nivel-do-rio"
+target="_system"
+rel="noopener noreferrer"
+class="credit-link"
+style="color: inherit; text-decoration: none;">
+💧 Nível do rio Itajaí-Açu
+</a>
 
 </div>
 
@@ -299,6 +297,92 @@ style="background:none; border:none; color:white; padding: 4px 0; cursor:pointer
 </button>
 </div>
 </div>
+
+<!-- Modal câmera ao vivo -->
+<div id="cameraModal"
+style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+z-index:999999;
+">
+
+<video id="cameraVideo"
+controls
+autoplay
+playsinline
+style="
+ width:100%;
+ height:100%;
+ object-fit:contain;
+ background:black;
+">
+</video>
+
+<!-- Botão fechar -->
+<button onclick="fecharCameraAoVivo()"
+style="
+  position:absolute;
+  top:15px;
+  right:15px;
+  z-index:10;
+  background:red;
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:bold;
+">
+Fechar
+</button>
+
+</div>
+
+<!-- HLS.js -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+function abrirCameraAoVivo() {
+
+alert("Para melhor visualização, vire o celular na horizontal.");
+
+const modal = document.getElementById("cameraModal");
+const video = document.getElementById("cameraVideo");
+
+modal.style.display = "block";
+
+const videoSrc =
+"https://streaming3.climaaovivo.com.br/blumenau1.sc/tracks-v1/mono.m3u8?autoplay=true&remote=no_check_ip&token=cdcd3e4f62e663f75822979062c3550d1b742dd2-72f649dca4fbfcd912389d06ba6e18da-1779122302-1779119602";
+
+if (Hls.isSupported()) {
+
+const hls = new Hls();
+
+hls.loadSource(videoSrc);
+hls.attachMedia(video);
+
+} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+
+video.src = videoSrc;
+
+}
+}
+
+function fecharCameraAoVivo() {
+
+const modal = document.getElementById("cameraModal");
+const video = document.getElementById("cameraVideo");
+
+modal.style.display = "none";
+
+video.pause();
+video.src = "";
+}
+</script>
 
 <!-- ========================================
 SCRIPTS E BIBLIOTECAS
