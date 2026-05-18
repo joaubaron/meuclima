@@ -132,7 +132,7 @@ vertical-align: middle;
 position: relative;
 top: -2px;
 display: inline-block;
-filter: drop-shadow(0 0 4px rgba(255, 235, 59, 0.4));
+filter: drop-shadow(0 0 2px rgba(255, 235, 59, 0.2));
 padding: 1px 0;
 }
 
