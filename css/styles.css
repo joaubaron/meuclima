@@ -138,7 +138,7 @@ padding: 1px 0;
 
 /* Informações em linha */
 .info-inline {
-font-size: 0.65em;
+font-size: 0.85em;
 display: flex;
 justify-content: center;
 gap: 16px;
