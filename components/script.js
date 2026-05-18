@@ -360,8 +360,8 @@ frio: [
 "Frio, use casaco.",
 "Bem frio, agasalhe-se.",
 "Gelado, use várias camadas.",
-"Muito frio, use gorro e luvas.",
-"Baixas, roupas quentes."
+"Frio, use gorro e luvas.",
+"Frio, roupas quentes."
 ],
 fresco: [
 "Fresco, casaco leve.",
@@ -372,22 +372,22 @@ fresco: [
 ],
 agradável: [
 "Agradável, roupas leves.",
-"Ideal, roupas casuais.",
-"Boa, nada pesado ou leve.",
-"Agradável, ótimo para passear.",
-"Amena, roupas confortáveis."
+"Ideal pra roupas casuais.",
+"Nada pesado ou leve.",
+"Ótimo para passear.",
+"Ameno, roupas confortáveis."
 ],
 calor: [
 "Quente, roupas leves.",
-"Calor moderado, roupa leve e protetor.",
+"Calor, roupa leve e protetor.",
 "Alta, prefira algodão.",
 "Calor, roupas ventiladas.",
-"Quente, hidrate-se e use roupas leves."
+"Quente, use roupas leves."
 ],
 muitoCalor: [
-"Muito calor, vista leve e hidrate-se.",
+"Muito calor, roupas leves.",
 "Calor intenso, evite roupas apertadas.",
-"Altas, use chapéu e roupas claras.",
+"Use chapéu e roupas claras.",
 "Calor forte, roupas leves e água.",
 "Calorão, tecidos naturais."
 ]
@@ -409,17 +409,17 @@ garoa: [
 " Leve capa leve.",
 " Chuvisco, atenção.",
 " Leve guarda-chuva pequeno.",
-" Garoa leve, não esqueça proteção."
+" Garoa leve, se proteja."
 ],
 fraca: [
 " Chuva fraca, leve guarda-chuva.",
-" Pode chover leve, tenha guarda-chuva.",
+" Pode chover, tenha guarda-chuva.",
 " Chuva leve, proteja-se.",
-" Chuva fraca, não esqueça guarda-chuva.",
+" Chuva fraca, leve o guarda-chuva.",
 " Chuva leve esperada, prepare-se."
 ],
 moderada: [
-" Chuva moderada, não esqueça guarda-chuva.",
+" Chuva moderada, leve guarda-chuva.",
 " Chuva moderada, proteja-se.",
 " Vai chover, leve guarda-chuva.",
 " Chuva prevista, proteja-se.",
@@ -502,7 +502,7 @@ calminho: [
 " Vento calmo, mas atenção à chuva.",
 " Sem vento, proteja-se da chuva.",
 " Clima tranquilo, só proteja da chuva.",
-" Pouco vento e chuva - guarda-chuva essencial.",
+" Pouco vento e chuva, leve guarda-chuva.",
 " Clima calmo, mas chuva pede cuidado."
 ],
 brisaLeve: [
