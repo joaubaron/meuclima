@@ -300,87 +300,66 @@ style="background:none; border:none; color:white; padding: 4px 0; cursor:pointer
 
 <!-- Modal câmera ao vivo -->
 <div id="cameraModal"
-style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-z-index:999999;
-">
+     style="
+       display:none;
+       position:fixed;
+       top:0;
+       left:0;
+       width:100%;
+       height:100%;
+       background:black;
+       z-index:999999;
+     ">
 
-<video id="cameraVideo"
-controls
-autoplay
-playsinline
-style="
- width:100%;
- height:100%;
- object-fit:contain;
- background:black;
-">
-</video>
+  <!-- Iframe com o site da câmera (funciona 100%) -->
+  <iframe 
+    id="cameraIframe"
+    src="https://www.climaaovivo.com.br/sc/blumenau-slaviero-essential-blumenau"
+    style="
+      width:100%;
+      height:100%;
+      border:none;
+      background:black;
+    "
+    allow="autoplay; fullscreen"
+    allowfullscreen>
+  </iframe>
 
-<!-- Botão fechar -->
-<button onclick="fecharCameraAoVivo()"
-style="
-  position:absolute;
-  top:15px;
-  right:15px;
-  z-index:10;
-  background:red;
-  color:white;
-  border:none;
-  padding:10px 14px;
-  border-radius:10px;
-  font-weight:bold;
-">
-Fechar
-</button>
+  <!-- Botão fechar -->
+  <button onclick="fecharCameraAoVivo()"
+          style="
+            position:absolute;
+            top:15px;
+            right:15px;
+            z-index:10;
+            background:red;
+            color:white;
+            border:none;
+            padding:10px 14px;
+            border-radius:10px;
+            font-weight:bold;
+            cursor:pointer;
+          ">
+    ✕ Fechar
+  </button>
 
 </div>
 
-<!-- HLS.js -->
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
 <script>
 function abrirCameraAoVivo() {
-
-alert("Para melhor visualização, vire o celular na horizontal.");
-
-const modal = document.getElementById("cameraModal");
-const video = document.getElementById("cameraVideo");
-
-modal.style.display = "block";
-
-const videoSrc =
-"https://streaming3.climaaovivo.com.br/blumenau1.sc/tracks-v1/mono.m3u8?autoplay=true&remote=no_check_ip&token=cdcd3e4f62e663f75822979062c3550d1b742dd2-72f649dca4fbfcd912389d06ba6e18da-1779122302-1779119602";
-
-if (Hls.isSupported()) {
-
-const hls = new Hls();
-
-hls.loadSource(videoSrc);
-hls.attachMedia(video);
-
-} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-
-video.src = videoSrc;
-
-}
+  alert("Para melhor visualização, vire o celular na horizontal.");
+  const modal = document.getElementById("cameraModal");
+  modal.style.display = "block";
 }
 
 function fecharCameraAoVivo() {
-
-const modal = document.getElementById("cameraModal");
-const video = document.getElementById("cameraVideo");
-
-modal.style.display = "none";
-
-video.pause();
-video.src = "";
+  const modal = document.getElementById("cameraModal");
+  const iframe = document.getElementById("cameraIframe");
+  
+  modal.style.display = "none";
+  
+  // Para o vídeo recarregando o iframe
+  iframe.src = iframe.src;
 }
 </script>
 
