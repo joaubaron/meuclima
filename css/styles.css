@@ -1,820 +1,637 @@
-/* =============================================================================
-   MEUCLIMA — styles.css
-   Organização: variáveis → reset → base → layout → componentes → modais
-                → notificações → animações → media queries
-   Cada seletor é autossuficiente. Sem !important desnecessário.
-   Para alterar uma cor/tamanho global, edite apenas as variáveis abaixo.
-============================================================================= */
-
-
-/* =============================================================================
-   1. VARIÁVEIS GLOBAIS
-============================================================================= */
-
-:root {
-  /* Paleta de cores */
-  --color-bg:           #002244;
-  --color-bg-overlay:   rgba(255, 255, 255, 0.1);
-  --color-bg-overlay-2: rgba(255, 255, 255, 0.05);
-  --color-bg-modal:     #002244;
-  --color-bg-alert:     #1a3957;
-  --color-text:         #ffffff;
-  --color-accent:       #ffeb3b;
-  --color-alert-text:   #ff6f00;
-  --color-divider:      rgba(255, 255, 255, 0.3);
-
-  /* Tipografia */
-  --font-base:    'Roboto', sans-serif;
-  --font-size-xs:   10px;
-  --font-size-sm:   11px;
-  --font-size-md:   12px;
-  --font-size-body: 13px;
-  --font-size-lg:   14px;
-  --font-size-xl:   16px;
-
-  /* Espaçamentos */
-  --spacing-xs:  4px;
-  --spacing-sm:  8px;
-  --spacing-md:  12px;
-  --spacing-lg:  15px;
-  --spacing-xl:  20px;
-  --spacing-2xl: 30px;
-
-  /* Containers */
-  --container-width:     92%;
-  --container-max-width: 380px;
-
-  /* Bordas e sombras */
-  --radius-sm:  3px;
-  --radius-md:  8px;
-  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.25);
-  --shadow-sm:   0 4px 4px rgba(0, 0, 0, 0.25);
-
-  /* Z-index */
-  --z-alert:   9999;
-  --z-modal:   10000;
-  --z-splash:  99999;
-
-  /* Transições */
-  --transition-fade: opacity 0.3s ease;
-  --transition-splash: opacity 0.5s ease;
-
-  /* Links do rodapé */
-  --credits-font-size:   0.75rem;
-  --credits-line-height: 1.5;
-  --credits-gap:         6px;
-  --credits-icon-size:   15px;
-}
-
-
-/* =============================================================================
-   2. RESET E BASE
-============================================================================= */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+* {
+box-sizing: border-box;
 }
 
 body {
-  font-family: var(--font-base);
-  font-size: var(--font-size-md);
-  color: var(--color-text);
-  background: var(--color-bg);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+font-family: 'Roboto', sans-serif !important;
+font-size: 12px;
+color: #fff;
+background: #002244;
+margin: 0;
+padding: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+min-height: 100vh;
 }
 
-strong,
+strong, 
 b {
-  font-weight: 700;
+font-weight: 700 !important;
 }
 
-canvas {
-  font-size: var(--font-size-md);
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-
-/* =============================================================================
-   3. ESTADOS DO BODY
-============================================================================= */
+/* -----------------------------------------------------------------------------
+2. ESTADOS DO BODY
+----------------------------------------------------------------------------- */
 
 body.modal-aberto {
-  overflow: hidden;
-  height: 100%;
-  position: fixed;
-  width: 100%;
+overflow: hidden !important;
+height: 100% !important;
+position: fixed !important;
+width: 100% !important;
 }
 
 body.loading {
-  overflow: hidden;
-  height: 100vh;
+overflow: hidden;
+height: 100vh;
 }
 
 body.loading #main-content {
-  display: none;
+display: none;
 }
 
-
-/* =============================================================================
-   4. SPLASH SCREEN
-============================================================================= */
+/* -----------------------------------------------------------------------------
+3. SPLASH SCREEN
+----------------------------------------------------------------------------- */
 
 #splashScreen {
-  position: fixed;
-  inset: 0;
-  background-color: var(--color-bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: var(--z-splash);
-  opacity: 1;
-  transition: var(--transition-splash);
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: #002244;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 99999;
+opacity: 1;
+transition: opacity 0.5s ease;
 }
 
 #splashScreen img {
-  width: 120px;
-  height: auto;
-  animation: pulse 2s infinite ease-in-out;
-  will-change: transform, opacity;
-  transform: translateZ(0);
-  backface-visibility: hidden;
+width: 120px;
+height: auto;
+animation: pulse 2s infinite ease-in-out;
+will-change: transform, opacity;
+transform: translateZ(0);
+backface-visibility: hidden;
 }
 
-
-/* Texto e pontos dentro do splash */
-.splash-label {
-  font-size: 0.65rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transform: translateY(-2px);
-}
-
-.loading-dots {
-  display: flex;
-  margin-top: 20px;
-}
-
-/* Divisores visuais reutilizáveis */
-.divider {
-  margin: 15px auto 2px;
-  padding: 0;
-  border-top: 1px solid var(--color-divider);
-  width: 90%;
-}
-
-.divider--full {
-  width: 90%;
-}
-
-/* Variação compacta do container do clima (seção extras) */
-.weather-container--compact {
-  font-size: var(--font-size-md);
-  padding: 0 var(--spacing-md);
-}
-
-/* ID do moonInfo — sem inline style no HTML */
-#moonInfo {
-  font-size: 0.9em;
-}
-
-/* =============================================================================
-   5. PULL TO REFRESH
-============================================================================= */
-
-#pullToRefresh {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 30px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  opacity: 0;
-  background-color: var(--color-bg);
-  transition: var(--transition-fade);
-  z-index: var(--z-alert);
-}
-
-#pullToRefresh .spinner {
-  width: 25px;
-  height: 25px;
-  border: 3px solid #ccc;
-  border-top-color: var(--color-accent);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-top: 5px;
-}
-
-
-/* =============================================================================
-   6. LAYOUT — CONTAINERS PRINCIPAIS
-============================================================================= */
+/* -----------------------------------------------------------------------------
+4. CONTAINERS PRINCIPAIS
+----------------------------------------------------------------------------- */
 
 .location-date {
-  margin-top: 14px;
-  margin-bottom: 2px;
-  font-weight: 500;
-  font-size: var(--font-size-body);
-  text-align: center;
-  line-height: 1;
-  user-select: none;
-  white-space: pre-line;
+margin-top: 14px;
+margin-bottom: 2px;
+font-weight: 500;
+font-size: 13px;
+text-align: center;
+line-height: 1em;
+user-select: none;
+white-space: pre-line;
 }
 
 .weather-container {
-  background-color: var(--color-bg-overlay);
-  border-radius: 0;
-  box-shadow: var(--shadow-card);
-  padding: 10px var(--spacing-lg);
-  margin-top: var(--spacing-sm);
-  width: var(--container-width);
-  max-width: var(--container-max-width);
-  backdrop-filter: blur(5px);
-  text-align: center;
-  line-height: 1.1;
-  font-size: 1em;
+background-color: rgba(255, 255, 255, 0.1);
+border-radius: 0;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+padding: 10px 15px;
+margin-top: 8px;
+width: 92%;
+max-width: 380px;
+backdrop-filter: blur(5px);
+text-align: center;
+line-height: 1.1;
+font-size: 1em;
 }
 
 .moon-phase-container {
-  background-color: var(--color-bg-overlay);
-  border-radius: 0;
-  box-shadow: var(--shadow-sm);
-  padding: var(--spacing-xs) 2px;
-  margin-top: var(--spacing-sm);
-  width: var(--container-width);
-  max-width: var(--container-max-width);
-  backdrop-filter: blur(5px);
-  text-align: center;
-  line-height: 1;
-  font-weight: normal;
+background-color: rgba(255, 255, 255, 0.1);
+border-radius: 0;
+box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+padding: 4px 2px;
+margin-top: 8px;
+width: 92%;
+max-width: 380px;
+backdrop-filter: blur(5px);
+text-align: center;
+line-height: 1;
+font-weight: normal;
 }
 
-#estacaoContainer {
-  margin-top: 13px;
-  text-align: center;
-  font-size: 1em;
-  line-height: 1.5;
-}
+/* -----------------------------------------------------------------------------
+5. ELEMENTOS DE CONTEÚDO METEOROLÓGICO
+----------------------------------------------------------------------------- */
 
-
-/* =============================================================================
-   7. ELEMENTOS METEOROLÓGICOS
-============================================================================= */
-
-/* --- Resultado e status --- */
-
-#weatherResult {
-  font-size: var(--font-size-lg);
-  font-weight: bold;
-}
-
-#weatherMessage {
-  text-align: center;
-  color: var(--color-accent);
-  font-weight: 500;
-  font-size: var(--font-size-lg);
-  border-radius: var(--radius-md);
-}
-
-#status {
-  margin-top: var(--spacing-sm);
-  font-size: 1em;
-  color: var(--color-text);
-  font-weight: bold;
-}
-
-/* --- Sugestão de receita --- */
-
-#sugestaoReceita {
-  display: none;
-}
-
-#sugestaoReceita p {
-  font-size: var(--font-size-md);
-  margin-top: var(--spacing-lg);
-  line-height: 0.6;
-}
-
-#sugestaoReceita p.descricao {
-  font-size: var(--font-size-md);
-  margin-top: 3px;
-  line-height: 1.35;
-}
-
-/* --- Resumo agora --- */
-
-#conteudoResumoAgora {
-  background-color: transparent;
-  padding: 10px 0;
-}
-
-/* --- Informações inline --- */
-
-.info-inline {
-  font-size: 0.85em;
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  align-items: center;
-  margin-top: var(--spacing-sm);
-  font-weight: bold;
-  color: var(--color-text);
-  flex-wrap: wrap;
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-}
-
-.info-item .weather-value {
-  font-size: 1.4em;
-  color: var(--color-accent);
-}
-
-/* --- Previsão do dia seguinte --- */
-
-.previsao-amanha {
-  display: grid;
-  grid-template-columns: 1fr 68px;
-  align-items: center;
-  column-gap: var(--spacing-md);
-  width: fit-content;
-  margin: -10px auto 0;
-  padding: var(--spacing-xs) var(--spacing-md);
-}
-
-.previsao-amanha .info {
-  text-align: right;
-  line-height: 1.4;
-  white-space: normal;
-  min-width: 0;
-}
-
-.previsao-amanha .titulo-previsao {
-  font-size: var(--font-size-lg);
-  font-weight: bold;
-  color: var(--color-text);
-}
-
-.previsao-amanha .temp-previsao {
-  font-size: var(--font-size-lg);
-  color: var(--color-accent);
-  margin-top: 2px;
-}
-
-.previsao-amanha .icon {
-  width: 68px;
-  height: 68px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.previsao-amanha .icon img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* --- Lua --- */
-
+/* Elementos da Lua */
 .moon-text {
-  font-size: var(--font-size-lg);
+font-size: 1.0em !important;
 }
 
 .moon-text span {
-  line-height: 1.5;
+line-height: 1.5;
 }
 
 .moon-emoji {
-  font-size: 1.6em;
-  margin: 0 3px;
-  line-height: 1;
-  vertical-align: middle;
-  position: relative;
-  top: -2px;
-  display: inline-block;
-  filter: drop-shadow(0 0 4px rgba(255, 235, 59, 0.4));
-  padding: 1px 0;
+font-size: 1.6em;
+margin: 0 3px;
+line-height: 1;
+vertical-align: middle;
+position: relative;
+top: -2px;
+display: inline-block;
+filter: drop-shadow(0 0 4px rgba(255, 235, 59, 0.4));
+padding: 1px 0;
 }
 
+/* Informações em linha */
+.info-inline {
+font-size: 0.85em;
+display: flex;
+justify-content: center;
+gap: 16px;
+align-items: center;
+margin-top: 8px;
+font-weight: bold;
+color: #fff;
+flex-wrap: wrap;
+}
 
-/* =============================================================================
-   8. ÍCONES
-============================================================================= */
+.info-item {
+display: flex;
+align-items: center;
+gap: 4px;
+}
+
+.info-item .weather-value {
+font-size: 1.4em;
+color: #ffeb3b;
+}
+
+/* Previsão do tempo */
+.previsao-amanha {
+display: grid;
+grid-template-columns: 1fr 68px;
+align-items: center;
+column-gap: 12px;
+width: fit-content;
+margin: 0 auto;
+margin-top: -10px;
+padding: 6px 12px;
+}
+
+.previsao-amanha .info {
+text-align: right;
+line-height: 1.4;
+white-space: normal;
+min-width: 0;
+}
+
+.previsao-amanha .titulo-previsao {
+font-size: 14px;
+font-weight: bold;
+color: #ffffff;
+}
+
+.previsao-amanha .temp-previsao {
+font-size: 14px;
+color: #ffeb3b;
+margin-top: 2px;
+}
+
+.previsao-amanha .icon {
+width: 68px;
+height: 68px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-shrink: 0;
+}
+
+.previsao-amanha .icon img {
+width: 100%;
+height: auto;
+object-fit: contain;
+}
+
+/* -----------------------------------------------------------------------------
+6. ÍCONES
+----------------------------------------------------------------------------- */
 
 .status-icon {
-  width: 16px;
-  height: 16px;
-  margin-right: var(--spacing-xs);
-  vertical-align: -2px;
+width: 16px;
+height: 16px;
+vertical-align: middle;
+margin-right: 4px;
+vertical-align: -2px;
 }
 
 .table-icon {
-  width: var(--font-size-md);
-  height: var(--font-size-md);
-  vertical-align: middle;
+width: 12px;
+height: 12px;
+vertical-align: middle;
 }
 
 .big-icon {
-  font-size: 47px;
-  position: relative;
-  top: -10px;
-  font-weight: bold;
+font-size: 47px;
+position: relative;
+top: -10px;
+font-weight: bold;
 }
 
 .weather-icon {
-  width: 75px;
-  height: 75px;
-  transform: translateY(15px);
+width: 75px;
+height: 75px;
+transform: translateY(15px);
 }
 
-
-/* =============================================================================
-   9. GRÁFICOS
-============================================================================= */
+/* -----------------------------------------------------------------------------
+7. GRÁFICOS
+----------------------------------------------------------------------------- */
 
 .grafico-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: var(--spacing-lg) 0;
+display: flex;
+flex-direction: column;
+width: 100%;
+margin: 15px 0;
 }
 
 .grafico {
-  position: relative;
-  height: 143px;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto 45px;
-  background: var(--color-bg-overlay-2);
-  border-radius: var(--radius-md);
-  padding: 10px;
+position: relative;
+height: 143px;
+width: 100%;
+max-width: 900px;
+margin: 0 auto 45px;
+background: rgba(255, 255, 255, 0.05);
+border-radius: 8px;
+padding: 10px;
 }
 
 .grafico:last-child {
-  margin-bottom: 0;
+margin-bottom: 0;
 }
 
+canvas {
+font-size: 12px;
+width: 100% !important;
+height: auto !important;
+display: block;
+}
 
-/* =============================================================================
-   10. LOADING — BARRA E PONTOS
-============================================================================= */
+/* -----------------------------------------------------------------------------
+8. ELEMENTOS ESPECÍFICOS DE INTERFACE
+----------------------------------------------------------------------------- */
+
+#weatherMessage {
+text-align: center;
+color: #ffeb3b;
+font-weight: 500;
+border-radius: 8px;
+font-size: 14px !important;
+}
+
+#weatherResult {
+font-size: 14px;
+font-weight: bold;
+}
+
+#estacaoContainer {
+text-align: center;
+font-size: 1em;
+line-height: 1.5;
+}
+
+#status {
+margin-top: 8px;
+font-size: 1em;
+color: #fff;
+font-weight: bold;
+}
+
+#conteudoResumoAgora {
+background-color: transparent !important;
+padding: 10px 0 !important;
+}
+
+#sugestaoReceita p {
+font-size: 1.0em;
+margin-top: 15px;
+line-height: 0.6;
+}
+
+#sugestaoReceita p.descricao {
+font-size: 1.0em;
+margin-top: 3px;
+}
+
+/* -----------------------------------------------------------------------------
+9. BARRA DE PROGRESSO E LOADING
+----------------------------------------------------------------------------- */
 
 .progress-bar-small {
-  position: relative;
-  width: 120px;
-  height: 6px;
-  background-color: var(--color-bg);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  margin: var(--credits-gap) auto 0;
+position: relative;
+width: 120px;
+height: 6px;
+background-color: #002244;
+border-radius: 3px;
+overflow: hidden;
+margin: 6px auto 0;
 }
 
 .progress-bar-small::before {
-  content: '';
-  position: absolute;
-  height: 100%;
-  width: 30%;
-  background: linear-gradient(to right, transparent, var(--color-accent), transparent);
-  animation: shimmer 1.8s infinite ease-in-out;
-  opacity: 0.6;
-  border-radius: var(--radius-sm);
+content: '';
+position: absolute;
+height: 100%;
+width: 30%;
+background: linear-gradient(to right, transparent, #ffeb3b, transparent);
+animation: shimmer 1.8s infinite ease-in-out;
+opacity: 0.6;
+border-radius: 3px;
 }
 
 .dot {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background-color: var(--color-text);
-  margin: 0 2px;
-  opacity: 0;
-  animation: dot-fade 1.5s infinite both;
+width: 3px;
+height: 3px;
+border-radius: 50%;
+background-color: white;
+margin: 0 2px;
+opacity: 0;
+animation: dot-fade 1.5s infinite both;
 }
 
 .dot:nth-child(1) { animation-delay: 0.1s; }
 .dot:nth-child(2) { animation-delay: 0.3s; }
 .dot:nth-child(3) { animation-delay: 0.5s; }
 
-
-/* =============================================================================
-   11. RODAPÉ / CRÉDITOS
-   Todos os links, ícones e linhas do rodapé herdam de .credit-item.
-   Nada sobrescreve outro — cada variação usa apenas as propriedades
-   que diferem do padrão.
-============================================================================= */
+/* -----------------------------------------------------------------------------
+10. CRÉDITOS E RODAPÉ
+----------------------------------------------------------------------------- */
 
 .custom-credits {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: var(--color-accent);
-  font-family: var(--font-base);
-  font-size: var(--credits-font-size);
-  text-align: center;
-  line-height: 1;
-  padding-top: var(--spacing-2xl);
-  /* Compensação de espaço visual herdada do layout antigo */
-  position: relative;
-  top: -12px;
-  margin-top: -12px;
-  margin-bottom: -5px;
+color: #ffeb3b;
+font-family: 'Segoe UI', sans-serif;
+font-size: 14px;
+text-align: center;
+line-height: 0.6;
+position: relative;
+top: -12px;
+margin-top: -12px;
+margin-bottom: -5px;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding-top: 30px;
 }
 
-/* --- Base compartilhada para todos os itens de crédito --- */
-
-.credit-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--credits-gap);
-  font-size: var(--credits-font-size);
-  line-height: var(--credits-line-height);
-  color: var(--color-accent);
-  text-decoration: none;
-  background: none;
-  border: none;
-  font-family: var(--font-base);
-  cursor: pointer;
-  padding: 0;
-  margin: 3px 0;
+.custom-credits a {
+text-decoration: none;
+color: inherit;
+display: inline-flex;
+align-items: center;
+line-height: 1.5;
+margin: 6px 0;
 }
 
-/* --- Variação: link âncora --- */
-
-a.credit-item {
-  /* herda tudo de .credit-item; sem regras adicionais */
+.custom-credits a i.fab.fa-instagram {
+margin-left: 6px;
+color: #ffeb3b;
+position: relative;
+top: 0px;
+font-size: 0.8rem;
 }
-
-/* --- Variação: botão --- */
-
-button.credit-item {
-  /* herda tudo de .credit-item; sem regras adicionais */
-}
-
-/* --- Variação: linha de texto simples (não clicável) --- */
-
-.credit-item-muted {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-xs);
-  line-height: var(--credits-line-height);
-  color: var(--color-text);
-  opacity: 0.4;
-  margin: 3px 0;
-}
-
-/* --- Logo nos créditos --- */
-
-.credit-logo {
-  width: 20px;
-  height: auto;
-  position: relative;
-  top: -1px;
-}
-
-/* --- Divisor --- */
 
 .custom-credits .divider {
-  margin-top: 10px;
-  width: 90%;
-  border-top: 1px solid var(--color-divider);
+margin-top: 10px;
+width: 90%;
+border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* --- Ícone emoji nos créditos --- */
+.custom-credits .credit-button {
+background: none;
+border: none;
+color: inherit;
+font-size: 14px;
+font-family: inherit;
+cursor: pointer;
+display: inline-flex;
+align-items: center;
+line-height: 1.5;
+margin: 6px 0;
+padding: 0;
+text-align: center;
+}
+
+.credit-link {
+display: flex;
+align-items: center;
+justify-content: center;
+text-decoration: none;
+color: #ffeb3b;
+margin: 0;
+padding: 0;
+line-height: 0.6;
+}
+
+.credit-logo {
+width: 20px;
+height: auto;
+margin-left: 8px;
+position: relative;
+top: -1px;
+}
+
+.credit-line {
+margin: -0.3rem 0;
+line-height: 0.6;
+}
+
+.river-line {
+display: flex;
+align-items: center;
+justify-content: center;
+margin: -0.3rem 0;
+line-height: 0.6;
+}
 
 .credit-icon {
-  font-size: var(--credits-icon-size);
-  line-height: 1;
-  flex-shrink: 0;
+margin-right: 6px;
+font-size: 0.75rem;
+vertical-align: top;
+line-height: 0.6;
+position: relative;
+top: -1px;
 }
 
+.river-icon {
+margin: 0 3px;
+font-size: 14px;
+line-height: 0.6;
+position: relative;
+top: -1px;
+}
 
-/* =============================================================================
-   12. NOTIFICAÇÕES E ALERTAS
-============================================================================= */
+#link-beira-rio {
+color: #ffeb3b;
+margin-top: 10px;
+display: inline-block;
+}
+
+/* -----------------------------------------------------------------------------
+11. MODAIS E OVERLAYS
+----------------------------------------------------------------------------- */
+
+#telaEscalas {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: #002244;
+z-index: 10000;
+color: white;
+overflow-y: auto;
+padding: 20px;
+font-family: sans-serif;
+font-size: 11px;
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+#telaEscalas.mostrar {
+display: block;
+opacity: 1;
+}
+
+#telaEscalas table td:first-child {
+background-color: rgba(255, 255, 255, 0.1);
+font-weight: bold;
+}
+
+#telaEscalas table td:last-child {
+background-color: rgba(255, 255, 255, 0.05);
+font-style: italic;
+}
+
+#telaEscalas table th {
+background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* -----------------------------------------------------------------------------
+12. NOTIFICAÇÕES E ALERTAS
+----------------------------------------------------------------------------- */
 
 .notificacao-alerta {
-  position: fixed;
-  top: 0.5%;
-  left: 0;
-  width: 100%;
-  background-color: var(--color-bg-alert);
-  color: var(--color-alert-text);
-  font-weight: bold;
-  font-size: 1.15rem;
-  text-align: center;
-  padding: var(--spacing-sm) 0;
-  z-index: var(--z-alert);
-  display: none;
-  opacity: 0;
-  transition: var(--transition-fade);
+position: fixed;
+top: 0.5%;
+left: 0;
+transform: none;
+width: 100%;
+background-color: #1a3957;
+color: #ff6f00;
+font-weight: bold;
+display: none;
+opacity: 0;
+transition: opacity 0.3s ease;
+font-size: 1.15rem;
+text-align: center;
+padding: 8px 0;
+z-index: 9999;
 }
 
-
-/* =============================================================================
-   13. MODAIS
-============================================================================= */
-
-/* --- Base compartilhada para todos os modais --- */
-
-.modal-tela {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background-color: var(--color-bg-modal);
-  z-index: var(--z-modal);
-  color: var(--color-text);
-  overflow-y: auto;
-  padding: var(--spacing-xl);
-  font-family: var(--font-base);
-  font-size: var(--font-size-sm);
-  opacity: 0;
-  transition: var(--transition-fade);
-}
-
-.modal-tela.mostrar {
-  display: block;
-  opacity: 1;
-}
-
-.modal-tela .modal-inner {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.modal-tela h2 {
-  color: var(--color-accent);
-  border-left: 6px solid var(--color-text);
-  padding-left: 10px;
-  margin-bottom: 10px;
-  font-size: var(--font-size-body);
-}
-
-/* --- Ações no rodapé dos modais --- */
-
-.modal-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 25px;
-  width: 100%;
-  margin-top: var(--spacing-2xl);
-  padding: 0 10px;
-}
-
-.modal-btn {
-  background: none;
-  border: none;
-  font-family: var(--font-base);
-  font-size: var(--font-size-md);
-  cursor: pointer;
-  padding: 4px 0;
-  line-height: 1.5;
-}
-
-.modal-btn-primary {
-  color: var(--color-accent);
-  font-weight: bold;
-}
-
-.modal-btn-secondary {
-  color: var(--color-text);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--credits-gap);
-}
-
-/* --- Tabelas dentro dos modais --- */
-
-.modal-tela table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 12px 0;
-  margin-bottom: var(--spacing-2xl);
-  table-layout: fixed;
-}
-
-.modal-tela table:last-of-type {
-  margin-bottom: 0;
-}
-
-.modal-tela table th {
-  padding: var(--credits-gap);
-  color: var(--color-accent);
-  text-align: left;
-  background-color: rgba(255, 255, 255, 0.15);
-  border-bottom: 2px solid var(--color-text);
-}
-
-.modal-tela table td {
-  padding: var(--credits-gap);
-  text-align: left;
-}
-
-.modal-tela table td:first-child {
-  background-color: rgba(255, 255, 255, 0.1);
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-.modal-tela table td:nth-child(2) {
-  white-space: nowrap;
-}
-
-.modal-tela table td:last-child {
-  background-color: var(--color-bg-overlay-2);
-  font-style: italic;
-}
-
-/* --- IDs legados (mantidos para não quebrar o JS existente) --- */
-
-#telaEscalas,
-#telaGraficos {
-  /* herda de .modal-tela quando as classes forem adicionadas no HTML */
-}
-
-
-/* =============================================================================
-   14. ANIMAÇÕES
-============================================================================= */
+/* -----------------------------------------------------------------------------
+13. ANIMAÇÕES
+----------------------------------------------------------------------------- */
 
 @keyframes pulse {
-  0%   { transform: scale(1);    opacity: 0.8; }
-  50%  { transform: scale(1.05); opacity: 1;   }
-  100% { transform: scale(1);    opacity: 0.8; }
+0% { 
+transform: scale(1); 
+opacity: 0.8; 
+}
+50% { 
+transform: scale(1.05); 
+opacity: 1; 
+}
+100% { 
+transform: scale(1); 
+opacity: 0.8; 
+}
 }
 
 @keyframes shimmer {
-  0%   { left: -30%; }
-  50%  { left: 100%; }
-  100% { left: -30%; }
+0% { left: -30%; }
+50% { left: 100%; }
+100% { left: -30%; }
 }
 
 @keyframes dot-fade {
-  0%,
-  100% { opacity: 0; transform: scale(0.8); }
-  50%  { opacity: 1; transform: scale(1);   }
+0%, 100% {
+opacity: 0;
+transform: scale(0.8);
+}
+50% {
+opacity: 1;
+transform: scale(1);
+}
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg);   }
-  to   { transform: rotate(360deg); }
-}
 
-
-/* =============================================================================
-   15. MEDIA QUERIES
-============================================================================= */
+/* -----------------------------------------------------------------------------
+14. MEDIA QUERIES - RESPONSIVIDADE
+----------------------------------------------------------------------------- */
 
 @media (max-width: 400px) {
-  .weather-container,
-  .moon-phase-container {
-    width: 95%;
-    padding: 2px 5px;
-  }
+.weather-container, 
+.moon-phase-container {
+width: 95%;
+padding: 2px 5px;
+}
 
-  .weather-icon {
-    width: 75px;
-    height: 75px;
-    transform: translateY(10px);
-  }
+.weather-icon {
+width: 75px;
+height: 75px;
+transform: translateY(10px);
+}
 
-  #weatherMessage {
-    font-size: var(--font-size-lg);
-    padding: 6.5px;
-  }
+#weatherMessage {
+font-size: 14px;
+padding: 6.5px;
+}
 }
 
 @media (max-width: 360px) {
-  .previsao-amanha {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-    padding: var(--credits-gap) var(--spacing-md);
-    margin: 0 auto;
-  }
+.previsao-amanha {
+grid-template-columns: 1fr;
+justify-items: center;
+text-align: center;
+padding: 6px 12px;
+margin: 0 auto;
+}
 
-  .previsao-amanha .info {
-    text-align: center;
-  }
+.previsao-amanha .info {
+text-align: center;
+}
 
-  .previsao-amanha .icon {
-    margin-top: var(--credits-gap);
-  }
+.previsao-amanha .icon {
+margin-top: 6px;
+}
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+.custom-credits a,
+.credit-link,
+.credit-line,
+.river-line,
+.river-line a {
+font-size: 0.75rem !important;  /* ou o tamanho que quiser */
+}
+
+/* AJUSTE RÁPIDO - MAIS VISÍVEL */
+#sugestaoReceita p.descricao {
+font-size: 12px !important;
+line-height: 1.35 !important;
+}
+
+#sugestaoReceita p {
+font-size: 12px !important;
+}
+
+.moon-text {
+font-size: 14px !important;
 }
