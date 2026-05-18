@@ -645,11 +645,11 @@ const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase
 
 if (info) {
 info.innerHTML = `
-<div style="text-align:center; font-size:0.73rem; line-height:1.4; margin-bottom:4px;">
+<div style="text-align:center; font-size:0.80rem; line-height:1.4; margin-bottom:4px;">
 <span style="margin-right:5px;">${emoji}</span>
 ${capitalize(estacao)} está aí e vai até ${formatarDataLonga(end)}
 </div>
-<div style="text-align:center; font-size:0.73rem; line-height:1.4;">
+<div style="text-align:center; font-size:0.80rem; line-height:1.4;">
 <span style="margin-right:5px;">${nextEmoji}</span>
 ${capitalize(next)} chega em ${textoRestante}
 </div>
