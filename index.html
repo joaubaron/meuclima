@@ -298,77 +298,21 @@ style="background:none; border:none; color:white; padding: 4px 0; cursor:pointer
 </div>
 </div>
 
-<!-- Modal câmera ao vivo -->
-<div id="cameraModal"
-style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-z-index:999999;
-">
-
-<!-- Iframe com o site da câmera (funciona 100%) -->
-<iframe 
-id="cameraIframe"
-src="https://www.climaaovivo.com.br/sc/blumenau-slaviero-essential-blumenau"
-style="
-width:100%;
-height:100%;
-border:none;
-background:black;
-"
-allow="autoplay; fullscreen"
-allowfullscreen>
-</iframe>
-
-<!-- Botão fechar -->
-<button onclick="fecharCameraAoVivo()"
-style="
-position:absolute;
-top:15px;
-right:15px;
-z-index:10;
-background:red;
-color:white;
-border:none;
-padding:10px 14px;
-border-radius:10px;
-font-weight:bold;
-cursor:pointer;
-">
-✕ Fechar
-</button>
-
+<!-- Modal câmera ao vivo - CÓDIGO FINAL CORRETO -->
+<div id="cameraModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:999999;">
+  <iframe id="cameraIframe" src="https://www.climaaovivo.com.br/sc/blumenau-slaviero-essential-blumenau" style="width:100%; height:100%; border:none;" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  <button onclick="fecharCameraAoVivo()" style="position:absolute; top:15px; right:15px; background:red; color:white; border:none; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:bold;">✕ Fechar</button>
 </div>
 
 <script>
-// Função para abrir a câmera ao vivo
-window.abrirCameraAoVivo = function() {
-alert("Para melhor visualização, vire o celular na horizontal.");
-const modal = document.getElementById("cameraModal");
-if (modal) {
-modal.style.display = "block";
-document.body.style.overflow = "hidden"; // Evita rolagem
+function abrirCameraAoVivo() {
+  document.getElementById("cameraModal").style.display = "block";
 }
-}
-
-// Função para fechar a câmera ao vivo
-window.fecharCameraAoVivo = function() {
-const modal = document.getElementById("cameraModal");
-const iframe = document.getElementById("cameraIframe");
-
-if (modal) {
-modal.style.display = "none";
-document.body.style.overflow = ""; // Restaura rolagem
-}
-
-if (iframe) {
-iframe.src = iframe.src; // Recarrega para parar o vídeo
-}
+function fecharCameraAoVivo() {
+  var modal = document.getElementById("cameraModal");
+  var iframe = document.getElementById("cameraIframe");
+  modal.style.display = "none";
+  iframe.src = iframe.src;
 }
 </script>
 
