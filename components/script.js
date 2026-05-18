@@ -1747,6 +1747,7 @@ periodosHTML += `
 <img src="${await getWeatherIcon(symbol, periodo.isDay)}" alt="" class="weather-icon small-weather-icon" style="margin-top: 4px;">
 </div>
 `;
+}
 
 const amanha = forecast.forecast.forecastday[1];
 const diasSemana = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
