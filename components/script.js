@@ -1643,7 +1643,7 @@ const moonHTML = `
 <a href="#"
 onclick="abrirStarWalkMoon(); return false;"
 style="color: inherit; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent;">
-Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% <span style="font-size: 0.80em;">de brilho</span>
+Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% <span style="font-size: 0.70em; color: #ffeb3b;">de brilho</span>
 </a>
 </span>
 </div>
