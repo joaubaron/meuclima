@@ -6,38 +6,38 @@ const GEO_TIMEOUT = 15000;
 const NOMINATIM_USER_AGENT = 'MeuClima/1.0 (local testing)';
 
 const DOM_IDS = {
-  WEATHER_RESULT: 'weatherResult',
-  STATUS: 'status',
-  SPLASH_SCREEN: 'splashScreen',
-  PULL_TO_REFRESH: 'pullToRefresh',
-  MOON_INFO: 'moonInfo',
-  EXTRAS: 'extras',
-  LOCATION_DATE: 'locationDate',
-  WEATHER_MESSAGE: 'weatherMessage',
-  ESTACAO_INFO: 'estacaoInfo',
-  NOTIFICACAO_ALERTA: 'notificacaoAlerta',
-  SUGESTAO_RECEITA: 'sugestaoReceita',
-  TELA_GRAFICOS: 'telaGraficos',
-  TELA_ESCALAS: 'telaEscalas',
-  TEMPERATURA_CHART: 'temperaturaChart',
-  PRECIPITACAO_CHART: 'precipitacaoChart',
-  VENTO_CHART: 'ventoChart'
+WEATHER_RESULT: 'weatherResult',
+STATUS: 'status',
+SPLASH_SCREEN: 'splashScreen',
+PULL_TO_REFRESH: 'pullToRefresh',
+MOON_INFO: 'moonInfo',
+EXTRAS: 'extras',
+LOCATION_DATE: 'locationDate',
+WEATHER_MESSAGE: 'weatherMessage',
+ESTACAO_INFO: 'estacaoInfo',
+NOTIFICACAO_ALERTA: 'notificacaoAlerta',
+SUGESTAO_RECEITA: 'sugestaoReceita',
+TELA_GRAFICOS: 'telaGraficos',
+TELA_ESCALAS: 'telaEscalas',
+TEMPERATURA_CHART: 'temperaturaChart',
+PRECIPITACAO_CHART: 'precipitacaoChart',
+VENTO_CHART: 'ventoChart'
 };
 
 const STYLES = {
-  ERROR_BOX: 'color:#ff6f00;text-align:center;padding:20px;',
-  SUCCESS_TEXT: 'color:#4bc194;',
-  WARNING_TEXT: 'color:#ccc;font-size:0.75em;',
-  VALUE_TEXT: 'color:#ffeb3b;'
+ERROR_BOX: 'color:#ff6f00;text-align:center;padding:20px;',
+SUCCESS_TEXT: 'color:#4bc194;',
+WARNING_TEXT: 'color:#ccc;font-size:0.75em;',
+VALUE_TEXT: 'color:#ffeb3b;'
 };
 
 const UI_STATE = {
-  touchStartY: 0,
-  isPulling: false,
-  isRefreshing: false,
-  currentTemperatureMessage: '',
-  weatherCache: null,
-  extrasCache: { extras: "", moon: "" }
+touchStartY: 0,
+isPulling: false,
+isRefreshing: false,
+currentTemperatureMessage: '',
+weatherCache: null,
+extrasCache: { extras: "", moon: "" }
 };
 
 function tentarComRetry(fn, maxTentativas = 3, intervalo = 4000) {
@@ -1632,7 +1632,7 @@ sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">Dica para o dia:</stron
 moonDiv.innerHTML = '';
 moonDiv.appendChild(sugestaoDiv);
 
-requestAnimationFrame(() => {
+setTimeout(() => {
 const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
 const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
@@ -1652,7 +1652,7 @@ Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${ilumin
 
 moonDiv.innerHTML = moonHTML;
 UI_STATE.extrasCache.moon = moonHTML;
-});
+}, 9000);
 
 const hoje = forecast.forecast.forecastday[0];
 const horaAtual = new Date().getHours();
