@@ -667,6 +667,7 @@ function abrirTelaGraficos() {
 const tela = document.getElementById('telaGraficos');
 tela.style.display = 'block';
 document.body.classList.add('modal-aberto');
+history.pushState({modal: 'Graficos'}, ''); // ← ADICIONADO
 setTimeout(() => {
 tela.style.opacity = '1';
 carregarGraficos();
@@ -682,6 +683,7 @@ if (tela) {
 tela.style.display = 'block';
 document.body.classList.add('modal-aberto');
 tela.style.zIndex = '10001';
+history.pushState({modal: 'Escalas'}, ''); // ← ADICIONADO
 setTimeout(() => {
 tela.style.opacity = '1';
 }, 10);
@@ -1948,3 +1950,20 @@ modal.appendChild(header);
 modal.appendChild(iframe);
 document.body.appendChild(modal);
 }
+
+// Gerencia o botão voltar do Android
+window.addEventListener('popstate', function(event) {
+const modalGraficos = document.getElementById('telaGraficos');
+const modalEscalas = document.getElementById('telaEscalas');
+
+// Verifica se algum modal está aberto
+if (modalGraficos && modalGraficos.style.display === 'block') {
+fecharModal('Graficos');
+event.preventDefault();
+event.stopPropagation(); // ← ADICIONE ESTA LINHA
+} else if (modalEscalas && modalEscalas.style.display === 'block') {
+fecharModal('Escalas');
+event.preventDefault();
+event.stopPropagation(); // ← ADICIONE ESTA LINHA
+}
+});
