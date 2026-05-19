@@ -1934,8 +1934,8 @@ const header = document.createElement('div');
 header.style.cssText = 'display:flex;justify-content:flex-end;padding:12px;background:#0a0a1a;';
 
 const closeBtn = document.createElement('button');
-closeBtn.textContent = '✕ FECHAR';
-closeBtn.style.cssText = 'background:#ffeb3b;color:#000;border:none;padding:8px 20px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;';
+closeBtn.textContent = 'Fechar';
+closeBtn.style.cssText = 'background:transparent;border:none;color:#ffeb3b;font-size:18px;font-weight:bold;cursor:pointer;padding:12px 20px;';
 closeBtn.onclick = () => document.body.removeChild(modal);
 
 header.appendChild(closeBtn);
