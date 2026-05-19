@@ -1768,13 +1768,13 @@ illumination: `${formattedIllumination}%`
 
 const phases = {
 'new': { emoji: '🌑', pt: 'Nova' },
-'waxing crescent': { emoji: '🌒', pt: 'Crescente' },
+'waxing crescent': { emoji: '🌘', pt: 'Crescente' },
 'first quarter': { emoji: '🌓', pt: 'Quarto Crescente' },
 'waxing gibbous': { emoji: '🌔', pt: 'Gibosa Crescente' },
 'full': { emoji: '🌕', pt: 'Cheia' },
 'waning gibbous': { emoji: '🌖', pt: 'Gibosa Minguante' },
 'last quarter': { emoji: '🌗', pt: 'Quarto Minguante' },
-'waning crescent': { emoji: '🌘', pt: 'Minguante' }
+'waning crescent': { emoji: '🌒', pt: 'Minguante' }
 };
 
 for (const [key, value] of Object.entries(phases)) {
@@ -1927,24 +1927,24 @@ console.error("Erro ao carregar dados:", erro);
 }
 
 function abrirStarWalkMoon() {
-  const modal = document.createElement('div');
-  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000000;z-index:20000;display:flex;flex-direction:column;';
-  
-  const header = document.createElement('div');
-  header.style.cssText = 'display:flex;justify-content:flex-end;padding:12px;background:#0a0a1a;';
-  
-  const closeBtn = document.createElement('button');
-  closeBtn.textContent = '✕ FECHAR';
-  closeBtn.style.cssText = 'background:#ffeb3b;color:#000;border:none;padding:8px 20px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;';
-  closeBtn.onclick = () => document.body.removeChild(modal);
-  
-  header.appendChild(closeBtn);
-  
-  const iframe = document.createElement('iframe');
-  iframe.src = 'https://starwalk.space/pt/moon-calendar';
-  iframe.style.cssText = 'width:100%;flex:1;border:none;background:#fff;';
-  
-  modal.appendChild(header);
-  modal.appendChild(iframe);
-  document.body.appendChild(modal);
+const modal = document.createElement('div');
+modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000000;z-index:20000;display:flex;flex-direction:column;';
+
+const header = document.createElement('div');
+header.style.cssText = 'display:flex;justify-content:flex-end;padding:12px;background:#0a0a1a;';
+
+const closeBtn = document.createElement('button');
+closeBtn.textContent = '✕ FECHAR';
+closeBtn.style.cssText = 'background:#ffeb3b;color:#000;border:none;padding:8px 20px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;';
+closeBtn.onclick = () => document.body.removeChild(modal);
+
+header.appendChild(closeBtn);
+
+const iframe = document.createElement('iframe');
+iframe.src = 'https://starwalk.space/pt/moon-calendar';
+iframe.style.cssText = 'width:100%;flex:1;border:none;background:#fff;';
+
+modal.appendChild(header);
+modal.appendChild(iframe);
+document.body.appendChild(modal);
 }
