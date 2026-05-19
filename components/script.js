@@ -1,12 +1,44 @@
-let touchStartY = 0;
-let isPulling = false;
-let isRefreshing = false;
+const API_BASE = 'https://meu-projeto-clima.vercel.app/api/weather';
+const CACHE_PREFIX = 'cache_';
+const UPDATE_INTERVAL = 5 * 60 * 1000;
+const SPLASH_TIMEOUT = 25000;
+const GEO_TIMEOUT = 15000;
+const NOMINATIM_USER_AGENT = 'MeuClima/1.0 (local testing)';
 
-let weatherCache = null;
-let weatherLastFetch = 0;
-let extrasCache = { extras: "", moon: "" };
-let extrasLastFetch = 0;
-let currentTemperatureMessage = '';
+const DOM_IDS = {
+  WEATHER_RESULT: 'weatherResult',
+  STATUS: 'status',
+  SPLASH_SCREEN: 'splashScreen',
+  PULL_TO_REFRESH: 'pullToRefresh',
+  MOON_INFO: 'moonInfo',
+  EXTRAS: 'extras',
+  LOCATION_DATE: 'locationDate',
+  WEATHER_MESSAGE: 'weatherMessage',
+  ESTACAO_INFO: 'estacaoInfo',
+  NOTIFICACAO_ALERTA: 'notificacaoAlerta',
+  SUGESTAO_RECEITA: 'sugestaoReceita',
+  TELA_GRAFICOS: 'telaGraficos',
+  TELA_ESCALAS: 'telaEscalas',
+  TEMPERATURA_CHART: 'temperaturaChart',
+  PRECIPITACAO_CHART: 'precipitacaoChart',
+  VENTO_CHART: 'ventoChart'
+};
+
+const STYLES = {
+  ERROR_BOX: 'color:#ff6f00;text-align:center;padding:20px;',
+  SUCCESS_TEXT: 'color:#4bc194;',
+  WARNING_TEXT: 'color:#ccc;font-size:0.75em;',
+  VALUE_TEXT: 'color:#ffeb3b;'
+};
+
+const UI_STATE = {
+  touchStartY: 0,
+  isPulling: false,
+  isRefreshing: false,
+  currentTemperatureMessage: '',
+  weatherCache: null,
+  extrasCache: { extras: "", moon: "" }
+};
 
 function tentarComRetry(fn, maxTentativas = 3, intervalo = 4000) {
 return new Promise(async (resolve, reject) => {
@@ -34,18 +66,18 @@ buscarPrevisaoPorGeolocalizacao(false);
 }
 document.addEventListener('touchstart', function (e) {
 if (window.scrollY === 0) {
-touchStartY = e.touches[0].clientY;
-isPulling = true;
+UI_STATE.touchStartY = e.touches[0].clientY;
+UI_STATE.isPulling = true;
 }
 }, { passive: true });
 
 document.addEventListener('touchmove', function (e) {
-if (!isPulling || isRefreshing) return;
+if (!UI_STATE.isPulling || UI_STATE.isRefreshing) return;
 
 const touchY = e.touches[0].clientY;
-const distance = touchY - touchStartY;
+const distance = touchY - UI_STATE.touchStartY;
 
-const refreshDiv = document.getElementById('pullToRefresh');
+const refreshDiv = document.getElementById(DOM_IDS.PULL_TO_REFRESH);
 
 if (distance > 50) {
 refreshDiv.style.opacity = '1';
@@ -55,27 +87,27 @@ refreshDiv.style.opacity = '0';
 }, { passive: true });
 
 document.addEventListener('touchend', function (e) {
-if (!isPulling || isRefreshing) return;
+if (!UI_STATE.isPulling || UI_STATE.isRefreshing) return;
 
 const touchEndY = e.changedTouches[0].clientY;
-const distance = touchEndY - touchStartY;
-const refreshDiv = document.getElementById('pullToRefresh');
+const distance = touchEndY - UI_STATE.touchStartY;
+const refreshDiv = document.getElementById(DOM_IDS.PULL_TO_REFRESH);
 
 if (distance > 80) {
-isRefreshing = true;
+UI_STATE.isRefreshing = true;
 refreshDiv.style.opacity = '1';
 
 atualizarDados().then(() => {
 setTimeout(() => {
 refreshDiv.style.opacity = '0';
-isRefreshing = false;
+UI_STATE.isRefreshing = false;
 }, 800);
 });
 } else {
 refreshDiv.style.opacity = '0';
 }
 
-isPulling = false;
+UI_STATE.isPulling = false;
 }, { passive: true });
 
 function getWeatherElements() {
@@ -106,13 +138,11 @@ console.log('Atualizando dados...');
 location.reload();
 }
 
-const SPLASH_TIMEOUT = 25000;
-
 function mostrarMensagemErro(mensagem) {
-const resultDiv = document.getElementById('weatherResult');
+const resultDiv = document.getElementById(DOM_IDS.WEATHER_RESULT);
 if (resultDiv) {
 resultDiv.innerHTML = `
-<div style="color:#ff6f00;text-align:center;padding:20px;">
+<div style="${STYLES.ERROR_BOX}">
 <p>${mensagem}</p>
 <button onclick="reiniciarBusca()" style="
 background:#ff6f00;color:white;border:none;
@@ -128,13 +158,16 @@ const el = document.getElementById(id);
 if (el) el.innerHTML = html;
 }
 
+function obterElemento(idKey) {
+return document.getElementById(DOM_IDS[idKey]);
+}
+
 function limparCachePorPrioridade() {
 const itens = [];
-const prefixo = 'cache_';
 
 for (let i = 0; i < localStorage.length; i++) {
 const chave = localStorage.key(i);
-if (chave.startsWith(prefixo)) {
+if (chave.startsWith(CACHE_PREFIX)) {
 try {
 const item = JSON.parse(localStorage.getItem(chave));
 itens.push({
@@ -158,12 +191,11 @@ localStorage.removeItem(itens[i].chave);
 
 function limparCacheAntigoMaisAgressivo(removerPercentual = 0.5) {
 const agora = Date.now();
-const prefixoCache = 'cache_';
 const itensCache = [];
 
 for (let i = 0; i < localStorage.length; i++) {
 const chave = localStorage.key(i);
-if (chave && chave.startsWith(prefixoCache)) {
+if (chave && chave.startsWith(CACHE_PREFIX)) {
 try {
 const registro = JSON.parse(localStorage.getItem(chave));
 if (registro && typeof registro === 'object' && typeof registro.timestamp === 'number') {
@@ -219,7 +251,7 @@ prioridade: prioridade
 
 const tentarSalvar = () => {
 try {
-const chaveCompleta = `cache_${chave}`;
+const chaveCompleta = `${CACHE_PREFIX}${chave}`;
 const dadosSerializados = JSON.stringify(registro);
 
 if (dadosSerializados.length > 2 * 1024 * 1024) {
@@ -322,7 +354,7 @@ const receita = receitasDaFaixa[Math.floor(Math.random() * receitasDaFaixa.lengt
 const box = document.getElementById('sugestaoReceita');
 box.innerHTML = `
 <p style="margin-bottom: 0.6em; font-size: 0.75em; margin-top: 6px;">
-Hoje pede: ${receita.emoji} 
+Hoje pede: ${receita.emoji}
 <strong>${receita.nome}</strong>
 </p>
 <p style="margin-top: 0.4em; font-size: 0.75em; line-height: 1.2em;">${receita.descricao}</p>
@@ -667,7 +699,7 @@ function abrirTelaGraficos() {
 const tela = document.getElementById('telaGraficos');
 tela.style.display = 'block';
 document.body.classList.add('modal-aberto');
-history.pushState({modal: 'Graficos'}, ''); // ← ADICIONADO
+history.pushState({modal: 'Graficos'}, '');
 setTimeout(() => {
 tela.style.opacity = '1';
 carregarGraficos();
@@ -683,7 +715,7 @@ if (tela) {
 tela.style.display = 'block';
 document.body.classList.add('modal-aberto');
 tela.style.zIndex = '10001';
-history.pushState({modal: 'Escalas'}, ''); // ← ADICIONADO
+history.pushState({modal: 'Escalas'}, '');
 setTimeout(() => {
 tela.style.opacity = '1';
 }, 10);
@@ -727,24 +759,39 @@ if (ventoChart) { ventoChart.destroy(); ventoChart = null; }
 }
 }
 
+function mapearFaixa(valor, faixas) {
+for (const faixa of faixas) {
+if (valor >= faixa.min && valor <= faixa.max) return faixa.label;
+}
+return faixas[faixas.length - 1].label;
+}
+
+const FAIXAS_PRECIPITACAO = [
+{ min: 0, max: 0.2, label: "Sem chuva" },
+{ min: 0.2, max: 1, label: "Garoa leve" },
+{ min: 1, max: 4, label: "Chuva fraca" },
+{ min: 4, max: 10, label: "Moderada" },
+{ min: 10, max: 20, label: "Chuva forte" },
+{ min: 20, max: 50, label: "Muito forte" },
+{ min: 50, max: Infinity, label: "Chuva extrema" }
+];
+
+const FAIXAS_VENTO = [
+{ min: 0, max: 1, label: "Sem vento" },
+{ min: 1, max: 9, label: "Brisinha leve" },
+{ min: 9, max: 30, label: "Vento moderado" },
+{ min: 30, max: 49, label: "Ventania" },
+{ min: 49, max: 74, label: "Quase voando" },
+{ min: 74, max: 102, label: "Muito forte" },
+{ min: 102, max: Infinity, label: "Destrutivo" }
+];
+
 function getDescricaoPrecipitacao(mm) {
-if (mm < 0.2) return "Sem chuva";
-if (mm <= 1) return "Garoa leve";
-if (mm <= 4) return "Chuva fraca";
-if (mm <= 10) return "Moderada";
-if (mm <= 20) return "Chuva forte";
-if (mm <= 50) return "Muito forte";
-return "Chuva extrema";
+return mapearFaixa(mm, FAIXAS_PRECIPITACAO);
 }
 
 function getDescricaoVento(kph) {
-if (kph <= 1) return "Sem vento";
-if (kph <= 9) return "Brisinha leve";
-if (kph <= 30) return "Vento moderado";
-if (kph <= 49) return "Ventania";
-if (kph <= 74) return "Quase voando";
-if (kph <= 102) return "Muito forte";
-return "Destrutivo";
+return mapearFaixa(kph, FAIXAS_VENTO);
 }
 
 function calcularMedia(dados) {
@@ -773,7 +820,7 @@ return faixa.emoji;
 }
 
 async function carregarGraficos() {
-if (!weatherCache) {
+if (!UI_STATE.weatherCache) {
 console.log("Aguardando dados do tempo…");
 return;
 }
@@ -785,7 +832,7 @@ return;
 
 destruirGraficos();
 
-const forecast = weatherCache.forecast;
+const forecast = UI_STATE.weatherCache.forecast;
 const horasDia1 = forecast.forecast.forecastday[0].hour;
 const horasDia2 = forecast.forecast.forecastday[1]?.hour || [];
 const todasHoras = [...horasDia1, ...horasDia2];
@@ -862,7 +909,7 @@ type: 'line',
 data: {
 labels,
 datasets: [{
-label: `🌧️ Média ${mediaPrecip24h.toFixed(1)} mm – ${descricaoPrecip}`,
+label: `🌧️ Média ${mediaPrecip24h.toFixed(1)} mm – ${descricaoPrecip}`,
 data: precipData,
 borderColor: '#42a5f5',
 backgroundColor: 'rgba(66, 165, 245, 0.1)',
@@ -895,7 +942,7 @@ type: 'line',
 data: {
 labels,
 datasets: [{
-label: `🍃 Média ${mediaVento24h.toFixed(1)} km/h – ${descricaoVento}`,
+label: `🍃 Média ${mediaVento24h.toFixed(1)} km/h – ${descricaoVento}`,
 data: ventoData,
 borderColor: '#4caf50',
 backgroundColor: 'rgba(76, 175, 80, 0.1)',
@@ -1040,8 +1087,8 @@ return mensagensEspeciais[chave1] || mensagensEspeciais[chave2] || null;
 function getMessageForTemperature(temp, isInitialLoad = false) {
 const especialHoje = getSpecialDateMessage();
 if (especialHoje) {
-currentTemperatureMessage = especialHoje;
-return currentTemperatureMessage;
+UI_STATE.currentTemperatureMessage = especialHoje;
+return UI_STATE.currentTemperatureMessage;
 }
 
 if (isInitialLoad) {
@@ -1055,19 +1102,19 @@ const emojiInfo = emojiByTemperature.find(
 faixa => temp >= faixa.min && temp <= faixa.max
 );
 const emoji = emojiInfo ? emojiInfo.emoji : '';
-currentTemperatureMessage = `${emoji} ${group.messages[randomIndex]}`;
+UI_STATE.currentTemperatureMessage = `${emoji} ${group.messages[randomIndex]}`;
 } else {
-currentTemperatureMessage = 'Aproveite o dia!';
+UI_STATE.currentTemperatureMessage = 'Aproveite o dia!';
 }
 }
 
-return currentTemperatureMessage;
+return UI_STATE.currentTemperatureMessage;
 }
 
 function atualizarMensagemTemperatura() {
-const messageDiv = document.getElementById('weatherMessage');
+const messageDiv = document.getElementById(DOM_IDS.WEATHER_MESSAGE);
 if (messageDiv) {
-messageDiv.innerHTML = currentTemperatureMessage;
+messageDiv.innerHTML = UI_STATE.currentTemperatureMessage;
 }
 }
 
@@ -1080,8 +1127,7 @@ let cachedData = null;
 if (!forceRefresh) {
 cachedData = lerCache(cacheKey);
 if (cachedData) {
-weatherCache = cachedData;
-weatherLastFetch = now;
+UI_STATE.weatherCache = cachedData;
 return cachedData;
 }
 }
@@ -1112,8 +1158,7 @@ if (!data.current.temp_c && (!data.forecast.forecast || !data.forecast.forecast.
 throw new Error("Dados insuficientes da API");
 }
 
-weatherCache = data;
-weatherLastFetch = now;
+UI_STATE.weatherCache = data;
 
 salvarCache(cacheKey, data, 10);
 
@@ -1150,7 +1195,7 @@ astronomy: {}
 async function getCurrentWeather(lat, lon, signal) {
 try {
 const response = await fetch(
-`https://meu-projeto-clima.vercel.app/api/weather?cidade=${lat},${lon}&tipo=current`,
+`${API_BASE}?cidade=${lat},${lon}&tipo=current`,
 { signal }
 );
 
@@ -1172,47 +1217,47 @@ return null;
 }
 }
 
-async function getForecast(lat, lon, days = 2) { 
-try { 
-const response = await fetch(`https://meu-projeto-clima.vercel.app/api/weather?cidade=${lat},${lon}&tipo=forecast&days=${days}`); 
+async function getForecast(lat, lon, days = 2) {
+try {
+const response = await fetch(`${API_BASE}?cidade=${lat},${lon}&tipo=forecast&days=${days}`);
 
 if (!response.ok) {
 throw new Error(`HTTP error! status: ${response.status}`);
 }
 
-const data = await response.json(); 
+const data = await response.json();
 
 if (data.error) {
 throw new Error(data.error);
 }
 
-return data; 
-} catch (error) { 
-console.error('Erro ao obter previsão:', error, error.message); 
-return null; 
-} 
+return data;
+} catch (error) {
+console.error('Erro ao obter previsão:', error, error.message);
+return null;
+}
 }
 
-async function getAstronomy(lat, lon, date = 'today') { 
-try { 
-const response = await fetch(`https://meu-projeto-clima.vercel.app/api/weather?cidade=${lat},${lon}&tipo=astronomy&date=${date}`); 
-const data = await response.json(); 
+async function getAstronomy(lat, lon, date = 'today') {
+try {
+const response = await fetch(`${API_BASE}?cidade=${lat},${lon}&tipo=astronomy&date=${date}`);
+const data = await response.json();
 
 if (data.error) {
 throw new Error(data.error);
 }
 
-return data; 
-} catch (error) { 
-console.error('Erro ao obter dados astronômicos:', error); 
-return null; 
-} 
+return data;
+} catch (error) {
+console.error('Erro ao obter dados astronômicos:', error);
+return null;
+}
 }
 
-function getWeatherIcon(code, isDay) { 
-const basePath = 'https://cdn.weatherapi.com/weather/64x64'; 
-const time = isDay ? 'day' : 'night'; 
-const iconMap = { 
+function getWeatherIcon(code, isDay) {
+const basePath = 'https://cdn.weatherapi.com/weather/64x64';
+const time = isDay ? 'day' : 'night';
+const iconMap = {
 '1000': `${time}/113.png`,
 '1003': `${time}/116.png`,
 '1006': `${time}/119.png`,
@@ -1261,7 +1306,7 @@ const iconMap = {
 '1276': `${time}/389.png`,
 '1279': `${time}/392.png`,
 '1282': `${time}/395.png`,
-}; 
+};
 return basePath + '/' + (iconMap[code] || `${time}/113.png`);
 }
 
@@ -1313,7 +1358,7 @@ const controller = new AbortController();
 const timeoutId = setTimeout(() => controller.abort(), 10000);
 
 const resGeo = await fetch(NOMINATIM_URL, {
-headers: { 'User-Agent': 'MeuClima/1.0 (local testing)' },
+headers: { 'User-Agent': NOMINATIM_USER_AGENT },
 mode: 'cors',
 cache: 'no-cache',
 credentials: 'omit',
@@ -1409,12 +1454,12 @@ ${temp_c.toFixed(1)}°C
 
 <div class="info-item">
 <span>🌧️</span>
-<span class="weather-value" style="color:#ffeb3b;">${precip_mm.toFixed(1)} mm</span>
+<span class="weather-value" style="color:#ffeb3b;">${precip_mm.toFixed(1)} mm</span>
 </div>
 
 <div class="info-item">
 <span>🍃</span>
-<span class="weather-value" style="color:#ffeb3b;">${wind_kph.toFixed(1)} km/h</span>
+<span class="weather-value" style="color:#ffeb3b;">${wind_kph.toFixed(1)} km/h</span>
 </div>
 
 <div class="info-item">
@@ -1524,7 +1569,7 @@ if (resultDiv) {
 resultDiv.innerHTML = `
 <div style="color:#ff6f00;text-align:center;padding:20px;">
 <p>Erro após várias tentativas: ${err.message}</p>
-<button onclick="reiniciarBuscaComRetry()" 
+<button onclick="reiniciarBuscaComRetry()"
 style="margin-top:10px; background:#ff6f00; color:white; border:none; padding:5px 10px; border-radius:3px;">
 Tentar novamente
 </button>
@@ -1587,7 +1632,7 @@ sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">Dica para o dia:</stron
 moonDiv.innerHTML = '';
 moonDiv.appendChild(sugestaoDiv);
 
-setTimeout(() => {
+requestAnimationFrame(() => {
 const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
 const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
@@ -1595,7 +1640,7 @@ const moonHTML = `
 <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
 <span>
-<a href="#" 
+<a href="#"
 onclick="abrirStarWalkMoon(); return false;"
 style="color: inherit; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent;">
 Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% ✨
@@ -1606,8 +1651,8 @@ Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${ilumin
 `;
 
 moonDiv.innerHTML = moonHTML;
-extrasCache.moon = moonHTML;
-}, 10000);
+UI_STATE.extrasCache.moon = moonHTML;
+});
 
 const hoje = forecast.forecast.forecastday[0];
 const horaAtual = new Date().getHours();
@@ -1798,7 +1843,7 @@ illumination: `${formattedIllumination}%`
 
 function lerCache(chave) {
 try {
-const chaveCompleta = `cache_${chave}`;
+const chaveCompleta = `${CACHE_PREFIX}${chave}`;
 const item = localStorage.getItem(chaveCompleta);
 if (!item) return null;
 
@@ -1836,13 +1881,12 @@ buscarPrevisaoPorGeolocalizacao(false);
 }, 5 * 60 * 1000);
 }
 
-const UPDATE_INTERVAL = 5 * 60 * 1000;
 let intervaloAtualizacao = setInterval(() => buscarPrevisaoPorGeolocalizacao(false), UPDATE_INTERVAL);
 
-document.addEventListener('visibilitychange', function() { 
-if (document.hidden) { 
-clearInterval(intervaloAtualizacao); 
-} 
+document.addEventListener('visibilitychange', function() {
+if (document.hidden) {
+clearInterval(intervaloAtualizacao);
+}
 });
 
 window.onload = async function () {
@@ -1930,10 +1974,9 @@ console.error("Erro ao carregar dados:", erro);
 
 function abrirStarWalkMoon() {
 const modal = document.createElement('div');
-modal.id = 'modalStarWalk'; // ← ADICIONADO: ID para identificar o modal
+modal.id = 'modalStarWalk';
 modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000000;z-index:20000;display:flex;flex-direction:column;';
 
-// ADICIONA AO HISTÓRICO QUANDO ABRE
 history.pushState({modal: 'StarWalk'}, '');
 
 const header = document.createElement('div');
@@ -1944,7 +1987,6 @@ closeBtn.textContent = 'Fechar';
 closeBtn.style.cssText = 'background:transparent;border:none;color:#ffeb3b;font-size:14px;font-weight:bold;cursor:pointer;padding:12px 20px;';
 closeBtn.onclick = () => {
 document.body.removeChild(modal);
-// REMOVE O ESTADO DO HISTÓRICO
 if (history.state && history.state.modal === 'StarWalk') {
 history.back();
 }
@@ -1961,13 +2003,11 @@ modal.appendChild(iframe);
 document.body.appendChild(modal);
 }
 
-// Gerencia o botão voltar do Android
 window.addEventListener('popstate', function(event) {
 const modalGraficos = document.getElementById('telaGraficos');
 const modalEscalas = document.getElementById('telaEscalas');
-const modalStarWalk = document.getElementById('modalStarWalk'); // ← ADICIONADO
+const modalStarWalk = document.getElementById('modalStarWalk');
 
-// Verifica se algum modal está aberto
 if (modalGraficos && modalGraficos.style.display === 'block') {
 fecharModal('Graficos');
 event.preventDefault();
@@ -1976,7 +2016,7 @@ event.stopPropagation();
 fecharModal('Escalas');
 event.preventDefault();
 event.stopPropagation();
-} else if (modalStarWalk) { // ← ADICIONADO: verifica o modal da lua
+} else if (modalStarWalk) {
 document.body.removeChild(modalStarWalk);
 event.preventDefault();
 event.stopPropagation();
