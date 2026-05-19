@@ -94,31 +94,50 @@ INFORMAÇÕES ADICIONAIS
 <!-- ========================================
 CRÉDITOS E LINKS EXTERNOS
 ======================================== -->
-<div class="custom-credits" style="display: flex; flex-direction: column; gap: 5px;">
-<!-- Link para Previsão Meteorológica -->
-<a id="link-previsao-blumenau" href="https://www.yr.no/en/forecast/graph/2-3469968/Brazil/Santa%20Catarina/Blumenau/Blumenau" target="_system" class="credit-link">
-<span style="padding-left: 11px;">Previsão do tempo para a região</span>
-<img src="img/yr.png" alt="Logo YR" class="credit-logo" style="margin: 0 12px; vertical-align: middle;">
-</a>
+<div class="custom-credits" style="display:flex; align-items:center; flex-wrap:nowrap; gap:8px; font-size:12px; white-space:nowrap;">
 
-<!-- Link para Informações Meteorológicas -->
-<div class="credit-line">
-<a href="#" onclick="abrirTelaGraficos(); return false;" class="credit-link" style="margin-left: -12px;">
-<span class="credit-icon" style="margin: 0 10px; line-height: 1.0;">📈</span>Informações do tempo atualizadas
-</a>
-</div>
+    <!-- Previsão -->
+    <a id="link-previsao-blumenau"
+       href="https://www.yr.no/en/forecast/graph/2-3469968/Brazil/Santa%20Catarina/Blumenau/Blumenau"
+       target="_system"
+       class="credit-link"
+       style="display:flex; align-items:center; gap:4px; text-decoration:none;">
 
-<!-- Links do Rio -->
-<div class="river-line" style="display: flex; align-items: center; gap: 8px; font-size: 12px; line-height: 1.0;">
+        <span>Previsão</span>
 
-<!-- Link nível do rio -->
-<a href="https://defesacivil.blumenau.sc.gov.br/m/monitora"
-target="_system"
-rel="noopener noreferrer"
-class="credit-link"
-style="color: inherit; text-decoration: none;">
-💧 Condição de chuva e riscos
-</a>
+        <img src="img/yr.png"
+             alt="Logo YR"
+             class="credit-logo"
+             style="height:12px; width:auto; vertical-align:middle;">
+
+    </a>
+
+    <span>-</span>
+
+    <!-- Tempo -->
+    <a href="#"
+       onclick="abrirTelaGraficos(); return false;"
+       class="credit-link"
+       style="display:flex; align-items:center; gap:4px; text-decoration:none;">
+
+        <span>Tempo</span>
+        <span style="font-size:12px; line-height:1;">📈</span>
+
+    </a>
+
+    <span>-</span>
+
+    <!-- Chuva -->
+    <a href="https://defesacivil.blumenau.sc.gov.br/m/monitora"
+       target="_system"
+       rel="noopener noreferrer"
+       class="credit-link"
+       style="display:flex; align-items:center; gap:4px; text-decoration:none; color:inherit;">
+
+        <span style="font-size:12px; line-height:1;">💧</span>
+        <span>Chuva</span>
+
+    </a>
 
 </div>
 
