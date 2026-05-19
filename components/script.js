@@ -1589,75 +1589,12 @@ setTimeout(() => {
 const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
 const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
-const openMoonModal = () => {
-const modal = document.createElement('div');
-modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000c1a;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;color:white;';
-const titulo = document.createElement('div');
-titulo.style.cssText = 'font-size:18px;font-weight:bold;color:#ffeb3b;margin-bottom:8px;';
-titulo.textContent = moonInfo.emoji + ' ' + moonInfo.pt;
-const sub = document.createElement('div');
-sub.style.cssText = 'font-size:14px;color:#ccc;margin-bottom:24px;';
-sub.textContent = 'Iluminação: ' + iluminacaoValor + '%';
-const svgNS = 'http://www.w3.org/2000/svg';
-const svg = document.createElementNS(svgNS, 'svg');
-svg.setAttribute('width','200');svg.setAttribute('height','200');svg.setAttribute('viewBox','0 0 200 200');
-const defs = document.createElementNS(svgNS,'defs');
-const clip = document.createElementNS(svgNS,'clipPath');clip.setAttribute('id','mc');
-const cc = document.createElementNS(svgNS,'circle');cc.setAttribute('cx','100');cc.setAttribute('cy','100');cc.setAttribute('r','80');
-clip.appendChild(cc);defs.appendChild(clip);svg.appendChild(defs);
-const bg = document.createElementNS(svgNS,'circle');bg.setAttribute('cx','100');bg.setAttribute('cy','100');bg.setAttribute('r','80');bg.setAttribute('fill','#1a1a2e');svg.appendChild(bg);
-const cratersData = [
-[72,65,10],[130,80,7],[55,120,6],[140,130,12],[90,150,5],
-[115,50,8],[60,90,4],[145,75,5],[80,105,7],[120,155,6],
-[100,85,9],[50,145,5],[135,110,4],[75,55,5],[110,130,8]
-];
-// Crateras sutis na parte escura
-cratersData.forEach(([cx,cy,r]) => {
-const cr = document.createElementNS(svgNS,'circle');
-cr.setAttribute('cx',cx);cr.setAttribute('cy',cy);cr.setAttribute('r',r);
-cr.setAttribute('fill','#0d0d1f');
-cr.setAttribute('opacity','0.22');
-cr.setAttribute('clip-path','url(#mc)');
-svg.appendChild(cr);
-});
-const pct = iluminacaoValor / 100;
-const isMinguante = moonInfo.pt.toLowerCase().includes('minguante');
-const rxLit = Math.max(0.5, pct * 80);
-const cxLit = isMinguante ? (100 - (80 - rxLit)) : (100 + (80 - rxLit));
-// ClipPath exclusivo para a área iluminada
-const clipLit = document.createElementNS(svgNS,'clipPath');clipLit.setAttribute('id','mclit');
-const ellipseClip = document.createElementNS(svgNS,'ellipse');
-ellipseClip.setAttribute('cx',cxLit.toFixed(1));ellipseClip.setAttribute('cy','100');
-ellipseClip.setAttribute('rx',rxLit.toFixed(1));ellipseClip.setAttribute('ry','80');
-clipLit.appendChild(ellipseClip);defs.appendChild(clipLit);
-const litEl = document.createElementNS(svgNS,'ellipse');
-litEl.setAttribute('cx', cxLit.toFixed(1));
-litEl.setAttribute('cy','100');
-litEl.setAttribute('rx', rxLit.toFixed(1));
-litEl.setAttribute('ry','80');
-litEl.setAttribute('fill','#fffde7');
-litEl.setAttribute('clip-path','url(#mc)');
-svg.appendChild(litEl);
-// Crateras sutis APENAS na parte iluminada
-cratersData.forEach(([cx,cy,r]) => {
-const cr2 = document.createElementNS(svgNS,'circle');
-cr2.setAttribute('cx',cx);cr2.setAttribute('cy',cy);cr2.setAttribute('r',r);
-cr2.setAttribute('fill','#b8940a');
-cr2.setAttribute('opacity','0.18');
-cr2.setAttribute('clip-path','url(#mclit)');
-svg.appendChild(cr2);
-});
-const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:none;outline:none;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:12px;cursor:pointer;';closeBtn.addEventListener('focus',()=>closeBtn.style.outline='none');closeBtn.addEventListener('mousedown',e=>e.preventDefault());closeBtn.onclick=()=>document.body.removeChild(modal);
-modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.appendChild(closeBtn);document.body.appendChild(modal);
-};
-
-
 const moonHTML = `
 <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
 <span>
 <a href="#" 
-onclick="openMoonModal(); return false;"
+onclick="abrirStarWalkMoon(); return false;"
 style="color: inherit; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent;">
 Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% ✨
 </a>
@@ -1665,8 +1602,6 @@ Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${ilumin
 </div>
 </div>
 `;
-
-window.openMoonModal = openMoonModal;
 
 moonDiv.innerHTML = moonHTML;
 extrasCache.moon = moonHTML;
@@ -1989,4 +1924,27 @@ await buscarPrevisaoPorGeolocalizacao(isInitialLoad);
 } catch (erro) {
 console.error("Erro ao carregar dados:", erro);
 }
+}
+
+function abrirStarWalkMoon() {
+  const modal = document.createElement('div');
+  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000000;z-index:20000;display:flex;flex-direction:column;';
+  
+  const header = document.createElement('div');
+  header.style.cssText = 'display:flex;justify-content:flex-end;padding:12px;background:#0a0a1a;';
+  
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = '✕ FECHAR';
+  closeBtn.style.cssText = 'background:#ffeb3b;color:#000;border:none;padding:8px 20px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;';
+  closeBtn.onclick = () => document.body.removeChild(modal);
+  
+  header.appendChild(closeBtn);
+  
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://starwalk.space/pt/moon-calendar';
+  iframe.style.cssText = 'width:100%;flex:1;border:none;background:#fff;';
+  
+  modal.appendChild(header);
+  modal.appendChild(iframe);
+  document.body.appendChild(modal);
 }
