@@ -12,10 +12,10 @@ padding: 0;
 display: flex;
 flex-direction: column;
 align-items: center;
-min-height: 100vh;
-overflow-y: auto;
-overflow-x: hidden;
--webkit-overflow-scrolling: touch;
+height: 100vh;
+overflow: hidden;
+position: fixed;
+width: 100%;
 }
 
 strong, 
