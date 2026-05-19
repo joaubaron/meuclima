@@ -1444,27 +1444,27 @@ let errorMessage = '';
 if (error instanceof GeolocationPositionError) {
 switch (error.code) {
 case error.PERMISSION_DENIED:
-errorMessage = 'Permissão de localização negada. Por favor, habilite a localização para usar o aplicativo.';
+errorMessage = 'Permissão negada. Permita localização no seu aplicativo.';
 break;
 case error.POSITION_UNAVAILABLE:
-errorMessage = 'Localização indisponível. Verifique suas configurações de GPS/rede.<br><button onclick="reiniciarBusca()" style="margin-top:10px;">🔄 Tentar de novo</button>';
+errorMessage = 'Verifique seu GPS/rede.<br><button onclick="reiniciarBusca()" style="margin-top:10px;">🔄 Tentar de novo</button>';
 break;
 case error.TIMEOUT:
-errorMessage = 'Tempo limite excedido ao tentar obter a localização.<br><button onclick="reiniciarBusca()" style="margin-top:10px;">🔄 Tentar de novo</button>';
+errorMessage = 'Localização não disponível.<br><button onclick="reiniciarBusca()" style="margin-top:10px;">🔄 Tentar de novo</button>';
 break;
 default:
 errorMessage = 'Erro desconhecido na geolocalização.<br><button onclick="reiniciarBusca()" style="margin-top:10px;">🔄 Tentar de novo</button>';
 }
 } else if (error.message === 'Timeout geolocalização') {
-errorMessage = 'Localização demorou muito para responder. Verifique seu GPS e tente novamente.<br><button onclick="reiniciarBusca()" style="margin-top:10px;">🔄 Tentar de novo</button>';
+errorMessage = 'Verifique seu GPS e tente novamente.<br><button onclick="reiniciarBusca()" style="margin-top:10px;">🔄 Tentar de novo</button>';
 } else if (error.message === "Sem conexão com a internet") {
-errorMessage = 'Você está offline. Conecte-se à internet para atualizar os dados...<br><button onclick="reiniciarBusca()" style="margin-top:10px;">🔄 Tentar de novo</button>';
+errorMessage = 'Conecte-se à internet para atualizar os dados...<br><button onclick="reiniciarBusca()" style="margin-top:10px;">🔄 Tentar de novo</button>';
 } else if (error.message.includes("HTTP error")) {
 errorMessage = 'Erro de comunicação com o servidor: ' + error.message + '.<br><button onclick="reiniciarBusca()" style="margin-top:10px;">🔄 Tentar de novo</button>';
 } else if (error.message.includes("Dados insuficientes da API")) {
-errorMessage = "Não foi possível obter todos os dados. Tente novamente mais tarde...<br><button onclick=\"reiniciarBusca()\" style=\"margin-top:10px;\">🔄 Tentar de novo</button>";
+errorMessage = "Tente novamente mais tarde...<br><button onclick=\"reiniciarBusca()\" style=\"margin-top:10px;\">🔄 Tentar de novo</button>";
 } else {
-errorMessage = "Ocorreu um erro inesperado. Tente novamente.<br><button onclick=\"reiniciarBusca()\" style=\"margin-top:10px;\">🔄 Tentar de novo</button>";
+errorMessage = "Ocorreu um erro inesperado.<br><button onclick=\"reiniciarBusca()\" style=\"margin-top:10px;\">🔄 Tentar de novo</button>";
 }
 
 if (resultDiv) {
