@@ -1589,112 +1589,67 @@ setTimeout(() => {
 const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
 const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
-function openMoonModal() {
-  // Calcula a idade lunar (dias desde a última Lua Nova)
-  function getLunarAge(date) {
-    const lunarCycle = 29.53058867; // dias
-    const knownNewMoon = new Date(2025, 0, 29, 20, 36); // Lua Nova conhecida
-    const diffDays = (date - knownNewMoon) / (1000 * 60 * 60 * 24);
-    let age = diffDays % lunarCycle;
-    if (age < 0) age += lunarCycle;
-    return age;
-  }
-
-  const hoje = new Date();
-  const idadeLua = getLunarAge(hoje);
-  const iluminacao = Math.sin((idadeLua / 29.53) * Math.PI * 2);
-  const percentual = Math.round((Math.sin((idadeLua / 29.53) * Math.PI * 2) + 1) / 2 * 100);
-
-  // Determina a fase
-  let fase = '';
-  let emoji = '';
-  if (idadeLua < 1.84566) { fase = 'Nova'; emoji = '🌑'; }
-  else if (idadeLua < 7.382647) { fase = 'Crescente Côncava'; emoji = '🌒'; }
-  else if (idadeLua < 8.382647) { fase = 'Quarto Crescente'; emoji = '🌓'; }
-  else if (idadeLua < 14.765294) { fase = 'Crescente Gibosa'; emoji = '🌔'; }
-  else if (idadeLua < 16.765294) { fase = 'Cheia'; emoji = '🌕'; }
-  else if (idadeLua < 22.147941) { fase = 'Minguante Gibosa'; emoji = '🌖'; }
-  else if (idadeLua < 23.147941) { fase = 'Quarto Minguante'; emoji = '🌗'; }
-  else { fase = 'Minguante'; emoji = '🌘'; }
-
-  // Cria modal
-  const modal = document.createElement('div');
-  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000c1a;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;color:white;';
-
-  // Título
-  const titulo = document.createElement('div');
-  titulo.style.cssText = 'font-size:18px;font-weight:bold;color:#ffeb3b;margin-bottom:8px;';
-  titulo.textContent = emoji + ' ' + fase;
-
-  // Iluminação
-  const sub = document.createElement('div');
-  sub.style.cssText = 'font-size:14px;color:#ccc;margin-bottom:24px;';
-  sub.textContent = 'Iluminação: ' + percentual + '%';
-
-  // Desenho da Lua (CORRIGIDO para HEMISFÉRIO SUL)
-  const svgNS = 'http://www.w3.org/2000/svg';
-  const svg = document.createElementNS(svgNS, 'svg');
-  svg.setAttribute('width', '200');
-  svg.setAttribute('height', '200');
-  svg.setAttribute('viewBox', '0 0 200 200');
-
-  // Fundo escuro
-  const bg = document.createElementNS(svgNS, 'circle');
-  bg.setAttribute('cx', '100');
-  bg.setAttribute('cy', '100');
-  bg.setAttribute('r', '80');
-  bg.setAttribute('fill', '#1a1a2e');
-  svg.appendChild(bg);
-
-  // Clip da Lua
-  const defs = document.createElementNS(svgNS, 'defs');
-  const clip = document.createElementNS(svgNS, 'clipPath');
-  clip.setAttribute('id', 'mc');
-  const cc = document.createElementNS(svgNS, 'circle');
-  cc.setAttribute('cx', '100');
-  cc.setAttribute('cy', '100');
-  cc.setAttribute('r', '80');
-  clip.appendChild(cc);
-  defs.appendChild(clip);
-  svg.appendChild(defs);
-
-  // HEMISFÉRIO SUL: crescente iluminada à ESQUERDA, minguante à DIREITA
-  const pct = percentual / 100;
-  const rxLit = Math.max(0.5, pct * 80);
-  const isCrescente = fase.includes('Crescente') && !fase.includes('Minguante');
-  const isMinguante = fase.includes('Minguante');
-
-  let cxLit;
-  if (isCrescente) {
-    cxLit = 100 - (80 - rxLit); // Luz à ESQUERDA
-  } else if (isMinguante) {
-    cxLit = 100 + (80 - rxLit); // Luz à DIREITA
-  } else {
-    cxLit = 100; // Cheia ou Nova
-  }
-
-  // Área iluminada
-  const litEl = document.createElementNS(svgNS, 'ellipse');
-  litEl.setAttribute('cx', cxLit.toFixed(1));
-  litEl.setAttribute('cy', '100');
-  litEl.setAttribute('rx', rxLit.toFixed(1));
-  litEl.setAttribute('ry', '80');
-  litEl.setAttribute('fill', '#fffde7');
-  litEl.setAttribute('clip-path', 'url(#mc)');
-  svg.appendChild(litEl);
-
-  // Botão fechar
-  const closeBtn = document.createElement('button');
-  closeBtn.textContent = 'Fechar';
-  closeBtn.style.cssText = 'margin-top:28px;background:transparent;border:none;outline:none;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:12px;cursor:pointer;';
-  closeBtn.onclick = () => document.body.removeChild(modal);
-
-  modal.appendChild(titulo);
-  modal.appendChild(svg);
-  modal.appendChild(sub);
-  modal.appendChild(closeBtn);
-  document.body.appendChild(modal);
-}
+const openMoonModal = () => {
+const modal = document.createElement('div');
+modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000c1a;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;color:white;';
+const titulo = document.createElement('div');
+titulo.style.cssText = 'font-size:18px;font-weight:bold;color:#ffeb3b;margin-bottom:8px;';
+titulo.textContent = moonInfo.emoji + ' ' + moonInfo.pt;
+const sub = document.createElement('div');
+sub.style.cssText = 'font-size:14px;color:#ccc;margin-bottom:24px;';
+sub.textContent = 'Iluminação: ' + iluminacaoValor + '%';
+const svgNS = 'http://www.w3.org/2000/svg';
+const svg = document.createElementNS(svgNS, 'svg');
+svg.setAttribute('width','200');svg.setAttribute('height','200');svg.setAttribute('viewBox','0 0 200 200');
+const defs = document.createElementNS(svgNS,'defs');
+const clip = document.createElementNS(svgNS,'clipPath');clip.setAttribute('id','mc');
+const cc = document.createElementNS(svgNS,'circle');cc.setAttribute('cx','100');cc.setAttribute('cy','100');cc.setAttribute('r','80');
+clip.appendChild(cc);defs.appendChild(clip);svg.appendChild(defs);
+const bg = document.createElementNS(svgNS,'circle');bg.setAttribute('cx','100');bg.setAttribute('cy','100');bg.setAttribute('r','80');bg.setAttribute('fill','#1a1a2e');svg.appendChild(bg);
+const cratersData = [
+[72,65,10],[130,80,7],[55,120,6],[140,130,12],[90,150,5],
+[115,50,8],[60,90,4],[145,75,5],[80,105,7],[120,155,6],
+[100,85,9],[50,145,5],[135,110,4],[75,55,5],[110,130,8]
+];
+// Crateras sutis na parte escura
+cratersData.forEach(([cx,cy,r]) => {
+const cr = document.createElementNS(svgNS,'circle');
+cr.setAttribute('cx',cx);cr.setAttribute('cy',cy);cr.setAttribute('r',r);
+cr.setAttribute('fill','#0d0d1f');
+cr.setAttribute('opacity','0.22');
+cr.setAttribute('clip-path','url(#mc)');
+svg.appendChild(cr);
+});
+const pct = iluminacaoValor / 100;
+const isMinguante = moonInfo.pt.toLowerCase().includes('minguante');
+const rxLit = Math.max(0.5, pct * 80);
+const cxLit = isMinguante ? (100 - (80 - rxLit)) : (100 + (80 - rxLit));
+// ClipPath exclusivo para a área iluminada
+const clipLit = document.createElementNS(svgNS,'clipPath');clipLit.setAttribute('id','mclit');
+const ellipseClip = document.createElementNS(svgNS,'ellipse');
+ellipseClip.setAttribute('cx',cxLit.toFixed(1));ellipseClip.setAttribute('cy','100');
+ellipseClip.setAttribute('rx',rxLit.toFixed(1));ellipseClip.setAttribute('ry','80');
+clipLit.appendChild(ellipseClip);defs.appendChild(clipLit);
+const litEl = document.createElementNS(svgNS,'ellipse');
+litEl.setAttribute('cx', cxLit.toFixed(1));
+litEl.setAttribute('cy','100');
+litEl.setAttribute('rx', rxLit.toFixed(1));
+litEl.setAttribute('ry','80');
+litEl.setAttribute('fill','#fffde7');
+litEl.setAttribute('clip-path','url(#mc)');
+svg.appendChild(litEl);
+// Crateras sutis APENAS na parte iluminada
+cratersData.forEach(([cx,cy,r]) => {
+const cr2 = document.createElementNS(svgNS,'circle');
+cr2.setAttribute('cx',cx);cr2.setAttribute('cy',cy);cr2.setAttribute('r',r);
+cr2.setAttribute('fill','#b8940a');
+cr2.setAttribute('opacity','0.18');
+cr2.setAttribute('clip-path','url(#mclit)');
+svg.appendChild(cr2);
+});
+const closeBtn = document.createElement('button');closeBtn.textContent='Fechar';closeBtn.style.cssText='margin-top:28px;background:transparent;border:none;outline:none;color:#ffeb3b;padding:8px 28px;border-radius:20px;font-size:12px;cursor:pointer;';closeBtn.addEventListener('focus',()=>closeBtn.style.outline='none');closeBtn.addEventListener('mousedown',e=>e.preventDefault());closeBtn.onclick=()=>document.body.removeChild(modal);
+modal.appendChild(titulo);modal.appendChild(svg);modal.appendChild(sub);modal.appendChild(closeBtn);document.body.appendChild(modal);
+};
 
 
 const moonHTML = `
