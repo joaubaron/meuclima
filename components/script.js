@@ -1930,7 +1930,11 @@ console.error("Erro ao carregar dados:", erro);
 
 function abrirStarWalkMoon() {
 const modal = document.createElement('div');
+modal.id = 'modalStarWalk'; // ← ADICIONADO: ID para identificar o modal
 modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000000;z-index:20000;display:flex;flex-direction:column;';
+
+// ADICIONA AO HISTÓRICO QUANDO ABRE
+history.pushState({modal: 'StarWalk'}, '');
 
 const header = document.createElement('div');
 header.style.cssText = 'display:flex;justify-content:flex-end;padding:12px;background:#0a0a1a;';
@@ -1938,7 +1942,13 @@ header.style.cssText = 'display:flex;justify-content:flex-end;padding:12px;backg
 const closeBtn = document.createElement('button');
 closeBtn.textContent = 'Fechar';
 closeBtn.style.cssText = 'background:transparent;border:none;color:#ffeb3b;font-size:14px;font-weight:bold;cursor:pointer;padding:12px 20px;';
-closeBtn.onclick = () => document.body.removeChild(modal);
+closeBtn.onclick = () => {
+document.body.removeChild(modal);
+// REMOVE O ESTADO DO HISTÓRICO
+if (history.state && history.state.modal === 'StarWalk') {
+history.back();
+}
+};
 
 header.appendChild(closeBtn);
 
@@ -1955,15 +1965,20 @@ document.body.appendChild(modal);
 window.addEventListener('popstate', function(event) {
 const modalGraficos = document.getElementById('telaGraficos');
 const modalEscalas = document.getElementById('telaEscalas');
+const modalStarWalk = document.getElementById('modalStarWalk'); // ← ADICIONADO
 
 // Verifica se algum modal está aberto
 if (modalGraficos && modalGraficos.style.display === 'block') {
 fecharModal('Graficos');
 event.preventDefault();
-event.stopPropagation(); // ← ADICIONE ESTA LINHA
+event.stopPropagation();
 } else if (modalEscalas && modalEscalas.style.display === 'block') {
 fecharModal('Escalas');
 event.preventDefault();
-event.stopPropagation(); // ← ADICIONE ESTA LINHA
+event.stopPropagation();
+} else if (modalStarWalk) { // ← ADICIONADO: verifica o modal da lua
+document.body.removeChild(modalStarWalk);
+event.preventDefault();
+event.stopPropagation();
 }
 });
