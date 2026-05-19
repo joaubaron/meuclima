@@ -8,11 +8,6 @@ let extrasCache = { extras: "", moon: "" };
 let extrasLastFetch = 0;
 let currentTemperatureMessage = '';
 
-// ── Utilitários: retry e reconexão automática ──────────────────────────────
-
-/**
-* Tenta executar fn até maxTentativas vezes, aguardando intervalo ms entre elas.
-*/
 function tentarComRetry(fn, maxTentativas = 3, intervalo = 4000) {
 return new Promise(async (resolve, reject) => {
 for (let i = 0; i < maxTentativas; i++) {
@@ -30,13 +25,10 @@ reject(new Error(`Falhou após ${maxTentativas} tentativas`));
 });
 }
 
-/** Tenta recarregar os dados do tempo após 5 segundos. */
 function reiniciarBuscaAutomatica() {
 setTimeout(() => buscarPrevisaoPorGeolocalizacao(false), 5000);
 }
 
-
-/** Reinicia a busca manualmente (chamada pelos botões de erro). */
 function reiniciarBusca() {
 buscarPrevisaoPorGeolocalizacao(false);
 }
@@ -73,9 +65,7 @@ if (distance > 80) {
 isRefreshing = true;
 refreshDiv.style.opacity = '1';
 
-// Aqui você chama sua função de atualização
 atualizarDados().then(() => {
-// Após atualizar, esconde o spinner
 setTimeout(() => {
 refreshDiv.style.opacity = '0';
 isRefreshing = false;
@@ -111,17 +101,13 @@ elements[key] = el;
 return elements;
 }
 
-// Sua função que atualiza os dados do app
 async function atualizarDados() {
 console.log('Atualizando dados...');
 location.reload();
 }
 
-// tempo máximo que o splash pode permanecer (ms)
-const SPLASH_TIMEOUT = 25000;  // 25 segundos
+const SPLASH_TIMEOUT = 25000;
 
-// Função para obter o nome da localização
-// Função para mostrar mensagem de erro
 function mostrarMensagemErro(mensagem) {
 const resultDiv = document.getElementById('weatherResult');
 if (resultDiv) {
@@ -137,7 +123,6 @@ Tentar novamente
 }
 }
 
-// Função para abrir o site yr.no
 function atualizarHTML(id, html) {
 const el = document.getElementById(id);
 if (el) el.innerHTML = html;
@@ -1025,22 +1010,22 @@ const anoAtual = hoje.getFullYear();
 
 const mensagensEspeciais = {
 '1-1'  : `Feliz Ano Novo! Que ${anoAtual} seja ótimo!`,
-'28-1' : `Hoje a Bruna está de aniversário!`,
-'30-1' : `Hoje Marlon está de niver e comemora ${anoAtual - 1988} anos!`,
+'28-1' : `Bruna está de aniversário!`,
+'30-1' : `Marlon está de niver e comemora ${anoAtual - 1988} anos!`,
 '7-2'  : `Parabéns para Clara! Ela faz ${anoAtual - 2016} anos!`,
 '12-2' : `Niver do Sérgio. Ele comemora ${anoAtual - 1969} anos!`,
 '5-3'  : 'Feliz aniversário Baron!',
-'9-3'  : 'Seu pai está fazendo aniversário hoje!',
-'23-3' : `Niver do seu filho Eduardo. Ele faz ${anoAtual - 2003} anos!`,
+'9-3'  : 'Seu pai está fazendo aniversário!',
+'23-3' : `Niver do Eduardo. Ele faz ${anoAtual - 2003} anos!`,
 '5-4'  : 'Data especial: você conheceu a Cláudia.',
 '2-5'  : `Mateus que comemora ${anoAtual - 2001} anos!`,
 '5-6'  : 'Você e Cláudia começaram a dividir a vida.',
 '12-6' : 'Feliz Dia dos Namorados!',
-'5-7'  : `Débora está de niver. Ela comemora ${anoAtual - 1973} anos!`,
-'5-9'  : 'Feliz niver Cláudia! Que tal um jantar especial?',
+'5-7'  : `Débora comemora ${anoAtual - 1973} anos!`,
+'5-9'  : 'Niver da Cláudia! Que tal um jantar especial?',
 '23-10': 'Hoje sua mãe comemora aniversário.',
-'5-11' : 'Juntos e fortes! Que tal levar um bom vinho?',
-'25-11': `Morgama está de niver. Ela comemora ${anoAtual - 1984} anos!`,
+'3-11' : 'Juntos e fortes! Que tal levar um bom vinho?',
+'25-11': `Morgama comemora ${anoAtual - 1984} anos!`,
 '25-12': 'Que esse feriado seja de muita paz.'
 };
 
