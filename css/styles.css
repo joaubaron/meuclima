@@ -433,9 +433,8 @@ line-height: 0.6;
 }
 
 .credit-logo {
-height: 13px !important;
+height: 15px !important;
 width: auto !important;
-max-width: 18px !important;
 display: inline-block;
 vertical-align: middle;
 }
