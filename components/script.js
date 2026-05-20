@@ -1691,10 +1691,6 @@ resultDiv.innerHTML = `
 <img src="${weatherIcon}" class="weather-icon" alt="${condText}">
 ${temp_c.toFixed(1)}°C
 </div>
-<div class="sun-times" style="display: flex; justify-content: center; gap: 16px; margin: 8px 0 4px 0; font-size: 12px;">
-<span>🌅 ${sunrise}</span>
-<span>🌇 ${sunset}</span>
-</div>
 <div class="info-inline">
 <div class="info-item">
 <span>💧</span>
