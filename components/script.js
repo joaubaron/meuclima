@@ -370,201 +370,182 @@ console.warn("Não foi possível carregar as receitas:", err);
 }
 
 function gerarSugestaoVestuario(temp, precip_mm, wind_kph) {
-const faixaTemp = obterFaixaTemperatura(temp);
-
-const sugestoesTemp = {
-frio: [
-"Frio, esquente-se!",
-"Bem frio, capriche!",
-"Gelado, várias camadas!",
-"Frio, gorro e luvas!",
-"Frio, roupas quentes!"
-],
-fresco: [
-"Fresco, casaco leve!",
-"Fresco, blusa leve!",
-"Ameno, suéter basta!",
-"Fresco, leve casaco!",
-"Fresquinho, meia estação!"
-],
-agradável: [
-"Agradável, roupas leves!",
-"Ideal pra sair assim!",
-"Nada pesado, que bom!",
-"Ótimo pra caminhar!",
-"Ameno, bem gostoso!"
-],
-calor: [
-"Quente, roupas leves!",
-"Calor, use protetor!",
-"Alta, vista algodão!",
-"Calor, roupas leves!",
-"Quente, seja feliz!"
-],
-muitoCalor: [
-"Muito calor, beba água!",
-"Calor intenso, fuja!",
-"Use chapéu, vai bem!",
-"Calor forte, se solte!",
-"Calorão, tecidos leves!"
-]
-};
-
-function pegarSugestaoAleatoria(lista) {
-const indice = Math.floor(Math.random() * lista.length);
-return lista[indice];
-}
-
-let chaveTemp = faixaTemp;
-if (faixaTemp === "muito calor") chaveTemp = "muitoCalor";
-
-const parteTemp = pegarSugestaoAleatoria(sugestoesTemp[chaveTemp] || ["Clima desconhecido"]);
-
-const sugestoesChuva = {
-garoa: [
-" Pode garoar, se prepare!",
-" Leve capa, vai bem!",
-" Chuvisco, nada grave!",
-" Leve guarda-chuva sim!",
-" Garoa leve, se cuide!"
-],
-fraca: [
-" Chuva fraca, se proteja!",
-" Pode chover, se ligue!",
-" Chuva leve, vai dar!",
-" Chuva fraca, se cuide!",
-" Chuva leve, prepare-se!"
-],
-moderada: [
-" Chuva moderada, se proteja!",
-" Chuva moderada, se cuide!",
-" Vai chover, se prepare!",
-" Chuva prevista, cuidado!",
-" Previsão de chuva, atenção!"
-],
-forte: [
-" Chuva forte, se proteja!",
-" Chuva intensa, cuidado!",
-" Chuvas fortes, atenção!",
-" Chuva pesada, se cuide!",
-" Tempestade prevista, viu!"
-],
-intensa: [
-" Muita chuva, fique em casa!",
-" Tempestade forte, não saia!",
-" Risco alto, se cuide!",
-" Chuva torrencial, segurança!",
-" Muita água, se proteja!"
-],
-semChuva: [
-" Sem chuva, pode sair!",
-" Céu limpo, aproveite!",
-" Tempo seco, bom demais!",
-" Sem chuva, dia lindo!",
-" Clima seco, sem problemas!"
-]
-};
-
-let chaveChuva = "semChuva";
-if (precip_mm > 0.2) {
-if (precip_mm <= 1) chaveChuva = "garoa";
-else if (precip_mm <= 4) chaveChuva = "fraca";
-else if (precip_mm <= 10) chaveChuva = "moderada";
-else if (precip_mm <= 20) chaveChuva = "forte";
-else chaveChuva = "intensa";
-}
-
-const parteChuva = pegarSugestaoAleatoria(sugestoesChuva[chaveChuva]);
-
-const sugestoesVento = {
-calminho: [
-" Quase sem vento, dia bom!",
-" Vento zero, relaxe!",
-" Dia tranquilo, sem vento!",
-" Ventania zero, calma!",
-" Clima estável, que paz!"
-],
-brisaLeve: [
-" Brisa leve, aproveite!",
-" Ventinho bom, curta!",
-" Brisa suave, gostoso!",
-" Vento leve, tranquilo!",
-" Clima fresco, bem leve!"
-],
-moderado: [
-" Vento moderado, se ligue!",
-" Ventania leve, segure!",
-" Vento presente, cuidado!",
-" Clima ventoso, aproveite!",
-" Vento médio, atenção!"
-],
-forte: [
-" Vento forte, se cuide!",
-" Ventania forte, cuidado!",
-" Vento potente, segure!",
-" Dia ventoso, evite!",
-" Vento forte, se proteja!"
-],
-muitoForte: [
-" Vento muito forte, evite!",
-" Ventania intensa, se proteja!",
-" Vento forte, fique em casa!",
-" Ventos intensos, cuidado!",
-" Clima perigoso, se cuide!"
-]
-};
-
-const sugestoesVentoComChuva = {
-calminho: [
-" Vento calmo, mas com chuva!",
-" Sem vento, só a chuva!",
-" Clima calmo com chuva!",
-" Pouco vento e chuva!",
-" Calmo, mas vai chover!"
-],
-brisaLeve: [
-" Vento leve e chuva, atenção!",
-" Brisa leve com chuva!",
-" Brisa suave e chuva!",
-" Vento gostoso e chuva!",
-" Brisa leve, mas com chuva!"
-],
-moderado: [
-" Vento e chuva, se cuide!",
-" Clima instável, se proteja!",
-" Vento e chuva, atenção!",
-" Vento e chuva, se prepare!",
-" Vento médio e chuva!"
-],
-forte: [
-" Vento forte e chuva, cuidado!",
-" Ventania e chuva, evite!",
-" Vento e chuva forte!",
-" Clima severo, se cuide!",
-" Chuva e vento forte!"
-],
-muitoForte: [
-" Vento fortíssimo e chuva, não saia!",
-" Vento intenso e chuva, fique!",
-" Risco alto com vento e chuva!",
-" Tempestade, fique em casa!",
-" Vento e chuva extremos, evite!"
-]
-};
-
-let chaveVento = "calminho";
-if (wind_kph > 10 && wind_kph <= 20) chaveVento = "brisaLeve";
-else if (wind_kph <= 30) chaveVento = "moderado";
-else if (wind_kph <= 45) chaveVento = "forte";
-else chaveVento = "muitoForte";
-
-const usarVentoComChuva = chaveChuva !== "semChuva";
-const sugestoesVentoAtuais = usarVentoComChuva ? sugestoesVentoComChuva : sugestoesVento;
-
-const parteVento = pegarSugestaoAleatoria(sugestoesVentoAtuais[chaveVento]);
-
-const sugestaoFinal = `${parteTemp} ${parteChuva}${parteVento}`;
-return sugestaoFinal.trim();
+    const faixaTemp = obterFaixaTemperatura(temp);
+    
+    // 5 opções originais para temperatura
+    const sugestoesTemp = {
+        frio: ["Frio, esquente-se", "Bem frio, capriche", "Gelado, várias camadas", "Frio, gorro e luvas", "Frio, roupas quentes"],
+        fresco: ["Fresco, casaco leve", "Fresco, blusa leve", "Ameno, suéter basta", "Fresco, leve casaco", "Fresquinho, meia estação"],
+        agradável: ["Agradável, roupas leves", "Ideal pra sair assim", "Nada pesado, que bom", "Ótimo pra caminhar", "Ameno, bem gostoso"],
+        calor: ["Quente, roupas leves", "Calor, use protetor", "Alta, vista algodão", "Calor, roupas leves", "Quente, seja feliz"],
+        muitoCalor: ["Muito calor, beba água", "Calor intenso, fuja", "Use chapéu, vai bem", "Calor forte, se solte", "Calorão, tecidos leves"]
+    };
+    
+    // 5 opções originais para chuva (removido "se cuide" para evitar repetição)
+    const sugestoesChuva = {
+        garoa: ["pode garoar, se prepare", "leve capa, vai bem", "chuvisco, nada grave", "leve guarda-chuva", "garoa leve, fique atento"],
+        fraca: ["chuva fraca, se proteja", "pode chover, fique ligado", "chuva leve, vai dar", "chuva fraca, fique esperto", "chuva leve, prepare-se"],
+        moderada: ["chuva moderada, se proteja", "chuva moderada, fique atento", "vai chover, se prepare", "chuva prevista, fique esperto", "previsão de chuva, atenção"],
+        forte: ["chuva forte, se proteja", "chuva intensa, fique atento", "chuvas fortes, atenção", "chuva pesada, se cuide", "tempestade prevista, viu"],
+        intensa: ["muita chuva, fique em casa", "tempestade forte, não saia", "risco alto, fique atento", "chuva torrencial, segurança", "muita água, se proteja"],
+        semChuva: ["sem chuva, pode sair", "céu limpo, bom dia", "tempo seco, ótimo", "sem chuva, dia lindo", "clima seco, tranquilo"]
+    };
+    
+    // 5 opções originais COMPLETAS para vento (sem chuva)
+    const sugestoesVento = {
+        calminho: [
+            "quase sem vento, dia bom",
+            "vento zero, relaxe",
+            "dia tranquilo, sem vento",
+            "ventania zero, calma",
+            "clima estável, que paz"
+        ],
+        brisaLeve: [
+            "brisa leve",
+            "ventinho bom",
+            "brisa suave, gostoso",
+            "vento leve, tranquilo",
+            "clima fresco, bem leve"
+        ],
+        moderado: [
+            "vento moderado, fique ligado",
+            "ventania leve, segure",
+            "vento presente, fique esperto",
+            "clima ventoso, bom",
+            "vento médio, atenção"
+        ],
+        forte: [
+            "vento forte, fique atento",
+            "ventania forte, cuidado",
+            "vento potente, segure",
+            "dia ventoso, evite",
+            "vento forte, se proteja"
+        ],
+        muitoForte: [
+            "vento muito forte, evite",
+            "ventania intensa, fique em casa",
+            "vento forte, não saia",
+            "ventos intensos, cuidado",
+            "clima perigoso, fique atento"
+        ]
+    };
+    
+    // 5 opções originais COMPLETAS para vento com chuva
+    const sugestoesVentoComChuva = {
+        calminho: [
+            "vento calmo, mas com chuva",
+            "sem vento, só a chuva",
+            "clima calmo com chuva",
+            "pouco vento e chuva",
+            "calmo, mas vai chover"
+        ],
+        brisaLeve: [
+            "vento leve e chuva",
+            "brisa leve com chuva",
+            "brisa suave e chuva",
+            "vento gostoso e chuva",
+            "brisa leve, mas com chuva"
+        ],
+        moderado: [
+            "vento e chuva, fique atento",
+            "clima instável",
+            "vento e chuva juntos",
+            "vento médio e chuva",
+            "ventania com chuva"
+        ],
+        forte: [
+            "vento forte e chuva",
+            "ventania e chuva",
+            "vento e chuva forte",
+            "clima severo",
+            "chuva e vento forte"
+        ],
+        muitoForte: [
+            "vento fortíssimo e chuva, não saia",
+            "vento intenso e chuva, fique",
+            "risco alto com vento e chuva",
+            "tempestade, fique em casa",
+            "vento e chuva extremos"
+        ]
+    };
+    
+    function pegarAleatorio(lista) {
+        return lista[Math.floor(Math.random() * lista.length)];
+    }
+    
+    let chaveTemp = faixaTemp === "muito calor" ? "muitoCalor" : faixaTemp;
+    let parteTemp = pegarAleatorio(sugestoesTemp[chaveTemp] || ["Clima desconhecido"]);
+    parteTemp = parteTemp.toLowerCase();
+    
+    let chaveChuva = "semChuva";
+    if (precip_mm > 0.2) {
+        if (precip_mm <= 1) chaveChuva = "garoa";
+        else if (precip_mm <= 4) chaveChuva = "fraca";
+        else if (precip_mm <= 10) chaveChuva = "moderada";
+        else if (precip_mm <= 20) chaveChuva = "forte";
+        else chaveChuva = "intensa";
+    }
+    let parteChuva = pegarAleatorio(sugestoesChuva[chaveChuva]).trim().toLowerCase();
+    
+    const temChuva = chaveChuva !== "semChuva";
+    const sugestoesVentoAtual = temChuva ? sugestoesVentoComChuva : sugestoesVento;
+    
+    let chaveVento = "calminho";
+    if (wind_kph > 10 && wind_kph <= 20) chaveVento = "brisaLeve";
+    else if (wind_kph <= 30) chaveVento = "moderado";
+    else if (wind_kph <= 45) chaveVento = "forte";
+    else if (wind_kph > 45) chaveVento = "muitoForte";
+    
+    let parteVento = pegarAleatorio(sugestoesVentoAtual[chaveVento]).trim().toLowerCase();
+    
+    // Montar frase
+    let frase = parteTemp.charAt(0).toUpperCase() + parteTemp.slice(1);
+    frase += `, ${parteChuva}`;
+    
+    if (parteVento && !parteVento.includes("sem vento") && !parteVento.includes("calmo")) {
+        if (temChuva) {
+            frase += ` e ${parteVento}`;
+        } else {
+            frase += `, ${parteVento}`;
+        }
+    } else if (parteVento && parteVento.length > 0 && !parteVento.includes("sem vento")) {
+        frase += `, ${parteVento}`;
+    }
+    
+    // Finalizadores sem repetição
+    const finais = [
+        " Tenha um ótimo dia!",
+        " Curta o clima!",
+        " Bom dia!"
+    ];
+    
+    // Adicionar "Aproveite!" apenas se não existir na frase
+    if (!frase.toLowerCase().includes("aproveite")) {
+        finais.push(" Aproveite!");
+    }
+    
+    let finalEscolhido = finais[Math.floor(Math.random() * finais.length)];
+    
+    // Evitar duplicidade de outras palavras
+    const palavrasEvitar = ["se cuide", "fique atento", "cuidado"];
+    for (const palavra of palavrasEvitar) {
+        if (finalEscolhido.toLowerCase().includes(palavra) && frase.toLowerCase().includes(palavra)) {
+            const alternativas = finais.filter(f => !f.toLowerCase().includes(palavra));
+            if (alternativas.length > 0) {
+                finalEscolhido = alternativas[Math.floor(Math.random() * alternativas.length)];
+            }
+            break;
+        }
+    }
+    
+    // Garantir que a frase termine com pontuação adequada
+    if (!frase.endsWith(".") && !frase.endsWith("!") && !frase.endsWith("?")) {
+        frase += ".";
+    }
+    
+    frase += finalEscolhido;
+    
+    return frase;
 }
 
 function getPreciseSeasonDates(year) {
