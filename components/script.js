@@ -1931,7 +1931,7 @@ Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${ilumin
 
 moonDiv.innerHTML = moonHTML;
 UI_STATE.extrasCache.moon = moonHTML;
-}, 9000);
+}, 10000);
 
 const hoje = forecast.forecast.forecastday[0];
 const horaAtual = new Date().getHours();
