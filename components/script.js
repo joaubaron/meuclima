@@ -1107,6 +1107,21 @@ const chave2 = `${dia.toString().padStart(2,'0')}-${mes}`;
 return mensagensEspeciais[chave1] || mensagensEspeciais[chave2] || null;
 }
 
+function getTodayMinMaxTemp(weatherData) {
+try {
+const today = weatherData.forecast.forecast.forecastday[0];
+if (today && today.day) {
+return {
+min: today.day.mintemp_c,
+max: today.day.maxtemp_c
+};
+}
+} catch (e) {
+console.warn('Erro ao obter min/max do dia:', e);
+}
+return { min: null, max: null };
+}
+
 function getMessageForTemperature(temp, isInitialLoad = false) {
 const especialHoje = getSpecialDateMessage();
 if (especialHoje) {
@@ -1134,11 +1149,20 @@ UI_STATE.currentTemperatureMessage = 'Aproveite o dia!';
 return UI_STATE.currentTemperatureMessage;
 }
 
-function atualizarMensagemTemperatura() {
+function atualizarMensagemTemperatura(weatherData = null) {
 const messageDiv = document.getElementById(DOM_IDS.WEATHER_MESSAGE);
-if (messageDiv) {
-messageDiv.innerHTML = UI_STATE.currentTemperatureMessage;
+if (!messageDiv) return;
+
+let minMaxHtml = '';
+
+if (weatherData) {
+const { min, max } = getTodayMinMaxTemp(weatherData);
+if (min !== null && max !== null) {
+minMaxHtml = `<span style="font-size: 0.7em; margin-left: 8px; opacity: 0.8;">📉 ${min.toFixed(0)}° 📈 ${max.toFixed(0)}°</span>`;
 }
+}
+
+messageDiv.innerHTML = UI_STATE.currentTemperatureMessage + minMaxHtml;
 }
 
 async function fetchAllWeatherData(lat, lon, forceRefresh = false) {
@@ -1495,7 +1519,7 @@ ${temp_c.toFixed(1)}°C
 
 if (isInitialLoad && currentWeather && currentWeather.temp_c !== undefined) {
 getMessageForTemperature(currentWeather.temp_c, true);
-atualizarMensagemTemperatura();
+atualizarMensagemTemperatura(weatherData);  // <-- passe o weatherData
 }
 
 if (lat && lon) {
