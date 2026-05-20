@@ -138,20 +138,281 @@ console.log('Atualizando dados...');
 location.reload();
 }
 
-function mostrarMensagemErro(mensagem) {
-const resultDiv = document.getElementById(DOM_IDS.WEATHER_RESULT);
-if (resultDiv) {
-resultDiv.innerHTML = `
-<div style="${STYLES.ERROR_BOX}">
-<p>${mensagem}</p>
-<button onclick="reiniciarBusca()" style="
-background:#ff6f00;color:white;border:none;
-padding:8px 16px;border-radius:4px;margin-top:10px;">
-Tentar novamente
-</button>
-</div>`;
+// NOVA FUNÇÃO: Sistema de mensagens amigáveis de erro
+function mostrarMensagemAmigavel(tipoErro, detalhes = {}) {
+    const resultDiv = document.getElementById(DOM_IDS.WEATHER_RESULT);
+    const statusDiv = document.getElementById(DOM_IDS.STATUS);
+    
+    const mensagensErro = {
+        'sem-internet': {
+            titulo: '🔌 Sem conexão',
+            mensagem: 'Parece que você está offline no momento.',
+            sugestao: 'Conecte-se à internet e tente novamente.',
+            cor: '#ff9800',
+            icone: '🌐'
+        },
+        'gps-off': {
+            titulo: '📍 GPS desativado',
+            mensagem: 'Precisamos da sua localização para mostrar o clima.',
+            sugestao: 'Ative o GPS e recarregue a página.',
+            cor: '#ff5722',
+            icone: '📍'
+        },
+        'permissao-negada': {
+            titulo: '🙅 Permissão negada',
+            mensagem: 'Você não permitiu o acesso à localização.',
+            sugestao: 'Libere o acesso nas configurações do seu dispositivo.',
+            cor: '#f44336',
+            icone: '🔒'
+        },
+        'timeout': {
+            titulo: '⏰ Demorou demais',
+            mensagem: 'O serviço de localização está demorando para responder.',
+            sugestao: 'Verifique se está em uma área com bom sinal de GPS.',
+            cor: '#ff9800',
+            icone: '🕐'
+        },
+        'api-falhou': {
+            titulo: '🌧️ Serviço indisponível',
+            mensagem: 'Nosso serviço de meteorologia está instável.',
+            sugestao: 'Tente novamente em alguns instantes.',
+            cor: '#9c27b0',
+            icone: '☁️'
+        },
+        'dados-antigos': {
+            titulo: '📊 Dados desatualizados',
+            mensagem: 'Não foi possível obter informações recentes.',
+            sugestao: 'Usando dados de até 24 horas atrás.',
+            cor: '#ffc107',
+            icone: '⚠️'
+        },
+        'erro-desconhecido': {
+            titulo: '🤔 Ops! Algo inesperado',
+            mensagem: 'Ocorreu um erro que não esperávamos.',
+            sugestao: 'Tente novamente ou entre em contato com o suporte.',
+            cor: '#e91e63',
+            icone: '🔧'
+        }
+    };
+    
+    const erro = mensagensErro[tipoErro] || mensagensErro['erro-desconhecido'];
+    
+    const htmlAmigavel = `
+        <div style="
+            background: linear-gradient(135deg, ${erro.cor}20 0%, ${erro.cor}10 100%);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            margin: 20px;
+            animation: slideIn 0.5s ease-out;
+        ">
+            <div style="font-size: 64px; margin-bottom: 20px;">${erro.icone}</div>
+            <h3 style="color: ${erro.cor}; margin-bottom: 10px;">${erro.titulo}</h3>
+            <p style="color: #fff; margin-bottom: 15px;">${erro.mensagem}</p>
+            <p style="color: ${erro.cor}99; font-size: 0.9em;">💡 ${erro.sugestao}</p>
+            
+            <div style="margin-top: 25px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <button onclick="reiniciarBuscaComRetry()" style="
+                    background: ${erro.cor};
+                    color: white;
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 30px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: transform 0.2s;
+                " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    🔄 Tentar novamente
+                </button>
+                
+                <button onclick="abrirConfiguracoes()" style="
+                    background: rgba(255,255,255,0.2);
+                    color: white;
+                    border: 1px solid ${erro.cor};
+                    padding: 12px 24px;
+                    border-radius: 30px;
+                    font-size: 14px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                    ⚙️ Verificar configurações
+                </button>
+            </div>
+            
+            <div style="margin-top: 20px; font-size: 12px; color: rgba(255,255,255,0.5);">
+                Código do erro: ${tipoErro}
+            </div>
+        </div>
+    `;
+    
+    if (!document.querySelector('#error-animation-style')) {
+        const style = document.createElement('style');
+        style.id = 'error-animation-style';
+        style.textContent = `
+            @keyframes slideIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    if (resultDiv) resultDiv.innerHTML = htmlAmigavel;
+    if (statusDiv) statusDiv.innerHTML = '';
 }
+
+// NOVA FUNÇÃO: Abrir configurações do dispositivo
+function abrirConfiguracoes() {
+    if (window.webkit && window.webkit.messageHandlers && window.cordova) {
+        cordova.plugins.settings.openSettings();
+    }
+    
+    if (navigator.userAgent.match(/Android/i)) {
+        window.location.href = 'app-settings:';
+    }
+    
+    mostrarDicasManuais();
 }
+
+// NOVA FUNÇÃO: Mostrar dicas manuais
+function mostrarDicasManuais() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.95);
+        z-index: 30000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    `;
+    
+    modal.innerHTML = `
+        <div style="background: linear-gradient(135deg, #002244 0%, #001133 100%); border-radius: 20px; padding: 25px; max-width: 300px; text-align: center;">
+            <div style="font-size: 50px;">📱</div>
+            <h3 style="color: #ffeb3b;">Dicas rápidas</h3>
+            <ul style="text-align: left; color: #fff; margin: 20px 0;">
+                <li>✓ Verifique se o GPS está ativo</li>
+                <li>✓ Conecte-se à internet</li>
+                <li>✓ Permita acesso à localização</li>
+                <li>✓ Reinicie o aplicativo</li>
+            </ul>
+            <button onclick="this.parentElement.parentElement.remove()" style="background: #ffeb3b; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">Entendi! 👍</button>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+}
+
+// SUBSTITUIR a função mostrarMensagemErro existente
+function mostrarMensagemErro(mensagem, tipoErro = 'erro-desconhecido') {
+    console.log(`Erro: ${tipoErro} - ${mensagem}`);
+    
+    if (mensagem.includes('Sem conexão') || mensagem.includes('offline')) {
+        tipoErro = 'sem-internet';
+    } else if (mensagem.includes('Permissão negada')) {
+        tipoErro = 'permissao-negada';
+    } else if (mensagem.includes('GPS') || mensagem.includes('localização')) {
+        tipoErro = 'gps-off';
+    } else if (mensagem.includes('Timeout') || mensagem.includes('demorou')) {
+        tipoErro = 'timeout';
+    } else if (mensagem.includes('API') || mensagem.includes('servidor')) {
+        tipoErro = 'api-falhou';
+    }
+    
+    mostrarMensagemAmigavel(tipoErro);
+}
+
+// NOVA FUNÇÃO: Notificação toast amigável
+function mostrarToast(mensagem, tipo = 'info') {
+    const toast = document.createElement('div');
+    const cores = {
+        sucesso: '#4caf50',
+        erro: '#f44336',
+        info: '#2196f3',
+        alerta: '#ff9800'
+    };
+    
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: ${cores[tipo] || cores.info};
+        color: white;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-size: 14px;
+        z-index: 40000;
+        animation: slideUp 0.3s ease-out;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        max-width: 80%;
+        text-align: center;
+    `;
+    
+    toast.textContent = mensagem;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.animation = 'slideDown 0.3s ease-out';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// Adicionar animações CSS para toast
+const toastStyle = document.createElement('style');
+toastStyle.textContent = `
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes slideDown {
+        from { opacity: 1; transform: translateX(-50%) translateY(0); }
+        to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    }
+`;
+document.head.appendChild(toastStyle);
+
+// NOVA FUNÇÃO: Recuperação automática inteligente
+let tentativasRecuperacao = 0;
+function recuperacaoInteligente() {
+    tentativasRecuperacao++;
+    
+    if (tentativasRecuperacao <= 3) {
+        mostrarToast(`🔄 Tentativa ${tentativasRecuperacao} de recuperação...`, 'info');
+        
+        setTimeout(() => {
+            if (navigator.onLine) {
+                buscarPrevisaoPorGeolocalizacao(false);
+            } else {
+                window.addEventListener('online', function onOnline() {
+                    window.removeEventListener('online', onOnline);
+                    buscarPrevisaoPorGeolocalizacao(false);
+                });
+            }
+        }, tentativasRecuperacao * 2000);
+    } else {
+        mostrarMensagemAmigavel('erro-desconhecido');
+        mostrarToast('❌ Não foi possível recuperar automaticamente', 'erro');
+        tentativasRecuperacao = 0;
+    }
+}
+
+// EXPORTAR funções para uso global
+window.mostrarMensagemAmigavel = mostrarMensagemAmigavel;
+window.mostrarToast = mostrarToast;
+window.abrirConfiguracoes = abrirConfiguracoes;
+window.mostrarDicasManuais = mostrarDicasManuais;
+window.recuperacaoInteligente = recuperacaoInteligente;
 
 function atualizarHTML(id, html) {
 const el = document.getElementById(id);
