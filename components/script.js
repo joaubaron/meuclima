@@ -592,27 +592,27 @@ return frase;
 
 function getPreciseSeasonDates(year) {
 return {
-VERÃO:     { date: new Date(year - 1, 11, 21, 12, 0, 0), emoji: "☀️" },
-OUTONO:    { date: new Date(year,     2, 20, 12, 0, 0), emoji: "🍂" },
-INVERNO:   { date: new Date(year,     5, 21, 12, 0, 0), emoji: "❄️" },
-PRIMAVERA: { date: new Date(year,     8, 22, 12, 0, 0), emoji: "🌸" }
+OUTONO:    { date: new Date(year, 2, 20, 12, 0, 0), emoji: "🍂" },    // 20 março
+INVERNO:   { date: new Date(year, 5, 21, 12, 0, 0), emoji: "❄️" },    // 21 junho
+PRIMAVERA: { date: new Date(year, 8, 22, 12, 0, 0), emoji: "🌸" },    // 22 setembro
+VERÃO:     { date: new Date(year, 11, 21, 12, 0, 0), emoji: "☀️" }    // 21 dezembro
 };
 }
 
 function getCurrentSeason(date = new Date()) {
 const year = date.getFullYear();
-const seasonDates = getPreciseSeasonDates(year);
-const veraoAnterior = getPreciseSeasonDates(year - 1).VERÃO.date;
+const seasons = getPreciseSeasonDates(year);
+const outonoAnterior = getPreciseSeasonDates(year - 1).OUTONO.date;
 
-if (date >= veraoAnterior && date < seasonDates.OUTONO.date) return "VERÃO";
-if (date >= seasonDates.OUTONO.date && date < seasonDates.INVERNO.date) return "OUTONO";
-if (date >= seasonDates.INVERNO.date && date < seasonDates.PRIMAVERA.date) return "INVERNO";
-return "PRIMAVERA";
+if (date >= outonoAnterior && date < seasons.INVERNO.date) return "OUTONO";
+if (date >= seasons.INVERNO.date && date < seasons.PRIMAVERA.date) return "INVERNO";
+if (date >= seasons.PRIMAVERA.date && date < seasons.VERÃO.date) return "PRIMAVERA";
+return "VERÃO";
 }
 
 function getSeasonDates(season, year = new Date().getFullYear()) {
 const seasonDates = getPreciseSeasonDates(year);
-const seasonsOrder = ["VERÃO", "OUTONO", "INVERNO", "PRIMAVERA"];
+const seasonsOrder = ["OUTONO", "INVERNO", "PRIMAVERA", "VERÃO"];
 const currentIndex = seasonsOrder.indexOf(season);
 const nextIndex = (currentIndex + 1) % seasonsOrder.length;
 const nextSeason = seasonsOrder[nextIndex];
@@ -631,9 +631,9 @@ endDate = seasonDates[nextSeason].date;
 
 return {
 start: startDate,
-end:   endDate,
+end: endDate,
 emoji: seasonDates[season].emoji,
-next:  nextSeason
+next: nextSeason
 };
 }
 
