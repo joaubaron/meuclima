@@ -4,7 +4,7 @@ const UPDATE_INTERVAL = 5 * 60 * 1000;
 const SPLASH_TIMEOUT = 30000;
 const GEO_TIMEOUT = 20000;
 const NOMINATIM_USER_AGENT = 'MeuClima/1.0 (local testing)';
-
+let splashTimeoutId = null;
 const DOM_IDS = {
 WEATHER_RESULT: 'weatherResult',
 STATUS: 'status',
@@ -382,16 +382,6 @@ mostrarMensagemAmigavel('erro-desconhecido');
 mostrarToast('❌ Não foi possível recuperar automaticamente', 'erro');
 tentativasRecuperacao = 0;
 }
-}
-
-
-function atualizarHTML(id, html) {
-const el = document.getElementById(id);
-if (el) el.innerHTML = html;
-}
-
-function obterElemento(idKey) {
-return document.getElementById(DOM_IDS[idKey]);
 }
 
 function limparCachePorPrioridade() {
@@ -2181,8 +2171,6 @@ clearInterval(intervaloAtualizacao);
 window.onload = async function () {
 const splashScreen = document.getElementById('splashScreen');
 document.body.classList.add('loading');
-
-let splashTimeoutId;
 let splashHidden = false;
 
 const hideSplashScreen = () => {
