@@ -316,13 +316,13 @@ canvas {
 }
 
 #sugestaoReceita p {
-    font-size: 11px !important;
+    font-size: 12px !important;
     margin-top: 15px;
     line-height: 0.6;
 }
 
 #sugestaoReceita p.descricao {
-    font-size: 11px !important;
+    font-size: 12px !important;
     margin-top: 3px;
 }
 
