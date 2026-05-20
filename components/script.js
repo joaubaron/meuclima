@@ -1158,11 +1158,20 @@ let minMaxHtml = '';
 if (weatherData) {
 const { min, max } = getTodayMinMaxTemp(weatherData);
 if (min !== null && max !== null) {
-minMaxHtml = `<span style="font-size: 0.7em; margin-left: 8px; opacity: 0.8;">📉 ${min.toFixed(0)}° 📈 ${max.toFixed(0)}°</span>`;
+minMaxHtml = ` Hoje entre ${min.toFixed(0)}° e ${max.toFixed(0)}°`;
 }
 }
 
-messageDiv.innerHTML = UI_STATE.currentTemperatureMessage + minMaxHtml;
+let mensagem = UI_STATE.currentTemperatureMessage;
+
+// Remove o segundo emoji do final
+mensagem = mensagem.replace(/\s?[🍃⛅🌤️☀️🕶️🔥🥵♨️🧊🥶❄️🧥🧣]\s?$/, '');
+
+// Garante ponto final
+mensagem = mensagem.replace(/[.!?]$/, '');
+mensagem = mensagem + '.';
+
+messageDiv.innerHTML = mensagem + minMaxHtml;
 }
 
 async function fetchAllWeatherData(lat, lon, forceRefresh = false) {
