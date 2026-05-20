@@ -1936,12 +1936,14 @@ Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${ilumin
 
 moonDiv.innerHTML = moonHTML;
 UI_STATE.extrasCache.moon = moonHTML;
+}, 10000);
 
-// Nascer e pôr do sol
+// Nascer e pôr do sol — executa imediatamente, sem esperar
 const sunDiv = document.getElementById(DOM_IDS.SUN_INFO);
 if (sunDiv) {
-const nascerStr = converterHora12para24(astronomy.sunrise || astronomy.astro?.sunrise);
-const porStr    = converterHora12para24(astronomy.sunset  || astronomy.astro?.sunset);
+const astroSol = forecast.forecast?.forecastday?.[0]?.astro || astronomy.astro || astronomy;
+const nascerStr = converterHora12para24(astroSol.sunrise);
+const porStr    = converterHora12para24(astroSol.sunset);
 sunDiv.innerHTML = `
 <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
@@ -1950,7 +1952,6 @@ sunDiv.innerHTML = `
 </div>
 `;
 }
-}, 10000);
 
 const hoje = forecast.forecast.forecastday[0];
 const horaAtual = new Date().getHours();
