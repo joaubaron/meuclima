@@ -1150,32 +1150,42 @@ return UI_STATE.currentTemperatureMessage;
 }
 
 function atualizarMensagemTemperatura(weatherData = null) {
-const messageDiv = document.getElementById(DOM_IDS.WEATHER_MESSAGE);
-if (!messageDiv) return;
-
-let minMaxHtml = '';
-
-if (weatherData) {
-const { min, max } = getTodayMinMaxTemp(weatherData);
-if (min !== null && max !== null) {
-minMaxHtml = ` Hoje entre ${min.toFixed(0)}° e ${max.toFixed(0)}°`;
-}
-}
-
-let mensagem = UI_STATE.currentTemperatureMessage;
-
-// Remove qualquer emoji do final (incluindo os que vêm depois do texto)
-mensagem = mensagem.replace(/\s?[🍃⛅🌤️☀️🕶️🔥🥵♨️🧊🥶❄️🧥🧣]\s*$/, '');
-
-// Remove pontuação do final (!, ?, .)
-mensagem = mensagem.replace(/[!?.]+$/, '');
-
-// Adiciona apenas se não tiver exclamação
-if (!mensagem.includes('!')) {
-mensagem = mensagem + '!';
-}
-
-messageDiv.innerHTML = mensagem + minMaxHtml;
+    const messageDiv = document.getElementById(DOM_IDS.WEATHER_MESSAGE);
+    if (!messageDiv) return;
+    
+    let minMaxHtml = '';
+    
+    if (weatherData) {
+        const { min, max } = getTodayMinMaxTemp(weatherData);
+        if (min !== null && max !== null) {
+            minMaxHtml = ` Hoje entre ${min.toFixed(0)}° e ${max.toFixed(0)}°`;
+        }
+    }
+    
+    let mensagemOriginal = UI_STATE.currentTemperatureMessage;
+    
+    // Pega o primeiro emoji (qualquer emoji no início)
+    const primeiroEmojiMatch = mensagemOriginal.match(/^[\p{Emoji}\u{1F300}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]\s?/u);
+    const primeiroEmoji = primeiroEmojiMatch ? primeiroEmojiMatch[0].trim() : '';
+    
+    // Remove o primeiro emoji da string para pegar só o texto
+    let texto = mensagemOriginal;
+    if (primeiroEmoji) {
+        texto = mensagemOriginal.replace(primeiroEmoji, '').trim();
+    }
+    
+    // Remove qualquer exclamação/interrogação/ponto do final do texto
+    texto = texto.replace(/[!?.]+$/, '');
+    
+    // Garante que tenha exclamação
+    if (!texto.includes('!')) {
+        texto = texto + '!';
+    }
+    
+    // Monta mensagem final: só UM emoji + texto limpo
+    const mensagemFinal = primeiroEmoji ? `${primeiroEmoji} ${texto}` : texto;
+    
+    messageDiv.innerHTML = mensagemFinal + minMaxHtml;
 }
 
 async function fetchAllWeatherData(lat, lon, forceRefresh = false) {
