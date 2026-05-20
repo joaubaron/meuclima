@@ -1150,32 +1150,32 @@ return UI_STATE.currentTemperatureMessage;
 }
 
 function atualizarMensagemTemperatura(weatherData = null) {
-    const messageDiv = document.getElementById(DOM_IDS.WEATHER_MESSAGE);
-    if (!messageDiv) return;
-    
-    let minMaxHtml = '';
-    
-    if (weatherData) {
-        const { min, max } = getTodayMinMaxTemp(weatherData);
-        if (min !== null && max !== null) {
-            minMaxHtml = ` Hoje entre ${min.toFixed(0)}° e ${max.toFixed(0)}°`;
-        }
-    }
-    
-    let mensagem = UI_STATE.currentTemperatureMessage;
-    
-    // Pega apenas o primeiro emoji (qualquer emoji no início)
-    const primeiroEmoji = mensagem.match(/^[\p{Emoji}]\s?/u)?.[0] || '';
-    
-    // Remove tudo que vem depois do primeiro emoji + espaços, e também remove pontuação do final
-    let textoLimpo = mensagem.replace(/^[\p{Emoji}]\s?/u, ''); // remove o primeiro emoji e espaço
-    textoLimpo = textoLimpo.replace(/[!?]$/, ''); // remove exclamação/interrogação do final
-    textoLimpo = textoLimpo.trim();
-    
-    // Monta a mensagem final: primeiro emoji + texto limpo + ponto final
-    mensagem = primeiroEmoji + ' ' + textoLimpo + '.';
-    
-    messageDiv.innerHTML = mensagem + minMaxHtml;
+const messageDiv = document.getElementById(DOM_IDS.WEATHER_MESSAGE);
+if (!messageDiv) return;
+
+let minMaxHtml = '';
+
+if (weatherData) {
+const { min, max } = getTodayMinMaxTemp(weatherData);
+if (min !== null && max !== null) {
+minMaxHtml = ` Hoje entre ${min.toFixed(0)}° e ${max.toFixed(0)}°`;
+}
+}
+
+let mensagem = UI_STATE.currentTemperatureMessage;
+
+// Remove qualquer emoji do final (incluindo os que vêm depois do texto)
+mensagem = mensagem.replace(/\s?[🍃⛅🌤️☀️🕶️🔥🥵♨️🧊🥶❄️🧥🧣]\s*$/, '');
+
+// Remove pontuação do final (!, ?, .)
+mensagem = mensagem.replace(/[!?.]+$/, '');
+
+// Adiciona apenas se não tiver exclamação
+if (!mensagem.includes('!')) {
+mensagem = mensagem + '!';
+}
+
+messageDiv.innerHTML = mensagem + minMaxHtml;
 }
 
 async function fetchAllWeatherData(lat, lon, forceRefresh = false) {
