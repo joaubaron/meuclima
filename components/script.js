@@ -1947,7 +1947,7 @@ const porStr    = converterHora12para24(astroSol.sunset);
 sunDiv.innerHTML = `
 <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
-<span>☀️ ${nascerStr} &nbsp;|&nbsp; 🌙 ${porStr}</span>
+<span>☀️ nasce às ☀️ ${nascerStr} &nbsp;|&nbsp; se põe às 🌙 ${porStr}</span>
 </div>
 </div>
 `;
