@@ -11,6 +11,7 @@ STATUS: 'status',
 SPLASH_SCREEN: 'splashScreen',
 PULL_TO_REFRESH: 'pullToRefresh',
 MOON_INFO: 'moonInfo',
+SUN_INFO: 'sunInfo',
 EXTRAS: 'extras',
 LOCATION_DATE: 'locationDate',
 WEATHER_MESSAGE: 'weatherMessage',
@@ -1935,6 +1936,20 @@ Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${ilumin
 
 moonDiv.innerHTML = moonHTML;
 UI_STATE.extrasCache.moon = moonHTML;
+
+// Nascer e pôr do sol
+const sunDiv = document.getElementById(DOM_IDS.SUN_INFO);
+if (sunDiv) {
+const nascerStr = converterHora12para24(astronomy.sunrise || astronomy.astro?.sunrise);
+const porStr    = converterHora12para24(astronomy.sunset  || astronomy.astro?.sunset);
+sunDiv.innerHTML = `
+<div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
+<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
+<span>🌅 ${nascerStr} &nbsp;|&nbsp; 🌇 ${porStr}</span>
+</div>
+</div>
+`;
+}
 }, 10000);
 
 const hoje = forecast.forecast.forecastday[0];
@@ -2068,6 +2083,18 @@ Erro ao carregar fase da lua. Tentando novamente...
 </p>
 `;
 }
+}
+
+function converterHora12para24(hora12) {
+if (!hora12) return '--:--';
+const partes = hora12.trim().split(' ');
+if (partes.length < 2) return hora12;
+const [time, modifier] = partes;
+let [hours, minutes] = time.split(':');
+hours = parseInt(hours, 10);
+if (modifier.toUpperCase() === 'AM' && hours === 12) hours = 0;
+if (modifier.toUpperCase() === 'PM' && hours !== 12) hours += 12;
+return `${String(hours).padStart(2, '0')}:${minutes}`;
 }
 
 function getMoonInfo(moonPhase, moonIllumination) {
