@@ -110,29 +110,6 @@ refreshDiv.style.opacity = '0';
 UI_STATE.isPulling = false;
 }, { passive: true });
 
-function getWeatherElements() {
-const ids = [
-['result', 'weatherResult'],
-['status', 'status'],
-['splash', 'splashScreen'],
-['pullRefresh', 'pullToRefresh'],
-['moonInfo', 'moonInfo'],
-['extras', 'extras']
-];
-
-const elements = {};
-
-ids.forEach(([key, id]) => {
-const el = document.getElementById(id);
-if (!el) {
-console.warn(`Elemento com ID '${id}' não encontrado.`);
-}
-elements[key] = el;
-});
-
-return elements;
-}
-
 async function atualizarDados() {
 console.log('Atualizando dados...');
 location.reload();
@@ -407,12 +384,6 @@ tentativasRecuperacao = 0;
 }
 }
 
-// EXPORTAR funções para uso global
-window.mostrarMensagemAmigavel = mostrarMensagemAmigavel;
-window.mostrarToast = mostrarToast;
-window.abrirConfiguracoes = abrirConfiguracoes;
-window.mostrarDicasManuais = mostrarDicasManuais;
-window.recuperacaoInteligente = recuperacaoInteligente;
 
 function atualizarHTML(id, html) {
 const el = document.getElementById(id);
@@ -549,7 +520,7 @@ limparCacheAntigoMaisAgressivo();
 });
 
 function finalizarPullToRefresh() {
-isRefreshing = false;
+UI_STATE.isRefreshing = false;
 const pullElement = document.getElementById('pullToRefresh');
 if (pullElement) {
 pullElement.style.transform = 'translateY(0)';
@@ -1026,7 +997,7 @@ document.body.classList.add("modal-aberto");
 carregarGraficos();
 }
 
-isRefreshing = false;
+UI_STATE.isRefreshing = false;
 const pullElement = document.getElementById('pullToRefresh');
 return;
 }
@@ -2083,11 +2054,11 @@ ${amanhaHTML}
 
 extrasDiv.innerHTML = htmlCompletoExtras;
 
-extrasCache = {
+UI_STATE.extrasCache = {
 extras: htmlCompletoExtras,
 moon: ""
 };
-extrasLastFetch = now;
+UI_STATE.extrasLastFetch = now;
 
 } catch (e) {
 console.error("Erro ao obter dados adicionais:", e);
