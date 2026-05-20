@@ -617,16 +617,6 @@ canvas {
     font-size: 0.75rem !important;
 }
 
-/* Ajustes específicos para sugestão de receita */
-#sugestaoReceita p.descricao {
-    font-size: 12px !important;
-    line-height: 1.35 !important;
-}
-
-#sugestaoReceita p {
-    font-size: 12px !important;
-}
-
 .moon-text {
     font-size: 14px !important;
 }
