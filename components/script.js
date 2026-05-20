@@ -1681,11 +1681,19 @@ setTimeout(() => mostrarSugestaoReceita(temp_c), 10);
 
 const weatherIcon = await getWeatherIcon(iconCode, isDay);
 
+// Pegar horários do sol
+const sunrise = weatherData.astronomy?.astro?.sunrise?.replace(' AM', '').replace(' PM', '') || '--:--';
+const sunset = weatherData.astronomy?.astro?.sunset?.replace(' AM', '').replace(' PM', '') || '--:--';
+
 if (resultDiv) {
 resultDiv.innerHTML = `
 <div class="big-icon">
 <img src="${weatherIcon}" class="weather-icon" alt="${condText}">
 ${temp_c.toFixed(1)}°C
+</div>
+<div class="sun-times" style="display: flex; justify-content: center; gap: 16px; margin: 8px 0 4px 0; font-size: 12px;">
+<span>🌅 ${sunrise}</span>
+<span>🌇 ${sunset}</span>
 </div>
 <div class="info-inline">
 <div class="info-item">
