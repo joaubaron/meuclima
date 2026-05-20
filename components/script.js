@@ -1228,7 +1228,7 @@ sugestaoDiv.style.borderRadius = '8px';
 sugestaoDiv.style.fontSize = '12px';
 sugestaoDiv.style.textAlign = 'left';
 sugestaoDiv.style.lineHeight = '1.4';
-sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">Dica pra hoje:</strong> ${sugestaoVestuario}`;
+sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">Clima:</strong> ${sugestaoVestuario}`;
 
 const ultimoGrafico = document.querySelector('.grafico:last-child');
 if (ultimoGrafico && ultimoGrafico.parentNode) {
@@ -1906,7 +1906,7 @@ sugestaoDiv.style.borderRadius = '8px';
 sugestaoDiv.style.fontSize = '12px';
 sugestaoDiv.style.textAlign = 'center';
 sugestaoDiv.style.lineHeight = '1.4';
-sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">Dica pra hoje:</strong> ${sugestaoVestuario}`;
+sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">Clima:</strong> ${sugestaoVestuario}`;
 
 moonDiv.innerHTML = '';
 moonDiv.appendChild(sugestaoDiv);
