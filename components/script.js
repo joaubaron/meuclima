@@ -460,10 +460,10 @@ semChuva: [
 // Parte 3a — vento sem chuva: já traz o finalizador embutido
 const sugestoesVento = {
 calminho: [
-"e vento calmo. Dia tranquilo!",
-"e sem vento. Aproveite!",
-"com tempo estável. Bom dia!",
-"e clima bem parado. Curta!",
+"e vento calmo. Aproveite o dia!",
+"e sem vento. Tenha um ótimo dia!",
+"com tempo estável. Curta bastante!",
+"e clima bem parado. Dia bom!",
 "e ventinho quase zero. Ótimo dia!"
 ],
 brisaLeve: [
