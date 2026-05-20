@@ -1381,7 +1381,7 @@ let minMaxHtml = '';
 if (weatherData) {
 const { min, max } = getTodayMinMaxTemp(weatherData);
 if (min !== null && max !== null) {
-minMaxHtml = ` Hoje entre ${min.toFixed(0)}° e ${max.toFixed(0)}°`;
+minMaxHtml = ` entre ${min.toFixed(0)}° e ${max.toFixed(0)}°`;
 }
 }
 
