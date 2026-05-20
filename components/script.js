@@ -1256,7 +1256,7 @@ messages: ['Temperatura amena! 🍃', 'Clima agradável! ⛅']
 {
 min: 21.0,
 max: 30.9,
-messages: ['Clima quente! ☀️', 'Dia ensolarado! 🕶️']
+messages: ['Clima quente! ☀️', 'Dia ensolarado! 😎']
 },
 {
 min: 31.0,
@@ -1275,7 +1275,7 @@ const descricoes = {
 "⛅": "Temperado",
 "🌤️": "Quente",
 "☀️": "Tórrido",
-"🕶️": "Escaldante",
+"😎": "Escaldante",
 "🔥": "Abrassador",
 "🥵": "Intenso",
 "♨️": "Extremo"
@@ -1291,7 +1291,7 @@ const emojiByTemperature = [
 { min: 15,  max: 17.9, emoji: "⛅" },
 { min: 18,  max: 20.9, emoji: "🌤️" },
 { min: 21,  max: 24.9, emoji: "☀️" },
-{ min: 25,  max: 28.9, emoji: "🕶️" },
+{ min: 25,  max: 28.9, emoji: "😎" },
 { min: 29,  max: 32.9, emoji: "🔥" },
 { min: 33,  max: 36.9, emoji: "🥵" },
 { min: 37,  max: 100, emoji: "♨️" }
@@ -1947,7 +1947,7 @@ const porStr    = converterHora12para24(astroSol.sunset);
 sunDiv.innerHTML = `
 <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
-<span>🌅 ${nascerStr} &nbsp;|&nbsp; 🌇 ${porStr}</span>
+<span>☀️ ${nascerStr} &nbsp;|&nbsp; 🌙 ${porStr}</span>
 </div>
 </div>
 `;
