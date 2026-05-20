@@ -1081,24 +1081,24 @@ const mes = hoje.getMonth() + 1;
 const anoAtual = hoje.getFullYear();
 
 const mensagensEspeciais = {
-'1-1'  : `Feliz Ano Novo! Que ${anoAtual} seja ótimo!`,
-'28-1' : `Bruna está de aniversário!`,
-'30-1' : `Marlon está de niver e comemora ${anoAtual - 1988} anos!`,
-'7-2'  : `Parabéns para Clara! Ela faz ${anoAtual - 2016} anos!`,
-'12-2' : `Niver do Sérgio. Ele comemora ${anoAtual - 1969} anos!`,
-'5-3'  : 'Feliz aniversário Baron!',
-'9-3'  : 'Seu pai está fazendo aniversário!',
-'23-3' : `Niver do Eduardo. Ele faz ${anoAtual - 2003} anos!`,
-'5-4'  : 'Data especial: você conheceu a Cláudia.',
-'2-5'  : `Mateus que comemora ${anoAtual - 2001} anos!`,
-'5-6'  : 'Você e Cláudia começaram a dividir a vida.',
-'12-6' : 'Feliz Dia dos Namorados!',
-'5-7'  : `Débora comemora ${anoAtual - 1973} anos!`,
-'5-9'  : 'Niver da Cláudia! Que tal um jantar especial?',
-'23-10': 'Hoje sua mãe comemora aniversário.',
-'3-11' : 'Juntos e fortes! Que tal levar um bom vinho?',
-'25-11': `Morgama comemora ${anoAtual - 1984} anos!`,
-'25-12': 'Que esse feriado seja de muita paz.'
+'1-1'  : `Feliz Ano Novo! Que ${anoAtual} seja incrível!`,
+'28-1' : `É aniversário da Bruna! 🎂`,
+'30-1' : `Marlon está completando ${anoAtual - 1988} anos hoje! 🎉`,
+'7-2'  : `Parabéns, Clara! Hoje ela faz ${anoAtual - 2016} anos! 🎈`,
+'12-2' : `É aniversário do Sérgio — ele celebra ${anoAtual - 1969} anos! 🎊`,
+'5-3'  : 'Feliz aniversário, Baron! 🥳',
+'9-3'  : 'Hoje é aniversário do seu pai! 🎁',
+'23-3' : `Eduardo completa hoje ${anoAtual - 2003} anos! 🎂`,
+'5-4'  : 'Hoje marca o dia em que você conheceu a Cláudia. 💛',
+'2-5'  : `Mateus está festejando ${anoAtual - 2001} anos! 🎉`,
+'5-6'  : 'Você e a Cláudia começaram a dividir a vida. 💞',
+'12-6' : 'Feliz Dia dos Namorados! 💕',
+'5-7'  : `Débora está de aniversário, são ${anoAtual - 1973} anos! 🎂`,
+'5-9'  : 'Aniversário da Cláudia! Que tal algo especial? 🍷',
+'23-10': 'Hoje é aniversário da sua mãe. 🌹',
+'3-11' : 'Juntos e fortes! Que tal levar um bom vinho? 🍷',
+'25-11': `Morgama comemora ${anoAtual - 1984} anos hoje! 🎈`,
+'25-12': 'Que este feriado traga muita paz. ✨'
 };
 
 const chave1 = `${dia}-${mes}`;
