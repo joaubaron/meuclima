@@ -2218,7 +2218,7 @@ buscarPrevisaoPorGeolocalizacao(false);
 
 splashTimeoutId = setTimeout(() => {
 const essentialDataLoaded =
-weatherCache !== null &&
+UI_STATE.weatherCache !== null &&
 document.getElementById('weatherResult')?.innerHTML.includes('big-icon') &&
 document.getElementById('locationDate')?.innerHTML.trim() !== '';
 
