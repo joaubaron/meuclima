@@ -316,13 +316,13 @@ canvas {
 }
 
 #sugestaoReceita p {
-    font-size: 1.0em;
+    font-size: 1.2em;
     margin-top: 15px;
     line-height: 0.6;
 }
 
 #sugestaoReceita p.descricao {
-    font-size: 1.0em;
+    font-size: 1.2em;
     margin-top: 3px;
 }
 
