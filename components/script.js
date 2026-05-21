@@ -1901,37 +1901,40 @@ sunDiv.innerHTML = `
 `;
 }
 
-// 2. DICAS DO CLIMA - colocar em weatherMessage, não em moonInfo
-const weatherMessageDiv = document.getElementById(DOM_IDS.WEATHER_MESSAGE);
-if (weatherMessageDiv && !weatherMessageDiv.querySelector('.clima-dica')) {
-    const climaDica = document.createElement('div');
-    climaDica.className = 'clima-dica';
-    climaDica.style.marginTop = '1px';
-    climaDica.style.padding = '10px';
-    climaDica.style.borderRadius = '8px';
-    climaDica.style.fontSize = '12px';
-    climaDica.style.textAlign = 'center';
-    climaDica.style.lineHeight = '1.4';
-    climaDica.innerHTML = `<strong style="color: #ffeb3b;">Clima:</strong> ${sugestaoVestuario}`;
-    weatherMessageDiv.appendChild(climaDica);
-}
-
-// 3. FASE DA LUA (apenas isso no moonInfo)
+// 2. DICAS DO CLIMA
 moonDiv.innerHTML = '';
-const moonInfoHTML = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
+const dicasDiv = document.createElement('div');
+dicasDiv.style.marginTop = '1px';
+dicasDiv.style.padding = '10px';
+dicasDiv.style.borderRadius = '8px';
+dicasDiv.style.fontSize = '12px';
+dicasDiv.style.textAlign = 'center';
+dicasDiv.style.lineHeight = '1.4';
+dicasDiv.innerHTML = `<strong style="color: #ffeb3b;">Clima:</strong> ${sugestaoVestuario}`;
+moonDiv.appendChild(dicasDiv);
+
+// 3. FASE DA LUA
+const luaContainer = document.createElement('div');
+moonDiv.appendChild(luaContainer);
+
+const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
 const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
-moonDiv.innerHTML = `
+const moonHTML = `
 <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
-    <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
-        <span>
-            <a href="#" onclick="abrirStarWalkMoon(); return false;" style="color: inherit; text-decoration: none;">
-                Lua <span class="moon-emoji">${moonInfoHTML.emoji}</span> ${moonInfoHTML.pt} em ${iluminacaoValor}% <span style="font-size: 0.70em; color: #ffeb3b;">de brilho</span>
-            </a>
-        </span>
-    </div>
+<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
+<span>
+<a href="#"
+onclick="abrirStarWalkMoon(); return false;"
+style="color: inherit; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent;">
+Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% <span style="font-size: 0.70em; color: #ffeb3b;">de brilho</span>
+</a>
+</span>
+</div>
 </div>
 `;
+
+luaContainer.innerHTML = moonHTML;
 
 // ========== PREVISÃO POR PERÍODO + AMANHÃ ==========
 const hoje = forecast.forecast.forecastday[0];
