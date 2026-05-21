@@ -56,7 +56,16 @@ CONTEÚDO PRINCIPAL DA APLICAÇÃO
 <!-- Localização e Data Atual -->
 <div class="location-date" id="locationDate"></div>
 
-<!-- Container Principal do Clima -->
+<!-- ========================================
+HORÁRIOS DO SOL (PRIMEIRO)
+======================================== -->
+<div class="sun-phase-container">
+<div id="sunInfo" style="font-size: 0.9em; margin-top: 6px;">🌅 -- | 🌇 --</div>
+</div>
+
+<!-- ========================================
+CONTEÚDO DO CLIMA (SEGUNDO)
+======================================== -->
 <div class="weather-container">
 <div id="weatherResult">Obtendo localização...</div>
 
@@ -70,15 +79,15 @@ CONTEÚDO PRINCIPAL DA APLICAÇÃO
 </div>
 
 <!-- ========================================
-INFORMAÇÕES ADICIONAIS
+FASE DA LUA (TERCEIRO)
 ======================================== -->
-
-<!-- Fase da Lua e Sol -->
 <div class="moon-phase-container">
 <div id="moonInfo" style="font-size: 0.9em;">Carregando fase da lua...</div>
-<div id="sunInfo" style="font-size: 0.9em; margin-top: 6px;">🌅 -- | 🌇 --</div>
 </div>
-<!-- Informações Extras do Clima -->
+
+<!-- ========================================
+INFORMAÇÕES EXTRAS
+======================================== -->
 <div class="weather-container" style="font-size: 12px; padding: 0 12px;">
 <div id="extras">Carregando previsões futuras...</div>
 </div>
