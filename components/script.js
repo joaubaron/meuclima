@@ -1884,23 +1884,39 @@ medias.mediaPrecip,
 medias.mediaVento
 );
 
-const sugestaoDiv = document.createElement('div');
-sugestaoDiv.style.marginTop = '1px';
-sugestaoDiv.style.padding = '10px';
-sugestaoDiv.style.borderRadius = '8px';
-sugestaoDiv.style.fontSize = '12px';
-sugestaoDiv.style.textAlign = 'center';
-sugestaoDiv.style.lineHeight = '1.4';
-sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">Clima:</strong> ${sugestaoVestuario}`;
+// ========== ORDEM CORRETA ==========
 
+// 1. NASCER/PÔR DO SOL
+const sunDiv = document.getElementById(DOM_IDS.SUN_INFO);
+if (sunDiv && !sunDiv.querySelector('.info-inline')) {
+const astroSol = forecast.forecast?.forecastday?.[0]?.astro || astronomy.astro || astronomy;
+const nascerStr = converterHora12para24(astroSol.sunrise);
+const porStr    = converterHora12para24(astroSol.sunset);
+sunDiv.innerHTML = `
+<div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
+<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
+<span>☀️ ${nascerStr} &nbsp; &nbsp; 🌙 ${porStr}</span>
+</div>
+</div>
+`;
+}
+
+// 2. DICAS DO CLIMA
 moonDiv.innerHTML = '';
-moonDiv.appendChild(sugestaoDiv);
+const dicasDiv = document.createElement('div');
+dicasDiv.style.marginTop = '1px';
+dicasDiv.style.padding = '10px';
+dicasDiv.style.borderRadius = '8px';
+dicasDiv.style.fontSize = '12px';
+dicasDiv.style.textAlign = 'center';
+dicasDiv.style.lineHeight = '1.4';
+dicasDiv.innerHTML = `<strong style="color: #ffeb3b;">Clima:</strong> ${sugestaoVestuario}`;
+moonDiv.appendChild(dicasDiv);
 
-// Cria um container separado para a lua (logo abaixo da frase)
+// 3. FASE DA LUA
 const luaContainer = document.createElement('div');
 moonDiv.appendChild(luaContainer);
 
-// Renderiza a lua IMEDIATAMENTE
 const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
 const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
@@ -1920,21 +1936,7 @@ Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${ilumin
 
 luaContainer.innerHTML = moonHTML;
 
-// Nascer e pôr do sol — só atualiza se ainda não foi preenchido pelo fluxo principal
-const sunDiv = document.getElementById(DOM_IDS.SUN_INFO);
-if (sunDiv && !sunDiv.querySelector('.info-inline')) {
-const astroSol = forecast.forecast?.forecastday?.[0]?.astro || astronomy.astro || astronomy;
-const nascerStr = converterHora12para24(astroSol.sunrise);
-const porStr    = converterHora12para24(astroSol.sunset);
-sunDiv.innerHTML = `
-<div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
-<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
-<span>☀️ ${nascerStr} &nbsp;   &nbsp; 🌙 ${porStr}</span>
-</div>
-</div>
-`;
-}
-
+// ========== PREVISÃO POR PERÍODO + AMANHÃ ==========
 const hoje = forecast.forecast.forecastday[0];
 const horaAtual = new Date().getHours();
 
