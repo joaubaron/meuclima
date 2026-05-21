@@ -711,46 +711,46 @@ muitoCalor: [
 // Parte 2 — chuva: contexto + conselho, minúsculo para encaixar após vírgula
 const sugestoesChuva = {
 garoa: [
-"garoa no caminho, atenção",
-"chuvisco previsto, cuidado",
-"pode cair garoa, atenção!",
-"garoa leve, leve cobertura",
-"garoa possível, se previna"
+"com garoa no caminho",
+"com chuvisco previsto",
+"pode cair garoa agora",
+"garoa leve e rapida",
+"possível garoa hoje"
 ],
 fraca: [
-"chuva fraca, fique atento",
-"chuvinha prevista, atenção",
-"chuva leve, leve cobertura",
-"chuva fina, muito cuidado",
-"chuva fraca prevista hoje"
+"com chuva fraca agora",
+"chuvinha leve caindo",
+"chuva fraca no local",
+"chuva leve no momento",
+"com chuva fina e leve"
 ],
 moderada: [
-"chuva media, fique esperto",
-"vai chover firme, atenção",
-"chuva moderada, se prepare",
-"chuva razoável, se proteja",
-"chuva média, muita atenção"
+"com chuva moderada",
+"chuva firme caindo",
+"chuva média no local",
+"chuva constante agora",
+"com precipitação média"
 ],
 forte: [
-"chuva forte, muito cuidado",
-"chuva pesada, fique atento",
-"vai chover forte, atenção",
-"chuva intensa, fique atento",
-"tempestade, muito cuidado"
+"com chuva forte agora",
+"chuva pesada caindo",
+"chuva intensa no local",
+"chuva forte no momento",
+"com precipitação forte"
 ],
 intensa: [
-"chuva extrema, evite sair",
-"chuva torrencial, cuidado",
-"risco alto, chuva vindo aí",
-"tempestade forte, atenção",
-"chuva perigosa, evite sair"
+"com chuva extrema agora",
+"chuva torrencial caindo",
+"tempestade no momento",
+"chuva perigosa agora",
+"com precipitação extrema"
 ],
 semChuva: [
-"tempo seco, sem chuva hoje",
-"sem chuva, céu limpo hoje",
-"sem chuva e céu aberto hoje",
-"dia seco, céu aberto aqui",
-"sem chuva, céu bem aberto"
+"tempo seco hoje aqui",
+"sem chuva neste momento",
+"céu limpo e seco hoje",
+"dia aberto e seco agora",
+"sem precipitação hoje"
 ]
 };
 
@@ -758,77 +758,77 @@ semChuva: [
 const sugestoesVento = {
 calminho: [
 "e vento calmo. Aproveite!",
-"e sem vento. Dia incrível!",
-"com tempo parado. Bom dia!",
-"e ventinho zero. Bom dia!",
-"e clima parado. Aproveite!"
+"e sem vento. Bom dia!",
+"com vento zero. Aproveite!",
+"e clima parado. Bom dia!",
+"e vento tranquilo. Aproveite!"
 ],
 brisaLeve: [
-"e brisa leve. Bom dia aqui!",
-"com brisa suave. Bom dia!",
+"e brisa leve. Bom dia!",
+"com vento suave. Aproveite!",
+"e vento leve. Bom dia!",
 "e brisa fresca. Aproveite!",
-"e vento leve. Que bom dia!",
-"com brisa gentil. Bom dia!"
+"e ventinho bom. Bom dia!"
 ],
 moderado: [
-"e ventania leve. Atenção!",
-"com vento médio. Atenção!",
-"e vento médio. Segure-se!",
-"e vento médio. Cuide bem!",
-"e vento presente. Cuide-se!"
+"e vento moderado. Atenção!",
+"com vento médio. Cuidado!",
+"e vento presente. Atenção!",
+"e ventania leve. Cuidado!",
+"e vento constante. Atenção!"
 ],
 forte: [
-"com vento forte. Cuidado!",
-"e ventania forte. Atenção!",
-"e rajadas fortes. Atenção!",
-"e ventos fortes. Não saia!",
-"com ventania forte. Cuide!"
+"e vento forte. Cuidado!",
+"com ventania forte. Atenção!",
+"e rajadas fortes. Cuidado!",
+"e vento intenso. Atenção!",
+"e ventos fortes. Cuidado!"
 ],
 muitoForte: [
 "e vendaval. Não arrisque!",
 "com vento extremo. Cuidado!",
-"e vento perigoso. Cuidado!",
-"e ventos fortes. Atenção!",
-"com rajadas fortes. Cuide!"
+"e vento perigoso. Atenção!",
+"e rajadas severas. Não saia!",
+"e tempestade de vento. Cuidado!"
 ]
 };
 
 // Parte 3b — vento com chuva: segunda sentença autônoma
 const sugestoesVentoComChuva = {
 calminho: [
-"O vento está calmo, ao menos.",
-"Sem vento forte, só a chuva mesmo.",
-"Vento tranquilo acompanhando a chuva.",
-"O vento não preocupa, mas a chuva sim.",
-"Sem agravante de vento, atenção à chuva."
+"Vento calmo ao menos.",
+"Sem vento forte hoje.",
+"Vento tranquilo apesar da chuva.",
+"Vento não preocupa agora.",
+"Apenas vento leve hoje."
 ],
 brisaLeve: [
-"O vento está leve, mas a chuva pede atenção.",
-"Brisa suave junto com a chuva.",
-"Ventinho leve acompanhando a chuva.",
-"Brisa fraca, mas a chuva pede cuidado.",
-"Vento leve e chuva juntos, se proteja."
+"Vento leve junto com a chuva.",
+"Brisa suave apesar da chuva.",
+"Ventinho fraco e chuva juntos.",
+"Vento calmo com a chuva agora.",
+"Brisa leve acompanhando a chuva."
 ],
 moderado: [
-"Vento moderado e chuva juntos, dobre a atenção.",
-"Clima instável com chuva e vento.",
-"Vento e chuva combinados, fique esperto.",
-"Ventania leve e chuva no caminho.",
-"Chuva e vento médio, se prepare bem."
+"Vento moderado com a chuva.",
+"Ventania leve e chuva juntas.",
+"Vento médio e precipitação.",
+"Vento presente junto da chuva.",
+"Rajadas médias com chuva agora."
 ],
 forte: [
-"Vento forte e chuva juntos, muito cuidado.",
-"Ventania e chuva pesada. Fique em segurança.",
-"Chuva e vento intensos. Evite sair.",
-"Clima severo: chuva e vento fortes.",
-"Rajadas e chuva pesada. Redobre a atenção."
+"Vento forte com chuva intensa.",
+"Ventania e chuva perigosas.",
+"Vento intenso e chuva juntos.",
+"Rajadas fortes com precipitação.",
+"Tempestade de vento e chuva."
 ],
 muitoForte: [
-"Vento fortíssimo e chuva intensa. Não saia!",
-"Tempestade com vento extremo. Fique em casa!",
-"Risco alto: vento e chuva perigosos.",
-"Vento e chuva severos. Segurança primeiro!",
-"Vendaval com chuva torrencial. Não arrisque!"
+"Vento extremo com chuva forte.",
+"Vendaval e chuva torrencial.",
+"Tempestade severa de vento e chuva.",
+"Vento perigoso com precipitação.",
+"Rajadas extremas e chuva intensa."
 ]
 };
 
