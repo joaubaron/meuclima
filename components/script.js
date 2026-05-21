@@ -1800,7 +1800,7 @@ const astroSol = weatherData.forecast?.forecast?.forecastday?.[0]?.astro
 const nascerStr = converterHora12para24(astroSol?.sunrise);
 const porStr    = converterHora12para24(astroSol?.sunset);
 sunDivImediato.innerHTML = `
-<div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
+<div class="info-inline moon-text" style="font-size: 1.0em; overflow-x: auto;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
 <span>☀️ ${nascerStr} &nbsp;   &nbsp; 🌙 ${porStr}</span>
 </div>
