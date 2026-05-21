@@ -116,125 +116,199 @@ console.log('Atualizando dados...');
 location.reload();
 }
 
-// NOVA FUNÇÃO: Sistema de mensagens amigáveis de erro
+// Sistema de mensagens amigáveis de erro — versão melhorada
 function mostrarMensagemAmigavel(tipoErro, detalhes = {}) {
 const resultDiv = document.getElementById(DOM_IDS.WEATHER_RESULT);
 const statusDiv = document.getElementById(DOM_IDS.STATUS);
 
-const mensagensErro = {
+const configs = {
 'sem-internet': {
-titulo: '🔌 Sem conexão',
-mensagem: 'Parece que você está offline no momento.',
-sugestao: 'Conecte-se à internet e tente novamente.',
+titulo: 'Sem conexão com a internet',
+descricao: 'Parece que você está offline agora. O clima precisa de internet para atualizar.',
 cor: '#ff9800',
-icone: '🌐'
+icone: '📡',
+dicas: [
+{ emoji: '📶', texto: 'Ative o Wi-Fi ou os dados móveis' },
+{ emoji: '✈️', texto: 'Verifique se o modo avião está desligado' },
+{ emoji: '🔄', texto: 'Tente reconectar à sua rede' }
+]
 },
 'gps-off': {
-titulo: '📍 GPS desativado',
-mensagem: 'Precisamos da sua localização para mostrar o clima.',
-sugestao: 'Ative o GPS e recarregue a página.',
+titulo: 'GPS está desativado',
+descricao: 'Precisamos da sua localização para mostrar o clima correto da sua região.',
 cor: '#ff5722',
-icone: '📍'
+icone: '📍',
+dicas: [
+{ emoji: '⚙️', texto: 'Ative o GPS nas configurações do dispositivo' },
+{ emoji: '📱', texto: 'Configurações › Privacidade › Localização' },
+{ emoji: '🔄', texto: 'Depois, volte aqui e tente de novo' }
+]
 },
 'permissao-negada': {
-titulo: '🙅 Permissão negada',
-mensagem: 'Você não permitiu o acesso à localização.',
-sugestao: 'Libere o acesso nas configurações do seu dispositivo.',
+titulo: 'Acesso à localização bloqueado',
+descricao: 'Você negou o acesso à localização. Precisamos dela para encontrar o clima da sua cidade.',
 cor: '#f44336',
-icone: '🔒'
+icone: '🔒',
+dicas: [
+{ emoji: '📱', texto: 'Configurações › Aplicativos › Este app › Permissões' },
+{ emoji: '✅', texto: 'Habilite "Localização" e volte aqui' },
+{ emoji: '🌐', texto: 'No navegador: clique no cadeado na barra de endereço' }
+]
 },
 'timeout': {
-titulo: '⏰ Demorou demais',
-mensagem: 'O serviço de localização está demorando para responder.',
-sugestao: 'Verifique se está em uma área com bom sinal de GPS.',
+titulo: 'GPS demorou para responder',
+descricao: 'Não conseguimos sua localização a tempo. Isso costuma acontecer em locais fechados ou com sinal fraco.',
 cor: '#ff9800',
-icone: '🕐'
+icone: '⏱️',
+dicas: [
+{ emoji: '🪟', texto: 'Vá para um local aberto ou perto de uma janela' },
+{ emoji: '📶', texto: 'Confirme que Wi-Fi ou dados móveis estão ativos' },
+{ emoji: '📍', texto: 'Verifique se o GPS está habilitado no dispositivo' }
+]
 },
 'api-falhou': {
-titulo: '🌧️ Serviço indisponível',
-mensagem: 'Nosso serviço de meteorologia está instável.',
-sugestao: 'Tente novamente em alguns instantes.',
-cor: '#9c27b0',
-icone: '☁️'
+titulo: 'Serviço temporariamente indisponível',
+descricao: 'Nosso servidor de previsão do tempo está com instabilidade. Já estamos trabalhando nisso.',
+cor: '#7c4dff',
+icone: '🌩️',
+dicas: [
+{ emoji: '⏳', texto: 'Aguarde alguns minutos e tente novamente' },
+{ emoji: '📶', texto: 'Verifique sua conexão com a internet' },
+{ emoji: '🔄', texto: 'Se persistir, o serviço pode estar em manutenção' }
+]
 },
 'dados-antigos': {
-titulo: '📊 Dados desatualizados',
-mensagem: 'Não foi possível obter informações recentes.',
-sugestao: 'Usando dados de até 24 horas atrás.',
+titulo: 'Dados podem estar desatualizados',
+descricao: 'Não foi possível obter a previsão mais recente. Exibindo a última atualização disponível.',
 cor: '#ffc107',
-icone: '⚠️'
+icone: '🕰️',
+dicas: [
+{ emoji: '📶', texto: 'Verifique sua conexão com a internet' },
+{ emoji: '🔄', texto: 'Puxe a tela para baixo para atualizar' },
+{ emoji: '⏱️', texto: 'Dados podem ter até 24 horas de diferença' }
+]
 },
 'erro-desconhecido': {
-titulo: '🤔 Ops! Algo inesperado',
-mensagem: 'Ocorreu um erro que não esperávamos.',
-sugestao: 'Tente novamente ou entre em contato com o suporte.',
+titulo: 'Algo inesperado aconteceu',
+descricao: 'Encontramos um problema que não esperávamos. Na maioria das vezes, tentar novamente resolve.',
 cor: '#e91e63',
-icone: '🔧'
+icone: '🔧',
+dicas: [
+{ emoji: '🔄', texto: 'Tente novamente em alguns instantes' },
+{ emoji: '📶', texto: 'Verifique sua conexão com a internet' },
+{ emoji: '💬', texto: 'Se o erro persistir, entre em contato pelo suporte' }
+]
 }
 };
 
-const erro = mensagensErro[tipoErro] || mensagensErro['erro-desconhecido'];
+const cfg = configs[tipoErro] || configs['erro-desconhecido'];
+
+const dicasHTML = cfg.dicas.map(d => `
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;">
+<span style="font-size:18px;flex-shrink:0;">${d.emoji}</span>
+<span style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.4;">${d.texto}</span>
+</div>
+`).join('');
 
 const htmlAmigavel = `
-<div style="
-background: linear-gradient(135deg, ${erro.cor}20 0%, ${erro.cor}10 100%);
-border-radius: 20px;
-padding: 30px 20px;
-text-align: center;
-margin: 20px;
-animation: slideIn 0.5s ease-out;
+<div id="erro-amigavel-wrap" style="
+padding: 20px 16px 24px;
+animation: erroSlideIn 0.4s ease-out;
 ">
-<div style="font-size: 64px; margin-bottom: 20px;">${erro.icone}</div>
-<h3 style="color: ${erro.cor}; margin-bottom: 10px;">${erro.titulo}</h3>
-<p style="color: #fff; margin-bottom: 15px;">${erro.mensagem}</p>
-<p style="color: ${erro.cor}99; font-size: 0.9em;">💡 ${erro.sugestao}</p>
+<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:20px;">
+<div style="
+width:80px;height:80px;border-radius:50%;
+background:${cfg.cor}18;
+border:1.5px solid ${cfg.cor}44;
+display:flex;align-items:center;justify-content:center;
+font-size:36px;margin-bottom:16px;
+">
+${cfg.icone}
+</div>
+<h3 style="
+color:#fff;font-size:17px;font-weight:600;
+margin:0 0 8px;text-align:center;line-height:1.3;
+">${cfg.titulo}</h3>
+<p style="
+color:rgba(255,255,255,0.5);font-size:13px;
+margin:0;text-align:center;line-height:1.6;max-width:280px;
+">${cfg.descricao}</p>
+</div>
 
-<div style="margin-top: 25px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-<button onclick="reiniciarBuscaComRetry()" style="
-background: ${erro.cor};
-color: white;
-border: none;
-padding: 12px 24px;
-border-radius: 30px;
-font-size: 14px;
-font-weight: bold;
-cursor: pointer;
-transition: transform 0.2s;
-" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+<div style="
+background:${cfg.cor}14;
+border:1px solid ${cfg.cor}30;
+border-radius:14px;
+padding:12px 16px;
+margin-bottom:20px;
+">
+<p style="
+font-size:12px;color:${cfg.cor};
+margin:0 0 6px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;
+">💡 O que pode ajudar</p>
+<div style="border-top:1px solid ${cfg.cor}20;padding-top:6px;">
+${dicasHTML}
+</div>
+</div>
+
+<button
+id="btn-erro-retry"
+onclick="(function(){
+const btn=document.getElementById('btn-erro-retry');
+const status=document.getElementById('erro-status-txt');
+if(btn.disabled)return;
+btn.disabled=true;
+btn.style.opacity='0.7';
+btn.innerHTML='⏳ Buscando localização…';
+status.textContent='';
+reiniciarBuscaComRetry&&reiniciarBuscaComRetry();
+setTimeout(()=>{
+btn.disabled=false;
+btn.style.opacity='1';
+btn.innerHTML='🔄 Tentar novamente';
+status.textContent='Se não funcionou, tente se mover para um local mais aberto.';
+},5000);
+})()"
+style="
+width:100%;padding:14px;border-radius:30px;
+background:${cfg.cor};border:none;
+color:#fff;font-size:15px;font-weight:600;
+cursor:pointer;margin-bottom:10px;
+transition:opacity 0.2s;
+">
 🔄 Tentar novamente
 </button>
 
-<button onclick="abrirConfiguracoes()" style="
-background: rgba(255,255,255,0.2);
-color: white;
-border: 1px solid ${erro.cor};
-padding: 12px 24px;
-border-radius: 30px;
-font-size: 14px;
-cursor: pointer;
-transition: all 0.2s;
-" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+<button
+onclick="abrirConfiguracoes()"
+style="
+width:100%;padding:13px;border-radius:30px;
+background:transparent;
+border:1px solid ${cfg.cor}55;
+color:rgba(255,255,255,0.65);font-size:14px;
+cursor:pointer;
+transition:background 0.2s;
+"
+onmouseover="this.style.background='${cfg.cor}18'"
+onmouseout="this.style.background='transparent'"
+>
 ⚙️ Verificar configurações
 </button>
-</div>
 
-<div style="margin-top: 20px; font-size: 12px; color: rgba(255,255,255,0.5);">
-Código do erro: ${tipoErro}
-</div>
+<p id="erro-status-txt" style="
+font-size:12px;color:rgba(255,255,255,0.3);
+text-align:center;margin:14px 0 0;min-height:16px;
+"></p>
 </div>
 `;
 
-if (!document.querySelector('#error-animation-style')) {
+if (!document.querySelector('#erro-amigavel-style')) {
 const style = document.createElement('style');
-style.id = 'error-animation-style';
+style.id = 'erro-amigavel-style';
 style.textContent = `
-@keyframes slideIn {
-from { opacity: 0; transform: translateY(20px); }
-to { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulse {
-0%, 100% { opacity: 1; }
-50% { opacity: 0.5; }
+@keyframes erroSlideIn {
+from { opacity: 0; transform: translateY(16px); }
+to   { opacity: 1; transform: translateY(0); }
 }
 `;
 document.head.appendChild(style);
