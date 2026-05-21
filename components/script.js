@@ -1749,7 +1749,7 @@ const feelslike_c = currentWeather?.feelslike_c ?? 0;
 const condText = currentWeather?.condition?.text ?? 'Desconhecido';
 
 // Mostrar sugestão de receita em background (não bloqueia)
-setTimeout(() => mostrarSugestaoReceita(temp_c), 10);
+mostrarSugestaoReceita(temp_c);
 
 const weatherIcon = await getWeatherIcon(iconCode, isDay);
 
@@ -1809,7 +1809,6 @@ sunDivImediato.innerHTML = `
 }
 
 // 4. DEPOIS: Carrega o resto em BACKGROUND (sem bloquear)
-setTimeout(async () => {
 try {
 // Buscar nome da cidade em background
 const nomeCidade = await buscarNomeCidadeBackground(lat, lon);
@@ -1822,7 +1821,6 @@ await buscarExtras(lat, lon);
 } catch(e) {
 console.warn('Erro ao carregar dados extras:', e);
 }
-}, 100);
 
 } catch (error) {
 console.error('Erro ao buscar previsão:', error);
@@ -2013,27 +2011,25 @@ moonDiv.appendChild(sugestaoDiv);
 const luaContainer = document.createElement('div');
 moonDiv.appendChild(luaContainer);
 
-setTimeout(() => {
-    const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
-    const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
+// Renderiza a lua IMEDIATAMENTE
+const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
+const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
-    const moonHTML = `
-        <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
-            <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
-                <span>
-                    <a href="#"
-                        onclick="abrirStarWalkMoon(); return false;"
-                        style="color: inherit; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent;">
-                        Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% <span style="font-size: 0.70em; color: #ffeb3b;">de brilho</span>
-                    </a>
-                </span>
-            </div>
-        </div>
-    `;
+const moonHTML = `
+<div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
+<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
+<span>
+<a href="#"
+onclick="abrirStarWalkMoon(); return false;"
+style="color: inherit; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent;">
+Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% <span style="font-size: 0.70em; color: #ffeb3b;">de brilho</span>
+</a>
+</span>
+</div>
+</div>
+`;
 
-    // Adiciona a lua no container - NÃO apaga a frase
-    luaContainer.innerHTML = moonHTML;
-}, 100);  // Pode reduzir o timeout ou manter 10000
+luaContainer.innerHTML = moonHTML;
 
 // Nascer e pôr do sol — só atualiza se ainda não foi preenchido pelo fluxo principal
 const sunDiv = document.getElementById(DOM_IDS.SUN_INFO);
