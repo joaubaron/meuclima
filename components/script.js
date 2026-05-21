@@ -1720,6 +1720,23 @@ atualizarMensagemTemperatura(weatherData);
 
 if(statusDiv) statusDiv.innerHTML = '';
 
+// 3b. NASCER/PÔR DO SOL — dados já disponíveis, renderiza agora (antes da splash sumir)
+const sunDivImediato = document.getElementById(DOM_IDS.SUN_INFO);
+if (sunDivImediato) {
+const astroSol = weatherData.forecast?.forecast?.forecastday?.[0]?.astro
+|| weatherData.astronomy?.astro
+|| weatherData.astronomy;
+const nascerStr = converterHora12para24(astroSol?.sunrise);
+const porStr    = converterHora12para24(astroSol?.sunset);
+sunDivImediato.innerHTML = `
+<div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
+<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
+<span>☀️ ${nascerStr} &nbsp;   &nbsp; 🌙 ${porStr}</span>
+</div>
+</div>
+`;
+}
+
 // 4. DEPOIS: Carrega o resto em BACKGROUND (sem bloquear)
 setTimeout(async () => {
 try {
@@ -1938,9 +1955,9 @@ moonDiv.innerHTML = moonHTML;
 UI_STATE.extrasCache.moon = moonHTML;
 }, 10000);
 
-// Nascer e pôr do sol — executa imediatamente, sem esperar
+// Nascer e pôr do sol — só atualiza se ainda não foi preenchido pelo fluxo principal
 const sunDiv = document.getElementById(DOM_IDS.SUN_INFO);
-if (sunDiv) {
+if (sunDiv && !sunDiv.querySelector('.info-inline')) {
 const astroSol = forecast.forecast?.forecastday?.[0]?.astro || astronomy.astro || astronomy;
 const nascerStr = converterHora12para24(astroSol.sunrise);
 const porStr    = converterHora12para24(astroSol.sunset);
