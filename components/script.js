@@ -1433,6 +1433,15 @@ if (!navigator.onLine) {
 throw new Error("Sem conexão com a internet");
 }
 
+// Prova de conectividade real — detecta WiFi+5G simultâneos com rota instável
+try {
+await fetch(`${API_BASE}?ping=1`, { method: 'HEAD', cache: 'no-store', signal: AbortSignal.timeout(4000) });
+} catch (probeErr) {
+// Se o probe falhar mas onLine=true, a rede está instável (troca WiFi/5G)
+if (!navigator.onLine) throw new Error("Sem conexão com a internet");
+throw new Error("Rede instável. Aguarde a conexão estabilizar.");
+}
+
 const controller = new AbortController();
 const timeout = setTimeout(() => controller.abort(), 10000);
 
@@ -1450,12 +1459,12 @@ forecast: forecast || { forecast: { forecastday: [] } },
 astronomy: astronomy || {}
 };
 
-if (!data.current.temp_c && (!data.forecast.forecast || !data.forecast.forecast.forecastday)) {
+if (data.current.temp_c === undefined && (!data.forecast.forecast || !data.forecast.forecast.forecastday)) {
 throw new Error("Dados insuficientes da API");
 }
 
 UI_STATE.weatherCache = data;
-salvarCache(cacheKey, data, 10);
+salvarCache(cacheKey, data, 60); // 60 min: sobrevive a noite e redes instáveis
 
 return data;
 
@@ -1471,20 +1480,8 @@ console.warn("⚠️ Usando dados em cache devido ao erro");
 return cachedData;
 }
 
-// ✅ ADICIONADO: Retornar dados vazios como fallback
-return {
-current: {
-temp_c: 0,
-humidity: 0,
-precip_mm: 0,
-wind_kph: 0,
-feelslike_c: 0,
-condition: { code: 1000, text: 'Desconhecido' },
-is_day: 1
-},
-forecast: { forecast: { forecastday: [] } },
-astronomy: {}
-};
+// Propaga o erro para o chamador mostrar mensagem adequada (nunca exibir zeros)
+throw error;
 }
 }
 
@@ -1782,6 +1779,11 @@ mostrarMensagemAmigavel(tipoErro);
 tipoErro = 'sem-internet';
 mostrarMensagemAmigavel(tipoErro);
 mostrarToast('🌐 Conecte-se à internet', 'alerta');
+} else if (error.message.includes("instável") || error.message.includes("Rede")) {
+tipoErro = 'sem-internet';
+mostrarMensagemAmigavel(tipoErro);
+mostrarToast('📶 Rede instável. Aguarde e tente novamente.', 'alerta');
+setTimeout(() => reiniciarBusca(), 8000); // retry automático após 8s
 } else if (error.message.includes("HTTP error") || error.message.includes("API")) {
 tipoErro = 'api-falhou';
 mostrarMensagemAmigavel(tipoErro);
