@@ -672,124 +672,124 @@ const faixaTemp = obterFaixaTemperatura(temp);
 // Parte 1 — temperatura: declaração limpa, sem pontuação final
 const sugestoesTemp = {
 frio: [
-"Tá bem frio lá fora",
-"Faz frio hoje",
-"Temperatura baixa",
-"Dia gelado",
-"Friozinho forte hoje"
+"Dia frio e gelado hoje",
+"Temperatura baixa hoje",
+"Friozinho intenso hoje",
+"Frio de doer hoje aqui",
+"Dia de frio forte hoje"
 ],
 fresco: [
-"Está fresquinho",
-"Clima ameno hoje",
-"Temperatura agradável",
-"Dia de meia estação",
-"Fresquinho gostoso"
+"Clima ameno hoje aqui",
+"Temperatura amena hoje",
+"Fresquinho gostoso hoje",
+"Clima fresco hoje aqui",
+"Está fresco hoje aqui"
 ],
 agradável: [
-"Clima ótimo hoje",
-"Temperatura ideal",
+"Temperatura ideal hoje",
 "Dia perfeito pra sair",
-"Clima muito agradável",
-"Temperatura gostosa"
+"Dia de clima ideal hoje",
+"Clima ótimo hoje aqui",
+"Clima agradável de hoje"
 ],
 calor: [
-"Está quente hoje",
 "Calor moderado lá fora",
-"Temperatura elevada",
-"Dia quente",
-"Bastante calor hoje"
+"Bastante calor lá fora",
+"Temperatura alta hoje",
+"Está quente hoje aqui",
+"Calor forte hoje aqui"
 ],
 muitoCalor: [
-"Calor intenso hoje",
+"Dia de muito calor hoje",
 "Temperatura muito alta",
-"Dia de muito calor",
-"Calorão lá fora",
-"Faz muito calor"
+"Calor extremo hoje aqui",
+"Calorão forte hoje aqui",
+"Muito calor hoje aqui"
 ]
 };
 
 // Parte 2 — chuva: contexto + conselho, minúsculo para encaixar após vírgula
 const sugestoesChuva = {
 garoa: [
-"pode cair uma garoa, leve o guarda-chuva",
-"chuvisco possível, se previna",
-"garoa leve no radar, fique atento",
-"pode pescumicar, melhor se preparar",
-"leve uma capa só por garantia"
+"garoa no caminho, atenção",
+"chuvisco previsto, cuidado",
+"pode cair garoa, atenção!",
+"garoa leve, leve cobertura",
+"garoa possível, se previna"
 ],
 fraca: [
-"chuva fraca prevista, vale levar o guarda-chuva",
-"chuva leve no caminho, se proteja",
-"chuvinha fraca, mas leve cobertura",
-"pequena chance de chuva, se previna",
-"chuva fina esperada, fique ligado"
+"chuva fraca, fique atento",
+"chuvinha prevista, atenção",
+"chuva leve, leve cobertura",
+"chuva fina, muito cuidado",
+"chuva fraca prevista hoje"
 ],
 moderada: [
-"chuva moderada prevista, não esqueça o guarda-chuva",
-"vai chover com força moderada, se prepare",
-"chuva moderada no radar, fique esperto",
-"previsão de chuva razoável, leve proteção",
-"chuva moderada vindo aí, atenção"
+"chuva media, fique esperto",
+"vai chover firme, atenção",
+"chuva moderada, se prepare",
+"chuva razoável, se proteja",
+"chuva média, muita atenção"
 ],
 forte: [
-"chuva forte prevista, cuidado ao sair",
-"chuva pesada no radar, se proteja bem",
-"vai chover bastante, planeje com cuidado",
-"chuva intensa esperada, evite se molhar",
-"tempestade no caminho, se cuide"
+"chuva forte, muito cuidado",
+"chuva pesada, fique atento",
+"vai chover forte, atenção",
+"chuva intensa, fique atento",
+"tempestade, muito cuidado"
 ],
 intensa: [
-"chuva torrencial prevista, fique em casa se puder",
-"chuva muito intensa no radar, evite sair",
-"risco alto de alagamento, muita atenção",
-"tempestade forte esperada, segurança em primeiro lugar",
-"chuva extrema prevista, não arrisque"
+"chuva extrema, evite sair",
+"chuva torrencial, cuidado",
+"risco alto, chuva vindo aí",
+"tempestade forte, atenção",
+"chuva perigosa, evite sair"
 ],
 semChuva: [
-"sem chuva prevista",
-"céu aberto o dia todo",
-"tempo seco e estável",
-"sem previsão de chuva",
-"dia sem chuva"
+"tempo seco, sem chuva hoje",
+"sem chuva, céu limpo hoje",
+"sem chuva e céu aberto hoje",
+"dia seco, céu aberto aqui",
+"sem chuva, céu bem aberto"
 ]
 };
 
 // Parte 3a — vento sem chuva: já traz o finalizador embutido
 const sugestoesVento = {
 calminho: [
-"e vento calmo. Aproveite o dia!",
-"e sem vento. Tenha um ótimo dia!",
-"com tempo estável. Curta bastante!",
-"e clima bem parado. Dia bom!",
-"e ventinho quase zero. Ótimo dia!"
+"e vento calmo. Aproveite!",
+"e sem vento. Dia incrível!",
+"com tempo parado. Bom dia!",
+"e ventinho zero. Bom dia!",
+"e clima parado. Aproveite!"
 ],
 brisaLeve: [
-"com brisa leve. Dia agradável!",
-"e uma brisa suave. Aproveite!",
-"e vento leve soprando. Bom dia!",
-"com ventinho gostoso. Curta!",
-"e brisa refrescante. Ótimo dia!"
+"e brisa leve. Bom dia aqui!",
+"com brisa suave. Bom dia!",
+"e brisa fresca. Aproveite!",
+"e vento leve. Que bom dia!",
+"com brisa gentil. Bom dia!"
 ],
 moderado: [
-"e vento moderado. Fique ligado!",
-"com ventania leve. Atenção ao sair!",
-"e vento presente. Segure o chapéu!",
-"com vento médio. Bom dia mesmo assim!",
-"e clima ventoso. Cuide-se!"
+"e ventania leve. Atenção!",
+"com vento médio. Atenção!",
+"e vento médio. Segure-se!",
+"e vento médio. Cuide bem!",
+"e vento presente. Cuide-se!"
 ],
 forte: [
-"e vento forte. Cuidado ao sair!",
-"com ventania forte. Evite áreas abertas!",
-"e rajadas de vento. Fique atento!",
-"com vento intenso. Se proteja!",
-"e vento potente. Redobre a atenção!"
+"com vento forte. Cuidado!",
+"e ventania forte. Atenção!",
+"e rajadas fortes. Atenção!",
+"e ventos fortes. Não saia!",
+"com ventania forte. Cuide!"
 ],
 muitoForte: [
-"e vendaval lá fora. Evite sair!",
-"com vento muito forte. Fique em casa se puder!",
-"e ventos perigosos. Muita atenção!",
-"com rajadas intensas. Não arrisque!",
-"e vento extremo. Segurança em primeiro lugar!"
+"e vendaval. Não arrisque!",
+"com vento extremo. Cuidado!",
+"e vento perigoso. Cuidado!",
+"e ventos fortes. Atenção!",
+"com rajadas fortes. Cuide!"
 ]
 };
 
@@ -800,17 +800,17 @@ calminho: [
 "Sem vento forte, só a chuva mesmo.",
 "Vento tranquilo acompanhando a chuva.",
 "O vento não preocupa, mas a chuva sim.",
-"Sem agravante de vento, fique atento à chuva."
+"Sem agravante de vento, atenção à chuva."
 ],
 brisaLeve: [
 "O vento está leve, mas a chuva pede atenção.",
 "Brisa suave junto com a chuva.",
 "Ventinho leve acompanhando a chuva.",
-"Brisa fraca, chuva no radar.",
+"Brisa fraca, mas a chuva pede cuidado.",
 "Vento leve e chuva juntos, se proteja."
 ],
 moderado: [
-"Vento moderado junto com a chuva, dobre a atenção.",
+"Vento moderado e chuva juntos, dobre a atenção.",
 "Clima instável com chuva e vento.",
 "Vento e chuva combinados, fique esperto.",
 "Ventania leve e chuva no caminho.",
@@ -818,16 +818,16 @@ moderado: [
 ],
 forte: [
 "Vento forte e chuva juntos, muito cuidado.",
-"Combinação de ventania e chuva. Fique em segurança.",
-"Chuva pesada com vento forte. Evite sair.",
-"Clima severo: chuva e vento intensos.",
-"Rajadas fortes e chuva. Redobre a atenção."
+"Ventania e chuva pesada. Fique em segurança.",
+"Chuva e vento intensos. Evite sair.",
+"Clima severo: chuva e vento fortes.",
+"Rajadas e chuva pesada. Redobre a atenção."
 ],
 muitoForte: [
 "Vento fortíssimo e chuva intensa. Não saia!",
 "Tempestade com vento extremo. Fique em casa!",
 "Risco alto: vento e chuva perigosos.",
-"Condições severas de vento e chuva. Segurança primeiro!",
+"Vento e chuva severos. Segurança primeiro!",
 "Vendaval com chuva torrencial. Não arrisque!"
 ]
 };
