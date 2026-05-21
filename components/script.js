@@ -2006,33 +2006,34 @@ sugestaoDiv.style.textAlign = 'center';
 sugestaoDiv.style.lineHeight = '1.4';
 sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">Clima:</strong> ${sugestaoVestuario}`;
 
-// mantém a frase e adiciona a lua abaixo
 moonDiv.innerHTML = '';
 moonDiv.appendChild(sugestaoDiv);
 
-// Criar um container separado para a lua, logo abaixo da frase
+// Cria um container separado para a lua (logo abaixo da frase)
 const luaContainer = document.createElement('div');
-luaContainer.id = 'luaContainer';
-luaContainer.style.marginTop = '10px';
-luaContainer.style.paddingTop = '8px';
-luaContainer.style.borderTop = '1px solid rgba(255, 235, 59, 0.3)';
 moonDiv.appendChild(luaContainer);
 
 setTimeout(() => {
-const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
-const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
+    const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
+    const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
 
-const moonHTML = `
-<div class="info-inline moon-text" style="font-size: 0.9em; overflow-x: auto;">
-<div class="info-item" style="display: flex; align-items: center; gap: 8px; white-space: nowrap;">
-<span>🌙 Lua ${moonInfo.emoji} ${moonInfo.pt} — ${iluminacaoValor}% de brilho</span>
-</div>
-</div>
-`;
+    const moonHTML = `
+        <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
+            <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
+                <span>
+                    <a href="#"
+                        onclick="abrirStarWalkMoon(); return false;"
+                        style="color: inherit; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent;">
+                        Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% <span style="font-size: 0.70em; color: #ffeb3b;">de brilho</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    `;
 
-// Adiciona a lua no container, sem apagar a frase do clima
-luaContainer.innerHTML = moonHTML;
-}, 100);
+    // Adiciona a lua no container - NÃO apaga a frase
+    luaContainer.innerHTML = moonHTML;
+}, 100);  // Pode reduzir o timeout ou manter 10000
 
 // Nascer e pôr do sol — só atualiza se ainda não foi preenchido pelo fluxo principal
 const sunDiv = document.getElementById(DOM_IDS.SUN_INFO);
