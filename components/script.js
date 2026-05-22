@@ -1979,26 +1979,29 @@ dicasDiv.style.lineHeight = '1.4';
 dicasDiv.innerHTML = `<strong style="color: #ffeb3b;">Clima:</strong> ${sugestaoVestuario}`;
 moonDiv.appendChild(dicasDiv);
 
-// 3. FASE DA LUA
+// 3. FASE DA LUA (Usando o valor original da API)
+// 3. FASE DA LUA (Usando o valor original da API)
 const luaContainer = document.createElement('div');
 moonDiv.appendChild(luaContainer);
 
-// Calcula iluminação corretamente
-const iluminacaoCorrigida = calcularIluminacaoLuaReal(new Date());
-const iluminacaoValor = iluminacaoCorrigida;
-const moonInfo = getMoonInfo(astronomy.moon_phase, iluminacaoCorrigida);
+// Pega o valor de iluminação diretamente da API, sem correção
+let iluminacaoDaAPI = astronomy.moon_illumination;
+
+// Garante que é um número e tem 1 casa decimal
+const iluminacaoValor = Number(iluminacaoDaAPI).toFixed(1);
+
+// A função getMoonInfo também usa o valor original
+const moonInfo = getMoonInfo(astronomy.moon_phase, iluminacaoDaAPI);
 
 const moonHTML = `
 <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
-<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
-<span>
-<a href="#"
-onclick="abrirStarWalkMoon(); return false;"
-style="color: inherit; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent;">
-Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% <span style="font-size: 0.70em; color: #ffeb3b;">de brilho</span>
-</a>
-</span>
-</div>
+    <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
+        <span>
+            <a href="#" onclick="abrirStarWalkMoon(); return false;" style="color: inherit; text-decoration: none; cursor: pointer;">
+                Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% <span style="font-size: 0.70em; color: #ffeb3b;">de brilho</span>
+            </a>
+        </span>
+    </div>
 </div>
 `;
 
