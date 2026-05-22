@@ -1496,7 +1496,9 @@ if (data.error) {
 throw new Error(data.error);
 }
 
-return data;
+// WeatherAPI retorna { astronomy: { astro: { moon_phase, moon_illumination, ... } } }
+// Retorna o astro achatado para manter compatibilidade com o restante do código
+return data?.astronomy?.astro || {};
 } catch (error) {
 console.error('Erro ao obter dados astronômicos:', error);
 return null;
