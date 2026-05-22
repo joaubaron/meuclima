@@ -620,3 +620,8 @@ canvas {
 .moon-text {
     font-size: 14px !important;
 }
+
+#sugestaoReceita {
+    display: none; /* começa escondido */
+    transition: all 0.2s ease;
+}
