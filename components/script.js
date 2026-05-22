@@ -1306,7 +1306,7 @@ function getSpecialDateMessage(temperatura) {
         '5-6'  : { msg: 'Tudo começou! 💞', tipo: 'romantico' },
         '12-6' : { msg: 'Amor no ar! 💕', tipo: 'romantico' },
         '5-7'  : { msg: `Débora é aniversariante! 🎂`, tipo: 'aniversario' },
-        '22-5'  : { msg: 'Cláudia merece festa! 🍷', tipo: 'aniversario' },
+        '5-9'  : { msg: 'Cláudia merece festa! 🍷', tipo: 'aniversario' },
         '23-10': { msg: 'Mamãe faz anos! 🌹', tipo: 'aniversario' },
         '3-11' : { msg: 'Hora do vinho! 🍷', tipo: 'romantico' },
         '25-11': { msg: `Morgama tá de festa! 🎈`, tipo: 'aniversario' },
@@ -1324,20 +1324,20 @@ function getSpecialDateMessage(temperatura) {
     // Dicas criativas e curtas baseadas na temperatura
     if (temperatura !== undefined) {
         if (temperatura < 15) {
-            if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo gelado! 🧥🎂`;
+            if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo gelado! 🎂`;
             else if (evento.tipo === 'romantico') mensagemFinal += ` Tá frio, mas o amor esquenta! ❤️`;
             else mensagemFinal += ` Frio, mas o dia tá lindo! 🧣`;
         }
         else if (temperatura > 32) {
             if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo no freezer! 🎂❄️`;
-            else if (evento.tipo === 'romantico') mensagemFinal += ` Calorão, mas junto é bom! ☀️❤️`;
+            else if (evento.tipo === 'romantico') mensagemFinal += ` Calorão, mas junto é bom! ❤️`;
             else mensagemFinal += ` Calor, mas a vibe tá boa! 🕶️`;
         }
         else if (temperatura > 28) {
             mensagemFinal += ` Dia quente, mas especial! 🌞`;
         }
         else if (temperatura > 22) {
-            mensagemFinal += ` Clima perfeito pra comemorar! 🌡️✨`;
+            mensagemFinal += ` Clima perfeito pra comemorar! ✨`;
         }
         else if (temperatura < 20 && temperatura >= 15) {
             mensagemFinal += ` Fresquinho, mas feliz! 🍃`;
