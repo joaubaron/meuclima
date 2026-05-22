@@ -526,7 +526,6 @@ return "intenso";
 }
 
 function mostrarSugestaoReceita(tempAtual) {
-    // Verifica se é data especial
     const hoje = new Date();
     const dia = hoje.getDate();
     const mes = hoje.getMonth() + 1;
@@ -534,25 +533,27 @@ function mostrarSugestaoReceita(tempAtual) {
     const datasEspeciais = {
         '1-1': true, '28-1': true, '30-1': true, '7-2': true, '12-2': true,
         '5-3': true, '9-3': true, '23-3': true, '5-4': true, '2-5': true,
-        '5-6': true, '12-6': true, '5-7': true, '5-9': true, '23-10': true,
+        '5-6': true, '12-6': true, '5-7': true, '22-5': true, '23-10': true,
         '3-11': true, '25-11': true, '25-12': true
     };
     
     const chave = `${dia}-${mes}`;
     const box = document.getElementById('sugestaoReceita');
     
-    // Se for data especial, esconde a caixa e sai
+    // Se for data especial, esconde a caixa AGORA e sai
     if (datasEspeciais[chave]) {
-        if (box) box.style.display = 'none';
+        if (box) {
+            box.style.display = 'none';
+            box.innerHTML = ''; // LIMPA o conteúdo também
+        }
         return;
     }
     
-    // Se não for data especial, mostra a receita normalmente
+    // Resto do código para mostrar receita normalmente...
     fetch('receitas.json')
         .then(res => res.json())
         .then(receitas => {
             const faixa = obterFaixaTemperatura(tempAtual);
-            
             const receitasDaFaixa = receitas.filter(r =>
                 r.faixa && r.nome && !r._comentario && r.faixa === faixa
             );
@@ -571,10 +572,12 @@ function mostrarSugestaoReceita(tempAtual) {
                 }
             } else {
                 console.warn("Nenhuma receita encontrada para a faixa:", faixa);
+                if (box) box.style.display = 'none';
             }
         })
         .catch(err => {
             console.warn("Não foi possível carregar as receitas:", err);
+            if (box) box.style.display = 'none';
         });
 }
 
