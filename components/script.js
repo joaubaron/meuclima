@@ -1396,13 +1396,14 @@ if (!navigator.onLine) {
 throw new Error("Sem conexão com a internet");
 }
 
-// Prova de conectividade real — detecta WiFi+5G simultâneos com rota instável
+// DEPOIS (corrigido):
 try {
-await fetch(`${API_BASE}?ping=1`, { method: 'HEAD', cache: 'no-store', signal: AbortSignal.timeout(4000) });
+    await fetch(`${API_BASE}?ping=1`, { method: 'HEAD', cache: 'no-store', signal: AbortSignal.timeout(6000) });
 } catch (probeErr) {
-// Se o probe falhar mas onLine=true, a rede está instável (troca WiFi/5G)
-if (!navigator.onLine) throw new Error("Sem conexão com a internet");
-throw new Error("Rede instável. Aguarde a conexão estabilizar.");
+    // Só bloqueia se realmente offline. Se onLine=true, ignora o probe
+    // e deixa a requisição real indicar o erro (evita falso positivo no cold start)
+    if (!navigator.onLine) throw new Error("Sem conexão com a internet");
+    console.warn("Probe falhou mas onLine=true — ignorando (possível cold start Vercel):", probeErr.message);
 }
 
 const controller = new AbortController();
