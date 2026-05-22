@@ -1280,7 +1280,7 @@ function getSpecialDateMessage(temperatura) {
         '5-6'  : { msg: 'Tudo começou! 💞', tipo: 'romantico' },
         '12-6' : { msg: 'Amor no ar! 💕', tipo: 'romantico' },
         '5-7'  : { msg: `Débora é aniversariante! 🎂`, tipo: 'aniversario' },
-        '25-5'  : { msg: 'Cláudia merece festa! 🍷', tipo: 'aniversario' },
+        '22-5'  : { msg: 'Cláudia merece festa! 🍷', tipo: 'aniversario' },
         '23-10': { msg: 'Mamãe faz anos! 🌹', tipo: 'aniversario' },
         '3-11' : { msg: 'Hora do vinho! 🍷', tipo: 'romantico' },
         '25-11': { msg: `Morgama tá de festa! 🎈`, tipo: 'aniversario' },
