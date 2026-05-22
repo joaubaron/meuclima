@@ -1850,6 +1850,111 @@ setTimeout(() => reiniciarBuscaComRetry(), 3000);
 }
 }
 
+// ============================================
+// CÁLCULO ASTRONÔMICO REAL DA ILUMINAÇÃO LUNAR
+// Baseado no algoritmo de Jean Meeus
+// ============================================
+function calcularIluminacaoLuaReal(data, lat, lon) {
+    // Converte data para DJ (Dia Juliano)
+    const getJD = (date) => {
+        const y = date.getUTCFullYear();
+        const m = date.getUTCMonth() + 1;
+        const d = date.getUTCDate();
+        const hora = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
+        
+        let A = Math.floor(y / 100);
+        let B = 2 - A + Math.floor(A / 4);
+        
+        let JD = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + hora / 24 + B - 1524.5;
+        return JD;
+    };
+    
+    // Converte graus para radianos
+    const toRad = (deg) => deg * Math.PI / 180;
+    
+    // Converte radianos para graus
+    const toDeg = (rad) => rad * 180 / Math.PI;
+    
+    // Normaliza ângulo para 0-360
+    const normalize = (angle) => {
+        angle = angle % 360;
+        if (angle < 0) angle += 360;
+        return angle;
+    };
+    
+    // Cálculo da posição do Sol (simplificado mas preciso)
+    const getSunPosition = (jd) => {
+        const T = (jd - 2451545.0) / 36525.0;
+        
+        // longitude média do Sol
+        let L0 = normalize(280.46646 + 36000.76983 * T + 0.0003032 * T * T);
+        
+        // anomalia média do Sol
+        let M = normalize(357.52911 + 35999.05029 * T - 0.0001537 * T * T);
+        const Mrad = toRad(M);
+        
+        // equação do centro
+        const C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(Mrad) +
+                  (0.019993 - 0.000101 * T) * Math.sin(2 * Mrad) +
+                  0.000289 * Math.sin(3 * Mrad);
+        
+        // longitude verdadeira do Sol
+        const sunLong = L0 + C;
+        
+        return normalize(sunLong);
+    };
+    
+    // Cálculo da posição da Lua
+    const getMoonPosition = (jd) => {
+        const T = (jd - 2451545.0) / 36525.0;
+        
+        // longitude média da Lua
+        let Lm = normalize(218.3164477 + 481267.88123421 * T - 0.0015786 * T * T + T * T * T / 538841.0 - T * T * T * T / 65194000.0);
+        
+        // anomalia média da Lua
+        let Mm = normalize(134.9629814 + 477198.8673981 * T + 0.0086972 * T * T + T * T * T / 56250.0);
+        
+        // argumento da latitude
+        let F = normalize(93.272095 + 483202.0175233 * T - 0.0036539 * T * T - T * T * T / 3526000.0);
+        
+        // correção de longitude (termos principais)
+        const MmRad = toRad(Mm);
+        const FRad = toRad(F);
+        
+        const deltaLong = 6.289 * Math.sin(MmRad) - 1.274 * Math.sin(toRad(2 * Lm - 2 * Mm)) +
+                          0.658 * Math.sin(2 * MmRad) - 0.186 * Math.sin(toRad(Mm + F)) +
+                          0.114 * Math.sin(toRad(2 * F)) - 0.059 * Math.sin(toRad(2 * Lm - 2 * Mm - F)) -
+                          0.057 * Math.sin(toRad(2 * Lm - 2 * Mm + F)) - 0.053 * Math.sin(toRad(Mm + 2 * F)) -
+                          0.046 * Math.sin(toRad(2 * Lm - F)) - 0.041 * Math.sin(toRad(Mm - F)) -
+                          0.035 * Math.sin(toRad(2 * Lm)) - 0.031 * Math.sin(toRad(2 * Mm + F)) -
+                          0.015 * Math.sin(toRad(2 * Lm + Mm - F));
+        
+        const moonLong = normalize(Lm + deltaLong);
+        
+        return moonLong;
+    };
+    
+    // Obtém elon = elongação (diferença de longitude entre Lua e Sol)
+    const jd = getJD(data);
+    const sunLong = getSunPosition(jd);
+    const moonLong = getMoonPosition(jd);
+    let elongation = Math.abs(moonLong - sunLong);
+    elongation = Math.min(elongation, 360 - elongation);
+    
+    // Fórmula da iluminação: (1 + cos(elongação)) / 2 * 100
+    const illumination = (1 + Math.cos(toRad(elongation))) / 2 * 100;
+    
+    // Pequena correção extra devido à latitude lunar (para maior precisão)
+    const latitudeLunar = Math.sin(toRad(elongation * 2)) * 0.3;
+    let finalIllumination = illumination + latitudeLunar;
+    
+    // Limita entre 0 e 100%
+    finalIllumination = Math.min(100, Math.max(0, finalIllumination));
+    
+    // Retorna com 1 casa decimal
+    return Math.round(finalIllumination * 10) / 10;
+}
+
 async function buscarExtras(lat, lon) {
 const extrasDiv = document.getElementById('extras');
 const moonDiv = document.getElementById('moonInfo');
@@ -1912,9 +2017,9 @@ moonDiv.appendChild(dicasDiv);
 const luaContainer = document.createElement('div');
 moonDiv.appendChild(luaContainer);
 
-const iluminacaoOriginal = astronomy.moon_illumination;
-const iluminacaoCorrigida = iluminacaoOriginal * 1.2457;
-const iluminacaoValor = Math.min(100, Math.max(0, Math.round(iluminacaoCorrigida * 10) / 10));
+// Usa cálculo astronômico real
+const iluminacaoCorrigida = calcularIluminacaoLuaReal(new Date(), lat, lon);
+const iluminacaoValor = iluminacaoCorrigida;
 const moonInfo = getMoonInfo(astronomy.moon_phase, iluminacaoCorrigida);
 
 const moonHTML = `
