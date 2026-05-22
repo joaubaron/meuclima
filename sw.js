@@ -1,4 +1,4 @@
-const CACHE_VERSION = '22.05.2026-1440';
+const CACHE_VERSION = '22.05.2026-1505';
 const CACHE_NAME = `cozinha-baron-${CACHE_VERSION}`;
 const ASSETS = [
 '/meuclima/',
@@ -39,6 +39,24 @@ const url = e.request.url;
 
 // Só intercepta requisições do mesmo domínio
 if (!url.startsWith(self.location.origin)) {
+// 🔥 NOVO: Cache para ícones do clima (CDN externo)
+if (url.includes('cdn.weatherapi.com')) {
+e.respondWith(
+caches.match(e.request).then(cached => {
+return cached || fetch(e.request).then(response => {
+if (!response || response.status !== 200) {
+return response;
+}
+const clone = response.clone();
+caches.open(CACHE_NAME).then(cache => {
+cache.put(e.request, clone);
+});
+return response;
+});
+})
+);
+return;
+}
 return;
 }
 
