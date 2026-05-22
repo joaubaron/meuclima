@@ -1396,14 +1396,7 @@ if (!navigator.onLine) {
 throw new Error("Sem conexão com a internet");
 }
 
-// Prova de conectividade real — detecta WiFi+5G simultâneos com rota instável
-try {
-await fetch(`${API_BASE}?ping=1`, { method: 'HEAD', cache: 'no-store', signal: AbortSignal.timeout(4000) });
-} catch (probeErr) {
-// Se o probe falhar mas onLine=true, a rede está instável (troca WiFi/5G)
-if (!navigator.onLine) throw new Error("Sem conexão com a internet");
-throw new Error("Rede instável. Aguarde a conexão estabilizar.");
-}
+// Prova de conectividade desativada — API chamada diretamente sem proxy
 
 const controller = new AbortController();
 const timeout = setTimeout(() => controller.abort(), 10000);
@@ -1451,7 +1444,7 @@ throw error;
 async function getCurrentWeather(lat, lon, signal) {
 try {
 const response = await fetch(
-`${API_BASE}?cidade=${lat},${lon}&tipo=current`,
+`https://api.weatherapi.com/v1/current.json?key=0c8c1be55b6c49d4a56141253252107&q=${lat},${lon}&lang=pt`,
 { signal }
 );
 
@@ -1475,7 +1468,7 @@ return null;
 
 async function getForecast(lat, lon, days = 2) {
 try {
-const response = await fetch(`${API_BASE}?cidade=${lat},${lon}&tipo=forecast&days=${days}`);
+const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=0c8c1be55b6c49d4a56141253252107&q=${lat},${lon}&days=${days}&lang=pt`);
 
 if (!response.ok) {
 throw new Error(`HTTP error! status: ${response.status}`);
@@ -1496,7 +1489,7 @@ return null;
 
 async function getAstronomy(lat, lon, date = 'today') {
 try {
-const response = await fetch(`${API_BASE}?cidade=${lat},${lon}&tipo=astronomy&date=${date}`);
+const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=0c8c1be55b6c49d4a56141253252107&q=${lat},${lon}&dt=${date}`);
 const data = await response.json();
 
 if (data.error) {
