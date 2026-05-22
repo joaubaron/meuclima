@@ -526,33 +526,56 @@ return "intenso";
 }
 
 function mostrarSugestaoReceita(tempAtual) {
-fetch('receitas.json')
-.then(res => res.json())
-.then(receitas => {
-const faixa = obterFaixaTemperatura(tempAtual);
-
-const receitasDaFaixa = receitas.filter(r =>
-r.faixa && r.nome && !r._comentario && r.faixa === faixa
-);
-
-if (receitasDaFaixa.length > 0) {
-const receita = receitasDaFaixa[Math.floor(Math.random() * receitasDaFaixa.length)];
-const box = document.getElementById('sugestaoReceita');
-box.innerHTML = `
-<p style="margin-bottom: 0.6em; font-size: 0.75em; margin-top: 6px;">
-Hoje pede: ${receita.emoji}
-<strong>${receita.nome}</strong>
-</p>
-<p style="margin-top: 0.4em; font-size: 0.75em; line-height: 1.2em;">${receita.descricao}</p>
-`;
-box.style.display = 'block';
-} else {
-console.warn("Nenhuma receita encontrada para a faixa:", faixa);
-}
-})
-.catch(err => {
-console.warn("Não foi possível carregar as receitas:", err);
-});
+    // Verifica se é data especial
+    const hoje = new Date();
+    const dia = hoje.getDate();
+    const mes = hoje.getMonth() + 1;
+    
+    const datasEspeciais = {
+        '1-1': true, '28-1': true, '30-1': true, '7-2': true, '12-2': true,
+        '5-3': true, '9-3': true, '23-3': true, '5-4': true, '2-5': true,
+        '5-6': true, '12-6': true, '5-7': true, '5-9': true, '23-10': true,
+        '3-11': true, '25-11': true, '25-12': true
+    };
+    
+    const chave = `${dia}-${mes}`;
+    const box = document.getElementById('sugestaoReceita');
+    
+    // Se for data especial, esconde a caixa e sai
+    if (datasEspeciais[chave]) {
+        if (box) box.style.display = 'none';
+        return;
+    }
+    
+    // Se não for data especial, mostra a receita normalmente
+    fetch('receitas.json')
+        .then(res => res.json())
+        .then(receitas => {
+            const faixa = obterFaixaTemperatura(tempAtual);
+            
+            const receitasDaFaixa = receitas.filter(r =>
+                r.faixa && r.nome && !r._comentario && r.faixa === faixa
+            );
+            
+            if (receitasDaFaixa.length > 0) {
+                const receita = receitasDaFaixa[Math.floor(Math.random() * receitasDaFaixa.length)];
+                if (box) {
+                    box.innerHTML = `
+                        <p style="margin-bottom: 0.6em; font-size: 0.75em; margin-top: 6px;">
+                            Hoje pede: ${receita.emoji}
+                            <strong>${receita.nome}</strong>
+                        </p>
+                        <p style="margin-top: 0.4em; font-size: 0.75em; line-height: 1.2em;">${receita.descricao}</p>
+                    `;
+                    box.style.display = 'block';
+                }
+            } else {
+                console.warn("Nenhuma receita encontrada para a faixa:", faixa);
+            }
+        })
+        .catch(err => {
+            console.warn("Não foi possível carregar as receitas:", err);
+        });
 }
 
 function gerarSugestaoVestuario(temp, precip_mm, wind_kph) {
