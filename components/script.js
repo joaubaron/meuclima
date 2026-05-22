@@ -540,18 +540,24 @@ const datasEspeciais = {
 const chave = `${dia}-${mes}`;
 const box = document.getElementById('sugestaoReceita');
 
-// Se for data especial, esconde a caixa AGORA e sai
+if (!box) return;
+
+// Se for data especial, esconde e SAI
 if (datasEspeciais[chave]) {
-if (box) {
 box.style.display = 'none';
-box.innerHTML = ''; // LIMPA o conteúdo também
-}
+box.innerHTML = '';
+console.log('Data especial: receita escondida');
 return;
 }
 
-// Resto do código para mostrar receita normalmente...
+// Se NÃO é data especial, mostra a receita
+console.log('Dia normal: buscando receita para', tempAtual, '°C');
+
 fetch('receitas.json')
-.then(res => res.json())
+.then(res => {
+if (!res.ok) throw new Error('HTTP error');
+return res.json();
+})
 .then(receitas => {
 const faixa = obterFaixaTemperatura(tempAtual);
 const receitasDaFaixa = receitas.filter(r =>
@@ -560,7 +566,6 @@ r.faixa && r.nome && !r._comentario && r.faixa === faixa
 
 if (receitasDaFaixa.length > 0) {
 const receita = receitasDaFaixa[Math.floor(Math.random() * receitasDaFaixa.length)];
-if (box) {
 box.innerHTML = `
 <p style="margin-bottom: 0.6em; font-size: 0.75em; margin-top: 6px;">
 Hoje pede: ${receita.emoji}
@@ -569,15 +574,15 @@ Hoje pede: ${receita.emoji}
 <p style="margin-top: 0.4em; font-size: 0.75em; line-height: 1.2em;">${receita.descricao}</p>
 `;
 box.style.display = 'block';
-}
+console.log('Receita exibida:', receita.nome);
 } else {
-console.warn("Nenhuma receita encontrada para a faixa:", faixa);
-if (box) box.style.display = 'none';
+console.warn("Nenhuma receita para faixa:", faixa);
+box.style.display = 'none';
 }
 })
 .catch(err => {
-console.warn("Não foi possível carregar as receitas:", err);
-if (box) box.style.display = 'none';
+console.warn("Erro ao carregar receitas:", err);
+box.style.display = 'none';
 });
 }
 
