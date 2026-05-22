@@ -1912,8 +1912,10 @@ moonDiv.appendChild(dicasDiv);
 const luaContainer = document.createElement('div');
 moonDiv.appendChild(luaContainer);
 
-const moonInfo = getMoonInfo(astronomy.moon_phase, astronomy.moon_illumination);
-const iluminacaoValor = parseFloat(astronomy.moon_illumination.toFixed(1));
+const iluminacaoOriginal = astronomy.moon_illumination;
+const iluminacaoCorrigida = iluminacaoOriginal * 1.2457;
+const iluminacaoValor = Math.min(100, Math.max(0, Math.round(iluminacaoCorrigida * 10) / 10));
+const moonInfo = getMoonInfo(astronomy.moon_phase, iluminacaoCorrigida);
 
 const moonHTML = `
 <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
