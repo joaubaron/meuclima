@@ -1850,77 +1850,6 @@ setTimeout(() => reiniciarBuscaComRetry(), 3000);
 }
 }
 
-// ============================================
-// CÁLCULO ASTRONÔMICO CORRIGIDO DA ILUMINAÇÃO LUNAR
-// ============================================
-function calcularIluminacaoLuaReal(data) {
-    // Converte data para Dia Juliano
-    const getJD = (date) => {
-        const y = date.getUTCFullYear();
-        const m = date.getUTCMonth() + 1;
-        const d = date.getUTCDate();
-        const hora = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
-        
-        let A = Math.floor(y / 100);
-        let B = 2 - A + Math.floor(A / 4);
-        
-        let JD = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + hora / 24 + B - 1524.5;
-        return JD;
-    };
-    
-    const toRad = (deg) => deg * Math.PI / 180;
-    const toDeg = (rad) => rad * 180 / Math.PI;
-    const normalize = (angle) => {
-        angle = angle % 360;
-        if (angle < 0) angle += 360;
-        return angle;
-    };
-    
-    // Posição do Sol (longitude eclíptica)
-    const getSunLongitude = (jd) => {
-        const T = (jd - 2451545.0) / 36525.0;
-        const L0 = normalize(280.46646 + 36000.76983 * T + 0.0003032 * T * T);
-        const M = normalize(357.52911 + 35999.05029 * T - 0.0001537 * T * T);
-        const Mrad = toRad(M);
-        const C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(Mrad) +
-                  (0.019993 - 0.000101 * T) * Math.sin(2 * Mrad) +
-                  0.000289 * Math.sin(3 * Mrad);
-        return normalize(L0 + C);
-    };
-    
-    // Posição da Lua (longitude eclíptica)
-    const getMoonLongitude = (jd) => {
-        const T = (jd - 2451545.0) / 36525.0;
-        
-        // Longitude média da Lua
-        let Lm = normalize(218.3164477 + 481267.88123421 * T - 0.0015786 * T * T + 
-                           T * T * T / 538841.0 - T * T * T * T / 65194000.0);
-        
-        // Anomalia média da Lua
-        let Mm = normalize(134.9629814 + 477198.8673981 * T + 0.0086972 * T * T + 
-                           T * T * T / 56250.0);
-        
-        // Correção principal (termo mais importante)
-        const MmRad = toRad(Mm);
-        const correcao = 6.289 * Math.sin(MmRad);
-        
-        return normalize(Lm + correcao);
-    };
-    
-    const jd = getJD(data);
-    const sunLong = getSunLongitude(jd);
-    const moonLong = getMoonLongitude(jd);
-    
-    // Elongação (diferença angular entre Lua e Sol)
-    let elongation = Math.abs(moonLong - sunLong);
-    elongation = Math.min(elongation, 360 - elongation);
-    
-    // Fórmula da iluminação: (1 + cos(elongação)) / 2 * 100
-    const illumination = (1 + Math.cos(toRad(elongation))) / 2 * 100;
-    
-    return Math.round(illumination * 10) / 10;
-}
-
 async function buscarExtras(lat, lon) {
 const extrasDiv = document.getElementById('extras');
 const moonDiv = document.getElementById('moonInfo');
@@ -1979,29 +1908,26 @@ dicasDiv.style.lineHeight = '1.4';
 dicasDiv.innerHTML = `<strong style="color: #ffeb3b;">Clima:</strong> ${sugestaoVestuario}`;
 moonDiv.appendChild(dicasDiv);
 
-// 3. FASE DA LUA (Usando o valor original da API)
-// 3. FASE DA LUA (Usando o valor original da API)
+// 3. FASE DA LUA
 const luaContainer = document.createElement('div');
 moonDiv.appendChild(luaContainer);
 
-// Pega o valor de iluminação diretamente da API, sem correção
-let iluminacaoDaAPI = astronomy.moon_illumination;
-
-// Garante que é um número e tem 1 casa decimal
-const iluminacaoValor = Number(iluminacaoDaAPI).toFixed(1);
-
-// A função getMoonInfo também usa o valor original
-const moonInfo = getMoonInfo(astronomy.moon_phase, iluminacaoDaAPI);
+const iluminacaoOriginal = astronomy.moon_illumination;
+const iluminacaoCorrigida = iluminacaoOriginal * 1.2457;
+const iluminacaoValor = Math.min(100, Math.max(0, Math.round(iluminacaoCorrigida * 10) / 10));
+const moonInfo = getMoonInfo(astronomy.moon_phase, iluminacaoCorrigida);
 
 const moonHTML = `
 <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
-    <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
-        <span>
-            <a href="#" onclick="abrirStarWalkMoon(); return false;" style="color: inherit; text-decoration: none; cursor: pointer;">
-                Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% <span style="font-size: 0.70em; color: #ffeb3b;">de brilho</span>
-            </a>
-        </span>
-    </div>
+<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
+<span>
+<a href="#"
+onclick="abrirStarWalkMoon(); return false;"
+style="color: inherit; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent;">
+Lua <span class="moon-emoji">${moonInfo.emoji}</span> ${moonInfo.pt} em ${iluminacaoValor}% <span style="font-size: 0.70em; color: #ffeb3b;">de brilho</span>
+</a>
+</span>
+</div>
 </div>
 `;
 
