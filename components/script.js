@@ -41,21 +41,6 @@ weatherCache: null,
 extrasCache: { extras: "", moon: "" }
 };
 
-const styleErroModal = document.createElement('style');
-styleErroModal.textContent = `
-@keyframes erroSlideIn {
-from {
-opacity: 0;
-transform: scale(0.95);
-}
-to {
-opacity: 1;
-transform: scale(1);
-}
-}
-`;
-document.head.appendChild(styleErroModal);
-
 function tentarComRetry(fn, maxTentativas = 3, intervalo = 4000) {
 return new Promise(async (resolve, reject) => {
 for (let i = 0; i < maxTentativas; i++) {
@@ -131,118 +116,209 @@ console.log('Atualizando dados...');
 location.reload();
 }
 
-// ============================================
-// TELA DE ERRO MINIMALISTA COM MODAL
-// ============================================
+// Sistema de mensagens amigáveis de erro — versão melhorada
 function mostrarMensagemAmigavel(tipoErro, detalhes = {}) {
-// Mapeamento rápido de erros
-const erros = {
-'sem-internet': { 
-icone: '📡', 
-titulo: 'Sem internet',
-descricao: 'Verifique sua conexão'
+const resultDiv = document.getElementById(DOM_IDS.WEATHER_RESULT);
+const statusDiv = document.getElementById(DOM_IDS.STATUS);
+
+const configs = {
+'sem-internet': {
+titulo: 'Sem conexão com a internet',
+descricao: 'Parece que você está offline agora. O clima precisa de internet para atualizar.',
+cor: '#ff9800',
+icone: '📡',
+dicas: [
+{ emoji: '📶', texto: 'Ative o Wi-Fi ou os dados móveis' },
+{ emoji: '✈️', texto: 'Verifique se o modo avião está desligado' },
+{ emoji: '🔄', texto: 'Tente reconectar à sua rede' }
+]
 },
-'gps-off': { 
-icone: '📍', 
-titulo: 'GPS desligado',
-descricao: 'Ative a localização do dispositivo'
+'gps-off': {
+titulo: 'GPS está desativado',
+descricao: 'Precisamos da sua localização para mostrar o clima correto da sua região.',
+cor: '#ff5722',
+icone: '📍',
+dicas: [
+{ emoji: '⚙️', texto: 'Ative o GPS nas configurações do dispositivo' },
+{ emoji: '📱', texto: 'Configurações › Privacidade › Localização' },
+{ emoji: '🔄', texto: 'Depois, volte aqui e tente de novo' }
+]
 },
-'permissao-negada': { 
-icone: '🔒', 
-titulo: 'Permissão negada',
-descricao: 'Permita o acesso à localização'
+'permissao-negada': {
+titulo: 'Acesso à localização bloqueado',
+descricao: 'Você negou o acesso à localização. Precisamos dela para encontrar o clima da sua cidade.',
+cor: '#f44336',
+icone: '🔒',
+dicas: [
+{ emoji: '📱', texto: 'Configurações › Aplicativos › Este app › Permissões' },
+{ emoji: '✅', texto: 'Habilite "Localização" e volte aqui' },
+{ emoji: '🌐', texto: 'No navegador: clique no cadeado na barra de endereço' }
+]
 },
-'timeout': { 
-icone: '⏱️', 
-titulo: 'GPS demorou',
-descricao: 'Tente em um local aberto'
+'timeout': {
+titulo: 'GPS demorou para responder',
+descricao: 'Não conseguimos sua localização a tempo. Isso costuma acontecer em locais fechados ou com sinal fraco.',
+cor: '#ff9800',
+icone: '⏱️',
+dicas: [
+{ emoji: '🪟', texto: 'Vá para um local aberto ou perto de uma janela' },
+{ emoji: '📶', texto: 'Confirme que Wi-Fi ou dados móveis estão ativos' },
+{ emoji: '📍', texto: 'Verifique se o GPS está habilitado no dispositivo' }
+]
 },
-'api-falhou': { 
-icone: '🌩️', 
-titulo: 'Serviço indisponível',
-descricao: 'Tente novamente em instantes'
+'api-falhou': {
+titulo: 'Serviço temporariamente indisponível',
+descricao: 'Nosso servidor de previsão do tempo está com instabilidade. Já estamos trabalhando nisso.',
+cor: '#7c4dff',
+icone: '🌩️',
+dicas: [
+{ emoji: '⏳', texto: 'Aguarde alguns minutos e tente novamente' },
+{ emoji: '📶', texto: 'Verifique sua conexão com a internet' },
+{ emoji: '🔄', texto: 'Se persistir, o serviço pode estar em manutenção' }
+]
 },
-'erro-desconhecido': { 
-icone: '⚠️', 
-titulo: 'Algo deu errado',
-descricao: 'Tente novamente'
+'dados-antigos': {
+titulo: 'Dados podem estar desatualizados',
+descricao: 'Não foi possível obter a previsão mais recente. Exibindo a última atualização disponível.',
+cor: '#ffc107',
+icone: '🕰️',
+dicas: [
+{ emoji: '📶', texto: 'Verifique sua conexão com a internet' },
+{ emoji: '🔄', texto: 'Puxe a tela para baixo para atualizar' },
+{ emoji: '⏱️', texto: 'Dados podem ter até 24 horas de diferença' }
+]
+},
+'erro-desconhecido': {
+titulo: 'Algo inesperado aconteceu',
+descricao: 'Encontramos um problema que não esperávamos. Na maioria das vezes, tentar novamente resolve.',
+cor: '#e91e63',
+icone: '🔧',
+dicas: [
+{ emoji: '🔄', texto: 'Tente novamente em alguns instantes' },
+{ emoji: '📶', texto: 'Verifique sua conexão com a internet' },
+{ emoji: '💬', texto: 'Se o erro persistir, entre em contato pelo suporte' }
+]
 }
 };
 
-const err = erros[tipoErro] || erros['erro-desconhecido'];
+const cfg = configs[tipoErro] || configs['erro-desconhecido'];
 
-// Remove modal anterior se existir
-document.getElementById('modal-erro-wrap')?.remove();
+const dicasHTML = cfg.dicas.map(d => `
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;">
+<span style="font-size:18px;flex-shrink:0;">${d.emoji}</span>
+<span style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.4;">${d.texto}</span>
+</div>
+`).join('');
 
-// Cria o modal minimalista
-const modal = document.createElement('div');
-modal.id = 'modal-erro-wrap';
-modal.style.cssText = `
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.85);
-z-index: 50000;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 20px;
-animation: erroSlideIn 0.3s ease-out;
-`;
-
-modal.innerHTML = `
-<div style="
-background: linear-gradient(135deg, #001133 0%, #00081a 100%);
-border-radius: 24px;
-padding: 32px 24px;
-max-width: 280px;
-width: 100%;
-text-align: center;
-border: 1px solid ${err.icone === '📍' ? '#ff5722' : err.icone === '📡' ? '#ff9800' : '#7c4dff'}33;
+const htmlAmigavel = `
+<div id="erro-amigavel-wrap" style="
+padding: 20px 16px 24px;
+animation: erroSlideIn 0.4s ease-out;
 ">
-<div style="font-size: 48px; margin-bottom: 12px;">${err.icone}</div>
-<h3 style="color: #fff; font-size: 18px; font-weight: 600; margin: 0 0 8px;">${err.titulo}</h3>
-<p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 24px; line-height: 1.5;">${err.descricao}</p>
-<button id="btn-erro-retry" style="
-width: 100%;
-padding: 14px;
-border-radius: 40px;
-background: ${err.icone === '📍' ? '#ff5722' : err.icone === '📡' ? '#ff9800' : '#7c4dff'};
-border: none;
-color: #fff;
-font-size: 15px;
-font-weight: 600;
-cursor: pointer;
-transition: opacity 0.2s;
+<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:20px;">
+<div style="
+width:80px;height:80px;border-radius:50%;
+background:${cfg.cor}18;
+border:1.5px solid ${cfg.cor}44;
+display:flex;align-items:center;justify-content:center;
+font-size:36px;margin-bottom:16px;
+">
+${cfg.icone}
+</div>
+<h3 style="
+color:#fff;font-size:17px;font-weight:600;
+margin:0 0 8px;text-align:center;line-height:1.3;
+">${cfg.titulo}</h3>
+<p style="
+color:rgba(255,255,255,0.5);font-size:13px;
+margin:0;text-align:center;line-height:1.6;max-width:280px;
+">${cfg.descricao}</p>
+</div>
+
+<div style="
+background:${cfg.cor}14;
+border:1px solid ${cfg.cor}30;
+border-radius:14px;
+padding:12px 16px;
+margin-bottom:20px;
+">
+<p style="
+font-size:12px;color:${cfg.cor};
+margin:0 0 6px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;
+">💡 O que pode ajudar</p>
+<div style="border-top:1px solid ${cfg.cor}20;padding-top:6px;">
+${dicasHTML}
+</div>
+</div>
+
+<button
+id="btn-erro-retry"
+onclick="(function(){
+const btn=document.getElementById('btn-erro-retry');
+const status=document.getElementById('erro-status-txt');
+if(btn.disabled)return;
+btn.disabled=true;
+btn.style.opacity='0.7';
+btn.innerHTML='⏳ Buscando localização…';
+status.textContent='';
+reiniciarBuscaComRetry&&reiniciarBuscaComRetry();
+setTimeout(()=>{
+btn.disabled=false;
+btn.style.opacity='1';
+btn.innerHTML='🔄 Tentar novamente';
+status.textContent='Se não funcionou, tente se mover para um local mais aberto.';
+},5000);
+})()"
+style="
+width:100%;padding:14px;border-radius:30px;
+background:${cfg.cor};border:none;
+color:#fff;font-size:15px;font-weight:600;
+cursor:pointer;margin-bottom:10px;
+transition:opacity 0.2s;
 ">
 🔄 Tentar novamente
 </button>
+
+<button
+onclick="abrirConfiguracoes()"
+style="
+width:100%;padding:13px;border-radius:30px;
+background:transparent;
+border:1px solid ${cfg.cor}55;
+color:rgba(255,255,255,0.65);font-size:14px;
+cursor:pointer;
+transition:background 0.2s;
+"
+onmouseover="this.style.background='${cfg.cor}18'"
+onmouseout="this.style.background='transparent'"
+>
+⚙️ Verificar configurações
+</button>
+
+<p id="erro-status-txt" style="
+font-size:12px;color:rgba(255,255,255,0.3);
+text-align:center;margin:14px 0 0;min-height:16px;
+"></p>
 </div>
 `;
 
-document.body.appendChild(modal);
-
-// Adiciona evento ao botão
-const btn = document.getElementById('btn-erro-retry');
-if (btn) {
-btn.addEventListener('click', function() {
-if (this.disabled) return;
-this.disabled = true;
-this.textContent = '⏳ Buscando...';
-modal.remove();
-reiniciarBusca(); // Chama imediatamente
-});
+if (!document.querySelector('#erro-amigavel-style')) {
+const style = document.createElement('style');
+style.id = 'erro-amigavel-style';
+style.textContent = `
+@keyframes erroSlideIn {
+from { opacity: 0; transform: translateY(16px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+`;
+document.head.appendChild(style);
 }
 
-// Limpa o status e result
-const resultDiv = document.getElementById(DOM_IDS.WEATHER_RESULT);
-const statusDiv = document.getElementById(DOM_IDS.STATUS);
-if (resultDiv) resultDiv.innerHTML = '';
+if (resultDiv) resultDiv.innerHTML = htmlAmigavel;
 if (statusDiv) statusDiv.innerHTML = '';
 }
 
+// NOVA FUNÇÃO: Abrir configurações do dispositivo
 function abrirConfiguracoes() {
 if (window.webkit && window.webkit.messageHandlers && window.cordova) {
 cordova.plugins.settings.openSettings();
@@ -251,13 +327,48 @@ cordova.plugins.settings.openSettings();
 if (navigator.userAgent.match(/Android/i)) {
 window.location.href = 'app-settings:';
 }
+
+mostrarDicasManuais();
 }
 
-// Substitua a função existente por esta:
+// NOVA FUNÇÃO: Mostrar dicas manuais
+function mostrarDicasManuais() {
+const modal = document.createElement('div');
+modal.style.cssText = `
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0,0,0,0.95);
+z-index: 30000;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+`;
+
+modal.innerHTML = `
+<div style="background: linear-gradient(135deg, #002244 0%, #001133 100%); border-radius: 20px; padding: 25px; max-width: 300px; text-align: center;">
+<div style="font-size: 50px;">📱</div>
+<h3 style="color: #ffeb3b;">Dicas rápidas</h3>
+<ul style="text-align: left; color: #fff; margin: 20px 0;">
+<li>✓ Verifique se o GPS está ativo</li>
+<li>✓ Conecte-se à internet</li>
+<li>✓ Permita acesso à localização</li>
+<li>✓ Reinicie o aplicativo</li>
+</ul>
+<button onclick="this.parentElement.parentElement.remove()" style="background: #ffeb3b; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">Entendi! 👍</button>
+</div>
+`;
+
+document.body.appendChild(modal);
+}
+
+// SUBSTITUIR a função mostrarMensagemErro existente
 function mostrarMensagemErro(mensagem, tipoErro = 'erro-desconhecido') {
 console.log(`Erro: ${tipoErro} - ${mensagem}`);
 
-// Detecta automaticamente o tipo de erro pela mensagem
 if (mensagem.includes('Sem conexão') || mensagem.includes('offline')) {
 tipoErro = 'sem-internet';
 } else if (mensagem.includes('Permissão negada')) {
