@@ -526,46 +526,18 @@ return "intenso";
 }
 
 function mostrarSugestaoReceita(tempAtual) {
-const hoje = new Date();
-const dia = hoje.getDate();
-const mes = hoje.getMonth() + 1;
-
-const datasEspeciais = {
-'1-1': true, '28-1': true, '30-1': true, '7-2': true, '12-2': true,
-'5-3': true, '9-3': true, '23-3': true, '5-4': true, '2-5': true,
-'5-6': true, '12-6': true, '5-7': true, '22-5': true, '23-10': true,
-'3-11': true, '25-11': true, '25-12': true
-};
-
-const chave = `${dia}-${mes}`;
-const box = document.getElementById('sugestaoReceita');
-
-if (!box) return;
-
-// Se for data especial, esconde e SAI
-if (datasEspeciais[chave]) {
-box.style.display = 'none';
-box.innerHTML = '';
-console.log('Data especial: receita escondida');
-return;
-}
-
-// Se NÃO é data especial, mostra a receita
-console.log('Dia normal: buscando receita para', tempAtual, '°C');
-
 fetch('receitas.json')
-.then(res => {
-if (!res.ok) throw new Error('HTTP error');
-return res.json();
-})
+.then(res => res.json())
 .then(receitas => {
 const faixa = obterFaixaTemperatura(tempAtual);
+
 const receitasDaFaixa = receitas.filter(r =>
 r.faixa && r.nome && !r._comentario && r.faixa === faixa
 );
 
 if (receitasDaFaixa.length > 0) {
 const receita = receitasDaFaixa[Math.floor(Math.random() * receitasDaFaixa.length)];
+const box = document.getElementById('sugestaoReceita');
 box.innerHTML = `
 <p style="margin-bottom: 0.6em; font-size: 0.75em; margin-top: 6px;">
 Hoje pede: ${receita.emoji}
@@ -574,15 +546,12 @@ Hoje pede: ${receita.emoji}
 <p style="margin-top: 0.4em; font-size: 0.75em; line-height: 1.2em;">${receita.descricao}</p>
 `;
 box.style.display = 'block';
-console.log('Receita exibida:', receita.nome);
 } else {
-console.warn("Nenhuma receita para faixa:", faixa);
-box.style.display = 'none';
+console.warn("Nenhuma receita encontrada para a faixa:", faixa);
 }
 })
 .catch(err => {
-console.warn("Erro ao carregar receitas:", err);
-box.style.display = 'none';
+console.warn("Não foi possível carregar as receitas:", err);
 });
 }
 
@@ -1291,66 +1260,37 @@ const emojiByTemperature = [
 { min: 37,  max: 100, emoji: "♨️" }
 ];
 
-function getSpecialDateMessage(temperatura) {
+function getSpecialDateMessage() {
 const hoje = new Date();
 const dia = hoje.getDate();
 const mes = hoje.getMonth() + 1;
 const anoAtual = hoje.getFullYear();
 
 const mensagensEspeciais = {
-'1-1'  : { msg: `${anoAtual} chegou! 🎉`, tipo: 'feriado' },
-'28-1' : { msg: `Aniversário da Bruna! 🎂`, tipo: 'aniversario' },
-'30-1' : { msg: `Marlon faz ${anoAtual - 1988} anos! 🎉`, tipo: 'aniversario' },
-'7-2'  : { msg: `Clara faz ${anoAtual - 2016} anos! 🎈`, tipo: 'aniversario' },
-'12-2' : { msg: `Sérgio faz ${anoAtual - 1969} anos! 🎊`, tipo: 'aniversario' },
-'5-3'  : { msg: 'Baron apaga as velas! 🥳', tipo: 'aniversario' },
-'9-3'  : { msg: 'Dia do seu pai! 🎁', tipo: 'aniversario' },
-'23-3' : { msg: `Eduardo sopra ${anoAtual - 2003} velas! 🎂`, tipo: 'aniversario' },
-'5-4'  : { msg: 'Conheceu a Cláudia! 💛', tipo: 'romantico' },
-'2-5'  : { msg: `Mateus tá de parabéns! 🎉`, tipo: 'aniversario' },
-'5-6'  : { msg: 'Tudo começou! 💞', tipo: 'romantico' },
-'12-6' : { msg: 'Amor no ar! 💕', tipo: 'romantico' },
-'5-7'  : { msg: `Débora é aniversariante! 🎂`, tipo: 'aniversario' },
-'5-9'  : { msg: 'Cláudia merece festa! 🍷', tipo: 'aniversario' },
-'23-10': { msg: 'Mamãe faz anos! 🌹', tipo: 'aniversario' },
-'3-11' : { msg: 'Hora do vinho! 🍷', tipo: 'romantico' },
-'25-11': { msg: `Morgama tá de festa! 🎈`, tipo: 'aniversario' },
-'25-12': { msg: 'Natal com cheiro de paz! ✨', tipo: 'feriado' }
+'1-1'  : `Feliz Ano Novo! Que ${anoAtual} seja incrível!`,
+'28-1' : `É aniversário da Bruna! 🎂`,
+'30-1' : `Marlon está completando ${anoAtual - 1988} anos hoje! 🎉`,
+'7-2'  : `Parabéns, Clara! Hoje ela faz ${anoAtual - 2016} anos! 🎈`,
+'12-2' : `É aniversário do Sérgio — ele celebra ${anoAtual - 1969} anos! 🎊`,
+'5-3'  : 'Feliz aniversário, Baron! 🥳',
+'9-3'  : 'Hoje é aniversário do seu pai! 🎁',
+'23-3' : `Eduardo completa hoje ${anoAtual - 2003} anos! 🎂`,
+'5-4'  : 'Hoje marca o dia em que você conheceu a Cláudia. 💛',
+'2-5'  : `Mateus está festejando ${anoAtual - 2001} anos! 🎉`,
+'5-6'  : 'Você e a Cláudia começaram a dividir a vida. 💞',
+'12-6' : 'Feliz Dia dos Namorados! 💕',
+'5-7'  : `Débora está de aniversário, são ${anoAtual - 1973} anos! 🎂`,
+'5-9'  : 'Aniversário da Cláudia! Que tal algo especial? 🍷',
+'23-10': 'Hoje é aniversário da sua mãe. 🌹',
+'3-11' : 'Juntos e fortes! Que tal levar um bom vinho? 🍷',
+'25-11': `Morgama comemora ${anoAtual - 1984} anos hoje! 🎈`,
+'25-12': 'Que este feriado traga muita paz. ✨'
 };
 
 const chave1 = `${dia}-${mes}`;
 const chave2 = `${dia.toString().padStart(2,'0')}-${mes}`;
-const evento = mensagensEspeciais[chave1] || mensagensEspeciais[chave2];
 
-if (!evento) return null;
-
-let mensagemFinal = evento.msg;
-
-// Dicas criativas e curtas baseadas na temperatura
-// Dicas criativas e curtas baseadas na temperatura
-if (temperatura !== undefined) {
-if (temperatura < 15) {
-if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo gelado!`;
-else if (evento.tipo === 'romantico') mensagemFinal += ` Tá frio, mas o amor esquenta! ❤️`;
-else mensagemFinal += ` Frio, mas o dia tá lindo! 🧣`;
-}
-else if (temperatura > 32) {
-if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo no freezer! ❄️`;
-else if (evento.tipo === 'romantico') mensagemFinal += ` Calorão, mas junto é bom! ❤️`;
-else mensagemFinal += ` Calor, mas a vibe tá boa! 🕶️`;
-}
-else if (temperatura > 28) {
-mensagemFinal += ` Dia quente, mas especial! 🌞`;
-}
-else if (temperatura > 22) {
-mensagemFinal += ` Clima perfeito pra comemorar!`;
-}
-else if (temperatura < 20 && temperatura >= 15) {
-mensagemFinal += ` Fresquinho, mas feliz! 🍃`;
-}
-}
-
-return mensagemFinal;
+return mensagensEspeciais[chave1] || mensagensEspeciais[chave2] || null;
 }
 
 function getTodayMinMaxTemp(weatherData) {
@@ -1369,7 +1309,7 @@ return { min: null, max: null };
 }
 
 function getMessageForTemperature(temp, isInitialLoad = false) {
-const especialHoje = getSpecialDateMessage(temp);  // ✅ CORRETO - passa a temperatura
+const especialHoje = getSpecialDateMessage();
 if (especialHoje) {
 UI_STATE.currentTemperatureMessage = especialHoje;
 return UI_STATE.currentTemperatureMessage;
@@ -1729,14 +1669,7 @@ ${temp_c.toFixed(1)}°C
 }
 
 if (isInitialLoad && currentWeather && currentWeather.temp_c !== undefined) {
-const mensagemEspecial = getSpecialDateMessage(currentWeather.temp_c);
-
-if (mensagemEspecial) {
-UI_STATE.currentTemperatureMessage = mensagemEspecial;
-} else {
 getMessageForTemperature(currentWeather.temp_c, true);
-}
-
 atualizarMensagemTemperatura(weatherData);
 }
 
