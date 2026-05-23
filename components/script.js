@@ -1292,14 +1292,14 @@ const mensagensEspeciais = {
 '5-3'  : { msg: 'Baron apaga as velas! 🥳', tipo: 'aniversario' },
 '9-3'  : { msg: 'Dia do seu pai! 🎁', tipo: 'aniversario' },
 '23-3' : { msg: `Eduardo sopra ${anoAtual - 2003} velas! 🎂`, tipo: 'aniversario' },
-'5-4'  : { msg: 'Conheceu a Cláudia! 💛', tipo: 'romantico' },
+'5-4'  : { msg: 'Augusto e Cláudia! 💛', tipo: 'romantico' },
 '2-5'  : { msg: `Mateus tá de parabéns! 🎉`, tipo: 'aniversario' },
 '5-6'  : { msg: 'Tudo começou! 💞', tipo: 'romantico' },
 '12-6' : { msg: 'Amor no ar! 💕', tipo: 'romantico' },
 '5-7'  : { msg: `Débora é aniversariante! 🎂`, tipo: 'aniversario' },
-'5-9' : { msg: 'Cláudia merece festa! 🍷', tipo: 'aniversario' },
+'5-9'  : { msg: 'Cláudia merece festa! 🍷', tipo: 'aniversario' },
 '23-10': { msg: 'Mamãe faz anos! 🌹', tipo: 'aniversario' },
-'3-11' : { msg: 'Hora do vinho! 🍷', tipo: 'romantico' },
+'3-11' : { msg: 'Casamos hora do vinho! 🍷', tipo: 'romantico' },
 '25-11': { msg: `Morgama tá de festa! 🎈`, tipo: 'aniversario' },
 '25-12': { msg: 'Natal com cheiro de paz! ✨', tipo: 'feriado' }
 };
@@ -1319,7 +1319,7 @@ const faixa = obterFaixaTemperatura(temperatura);
 let sufixo = '';
 if (faixa === 'frio') {
 if (evento.tipo === 'aniversario') sufixo = `Agasalha e aproveita!`;
-else if (evento.tipo === 'romantico') sufixo = `Tá frio, mas o amor esquenta!`;
+else if (evento.tipo === 'romantico') sufixo = `Frio, mas o amor esquenta!`;
 else sufixo = `Frio, mas o dia tá especial!`;
 } else if (faixa === 'fresco') {
 if (evento.tipo === 'aniversario') sufixo = `Dia gostoso pra comemorar!`;
@@ -1336,7 +1336,7 @@ else sufixo = `Calor, mas a data especial!`;
 } else if (faixa === 'intenso') {
 if (evento.tipo === 'aniversario') sufixo = `Que calorão lá fora!`;
 else if (evento.tipo === 'romantico') sufixo = `Calor de dar inveja ao sol!`;
-else sufixo = `Calor intenso, mas é dia de festa!`;
+else sufixo = `Calor forte, mas é dia de festa!`;
 }
 
 if (sufixo) mensagemFinal += ` ${sufixo} ${emojiTemp}`;
