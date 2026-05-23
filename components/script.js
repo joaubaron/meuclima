@@ -1313,14 +1313,14 @@ let mensagemFinal = evento.msg;
 
 if (temperatura !== undefined) {
 if (temperatura < 15) {
-if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo gelado! 🎂`;
-else if (evento.tipo === 'romantico') mensagemFinal += ` Tá frio, mas o amor esquenta! ❤️`;
-else mensagemFinal += ` Frio, mas o dia tá especial! 🧣`;
+if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo gelado!`;
+else if (evento.tipo === 'romantico') mensagemFinal += ` Tá frio, mas o amor esquenta!`;
+else mensagemFinal += ` Frio, mas o dia tá especial!`;
 }
 else if (temperatura > 32) {
-if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo no freezer! ❄️`;
-else if (evento.tipo === 'romantico') mensagemFinal += ` Calorão, mas junto é bom! ❤️`;
-else mensagemFinal += ` Calor, mas a data especial! 🎉`;
+if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo no freezer!`;
+else if (evento.tipo === 'romantico') mensagemFinal += ` Calorão, mas junto é bom!`;
+else mensagemFinal += ` Calor, mas a data especial!`;
 }
 }
 
