@@ -1913,7 +1913,7 @@ const luaContainer = document.createElement('div');
 moonDiv.appendChild(luaContainer);
 
 const iluminacaoOriginal = astronomy.moon_illumination;
-const iluminacaoCorrigida = iluminacaoOriginal * 1.2357;
+const iluminacaoCorrigida = iluminacaoOriginal * 1.1357;
 const iluminacaoValor = Math.min(100, Math.max(0, Math.round(iluminacaoCorrigida * 10) / 10));
 const moonInfo = getMoonInfo(astronomy.moon_phase, iluminacaoCorrigida);
 
