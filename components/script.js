@@ -1702,8 +1702,8 @@ ${temp_c.toFixed(1)}°C
 `;
 }
 
-if (isInitialLoad && currentWeather && currentWeather.temp_c !== undefined) {
-getMessageForTemperature(currentWeather.temp_c, true);
+if (currentWeather && currentWeather.temp_c !== undefined) {
+getMessageForTemperature(currentWeather.temp_c, isInitialLoad);
 atualizarMensagemTemperatura(weatherData, currentWeather.temp_c);
 }
 
