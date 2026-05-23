@@ -1312,15 +1312,27 @@ if (!evento) return null;
 let mensagemFinal = evento.msg;
 
 if (temperatura !== undefined) {
-if (temperatura < 15) {
-if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo gelado!`;
-else if (evento.tipo === 'romantico') mensagemFinal += ` Tá frio, mas o amor esquenta!`;
-else mensagemFinal += ` Frio, mas o dia tá especial!`;
-}
-else if (temperatura > 32) {
-if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo no freezer!`;
-else if (evento.tipo === 'romantico') mensagemFinal += ` Calorão, mas junto é bom!`;
-else mensagemFinal += ` Calor, mas a data especial!`;
+const faixa = obterFaixaTemperatura(temperatura);
+if (faixa === 'frio') {
+if (evento.tipo === 'aniversario') mensagemFinal += ` Festa quentinha! 🎂`;
+else if (evento.tipo === 'romantico') mensagemFinal += ` Tá frio, mas o amor esquenta! ❤️`;
+else mensagemFinal += ` Frio, mas o dia tá especial! 🧣`;
+} else if (faixa === 'fresco') {
+if (evento.tipo === 'aniversario') mensagemFinal += ` Dia gostoso pra comemorar! 🥂`;
+else if (evento.tipo === 'romantico') mensagemFinal += ` Dia perfeito pro romance! 🌹`;
+else mensagemFinal += ` Clima ótimo pra celebrar! 🎉`;
+} else if (faixa === 'agradável') {
+if (evento.tipo === 'aniversario') mensagemFinal += ` Dia ideal pra festa! 🥳`;
+else if (evento.tipo === 'romantico') mensagemFinal += ` Dia ideal pro amor! 🌹`;
+else mensagemFinal += ` Dia ideal pra celebrar! ✨`;
+} else if (faixa === 'calor') {
+if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo no freezer! 🧊`;
+else if (evento.tipo === 'romantico') mensagemFinal += ` Calorão, mas junto é bom! 🔥`;
+else mensagemFinal += ` Calor, mas a data especial! 🌞`;
+} else if (faixa === 'intenso') {
+if (evento.tipo === 'aniversario') mensagemFinal += ` Que calorão! Festa na piscina! 🏊`;
+else if (evento.tipo === 'romantico') mensagemFinal += ` Calor de dar inveja ao sol! ☀️`;
+else mensagemFinal += ` Calor intenso, mas é dia de festa! 🎊`;
 }
 }
 
