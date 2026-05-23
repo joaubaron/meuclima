@@ -526,23 +526,11 @@ return "intenso";
 }
 
 function mostrarSugestaoReceita(tempAtual) {
-const hoje = new Date();
-const dia = hoje.getDate();
-const mes = hoje.getMonth() + 1;
-
-const datasEspeciais = {
-'1-1': true, '28-1': true, '30-1': true, '7-2': true, '12-2': true,
-'5-3': true, '9-3': true, '23-3': true, '5-4': true, '2-5': true,
-'5-6': true, '12-6': true, '5-7': true, '5-9': true, '23-10': true,
-'3-11': true, '25-11': true, '25-12': true
-};
-
-const chave = `${dia}-${mes}`;
 const box = document.getElementById('sugestaoReceita');
 
 if (!box) return;
 
-if (datasEspeciais[chave]) {
+if (getSpecialDateMessage()) {
 console.log('📅 Data especial: receita oculta');
 box.style.display = 'none';
 box.innerHTML = '';
