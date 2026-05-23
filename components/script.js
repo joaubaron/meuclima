@@ -526,11 +526,23 @@ return "intenso";
 }
 
 function mostrarSugestaoReceita(tempAtual) {
+const hoje = new Date();
+const dia = hoje.getDate();
+const mes = hoje.getMonth() + 1;
+
+const datasEspeciais = {
+'1-1': true, '28-1': true, '30-1': true, '7-2': true, '12-2': true,
+'5-3': true, '9-3': true, '23-3': true, '5-4': true, '2-5': true,
+'5-6': true, '12-6': true, '5-7': true, '5-9': true, '23-10': true,
+'3-11': true, '25-11': true, '25-12': true
+};
+
+const chave = `${dia}-${mes}`;
 const box = document.getElementById('sugestaoReceita');
 
 if (!box) return;
 
-if (getSpecialDateMessage()) {
+if (datasEspeciais[chave]) {
 console.log('📅 Data especial: receita oculta');
 box.style.display = 'none';
 box.innerHTML = '';
@@ -1369,7 +1381,7 @@ UI_STATE.currentTemperatureMessage = 'Aproveite o dia!';
 return UI_STATE.currentTemperatureMessage;
 }
 
-function atualizarMensagemTemperatura(weatherData = null) {
+function atualizarMensagemTemperatura(weatherData = null, temp = null) {
 const messageDiv = document.getElementById(DOM_IDS.WEATHER_MESSAGE);
 if (!messageDiv) return;
 
@@ -1378,14 +1390,17 @@ let minMaxHtml = '';
 if (weatherData) {
 const { min, max } = getTodayMinMaxTemp(weatherData);
 if (min !== null && max !== null) {
-minMaxHtml = ` entre ${min.toFixed(0)}° e ${max.toFixed(0)}°`;
+// Emoji da temperatura atual via emojiByTemperature
+const tempParaEmoji = temp !== null ? temp : (min + max) / 2;
+const emojiInfo = emojiByTemperature.find(f => tempParaEmoji >= f.min && tempParaEmoji <= f.max);
+const emojiTemp = emojiInfo ? emojiInfo.emoji : '🌡️';
+minMaxHtml = `<br>${emojiTemp} entre ${min.toFixed(0)}° e ${max.toFixed(0)}°`;
 }
 }
 
 let mensagemOriginal = UI_STATE.currentTemperatureMessage;
 
 // Remove APENAS o PRIMEIRO emoji da string
-// Isso captura qualquer emoji no início (incluindo os com variação como 🌤️)
 const primeiroEmojiMatch = mensagemOriginal.match(/^[\p{Emoji}\u{1F300}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]\s?/u);
 
 let mensagemSemPrimeiroEmoji = mensagemOriginal;
@@ -1393,19 +1408,13 @@ if (primeiroEmojiMatch) {
 mensagemSemPrimeiroEmoji = mensagemOriginal.replace(primeiroEmojiMatch[0], '').trim();
 }
 
-// Agora aplica as regras de pontuação na mensagem restante
-// Remove qualquer exclamação/interrogação/ponto do final do texto
+// Remove pontuação do final e garante exclamação
 let texto = mensagemSemPrimeiroEmoji.replace(/[!?.]+$/, '');
-
-// Garante que tenha exclamação
 if (!texto.includes('!')) {
 texto = texto + '!';
 }
 
-// Monta mensagem final (sem o primeiro emoji)
-const mensagemFinal = texto;
-
-messageDiv.innerHTML = mensagemFinal + minMaxHtml;
+messageDiv.innerHTML = texto + minMaxHtml;
 }
 
 async function fetchAllWeatherData(lat, lon, forceRefresh = false) {
@@ -1704,7 +1713,7 @@ ${temp_c.toFixed(1)}°C
 
 if (isInitialLoad && currentWeather && currentWeather.temp_c !== undefined) {
 getMessageForTemperature(currentWeather.temp_c, true);
-atualizarMensagemTemperatura(weatherData);
+atualizarMensagemTemperatura(weatherData, currentWeather.temp_c);
 }
 
 if(statusDiv) statusDiv.innerHTML = '';
