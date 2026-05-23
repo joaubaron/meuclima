@@ -1312,28 +1312,34 @@ if (!evento) return null;
 let mensagemFinal = evento.msg;
 
 if (temperatura !== undefined) {
+const emojiInfo = emojiByTemperature.find(f => temperatura >= f.min && temperatura <= f.max);
+const emojiTemp = emojiInfo ? emojiInfo.emoji : '';
 const faixa = obterFaixaTemperatura(temperatura);
+
+let sufixo = '';
 if (faixa === 'frio') {
-if (evento.tipo === 'aniversario') mensagemFinal += ` Festa quentinha! 🎂`;
-else if (evento.tipo === 'romantico') mensagemFinal += ` Tá frio, mas o amor esquenta! ❤️`;
-else mensagemFinal += ` Frio, mas o dia tá especial! 🧣`;
+if (evento.tipo === 'aniversario') sufixo = `Agasalha e aproveita!`;
+else if (evento.tipo === 'romantico') sufixo = `Tá frio, mas o amor esquenta!`;
+else sufixo = `Frio, mas o dia tá especial!`;
 } else if (faixa === 'fresco') {
-if (evento.tipo === 'aniversario') mensagemFinal += ` Dia gostoso pra comemorar! 🥂`;
-else if (evento.tipo === 'romantico') mensagemFinal += ` Dia perfeito pro romance! 🌹`;
-else mensagemFinal += ` Clima ótimo pra celebrar! 🎉`;
+if (evento.tipo === 'aniversario') sufixo = `Dia gostoso pra comemorar!`;
+else if (evento.tipo === 'romantico') sufixo = `Dia perfeito pro romance!`;
+else sufixo = `Clima ótimo pra celebrar!`;
 } else if (faixa === 'agradável') {
-if (evento.tipo === 'aniversario') mensagemFinal += ` Dia ideal pra festa! 🥳`;
-else if (evento.tipo === 'romantico') mensagemFinal += ` Dia ideal pro amor! 🌹`;
-else mensagemFinal += ` Dia ideal pra celebrar! ✨`;
+if (evento.tipo === 'aniversario') sufixo = `Dia ideal pra celebrar!`;
+else if (evento.tipo === 'romantico') sufixo = `Dia ideal pro amor!`;
+else sufixo = `Dia ideal pra celebrar!`;
 } else if (faixa === 'calor') {
-if (evento.tipo === 'aniversario') mensagemFinal += ` Bolo no freezer! 🧊`;
-else if (evento.tipo === 'romantico') mensagemFinal += ` Calorão, mas junto é bom! 🔥`;
-else mensagemFinal += ` Calor, mas a data especial! 🌞`;
+if (evento.tipo === 'aniversario') sufixo = `Bolo no freezer!`;
+else if (evento.tipo === 'romantico') sufixo = `Calorão, mas junto é bom!`;
+else sufixo = `Calor, mas a data especial!`;
 } else if (faixa === 'intenso') {
-if (evento.tipo === 'aniversario') mensagemFinal += ` Que calorão! Festa na piscina! 🏊`;
-else if (evento.tipo === 'romantico') mensagemFinal += ` Calor de dar inveja ao sol! ☀️`;
-else mensagemFinal += ` Calor intenso, mas é dia de festa! 🎊`;
+if (evento.tipo === 'aniversario') sufixo = `Que calorão lá fora!`;
+else if (evento.tipo === 'romantico') sufixo = `Calor de dar inveja ao sol!`;
+else sufixo = `Calor intenso, mas é dia de festa!`;
 }
+
+if (sufixo) mensagemFinal += ` ${sufixo} ${emojiTemp}`;
 }
 
 return mensagemFinal;
