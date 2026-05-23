@@ -1940,8 +1940,8 @@ const astroSol = forecast.forecast?.forecastday?.[0]?.astro || astronomy.astro |
 const nascerStr = converterHora12para24(astroSol.sunrise);
 const porStr    = converterHora12para24(astroSol.sunset);
 sunDiv.innerHTML = `
-<div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
-<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
+<div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto; margin: 0; padding: 4px;">
+<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap; margin: 0; padding: 0;">
 <span>☀️ ${nascerStr} &nbsp; &nbsp; 🌙 ${porStr}</span>
 </div>
 </div>
@@ -1951,8 +1951,9 @@ sunDiv.innerHTML = `
 // 2. DICAS DO CLIMA
 moonDiv.innerHTML = '';
 const dicasDiv = document.createElement('div');
-dicasDiv.style.marginTop = '1px';
-dicasDiv.style.padding = '10px';
+dicasDiv.style.marginTop = '0';
+dicasDiv.style.marginBottom = '0';
+dicasDiv.style.padding = '4px';
 dicasDiv.style.borderRadius = '8px';
 dicasDiv.style.fontSize = '12px';
 dicasDiv.style.textAlign = 'center';
@@ -1970,8 +1971,8 @@ const iluminacaoValor = Math.min(100, Math.max(0, Math.round(iluminacaoCorrigida
 const moonInfo = getMoonInfo(astronomy.moon_phase, iluminacaoCorrigida);
 
 const moonHTML = `
-<div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto;">
-<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
+<div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto; margin: 0; padding: 4px;">
+<div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap; margin: 0; padding: 0;">
 <span>
 <a href="#"
 onclick="abrirStarWalkMoon(); return false;"
