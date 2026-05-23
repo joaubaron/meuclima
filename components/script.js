@@ -889,7 +889,7 @@ const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase
 if (info) {
 info.innerHTML = `
 <div style="text-align:center; font-size:0.80rem; line-height:1.4;">
-${emoji} ${capitalize(estacao)} até ${formatarDataLonga(end)} · ${nextEmoji} ${capitalize(next)} em ${textoRestante}
+${emoji} ${capitalize(estacao)} até ${formatarDataLonga(end)}  ${nextEmoji} ${capitalize(next)} em ${textoRestante}
 </div>
 `;
 }
