@@ -1,1895 +1,1658 @@
 [
-  {
-    "_comentario": "Faixa frio"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Chocolate quente",
-    "descricao": "Leite cremoso, chocolate em pó e açúcar aquecidos até ficarem homogêneos",
-    "emoji": "🍫"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Fondue de queijo",
-    "descricao": "Queijo derretido com vinho branco e amido em fogo baixo delicado",
-    "emoji": "🫕"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Caldo verde",
-    "descricao": "Batata cozida, couve fatiada, alho e linguiça apurados lentamente e saborosos",
-    "emoji": "🥣"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Quentão sem álcool",
-    "descricao": "Gengibre, cravo, canela e suco de frutas fervidos com açúcar aromático",
-    "emoji": "🍵"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Canjica cremosa",
-    "descricao": "Milho branco cozido com leite condensado, coco e cravo envolventes",
-    "emoji": "🍚"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Lasanha à bolonhesa",
-    "descricao": "Massa em camadas com carne moída, molho e queijo gratinado saboroso",
-    "emoji": "🍝"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Sopa gratinada",
-    "descricao": "Cebola caramelizada com caldo, pão tostado e queijo gratinado quente",
-    "emoji": "🍲"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Café coado",
-    "descricao": "Pó moído fresco coado em água quente para aroma intenso",
-    "emoji": "☕"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Macarrão ao forno",
-    "descricao": "Massa com molho branco, ervas e queijo gratinado até dourar",
-    "emoji": "🍲"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Cuscuz nordestino com ovo",
-    "descricao": "Flocos de milho no vapor servidos com manteiga e ovo frito saboroso",
-    "emoji": "🍳"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Polenta cremosa com ragu",
-    "descricao": "Fubá cozido no leite com ragu de carne bem temperado",
-    "emoji": "🌽"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Mingau de aveia",
-    "descricao": "Aveia cozida com leite, açúcar e canela para sabor suave",
-    "emoji": "🥣"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Sopa de mandioca com carne",
-    "descricao": "Mandioca cozida com carne desfiada e cheiro-verde fresco",
-    "emoji": "🥔"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Vinho quente",
-    "descricao": "Vinho tinto aquecido com especiarias, frutas e açúcar aromático",
-    "emoji": "🍷"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Chá de hibisco com cravo",
-    "descricao": "Hibisco e cravo em infusão com casca de maçã quente e suave",
-    "emoji": "🍵"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Torta de frango cremosa",
-    "descricao": "Frango desfiado com requeijão em massa assada até dourar",
-    "emoji": "🥧"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Sopa de abóbora com gengibre",
-    "descricao": "Abóbora cozida com gengibre e cebola para sabor agridoce",
-    "emoji": "🎃"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Feijão tropeiro",
-    "descricao": "Feijão refogado com ovos, farinha e torresmo crocante",
-    "emoji": "🍛"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Sopa de lentilha",
-    "descricao": "Lentilhas cozidas com legumes, alho e louro para sabor rico",
-    "emoji": "🫘"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Chá de camomila com mel",
-    "descricao": "Camomila infusionada com mel e limão para acalmar suavemente",
-    "emoji": "🍯"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Panquecas recheadas",
-    "descricao": "Massa fina com recheio de carne moída and molho de tomate",
-    "emoji": "🥞"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Escondidinho de carne seca",
-    "descricao": "Carne seca desfiada com purê de mandioca e queijo gratinado",
-    "emoji": "🥘"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Arroz carreteiro",
-    "descricao": "Arroz refogado com carne seca, alho e cheiro-verde fresco",
-    "emoji": "🍚"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Pão de queijo quentinho",
-    "descricao": "Polvilho, queijo curado e ovos assados até inflar macios",
-    "emoji": "🧀"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Creme de milho",
-    "descricao": "Milho batido com leite, cebola e manteiga até textura suave",
-    "emoji": "🌽"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Sopa de ervilha com bacon",
-    "descricao": "Ervilhas cozidas com bacon, cebola e temperos aromáticos",
-    "emoji": "🥓"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Cappuccino cremoso",
-    "descricao": "Café forte com leite vaporizado, açúcar e canela delicada",
-    "emoji": "☕"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Carne de panela com batatas",
-    "descricao": "Carne cozida lentamente com batatas e caldo grosso saboroso",
-    "emoji": "🥩"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Pudim de pão quentinho",
-    "descricao": "Pão amanhecido com leite, ovos e açúcar assado cremoso",
-    "emoji": "🍮"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Vaca atolada",
-    "descricao": "Carne bovina cozida com mandioca e temperos encorpados",
-    "emoji": "🥘"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Caldinho de feijão",
-    "descricao": "Feijão cozido e temperos, bater e aquecer até caldo",
-    "emoji": "🥣"
-  },
-  {
-    "faixa": "frio",
-    "nome": "Sopa de ervilha",
-    "descricao": "Ervilhas, temperos e caldo, cozinhar e bater até creme",
-    "emoji": "🥣"
-  },
-  {
-    "_comentario": "Faixa fresco"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Café aromático",
-    "descricao": "Filtrado lentamente com canela, noz-moscada e leve doçura acolhedora",
-    "emoji": "☕"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Panqueca de banana",
-    "descricao": "Feita na frigideira com banana amassada, ovos frescos e mel natural",
-    "emoji": "🥞"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Torrada com abacate",
-    "descricao": "Pão crocante com abacate temperado, limão fresco e azeite extra virgem",
-    "emoji": "🥑"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Torta de frango",
-    "descricao": "Assada com frango desfiado, ervas aromáticas e creme leve",
-    "emoji": "🥧"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Omelete com ervas",
-    "descricao": "Ovos batidos com ervas frescas selecionadas e pitada de sal",
-    "emoji": "🍳"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Crepioca recheada",
-    "descricao": "Tapioca macia com ovo batido e queijo derretido no fogo",
-    "emoji": "🌮"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Tapioca de queijo",
-    "descricao": "Goma hidratada recheada com queijo quente e salpicado saboroso",
-    "emoji": "🧀"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Bolo de cenoura com cobertura",
-    "descricao": "Cenoura ralada, masa doce e calda quente de chocolate intenso",
-    "emoji": "🍰"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Sopa de legumes",
-    "descricao": "Caldo fervido com legumes picados e tempero leve e aromático",
-    "emoji": "🥕"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Arroz carreteiro",
-    "descricao": "Carne seca, arroz refogado e cheiro-verde fresco picado",
-    "emoji": "🍛"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Cuscuz com ovo",
-    "descricao": "Milho flocado no vapor com ovo cozido e toque de sal",
-    "emoji": "🍽️"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Muffin salgado",
-    "descricao": "Assado no forno com ovos, recheio e farinha temperada saborosa",
-    "emoji": "🧁"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Pão de queijo",
-    "descricao": "Queijo ralado, polvilho e ovos batidos assados no forno quente",
-    "emoji": "🧀"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Café com leite e pão na chapa",
-    "descricao": "Café forte misturado ao leite e pão com manteiga tostado",
-    "emoji": "🥖"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Bolinho de chuva",
-    "descricao": "Massa doce frita com canela, açúcar e ovos frescos",
-    "emoji": "🍩"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Macarrão alho e óleo",
-    "descricao": "Espaguete cozido salteado com alho e azeite quente aromático",
-    "emoji": "🍝"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Risoto de cogumelos",
-    "descricao": "Arroz cremoso com cogumelos frescos e caldo quente saboroso",
-    "emoji": "🍄"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Batata recheada",
-    "descricao": "Assada no forno com recheio de queijo e ervas quentes",
-    "emoji": "🥔"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Espaguete à bolonhesa",
-    "descricao": "Molho com carne moída e tomate sobre massa firme cozida",
-    "emoji": "🍝"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Polenta cremosa com queijo",
-    "descricao": "Fubá cozido com leite, parmesão e manteiga quente derretida",
-    "emoji": "🥣"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Frango grelhado com legumes",
-    "descricao": "Peito marinado grelhado com legumes coloridos e frescos",
-    "emoji": "🍗"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Lasanha de berinjela",
-    "descricao": "Berinjela grelhada com camadas de molho e queijo cremoso",
-    "emoji": "🍆"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Torta de maçã morna",
-    "descricao": "Maçã fatiada com canela e massa assada no forno quente",
-    "emoji": "🥧"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Muffin de banana e aveia",
-    "descricao": "Banana madura batida com aveia e mel natural doce",
-    "emoji": "🧁"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Arroz de forno",
-    "descricao": "Arroz pronto misturado com legumes e queijo assado quente",
-    "emoji": "🍲"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Gratinado de abobrinha",
-    "descricao": "Abobrinha fatiada com queijo gratinado e creme suave",
-    "emoji": "🥒"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Café turco com cardamomo",
-    "descricao": "Café moído fino fervido lentamente com especiarias aromáticas",
-    "emoji": "☕"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Shakshuka",
-    "descricao": "Molho apimentado com ovos escalfados na panela quente",
-    "emoji": "🍳"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Arepas recheadas",
-    "descricao": "Massa de milho assada com recheio quente e queijo derretido",
-    "emoji": "🌽"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Moqueca de banana-da-terra",
-    "descricao": "Banana cozida em leite de coco e azeite de dendê aromático",
-    "emoji": "🍌"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Gallo pinto",
-    "descricao": "Feijão preto com arroz refogado e ervas frescas picadas",
-    "emoji": "🍚"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Dal indiano",
-    "descricao": "Lentilhas amarelas cozidas com especiarias e cebola dourada",
-    "emoji": "🍲"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Moussaka vegetariana",
-    "descricao": "Berinjela em camadas com molho branco e queijo gratinado",
-    "emoji": "🍆"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Nhoque de abóbora",
-    "descricao": "Massa macia com purê de abóbora e manteiga de sálvia fresca",
-    "emoji": "🥟"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Empanadas de queijo",
-    "descricao": "Massa assada fina com recheio cremoso de queijo derretido",
-    "emoji": "🥟"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Sopa tailandesa de coco",
-    "descricao": "Leite de coco fervido com legumes e gengibre fresco aromático",
-    "emoji": "🥥"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Arroz jollof",
-    "descricao": "Arroz cozido com molho de tomate, pimentão e temperos fortes",
-    "emoji": "🍛"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Pão sírio com homus",
-    "descricao": "Pão levemente tostado com pasta de grão-de-bico e tahine",
-    "emoji": "🫓"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Tamales de milho",
-    "descricao": "Massa de milho cozida em folha com recheio temperado saboroso",
-    "emoji": "🌽"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Caponata siciliana",
-    "descricao": "Berinjela cozida com tomate, azeitona e vinagre agridoce",
-    "emoji": "🍅"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Feijão tropeiro vegetariano",
-    "descricao": "Farofa úmida com feijão, couve refogada e ovo fresco",
-    "emoji": "🥬"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Bobó de cogumelos",
-    "descricao": "Cogumelos cozidos no dendê com leite de coco cremoso e temperos",
-    "emoji": "🍄"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Yakissoba vegetariano",
-    "descricao": "Macarrão salteado com legumes frescos e molho shoyu quente",
-    "emoji": "🍜"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Cachapa",
-    "descricao": "Panqueca doce de milho com recheio cremoso de queijo derretido",
-    "emoji": "🥞"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Aloo paratha",
-    "descricao": "Massa indiana recheada com batata amassada e especiarias fortes",
-    "emoji": "🥔"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Creme de abóbora com gengibre",
-    "descricao": "Abóbora cozida com gengibre fresco e creme suave delicado",
-    "emoji": "🎃"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Tofu grelhado com legumes",
-    "descricao": "Tofu dourado com legumes coloridos e azeite aromático",
-    "emoji": "🍱"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Quiche de alho-poró",
-    "descricao": "Massa assada com recheio cremoso de alho-poró refogado",
-    "emoji": "🥧"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Chá de frutas vermelhas",
-    "descricao": "Infusão quente de frutas vermelhas com mel natural doce",
-    "emoji": "🍓"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Escondidinho de legumes",
-    "descricao": "Purê de batata com legumes salteados e camada gratinada crocante",
-    "emoji": "🥘"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Ovo poché com torradas",
-    "descricao": "Ovo escalfado servido sobre pão tostado com manteiga fresca",
-    "emoji": "🍳"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Panqueca integral com mel",
-    "descricao": "Farinha integral batida com ovos e mel, frita levemente dourada",
-    "emoji": "🥞"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Torta de cogumelos",
-    "descricao": "Massa assada com cogumelos salteados e ervas aromáticas frescas",
-    "emoji": "🍄"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Sopa de cenoura com curry",
-    "descricao": "Cenoura cozida com curry suave e caldo cremoso aromático",
-    "emoji": "🥕"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Tofu crocante com gergelim",
-    "descricao": "Tofu empanado com gergelim frito até dourar crocante",
-    "emoji": "🧆"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Arroz com lentilhas e cebola",
-    "descricao": "Arroz soltinho com lentilhas e cebola caramelizada doce",
-    "emoji": "🫘"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Bolo de fubá cremoso",
-    "descricao": "Fubá com leite e açúcar, assado com textura macia e suave",
-    "emoji": "🍰"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Wrap de vegetais grelhados",
-    "descricao": "Tortilla recheada com legumes grelhados e molho leve refrescante",
-    "emoji": "🌯"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Chá de gengibre com limão",
-    "descricao": "Infusão fervente de gengibre fresco e limão espremido natural",
-    "emoji": "🍋"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Grão-de-bico ao curry",
-    "descricao": "Grão-de-bico cozido com curry amarelo e leite de coco",
-    "emoji": "🍲"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Arroz de couve-flor",
-    "descricao": "Couve-flor ralada, alho refogado e azeite quente aromático",
-    "emoji": "🥦"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Ratatouille rústico",
-    "descricao": "Legumes coloridos assados com ervas frescas e tomate fresco",
-    "emoji": "🍆"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Chá de capim-santo com mel",
-    "descricao": "Capim-santo infundido em água quente com mel natural",
-    "emoji": "🌿"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Batata-doce assada com alecrim",
-    "descricao": "Batata-doce fatiada com alecrim e azeite extra virgem assada",
-    "emoji": "🍠"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Sopa de espinafre com batata",
-    "descricao": "Espinafre refogado com batata e caldo temperado leve",
-    "emoji": "🥬"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Lasanha de abobrinha",
-    "descricao": "Abobrinha grelhada em camadas com molho e queijo cremoso",
-    "emoji": "🥒"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Tapioca de coco com mel",
-    "descricao": "Goma de tapioca com coco ralado e mel aquecido doce",
-    "emoji": "🥥"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Bolinho de milho",
-    "descricao": "Milho triturado, farinha e ovos fritos em óleo quente",
-    "emoji": "🌽"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Biscoito de polvilho",
-    "descricao": "Polvilho escaldado com óleo quente e forno médio",
-    "emoji": "🥨"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Berinjela recheada ao forno",
-    "descricao": "Berinjela assada com recheio de legumes temperados frescos",
-    "emoji": "🍆"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Creme de chuchu com ervas",
-    "descricao": "Chuchu cozido batido com creme leve e ervas frescas",
-    "emoji": "🥣"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Espaguete de pupunha",
-    "descricao": "Tiras de pupunha refogadas com azeite e manjericão fresco",
-    "emoji": "🌿"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Polenta cremosa com cogumelos",
-    "descricao": "Polenta macia servida com cogumelos refogados na manteiga",
-    "emoji": "🍄"
-  },
-  {
-    "faixa": "fresco",
-    "nome": "Lasanha de espinafre e ricota",
-    "descricao": "Massa com espinafre, ricota e molho branco gratinado",
-    "emoji": "🍝"
-  },
-  {
-    "_comentario": "Faixa agradável"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Pão de queijo",
-    "descricao": "Polvilho, queijo, ovos e leite, misturar, modelar e assar",
-    "emoji": "🧀"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Salada morna de grãos",
-    "descricao": "Grãos cozidos, cebola, alho e azeite, refogar e servir morno",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Bolo de cenoura",
-    "descricao": "Cenoura ralada, farinha, ovos e açúcar, bater, assar e cobrir",
-    "emoji": "🍰"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Omelete recheada",
-    "descricao": "Ovos, sal e queijo, bater, fritar e rechear à escolha",
-    "emoji": "🍳"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Cuscuz com manteiga",
-    "descricao": "Milho para cuscuz, sal e manteiga, cozinhar e adicionar manteiga",
-    "emoji": "🌽"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Tapioca com queijo coalho",
-    "descricao": "Goma hidratada e queijo coalho, espalhar e grelhar até derreter",
-    "emoji": "🧀"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Bolo de milho cremoso",
-    "descricao": "Milho verde, leite, ovos e açúcar, bater e assar até firmar",
-    "emoji": "🌽"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Canja de galinha",
-    "descricao": "Frango, arroz, cebola e temperos, cozinhar até macio",
-    "emoji": "🍲"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Escondidinho de carne seca",
-    "descricao": "Carne seca desfiada, purê de mandioca, montar e gratinar",
-    "emoji": "🥘"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Crepioca de presunto e queijo",
-    "descricao": "Goma de tapioca, ovo, presunto e queijo, misturar, fritar e rechear",
-    "emoji": "🥞"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Bife acebolado com arroz",
-    "descricao": "Bife, cebola e arroz, grelhar, refogar cebola e servir",
-    "emoji": "🍛"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Quibe assado recheado",
-    "descricao": "Carne moída, trigo e temperos, rechear e assar até dourar",
-    "emoji": "🥙"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Moqueca de peixe",
-    "descricao": "Peixe, leite de coco, cebola e azeite, cozinhar e servir quente",
-    "emoji": "🐟"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Massa ao alho e óleo",
-    "descricao": "Macarrão, alho e azeite, cozinhar e dourar alho",
-    "emoji": "🍝"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Sopa de lentilha com calabresa",
-    "descricao": "Lentilha, calabresa, cebola e temperos, cozinhar e servir quente",
-    "emoji": "🥣"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Arroz à grega",
-    "descricao": "Arroz, legumes e ervas, cozinhar e misturar colorido",
-    "emoji": "🍚"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Empadão de frango",
-    "descricao": "Massa amanteigada, frango refogado, rechear e assar",
-    "emoji": "🥧"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Hambúrguer caseiro",
-    "descricao": "Carne moída, temperos e pão, moldar, grelhar e montar",
-    "emoji": "🍔"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Baião de dois",
-    "descricao": "Arroz, feijão, queijo coalho e temperos, cozinhar e misturar",
-    "emoji": "🍛"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Strogonoff de carne",
-    "descricao": "Tiras de carne, creme de leite e molho, refogar e cozinhar",
-    "emoji": "🥩"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Macarronada com molho branco",
-    "descricao": "Macarrão, leite, farinha e manteiga, preparar molho e misturar",
-    "emoji": "🍝"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Ovo mexido com tomate",
-    "descricao": "Ovos, tomate e sal, bater e cozinhar até firme",
-    "emoji": "🍳"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Panqueca de carne moída",
-    "descricao": "Massa fina, carne moída refogada, rechear e enrolar",
-    "emoji": "🌮"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Torta de atum",
-    "descricao": "Massa, atum, maionese e temperos, misturar e assar",
-    "emoji": "🐟"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Salsichão com mostarda",
-    "descricao": "Salsichão grelhado e mostarda, preparar e servir quente",
-    "emoji": "🌭"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Arroz de forno",
-    "descricao": "Arroz, queijo, legumes e temperos, misturar e gratinar",
-    "emoji": "🍲"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Feijão tropeiro",
-    "descricao": "Feijão, farinha, couve e ovo, misturar e refogar",
-    "emoji": "🥘"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Risoto simples de frango",
-    "descricao": "Arroz arbóreo, caldo, frango e queijo, cozinhar até cremoso",
-    "emoji": "🍚"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Omelete com batata palha",
-    "descricao": "Ovos, batata palha e temperos, bater, fritar e servir crocante",
-    "emoji": "🍳"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Moqueca de banana da terra",
-    "descricao": "Banana da terra, leite de coco e azeite, cozinhar e servir quente",
-    "emoji": "🍌"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Falafel com homus",
-    "descricao": "Grão-de-bico, especiarias e tahine, fritar e servir com homus",
-    "emoji": "🥙"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Escondidinho de legumes",
-    "descricao": "Legumes cozidos, purê de mandioca, montar e gratinar",
-    "emoji": "🥕"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Cuscuz paulista vegetariano",
-    "descricao": "Milho cozido, legumes e temperos, misturar e servir quente ou frio",
-    "emoji": "🌽"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Grão-de-bico ao curry",
-    "descricao": "Grão-de-bico, curry e especiarias, cozinhar e servir com arroz",
-    "emoji": "🍛"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Risoto de cogumelos",
-    "descricao": "Cogumelos, arroz arbóreo e caldo, cozinhar até cremoso",
-    "emoji": "🍄"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Feijão tropeiro vegetariano",
-    "descricao": "Feijão, farinha, tofu e couve, refogar e misturar",
-    "emoji": "🥘"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Yakissoba de legumes",
-    "descricao": "Macarrão, legumes e molho oriental, saltear e misturar",
-    "emoji": "🍜"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Massa com pesto",
-    "descricao": "Manjericão, alho, nozes e azeite, bater e misturar na massa",
-    "emoji": "🌿"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Tofu grelhado com legumes",
-    "descricao": "Tofu, legumes, grelhar e temperar a gosto",
-    "emoji": "🍱"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Quibe de abóbora",
-    "descricao": "Abóbora cozida, trigo para quibe e temperos, assar até dourar",
-    "emoji": "🎃"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Chili vegetariano",
-    "descricao": "Feijões, tomates e especiarias, cozinhar até apurar sabor",
-    "emoji": "🌶️"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Arroz integral com brócolis",
-    "descricao": "Arroz integral, brócolis e temperos, cozinhar junto e servir",
-    "emoji": "🥦"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Esfiha de escarola",
-    "descricao": "Massa fina, escarola temperada, rechear e assar até dourar",
-    "emoji": "🥬"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Panqueca de espinafre e ricota",
-    "descricao": "Espinafre, ricota e masa agradável, misturar, cozinhar e enrolar",
-    "emoji": "🌿"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Baião de dois vegetariano",
-    "descricao": "Arroz, feijão e legumes, cozinhar e temperar bem",
-    "emoji": "🍛"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Pizza margherita",
-    "descricao": "Massa, molho, mussarela e manjericão, montar e assar",
-    "emoji": "🍕"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Sopa de mandioquinha",
-    "descricao": "Mandioquinha, caldo e temperos, cozinhar, bater e servir quente",
-    "emoji": "🥣"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Torta de legumes",
-    "descricao": "Legumes refogados e masa agradável, rechear e assar crocante",
-    "emoji": "🥧"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Polenta cremosa com queijo",
-    "descricao": "Fubá, caldo e queijo ralado, cozinhar e misturar cremoso",
-    "emoji": "🧀"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Espaguete com legumes salteados",
-    "descricao": "Espaguete, legumes frescos e azeite, cozinhar, saltear e misturar",
-    "emoji": "🍝"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Mingau de aveia com banana",
-    "descricao": "Aveia, leite e banana, cozinhar e adoçar naturalmente",
-    "emoji": "🍌"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Tostex de queijo e tomate",
-    "descricao": "Pão, queijo e tomate, montar e tostar até derreter",
-    "emoji": "🥪"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Arroz de lentilhas",
-    "descricao": "Arroz, lentilhas e temperos, cozinhar juntos até macio",
-    "emoji": "🍚"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Torta de palmito",
-    "descricao": "Palmito cremoso, masa agradável, rechear e assar até dourar",
-    "emoji": "🥧"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Massa com legumes grelhados",
-    "descricao": "Legumes grelhados e masa cozida, misturar e temperar",
-    "emoji": "🍝"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Cenoura glaceada",
-    "descricao": "Cenouras, manteiga e açúcar, cozinhar até caramelizar",
-    "emoji": "🥕"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Frittata de legumes",
-    "descricao": "Ovos e legumes picados, bater e cozinhar até firmar",
-    "emoji": "🍳"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Panqueca americana com mel",
-    "descricao": "Massa fofinha, mel natural, preparar e servir com mel",
-    "emoji": "🥞"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Gratinado de batata",
-    "descricao": "Batatas fatiadas, molho branco e queijo, assar até dourar",
-    "emoji": "🥔"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Arroz cremoso de legumes",
-    "descricao": "Arroz, molho cremoso e legumes, misturar e aquecer",
-    "emoji": "🍚"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Escondidinho de frango",
-    "descricao": "Frango desfiado, purê cremoso, montar e gratinar",
-    "emoji": "🥘"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Bolo de fubá com erva-doce",
-    "descricao": "Fubá, açúcar, ovos e erva-doce, misturar e assar",
-    "emoji": "🍰"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Salada de batata com maionese",
-    "descricao": "Batatas cozidas, maionese e ervas, misturar e servir",
-    "emoji": "🥔"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Torta integral de espinafre",
-    "descricao": "Massa integral, espinafre refogado, rechear e assar",
-    "emoji": "🥬"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Creme de abóbora com gengibre",
-    "descricao": "Abóbora, gengibre e temperos, cozinhar, bater e servir",
-    "emoji": "🎃"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Bolo de banana com aveia",
-    "descricao": "Bananas maduras, aveia e açúcar, misturar e assar",
-    "emoji": "🍌"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Pão com ovo e queijo",
-    "descricao": "Pão, ovo frito e queijo, montar e servir quente",
-    "emoji": "🥪"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Nhoque ao sugo",
-    "descricao": "Nhoque, molho de tomate e manjericão, cozinhar e servir",
-    "emoji": "🍅"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Espetinho de camarão grelhado",
-    "descricao": "Tempere camarões com limão e alho, grelhe rápido, sirva quente.",
-    "emoji": "🦐"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Espetinho de frango com ervas",
-    "descricao": "Tempere frango com ervas, grelhe até dourar, sirva quente.",
-    "emoji": "🍗"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Espetinho de tofu com legumes",
-    "descricao": "Grelhe tofu com legumes, tempere com molho shoyu, sirva quente.",
-    "emoji": "🍢"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Espetinho de camarão",
-    "descricao": "Camarão temperado com especiarias e grelhado na brasa quente",
-    "emoji": "🍤"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Espetinho misto",
-    "descricao": "Carne, legumes e queijo grelhados na brasa, temperados no ponto",
-    "emoji": "🍢"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Camarão ao alho e óleo",
-    "descricao": "Camarão refogado no alho dourado com toque de limão fresco",
-    "emoji": "🍤"
-  },
-  {
-    "faixa": "agradável",
-    "nome": "Churrasco frio",
-    "descricao": "Carnes grelhadas na brasa servidas frias, temperadas e suculentas",
-    "emoji": "🥩"
-  },
-  {
-    "_comentario": "Faixa calor"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Tartare de atum",
-    "descricao": "Pique atum fresco, tempere com limão, sal e pimenta, sirva gelado.",
-    "emoji": "🐟"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Rolinho primavera",
-    "descricao": "Hidrate folha de arroz, recheie com legumes, enrole firme e sirva.",
-    "emoji": "🥢"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Chá gelado de pêssego",
-    "descricao": "Fatie pêssegos frescos, infunda em água com mel, sirva frio.",
-    "emoji": "🍑"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Espaguete de abobrinha",
-    "descricao": "Corte abobrinha em fios, tempere com azeite e ervas, sirva logo.",
-    "emoji": "🥒"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Tartar de tomate com manjericão",
-    "descricao": "Pique tomates maduros, misture manjericão, tempere com azeite.",
-    "emoji": "🍅"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Palitinhos de cenoura e pepino",
-    "descricao": "Corte cenoura e pepino, lave bem, sirva fresquinho.",
-    "emoji": "🥒"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Tapioca fria com coco e mel",
-    "descricao": "Prepare tapioca, esfrie, cubra com coco e mel.",
-    "emoji": "🥥"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Espetinho caprese",
-    "descricao": "Monte espetinhos, intercale tomate, mussarela e manjericão.",
-    "emoji": "🍢"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Chá gelado de frutas vermelhas",
-    "descricao": "Misture frutas vermelhas, prepare chá gelado, adicione limão.",
-    "emoji": "🫐"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Gazpacho de melancia",
-    "descricao": "Bata melancia, tomate e pepino, tempere com azeite, sirva gelado.",
-    "emoji": "🍉"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de pepino com gergelim",
-    "descricao": "Fatie pepino, salpique gergelim, tempere com shoyu e azeite.",
-    "emoji": "🥒"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Sorvete de manga",
-    "descricao": "Congele mangas maduras, bata no processador, sirva sorvete.",
-    "emoji": "🥭"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Sopa fria de abacate",
-    "descricao": "Bata abacate com limão e iogurte, tempere com sal, sirva gelada.",
-    "emoji": "🥑"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Tapioca salgada fria",
-    "descricao": "Prepare tapioca, esfrie, recheie com requeijão e ervas.",
-    "emoji": "🌿"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Frappé de café",
-    "descricao": "Bata café forte, leite e gelo, bata até cremoso, sirva gelado.",
-    "emoji": "🧊"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Espetinho de frutas congeladas",
-    "descricao": "Monte espetinhos de frutas congeladas, sirva para refrescar.",
-    "emoji": "🍇"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Vinagrete de abacaxi",
-    "descricao": "Pique abacaxi, tempere com limão e pimenta, sirva fresco.",
-    "emoji": "🍍"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Café com leite gelado",
-    "descricao": "Misture café forte com leite gelado, acrescente gelo, sirva logo.",
-    "emoji": "🥛"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Gelatina com frutas",
-    "descricao": "Prepare gelatina, incorpore frutas, agradável para gelar.",
-    "emoji": "🍓"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Creme de papaia com cassis",
-    "descricao": "Bata papaia com licor, adicione gelo, bata até cremoso.",
-    "emoji": "🍈"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Panqueca fria recheada",
-    "descricao": "Cozinhe panquecas, recheie com frango e ervas, sirva fria.",
-    "emoji": "🥞"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Milkshake de morango",
-    "descricao": "Bata morangos com leite e sorvete, bata até cremoso, sirva gelado.",
-    "emoji": "🍓"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Suco verde com limão",
-    "descricao": "Bata couve, limão, maçã e água gelada, misture e sirva gelado.",
-    "emoji": "🍋"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Crepioca fria de atum",
-    "descricao": "Prepare crepioca, esfrie, recheie com atum e ervas.",
-    "emoji": "🥚"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Rolinho vietnamita",
-    "descricao": "Hidrate folha de arroz, recheie com vegetais e ervas, enrole firme.",
-    "emoji": "🥬"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de quinoa com legumes",
-    "descricao": "Cozinhe quinoa, misture com tomate, pepino e cebola, tempere.",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Ceviche de tilápia",
-    "descricao": "Marine tilápia no limão, adicione cebola e pimenta, sirva fresco.",
-    "emoji": "🐟"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Smoothie de abacaxi e hortelã",
-    "descricao": "Bata abacaxi com hortelã, acrescente gelo, sirva gelado.",
-    "emoji": "🍍"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Tabule libanês",
-    "descricao": "Misture salsa, trigo e tomate, tempere com limão, sirva fresco.",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de melancia com feta",
-    "descricao": "Combine melancia com queijo feta, acrescente hortelã, tempere.",
-    "emoji": "🍉"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Sanduíche natural de frango",
-    "descricao": "Monte pão integral, recheie com frango, alface e tomate, sirva.",
-    "emoji": "🥪"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de grão-de-bico",
-    "descricao": "Misture grão cozido com cebola, tomate e coentro, tempere, sirva.",
-    "emoji": "🫘"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Poke bowl de salmão",
-    "descricao": "Sirva salmão cru sobre arroz, adicione abacate e shoyu, finalize.",
-    "emoji": "🍣"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Caprese com pesto",
-    "descricao": "Monte tomate e mussarela, regue pesto, sirva logo.",
-    "emoji": "🍅"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de rúcula com manga",
-    "descricao": "Misture rúcula com manga, tempere com limão e azeite, sirva.",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Cuscuz marroquino frio",
-    "descricao": "Misture cuscuz cozido com legumes, regue azeite, sirva gelado.",
-    "emoji": "🍲"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Tapioca doce fria com frutas",
-    "descricao": "Prepare tapioca, esfrie, cubra com frutas e mel.",
-    "emoji": "🥥"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de batata doce",
-    "descricao": "Cozinhe batata doce, misture com cebola e cheiro-verde, sirva.",
-    "emoji": "🍠"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de lentilha com hortelã",
-    "descricao": "Cozinhe lentilha, misture com hortelã e tomate, tempere.",
-    "emoji": "🍲"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Sanduíche de pepino e cream cheese",
-    "descricao": "Monte pão com pepino, espalhe cream cheese, sirva fresco.",
-    "emoji": "🥪"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de macarrão integral",
-    "descricao": "Cozinhe macarrão, misture com tomate, azeitonas e azeite, sirva.",
-    "emoji": "🍝"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Sushi vegetariano",
-    "descricao": "Enrole arroz com pepino e abacate, envolva em alga, corte e sirva.",
-    "emoji": "🍣"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de manga com pimenta",
-    "descricao": "Fatie manga, tempere com pimenta e limão, sirva fresca.",
-    "emoji": "🥭"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Sanduíche de abacate e tomate",
-    "descricao": "Espalhe abacate no pão, adicione tomate, sirva.",
-    "emoji": "🥪"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de repolho com maçã",
-    "descricao": "Misture repolho com maçã, tempere com vinagre, sirva fresca.",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Picolé natural de frutas",
-    "descricao": "Bata frutas frescas, congele em palitos, sirva gelado.",
-    "emoji": "🍧"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de couve com laranja",
-    "descricao": "Fatie couve e laranja, tempere com azeite, sirva fresca.",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Guacamole com chips de milho",
-    "descricao": "Amasse abacate com limão e cebola, sirva com chips crocantes.",
-    "emoji": "🥑"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Tabule com grão-de-bico",
-    "descricao": "Misture trigo, salsa e grão-de-bico, tempere, sirva fresca.",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de arroz integral",
-    "descricao": "Cozinhe arroz integral, misture com tomate, pepino e azeite, sirva.",
-    "emoji": "🍚"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de alface americana com frutas",
-    "descricao": "Misture alface crocante com frutas, tempere com molho agradável, sirva.",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Ceviche vegetariano de cogumelos",
-    "descricao": "Marine cogumelos no limão, adicione cebola e pimenta, sirva.",
-    "emoji": "🍄"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Batata chips assada",
-    "descricao": "Fatie batatas finamente, tempere com azeite e sal, asse crocante.",
-    "emoji": "🥔"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Suco detox de melancia e hortelã",
-    "descricao": "Bata melancia com hortelã e água, misture bem, sirva gelado.",
-    "emoji": "🍉"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de beterraba com laranja",
-    "descricao": "Cozinhe beterraba, misture com laranja, tempere com azeite e sal.",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de pepino com iogurte",
-    "descricao": "Fatie pepino, misture com iogurte e hortelã, sirva fresca.",
-    "emoji": "🥒"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Pão sírio com homus",
-    "descricao": "Sirva pão sírio, acompanhe com pasta de grão-de-bico, ótimo para petiscar.",
-    "emoji": "🫓"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de grãos com azeite",
-    "descricao": "Misture grãos cozidos variados, regue azeite e ervas, sirva fresca.",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de tomate cereja e manjericão",
-    "descricao": "Misture tomate cereja cortado, tempere com manjericão e azeite.",
-    "emoji": "🍅"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Smoothie de morango e banana",
-    "descricao": "Bata morango e banana com leite, bata até textura cremosa, sirva gelado.",
-    "emoji": "🍓"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de repolho e maçã verde",
-    "descricao": "Misture repolho roxo fatiado, adicione maçã verde, tempere com vinagre.",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Sushi de pepino e abacate",
-    "descricao": "Enrole pepino e abacate no arroz, envolva em alga, corte e sirva.",
-    "emoji": "🥒"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Salada de alface americana",
-    "descricao": "Combine alface crocante com tomate fatiado, tempere, sirva fresca.",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Guacamole com tomate e cebola",
-    "descricao": "Amasse abacate, misture tomate e cebola, tempere com limão.",
-    "emoji": "🥑"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Wrap de alface com frango grelhado",
-    "descricao": "Enrole frango grelhado em folhas de alface, acrescente molho, sirva.",
-    "emoji": "🌯"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Iogurte com granola e mel",
-    "descricao": "Iogurte natural gelado com granola crocante e mel suave",
-    "emoji": "🥣"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Suco de laranja e cenoura",
-    "descricao": "Laranja e cenoura crua, bater, coar e servir gelado",
-    "emoji": "🧃"
-  },
-  {
-    "faixa": "calor",
-    "nome": "Tabule refrescante",
-    "descricao": "Trigo hidratado, salsinha, tomate e hortelã, misturar e servir gelado",
-    "emoji": "🥗"
-  },
-  {
-    "_comentario": "Faixa intenso"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Picolé natural",
-    "descricao": "Frutas frescas batidas, congeladas rapidamente e sem adição de açúcar",
-    "emoji": "🍧"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Tapioca com coco",
-    "descricao": "Tapioca preparada na chapa, com coco ralado fresco e toque delicado",
-    "emoji": "🥥"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Ceviche simples",
-    "descricao": "Peixe cru marinado no limão com cebola roxa picada e ervas",
-    "emoji": "🐟"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Chá gelado com frutas",
-    "descricao": "Chá preto gelado infusionado com frutas frescas e leve adoçamento",
-    "emoji": "🧊"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de melancia",
-    "descricao": "Melancia doce combinada com hortelã fresca e queijo feta cremoso",
-    "emoji": "🍉"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de rúcula com laranja",
-    "descricao": "Rúcula fresca amarga combinada com laranja doce e vinagrete leve",
-    "emoji": "🍊"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Suco detox verde",
-    "descricao": "Couve batida com limão fresco e maçã para adoçar naturalmente",
-    "emoji": "🥬"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Peixe grelhado com limão",
-    "descricao": "Peixe fresco grelhado e finalizado com limão espremido na hora",
-    "emoji": "🐟"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de grãos frios",
-    "descricao": "Mix de lentilhas e feijão temperados com ervas frescas e limão",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Tabule com hortelã",
-    "descricao": "Trigo para quibe misturado com tomate picado e hortelã fresca",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Carpaccio de carne",
-    "descricao": "Fatias finas de carne crua temperadas com azeite e limão fresco",
-    "emoji": "🥩"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Sanduíche natural de frango",
-    "descricao": "Frango desfiado com alface crocante e pão integral macio",
-    "emoji": "🥪"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Torta fria de legumes",
-    "descricao": "Legumes cozidos e gelados sobre massa leve para contraste agradável",
-    "emoji": "🥧"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de macarrão com atum",
-    "descricao": "Macarrão cozido misturado com atum, tomate fresco e ervas",
-    "emoji": "🍝"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Sorvete de iogurte",
-    "descricao": "Iogurte congelado batido com frutas frescas, cremoso e leve",
-    "emoji": "🍦"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Peixe assado com ervas",
-    "descricao": "Peixe assado no forno com tomilho e alecrim frescos para aroma",
-    "emoji": "🐟"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Camarão empanado gelado",
-    "descricao": "Camarão crocante empanado, servido frio para refrescar paladar",
-    "emoji": "🍤"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de pepino com iogurte",
-    "descricao": "Pepino fatiado combinado com molho cremoso de iogurte temperado",
-    "emoji": "🥒"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Wrap de peru com salada",
-    "descricao": "Tortilla recheada com peru fatiado, alface e tomate frescos",
-    "emoji": "🌯"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de batata com maionese",
-    "descricao": "Batata cozida misturada com maionese e ervas frescas picadas",
-    "emoji": "🥔"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Ceviche de polvo",
-    "descricao": "Polvo marinado no limão com cebola roxa para sabor intenso",
-    "emoji": "🐙"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de quinoa com legumes",
-    "descricao": "Quinoa cozida misturada com tomate e pepino frescos picados",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Ceviche vegano de jaca",
-    "descricao": "Jaca desfiada marinada no limão com pimenta para sabor marcante",
-    "emoji": "🌱"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Gazpacho andaluz",
-    "descricao": "Sopa fria batida de tomate, pepino e alho com textura suave",
-    "emoji": "🍅"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Tabule com hortelã fresca",
-    "descricao": "Trigo para quibe temperado com hortelã fresca e limão espremido",
-    "emoji": "🌿"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de grão",
-    "descricao": "Grão-de-bico temperado com limão, cebola picada e ervas frescas",
-    "emoji": "🫘"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Tostada mexicana de feijão",
-    "descricao": "Tortilha crocante coberta com feijão temperado e queijo",
-    "emoji": "🌮"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada caprese vegana",
-    "descricao": "Tomate combinado com manjericão fresco e queijo de castanha cremoso",
-    "emoji": "🍅"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Smoothie verde detox",
-    "descricao": "Couve batida com maçã e limão para um toque refrescante",
-    "emoji": "🥬"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Sushi vegetariano",
-    "descricao": "Arroz temperado enrolado com pepino, abacate e cenoura frescos",
-    "emoji": "🍣"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de beterraba com laranja",
-    "descricao": "Beterraba cozida combinada com laranja e azeite aromático",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Açaí bowl",
-    "descricao": "Açaí batido com frutas variadas e granola crocante por cima",
-    "emoji": "🍧"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Wrap de legumes grelhados",
-    "descricao": "Tortilla recheada com legumes grelhados coloridos e temperados",
-    "emoji": "🌯"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Sopa fria de ervilhas",
-    "descricao": "Ervilhas batidas com hortelã fresca, servida gelada para refrescar",
-    "emoji": "🥣"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada mediterrânea",
-    "descricao": "Tomate, azeitonas pretas e pepino temperados com azeite puro",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Baba ganoush",
-    "descricao": "Pasta cremosa de berinjela defumada e temperada com alho",
-    "emoji": "🍆"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de lentilha",
-    "descricao": "Lentilha cozida com cebola refogada e ervas frescas para sabor",
-    "emoji": "🥗"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Cuscuz marroquino com legumes",
-    "descricao": "Cuscuz temperado com legumes coloridos e especiarias aromáticas",
-    "emoji": "🍲"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Espetinho de legumes",
-    "descricao": "Legumes variados grelhados na brasa e temperados com ervas",
-    "emoji": "🌽"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Melancia gelada em cubos",
-    "descricao": "Cubos de melancia frescos e gelados para refrescar o paladar",
-    "emoji": "🍉"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de abacate com tomate",
-    "descricao": "Abacate cremoso combinado com tomate fresco e azeite",
-    "emoji": "🥑"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Sanduíche de pepino",
-    "descricao": "Pão macio com pepino fatiado e cream cheese cremoso",
-    "emoji": "🥪"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Cenoura palito com hummus",
-    "descricao": "Cenoura crua cortada em palitos servida com pasta de grão-de-bico",
-    "emoji": "🥕"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Água de coco gelada",
-    "descricao": "Água de coco natural servida gelada direto do fruto fresco",
-    "emoji": "🥥"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Sorbet de manga",
-    "descricao": "Manga batida e congelada, cremosa e refrescante para o verão",
-    "emoji": "🍨"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Wrap de salmão defumado",
-    "descricao": "Tortilla recheada com salmão defumado e cream cheese suave",
-    "emoji": "🌯"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Tartar de atum",
-    "descricao": "Atum cru temperado com limão fresco e especiarias leves",
-    "emoji": "🐟"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Chips de batata-doce assada",
-    "descricao": "Batata-doce fatiada e assada até ficar crocante e dourada",
-    "emoji": "🥔"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Iogurte com granola e frutas",
-    "descricao": "Iogurte natural servido com granola crocante e frutas frescas",
-    "emoji": "🍓"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Tomate recheado frio",
-    "descricao": "Tomate fresco recheado com ingredientes gelados e saborosos",
-    "emoji": "🍅"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Espetinho caprese",
-    "descricao": "Tomate, mussarela fresca e manjericão no palito colorido",
-    "emoji": "🧀"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Café gelado com leite vegetal",
-    "descricao": "Café forte misturado com leite vegetal e servido gelado",
-    "emoji": "☕️"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Rolinho de alface com frango",
-    "descricao": "Alface recheada com frango temperado e saboroso, fresco",
-    "emoji": "🥬"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Suco de abacaxi com hortelã",
-    "descricao": "Abacaxi batido com hortelã fresca para um sabor refrescante",
-    "emoji": "🍍"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Panqueca fria recheada",
-    "descricao": "Panqueca recheada com ingredientes temperados e servida fria",
-    "emoji": "🥞"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Tartar de beterraba",
-    "descricao": "Beterraba crua picada com temperos frescos para sabor único",
-    "emoji": "🧄"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Wrap de ricota com espinafre",
-    "descricao": "Tortilla com ricota cremosa e espinafre fresco picado",
-    "emoji": "🌯"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Vinagrete com pão tostado",
-    "descricao": "Vinagrete temperado servido com pão crocante tostado na hora",
-    "emoji": "🥖"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Chips de maçã desidratada",
-    "descricao": "Maçã fatiada e desidratada até ficar crocante e dourada",
-    "emoji": "🍎"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Salada de manga com limão",
-    "descricao": "Manga fatiada com limão fresco e pimenta para sabor especial",
-    "emoji": "🥭"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Rolinho vietnamita",
-    "descricao": "Folha de arroz recheada com vegetais frescos e coloridos",
-    "emoji": "🥢"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Mousse gelado de maracujá",
-    "descricao": "Mousse cremosa e gelada com suco de maracujá fresco",
-    "emoji": "🍮"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Torradas com guacamole",
-    "descricao": "Pão torrado servido com pasta cremosa de abacate temperado",
-    "emoji": "🥑"
-  },
-  {
-    "faixa": "intenso",
-    "nome": "Pasta fria de tofu com ervas",
-    "descricao": "Tofu batido com ervas frescas para sabor leve e natural",
-    "emoji": "🌱"
-  }
+    {
+        "_comentario": "Faixa frio"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Ovo mexido",
+        "descricao": "Ovos batidos com sal na frigideira com manteiga quente e rápida",
+        "emoji": "🍳"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Pão com manteiga",
+        "descricao": "Pão francês fresquinho cortado com manteiga derretida na chapa",
+        "emoji": "🥖"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Chá de hortelã",
+        "descricao": "Folhas frescas de hortelã na água fervente para acalmar a noite",
+        "emoji": "🌿"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Mingau de leite",
+        "descricao": "Amido de milho cozido com leite e açúcar até engrossar suave",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Café com leite",
+        "descricao": "Café passado quente misturado com leite integral bem quentinho",
+        "emoji": "☕"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Queijo quente",
+        "descricao": "Duas fatias de pão de forma com queijo derretido na frigideira",
+        "emoji": "🧀"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Sopa de letrinha",
+        "descricao": "Macarrão de letrinha cozido no caldo de legumes leve e rápido",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Banana cozida",
+        "descricao": "Banana picada cozida no micro-ondas com canela salpicada doce",
+        "emoji": "🍌"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Misto quente",
+        "descricao": "Pão de forma com presunto e queijo tostado no ponto perfeito",
+        "emoji": "🥪"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Tapioca com manteiga",
+        "descricao": "Goma de tapioca aquecida na frigideira com manteiga derretida",
+        "emoji": "🫓"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Cuscuzeiro simples",
+        "descricao": "Flocão de milho hidratado e cozido no vapor com sal leve",
+        "emoji": "🌽"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Leite com canela",
+        "descricao": "Leite integral aquecido com uma pitada de canela aromática",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Torrada com ovo",
+        "descricao": "Pão de forma tostado com ovo frito de gema mole por cima",
+        "emoji": "🍳"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Chá de camomila",
+        "descricao": "Flores de camomila in infusão quente para um sono tranquilo",
+        "emoji": "🍵"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Sopa de fubá",
+        "descricao": "Fubá dissolvido na água e cozido com sal e alho refogado",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Arroz com ovo",
+        "descricao": "Arroz branco aquecido servido com ovo frito na hora simples",
+        "emoji": "🍚"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Purê de batata",
+        "descricao": "Batata cozida amassada com leite, manteiga e sal até macia",
+        "emoji": "🥔"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Noodles instantâneo",
+        "descricao": "Macarrão rápido cozido na água fervente com tempero leve",
+        "emoji": "🍜"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Chá de canela",
+        "descricao": "Canela em pau fervida na água para aquecer os dias frios",
+        "emoji": "🪵"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Omelete de queijo",
+        "descricao": "Ovos batidos com queijo prato fritos na frigideira rápida",
+        "emoji": "🍳"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Rap10 com queijo",
+        "descricao": "Massa leve aquecida na hora com queijo mussarela derretido",
+        "emoji": "🫓"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Pão com ovo mexido",
+        "descricao": "Pão francês recheado com ovos mexidos cremosos e salgados",
+        "emoji": "🥖"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Café preto puro",
+        "descricao": "Pó de café fresco filtrado na água fervente com açúcar",
+        "emoji": "☕"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Biscoito na chapa",
+        "descricao": "Biscoito de água e sal tostado na frigideira com manteiga",
+        "emoji": "🍪"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Macarrão com manteiga",
+        "descricao": "Massa cozida escorrida e misturada na manteiga derretida",
+        "emoji": "🍝"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Sopa de caneca",
+        "descricao": "Caldo desidratado dissolvido na água fervente direto na xícara",
+        "emoji": "☕"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Chá de erva-doce",
+        "descricao": "Sementes de erva-doce in infusão quente para digestão leve",
+        "emoji": "🍵"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Cacau quente",
+        "descricao": "Leite morno com cacau em pó puro e mel para adoçar leve",
+        "emoji": "☕"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Batata cozida",
+        "descricao": "Batata picada cozida na água com sal e azeite por cima",
+        "emoji": "🥔"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Pão com requeijão",
+        "descricao": "Pão de forma aquecido com requeijão cremoso derretido",
+        "emoji": "🍞"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Creme de aveia",
+        "descricao": "Flocos de aveia cozidos no leite desnatado com adoçante",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Chá de gengibre",
+        "descricao": "Gengibre fresco fervido na água para garganta esquentar",
+        "emoji": "🫚"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Ovo cozido quente",
+        "descricao": "Ovo cozido por sete minutos com sal e pimenta do reino",
+        "emoji": "🥚"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Tomate quente",
+        "descricao": "Rodelas de tomate salteadas no azeite com orégano seco",
+        "emoji": "🍅"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Pão com mortadela",
+        "descricao": "Pão francês com fatias de mortadela aquecidas na chapa",
+        "emoji": "🥖"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Caldo de galinha",
+        "descricao": "Cubo de caldo dissolvido na água quente com salsinha picada",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Chá de limão",
+        "descricao": "Água fervente com rodelas de limão e mel para garganta",
+        "emoji": "🍋"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Arroz de micro-ondas",
+        "descricao": "Arroz do dia anterior aquecido com um fio de água e tampa",
+        "emoji": "🍚"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Pipoca de panela",
+        "descricao": "Milho de pipoca estourado no óleo com sal bem crocante",
+        "emoji": "🍿"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Queijo coalho tostado",
+        "descricao": "Espeto de queijo coalho dourado na frigideira sem óleo",
+        "emoji": "🧀"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Chá preto quente",
+        "descricao": "Sachê de chá preto na água fervente para dar energia acordar",
+        "emoji": "☕"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Sopa de arroz leve",
+        "descricao": "Arroz cozido com bastante caldo de legumes para jantar leve",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Ovo pochê simples",
+        "descricao": "Ovo cozido na água fervente com vinagre sem casca macio",
+        "emoji": "🥚"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Pão pita quente",
+        "descricao": "Pão árabe aquecido na torradeira com azeite e sal fino",
+        "emoji": "🫓"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Cuscus de micro-ondas",
+        "descricao": "Milho flocado molhado cozido na caneca por um minuto apenas",
+        "emoji": "🌽"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Chá de boldo",
+        "descricao": "Folhas de boldo na água quente para aliviar o estômago",
+        "emoji": "🌿"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Inhame cozido",
+        "descricao": "Inhame sem casca cozido na água servido com manteiga sal",
+        "emoji": "🥔"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Omelete de clara",
+        "descricao": "Claras de ovos batidas e fritas com sal e cheiro-verde",
+        "emoji": "🍳"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Chá de maçã",
+        "descricao": "Cascas de maçã fervidas com cravo para aroma reconfortante",
+        "emoji": "🍎"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Macarrão alho e óleo",
+        "descricao": "Espaguete cozido com alho dourado no azeite rápido jantar",
+        "emoji": "🍝"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Abóbora cozida",
+        "descricao": "Cubos de abóbora no vapor com sal e um fio de azeite",
+        "emoji": "🎃"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Chá de capim-limão",
+        "descricao": "Capim-limão fresco in infusão quente para acalmar a mente",
+        "emoji": "🌿"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Pão sovado na chapa",
+        "descricao": "Fatia de pão sovado tostada na frigideira com margarina",
+        "emoji": "🍞"
+    },
+    {
+        "faixa": "frio",
+        "nome": "Sopa de batata limpa",
+        "descricao": "Caldo de batata batida com sal para estômago delicado",
+        "emoji": "🥣"
+    },
+    {
+        "_comentario": "Faixa fresco"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Fruta com aveia",
+        "descricao": "Meia mamão papaia picado com uma colher de aveia em flocos fina",
+        "emoji": "🥭"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Iogurte natural",
+        "descricao": "Iogurte integral firme servido puro no café da manhã rápido",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Suco de maracujá",
+        "descricao": "Polpa de maracujá batida com água fria e açúcar no ponto",
+        "emoji": "🥤"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Salada de alface",
+        "descricao": "Folhas de alface lavadas temperadas com limão e sal tempero",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Pão com queijo branco",
+        "descricao": "Pão integral com fatia de queijo minas fresco lanche leve",
+        "emoji": "🍞"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Vitamina de banana",
+        "descricao": "Banana batida com leite desnatado gelado no liquidificador",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Melancia em fatias",
+        "descricao": "Fatia grossa de melancia gelada cortada para refrescar dia",
+        "emoji": "🍉"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Gelatina de morango",
+        "descricao": "Gelatina pronta gelada servida in cubos doce sobremesa leve",
+        "emoji": "🍓"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Pepino com sal",
+        "descricao": "Pepino japonês fatiado fino com sal e gotas de vinagre",
+        "emoji": "🥒"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Água com limão",
+        "descricao": "Copo de água fria com meio limão espremido de manhã cedo",
+        "emoji": "🍋"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Tomate com azeite",
+        "descricao": "Tomate picado temperado com azeite de oliva e sal comum",
+        "emoji": "🍅"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Abacaxi picado",
+        "descricao": "Rodelas de abacaxi maduro cortadas in cubos para lanche",
+        "emoji": "🍍"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Pão com geleia",
+        "descricao": "Torrada leve com geleia de uva comprada pronta lanche doce",
+        "emoji": "🍞"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Cenoura ralada",
+        "descricao": "Cenoura crua ralada fina com gotas de limão para salada",
+        "emoji": "🥕"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Leite fermentado",
+        "descricao": "Garrafinha de leite fermentado gelado para o intestino bom",
+        "emoji": "🍼"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Maçã com casca",
+        "descricao": "Maçã nacional lavada e cortada em quatro partes lanche rápido",
+        "emoji": "🍎"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Água de coco",
+        "descricao": "Copo de água de coco de caixinha gelada para hidratar bem",
+        "emoji": "🥥"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Iogurte com mel",
+        "descricao": "Iogurte desnatado com um fio de mel puro por cima doce",
+        "emoji": "🍯"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Salada de tomate",
+        "descricao": "Tomate cereja cortado ao meio com sal e folhas manjericão",
+        "emoji": "🍅"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Melão em cubos",
+        "descricao": "Melão picado sem sementes bem gelado para comer de colher",
+        "emoji": "🍈"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Sanduíche de ricota",
+        "descricao": "Pão de forma com creme de ricota e sal lanche rápido noite",
+        "emoji": "🥪"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Suco de uva",
+        "descricao": "Suco de uva integral de garrafa servido com pedras gelo",
+        "emoji": "🍇"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Manga fatiada",
+        "descricao": "Manga palmer cortada em filetes doces para sobremesa leve",
+        "emoji": "🥭"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Coalhada simples",
+        "descricao": "Coalhada fresca servida fria com uma pitada de açúcar refi",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Pera lavada",
+        "descricao": "Pera portuguesa madura consumida inteira no lanche tarde",
+        "emoji": "🍐"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Suco de laranja",
+        "descricao": "Duas laranjas espremidas na hora no copo sem açúcar puro",
+        "emoji": "🍊"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Ricota amassada",
+        "descricao": "Ricota esfarelada com azeite e orégano para passar pão",
+        "emoji": "🧀"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Gelatina de limão",
+        "descricao": "Sobremesa rápida de gelatina verde gelada copinho plástico",
+        "emoji": "🟢"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Salada de repolho",
+        "descricao": "Repolho picado bem fino com vinagre branco e sal tempero",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Biscoito de polvilho",
+        "descricao": "Biscoito de polvilho salgado leve para beliscar à tarde",
+        "emoji": "🥨"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Água saborizada",
+        "descricao": "Jarros de água fria com rodelas de pepino e folhas menta",
+        "emoji": "🫙"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Morango com açúcar",
+        "descricao": "Morangos limpos cortados com uma colher rasa de açúcar",
+        "emoji": "🍓"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Sanduíche de alface",
+        "descricao": "Pão integral com maionese leve e folhas de alface fresca",
+        "emoji": "🥪"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Suco de limão",
+        "descricao": "Limonada rápida com água gelada, limão galego e açúcar",
+        "emoji": "🍋"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Kiwi descascado",
+        "descricao": "Kiwi cortado em rodelas verdes azedinhas lanche da tarde",
+        "emoji": "🥝"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Queijo minas puro",
+        "descricao": "Duas fatias de queijo minas frescal consumidas puras leve",
+        "emoji": "🧀"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Salada de rúcula",
+        "descricao": "Folhas de rúcula limpas com azeite de oliva e sal marinho",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Vitamina de mamão",
+        "descricao": "Mamão batido com leite integral bem gelado lanche manhã",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Goiaba vermelha",
+        "descricao": "Goiaba madura limpa cortada em pedaços para comer na hora",
+        "emoji": "🥑"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Chá gelado sachê",
+        "descricao": "Chá mate pronto de caixinha servido bem gelado copo alto",
+        "emoji": "🧊"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Beterraba cozida",
+        "descricao": "Beterraba cozida fria fatiada com vinagre e sal salada",
+        "emoji": "🥗"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Iogurte desnatado",
+        "descricao": "Pote de iogurte magro consumido gelado após o exercício",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Torrada com geleia",
+        "descricao": "Torrada industrializada com geleia de morango lanche leve",
+        "emoji": "🍞"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Suco de abacaxi",
+        "descricao": "Abacaxi batido com água gelada e coado no copo com gelo",
+        "emoji": "🍍"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Banana amassada",
+        "descricao": "Banana prata amassada com garfo crua lanche infantil manhã",
+        "emoji": "🍌"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Salada chuchu",
+        "descricao": "Chuchu cozido frio picado com azeite e vinagre salada",
+        "emoji": "🥗"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Uva sem semente",
+        "descricao": "Cacho de uva thompson lavada consumida fria lanche rápido",
+        "emoji": "🍇"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Água mineral gelada",
+        "descricao": "Copo grande de água mineral bem gelada para matar a sede",
+        "emoji": "💧"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Creme de abacate",
+        "descricao": "Abacate batido com leite condensado e limão doce gelado",
+        "emoji": "🥑"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Pão com patê",
+        "descricao": "Pão de forma com patê de alho comprado pronto mercado",
+        "emoji": "🍞"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Salada aguada",
+        "descricao": "Alface americana picada com tomate e pouco sal jantar",
+        "emoji": "🥗"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Suco de acerola",
+        "descricao": "Polpa de acerola batida com água e açúcar bem gelada",
+        "emoji": "🥤"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Mamão com limão",
+        "descricao": "Meio mamão com gotas de limão espremido por cima azedo",
+        "emoji": "🥭"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Coalhada com mel",
+        "descricao": "Coalhada seca fresca misturada com mel de abelha doce",
+        "emoji": "🍯"
+    },
+    {
+        "faixa": "fresco",
+        "nome": "Biscoito maria",
+        "descricao": "Três unidades de biscoito maria com leite frio lanche",
+        "emoji": "🍪"
+    },
+    {
+        "_comentario": "Faixa agradável"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Arroz soltinho",
+        "descricao": "Arroz branco refogado no alho e óleo cozido até secar",
+        "emoji": "🍚"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Feijão simples",
+        "descricao": "Feijão carioca cozido batido temperado com alho e sal",
+        "emoji": "🫘"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Ovo mexido cremoso",
+        "descricao": "Ovos fritos mexidos devagar na manteiga com sal grosso",
+        "emoji": "🍳"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Macarrão com molho",
+        "descricao": "Espaguete com molho de tomate pronto aquecido na hora",
+        "emoji": "🍝"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Frango grelhado",
+        "descricao": "Filé de peito de frango temperado dourado na frigideira",
+        "emoji": "🍗"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Batata frita rápida",
+        "descricao": "Batata palito congelada feita na airfryer com sal fino",
+        "emoji": "🍟"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Salada de maionese",
+        "descricao": "Batata e cenoura cozidas com maionese de pote gelada",
+        "emoji": "🥔"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Farofa de manteiga",
+        "descricao": "Farinha de mandioca torrada na manteiga com sal leve",
+        "emoji": "⚱️"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Abobrinha refogada",
+        "descricao": "Abobrinha picada frita no alho e óleo até murchar bem",
+        "emoji": "🥒"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Carne moída simples",
+        "descricao": "Acém moído refogado com cebola e sal para o almoço",
+        "emoji": "🥩"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Sopa de legumes",
+        "descricao": "Batata, cenoura e chuchu picados cozidos com sal caldo",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Sanduíche de atum",
+        "descricao": "Pão de forma com atum ralado em lata e maionese leve",
+        "emoji": "🐟"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Panqueca de queijo",
+        "descricao": "Massa de leite e ovo recheada com mussarela enrolada",
+        "emoji": "🥞"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Cuscuz com ovo frito",
+        "descricao": "Cuscuz nordestino quente servido com ovo frito cima",
+        "emoji": "🍳"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Purê de batata fácil",
+        "descricao": "Batata amassada com leite quente e margarina salgada",
+        "emoji": "🥔"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Chuchu com ovo",
+        "descricao": "Chuchu picado cozido mexido com ovo na frigideira sal",
+        "emoji": "🍳"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Salsicha ao molho",
+        "descricao": "Salsicha picada cozida no extrato de tomate cebola",
+        "emoji": "🌭"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Omelete de tomate",
+        "descricao": "Ovos batidos com cubos de tomate e orégano fritos",
+        "emoji": "🍳"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Carne de panela",
+        "descricao": "Carne cozida na pressão com cebola e caldo grosso com sal",
+        "emoji": "🥩"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Arroz com cenoura",
+        "descricao": "Arroz branco cozido junto com cenoura ralada bonita",
+        "emoji": "🍚"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Polenta mole caseira",
+        "descricao": "Fubá cozido na água com sal servido mole no prato",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Frango acebolado",
+        "descricao": "Filé de frango frito com rodelas de cebola doce por cima",
+        "emoji": "🍗"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Couve refogada alho",
+        "descricao": "Couve fatiada fina frita rápido no alho dourado sal",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Macarrão com alho",
+        "descricao": "Macarrão cozido misturado com alho frito no óleo",
+        "emoji": "🍝"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Ovo cozido picado",
+        "descricao": "Dois ovos cozidos firmes picados com azeite e sal",
+        "emoji": "🥚"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Tomate recheado ovo",
+        "descricao": "Tomate sem miolo com ovo quebrado dentro assado forno",
+        "emoji": "🍅"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Sopa de macarrão",
+        "descricao": "Macarrão pai-nosso cozido no caldo de carne simples",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Cenoura em rodelas",
+        "descricao": "Cenoura em rodelas macia com fio de azeite e sal comum",
+        "emoji": "🥕"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Arroz com lentilha",
+        "descricao": "Arroz cozido junto com lentilha e cebola frita em cima",
+        "emoji": "🍚"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Abóbora refogada sal",
+        "descricao": "Abóbora japonesa em cubos frita com cebola e sal",
+        "emoji": "🎃"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Farofa de ovo simples",
+        "descricao": "Ovo mexido na panela com farinha de mandioca e sal",
+        "emoji": "🍳"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Mandioca cozida",
+        "descricao": "Mandioca macia cozida na água salgada servida com manteiga",
+        "emoji": "🥔"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Feijão batido caldo",
+        "descricao": "Feijão preto batido no liquidificador morno na caneca",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Batata doce assada",
+        "descricao": "Fatias de batata doce assadas no forno com alecrim",
+        "emoji": "🍠"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Macarrão com salsich",
+        "descricao": "Espaguete cozido com rodelas de salsicha no molho",
+        "emoji": "🍝"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Frango desfiado rápido",
+        "descricao": "Peito de frango cozido desfiado temperado com sal",
+        "emoji": "🍗"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Arroz temperado dia",
+        "descricao": "Arroz de ontem frito com milho verde de lata óleo",
+        "emoji": "🍚"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Crepioca de queijo",
+        "descricao": "Tapioca batida com ovo frita na frigideira com queijo",
+        "emoji": "🫓"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Salada de feijão",
+        "descricao": "Feijão fradinho cozido frio com cebola, cheiro-verde e azeite",
+        "emoji": "🫘"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Nhoque com molho",
+        "descricao": "Nhoque de batata cozido com molho de tomate bem simples",
+        "emoji": "🍝"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Sopa de fubá com cou",
+        "descricao": "Caldinho de fubá ralo com tiras de couve dentro",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Ovo frito gema dura",
+        "descricao": "Ovo frito no óleo quente virado dos dois lados sal",
+        "emoji": "🍳"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Ervilha de lata ref",
+        "descricao": "Ervilha escorrida frita na manteiga com cebola sal",
+        "emoji": "🫛"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Pão com carne moída",
+        "descricao": "Pão francês recheado com carne moída quente jantar",
+        "emoji": "🥖"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Batata amassada aze",
+        "descricao": "Batata cozida esmagada com garfo azeite sal grosso",
+        "emoji": "🥔"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Tapioca com ovo mex",
+        "descricao": "Tapioca na frigideira recheada com ovo mexido sal",
+        "emoji": "🌮"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Sopa de arroz com le",
+        "descricao": "Sopa rala com arroz cenoura chuchu sobrou ontem",
+        "emoji": "🥣"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Filé de peixe grelh",
+        "descricao": "Filé de tilápia rápido temperado sal limão chapa",
+        "emoji": "🐟"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Macarrão com requei",
+        "descricao": "Massa quente misturada com duas colheres requeijão",
+        "emoji": "🍝"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Couve flor cozida sa",
+        "descricao": "Ramos de couve flor no vapor com sal azeite oliva",
+        "emoji": "🥦"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Arroz com milho",
+        "descricao": "Arroz branco cozido com grãos de milho verde em lata",
+        "emoji": "🍚"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Abobrinha grelhada",
+        "descricao": "Fatias de abobrinha douradas na frigideira com sal",
+        "emoji": "🥒"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Pipoca salgada case",
+        "descricao": "Pipoca feita no óleo com bastante sal para o filme",
+        "emoji": "🍿"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Tomate frito com alh",
+        "descricao": "Metades de tomate fritas com alho amassado na chapa",
+        "emoji": "🍅"
+    },
+    {
+        "faixa": "agradável",
+        "nome": "Sopa de batata doce",
+        "descricao": "Batata doce cozida batida com sal caldo morno noite",
+        "emoji": "🥣"
+    },
+    {
+        "_comentario": "Faixa calor"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Suco de melancia",
+        "descricao": "Pedaços de melancia batidos sem água bem gelados no copo",
+        "emoji": "🍉"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Salada de pepino",
+        "descricao": "Pepino fatiado fino com sal, vinagre e pedras de gelo",
+        "emoji": "🥒"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Água de coco fria",
+        "descricao": "Água de coco natural bem gelada direto do copo grande",
+        "emoji": "🥥"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Abacaxi com hortelã",
+        "descricao": "Abacaxi in cubos com folhas de hortelã fresca batido",
+        "emoji": "🍍"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Gelatina gelada",
+        "descricao": "Gelatina sabor limão feita ontem cortada em quadradinho",
+        "emoji": "🟢"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Iogurte com morango",
+        "descricao": "Iogurte natural batido com morangos frescos sem açúcar",
+        "emoji": "🍓"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Salada de alface lev",
+        "descricao": "Alface americana rasgada com limão espremido e sal fino",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Melão gelado cubos",
+        "descricao": "Melão cortado em pedaços guardado na geladeira lanche",
+        "emoji": "🍈"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Sanduíche natural f",
+        "descricao": "Pão integral com frango desfiado frio e maionese leve",
+        "emoji": "🥪"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Vitamina de banana f",
+        "descricao": "Banana com leite gelado e cubos de gelo liquidificador",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Tomate com sal simples",
+        "descricao": "Tomate salada fatiado com sal comum e gotas de vinagre",
+        "emoji": "🍅"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Picolé de limão case",
+        "descricao": "Suco de limão com água adoçada congelado nas forminhas",
+        "emoji": "🍧"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Água com gás limão",
+        "descricao": "Água com gás gelada com rodelas de limão espremido copo",
+        "emoji": "🍋"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Mamão papaia gelado",
+        "descricao": "Metade de mamão sem sementes gelado comido de colher",
+        "emoji": "🥭"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Salada de cenoura cr",
+        "descricao": "Cenoura ralada grossa com sal e azeite de oliva frio",
+        "emoji": "🥕"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Coalhada gelada mel",
+        "descricao": "Coalhada fresca gelada com um fio de mel de abelha doce",
+        "emoji": "🍯"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Suco de maracujá gel",
+        "descricao": "Polpa de maracujá batida com água bem fria lanche tarde",
+        "emoji": "🥤"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Queijo minas frio",
+        "descricao": "Fatias de queijo minas frescal tiradas da geladeira",
+        "emoji": "🧀"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Wrap de alface ricot",
+        "descricao": "Folha de alface grande recheada com ricota amassada sal",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Suco de uva integral",
+        "descricao": "Suco de uva de garrafa puro bem gelado com muito gelo",
+        "emoji": "🍇"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Biscoito de polvilho",
+        "descricao": "Pacote de biscoito de polvilho leve para dias quentes",
+        "emoji": "🥨"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Salada de repolho br",
+        "descricao": "Repolho picado fino com gotas de limão salada refresco",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Pera gelada lanche",
+        "descricao": "Pera lavada deixada na geladeira consumida inteira tarde",
+        "emoji": "🍐"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Suco verde rápido",
+        "descricao": "Couve batida com água gelada e limão para refrescar manhã",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Pipoca sem óleo mcr",
+        "descricao": "Milho de pipoca no saco de pão estourado micro-ondas sal",
+        "emoji": "🍿"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Tomate cereja puro",
+        "descricao": "Tomatinhos cereja lavados consumidos inteiros gelados",
+        "emoji": "🍅"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Gelatina de uva pote",
+        "descricao": "Copinho de gelatina roxa bem firme tirada do refriger",
+        "emoji": "🍇"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Suco de laranja copo",
+        "descricao": "Suco de laranja espremido na hora com cubos de gelo",
+        "emoji": "🍊"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Manga picada fria",
+        "descricao": "Manga cortada em cubos grandes bem gelada sobremesa",
+        "emoji": "🥭"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Sanduíche de pepino",
+        "descricao": "Pão de forma com rodelas finas de pepino e maionese",
+        "emoji": "🥪"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Água saborizada hor",
+        "descricao": "Água fria com folhas de hortelã fresca jarra de vidro",
+        "emoji": "🫙"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Kiwi cortado gelado",
+        "descricao": "Kiwi maduro fatiado frio lanche azedinho refrescante",
+        "emoji": "🥝"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Salada de tomate cer",
+        "descricao": "Tomate cereja com azeite de oliva e sal lanche da noite",
+        "emoji": "🍅"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Chá mate gelado cop",
+        "descricao": "Chá mate batido com limão e pedras de gelo refresco",
+        "emoji": "🥤"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Goiaba fria pedaços",
+        "descricao": "Goiaba vermelha lavada cortada em quatro partes lanche",
+        "emoji": "🍉"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Iogurte magro puro",
+        "descricao": "Pote de iogurte grego zero açúcar comido bem gelado",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Salada rúcula limão",
+        "descricao": "Rúcula fresca limpa com gotas de limão e sal comum",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Vitamina de mamão l",
+        "descricao": "Mamão batido com leite integral gelado copo grande de",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Biscoito água e sal",
+        "descricao": "Três biscoitos água e sal puras lanche leve de calor",
+        "emoji": "🍪"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Suco de acerola gel",
+        "descricao": "Acerola da fruta batida com água fria coada açúcar",
+        "emoji": "🥤"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Melancia picada pot",
+        "descricao": "Cubos de melancia sem caroço guardados no pote plástico",
+        "emoji": "🍉"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Ricota fria temperad",
+        "descricao": "Pedaço de ricota com fio de azeite comida de garfo",
+        "emoji": "🧀"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Salada de chuchu cr",
+        "descricao": "Chuchu cozido gelado com vinagre e sal jantarzinho",
+        "emoji": "🥗"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Chá de camomila gel",
+        "descricao": "Infusão de camomila feita antes gelada para refrescar",
+        "emoji": "🧊"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Morango limpo bacia",
+        "descricao": "Morangos frescos lavados consumidos puros sem açúcar",
+        "emoji": "🍓"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Pão integral ricota",
+        "descricao": "Uma fatia de pão integral com creme de ricota leve",
+        "emoji": "🍞"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Suco de limão copo",
+        "descricao": "Limonada simples com água da geladeira e açúcar refi",
+        "emoji": "🍋"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Abacaxi fatiado gel",
+        "descricao": "Fatias finas de abacaxi guardadas no frio lanche doce",
+        "emoji": "🍍"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Pepino fatiado azei",
+        "descricao": "Pepino comum com casca lavado fatiado azeite sal",
+        "emoji": "🥒"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Gelatina morango po",
+        "descricao": "Sobremesa leve de gelatina vermelha copinho de vidro",
+        "emoji": "🍓"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Água limão espremido",
+        "descricao": "Copo de água bem fria com algumas gotas de limão puro",
+        "emoji": "💧"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Melão fatia fina fr",
+        "descricao": "Fatia de melão amarelo fresquinha para tarde quente",
+        "emoji": "🍈"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Salada alface raban",
+        "descricao": "Alface picada com rodelas de rabanete tempero básico",
+        "emoji": "🥗"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Suco de maracujá co",
+        "descricao": "Maracujá batido com muito gelo e pouco açúcar copo",
+        "emoji": "🥤"
+    },
+    {
+        "faixa": "calor",
+        "nome": "Uva verde lavada po",
+        "descricao": "Uvas thompson geladas colhidas direto do cacho lanche",
+        "emoji": "🍇"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Suco de melancia g",
+        "descricao": "Melancia batida pura com bastante gelo picado copo alto",
+        "emoji": "🍉"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Salada de pepino f",
+        "descricao": "Pepino japonês fatiado com vinagre branco sal bem frio",
+        "emoji": "🥒"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Água de coco copo",
+        "descricao": "Água de coco de caixinha bem gelada lanche da tarde",
+        "emoji": "🥥"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Gelatina de limão",
+        "descricao": "Gelatina verde bem gelada cortada em cubos sobremesa",
+        "emoji": "🟢"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Iogurte natural f",
+        "descricao": "Iogurte integral tirado da geladeira comido puro copo",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Abacaxi em cubos",
+        "descricao": "Abacaxi maduro picado bem gelado para refrescar o dia",
+        "emoji": "🍍"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Tomate fatiado sal",
+        "descricao": "Tomate salada cortado com sal comum e gotas limão",
+        "emoji": "🍅"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Melão gelado doce",
+        "descricao": "Pedaços de melão amarelo gelados para comer de garfo",
+        "emoji": "🍈"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Água com limão gel",
+        "descricao": "Copo grande de água fria com meio limão espremido na hora",
+        "emoji": "🍋"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Salada de alface l",
+        "descricao": "Folhas de alface lisa com vinagre e sal jantarzinho",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Suco de maracujá",
+        "descricao": "Maracujá da fruta batido com água gelada açúcar copo",
+        "emoji": "🥤"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Queijo minas leve",
+        "descricao": "Fatias de queijo minas frescal gelado lanche rápido",
+        "emoji": "🧀"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Vitamina banana f",
+        "descricao": "Banana prata batida com leite desnatado gelado copo",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Sanduíche natural",
+        "descricao": "Pão de forma com frango desfiado frio lanche de tarde",
+        "emoji": "🥪"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Mamão com colher",
+        "descricao": "Metade de mamão papaia gelado limpo comido de manhã",
+        "emoji": "🥭"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Suco de laranja g",
+        "descricao": "Laranja espremida pura com cubos de gelo no copo grande",
+        "emoji": "🍊"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Cenoura ralada cr",
+        "descricao": "Cenoura crua ralada fina com azeite de oliva e sal",
+        "emoji": "🥕"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Chá mate gelado l",
+        "descricao": "Chá mate de saquinho batido com limão e muito gelo",
+        "emoji": "🥤"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Gelatina morango",
+        "descricao": "Copinho de gelatina vermelha bem gelada doce leve noite",
+        "emoji": "🍓"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Pepino com azeite",
+        "descricao": "Pepino comum fatiado com casca temperado azeite sal",
+        "emoji": "🥒"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Suco de uva frio",
+        "descricao": "Suco de uva integral gelado servido com pedras gelo",
+        "emoji": "🍇"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Manga picada doce",
+        "descricao": "Manga palmer cortada em cubos frios para sobremesa",
+        "emoji": "🥭"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Biscoito polvilho",
+        "descricao": "Biscoito de polvilho salgado leve lanche da tarde calor",
+        "emoji": "🥨"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Salada de repolho",
+        "descricao": "Repolho branco picado com limão galego salada simples",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Água saborizada",
+        "descricao": "Jarra de água fria com rodelas de pepino folhas menta",
+        "emoji": "🫙"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Kiwi fatiado leve",
+        "descricao": "Kiwi maduro descascado cortado em rodelas geladas",
+        "emoji": "🥝"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Tomate cereja pot",
+        "descricao": "Tomatinhos cereja lavados inteiros guardados na gelad",
+        "emoji": "🍅"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Pera lavada fria",
+        "descricao": "Pera portuguesa deixada no frio consumida inteira lanche",
+        "emoji": "🍐"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Suco verde rápido",
+        "descricao": "Folha de couve batida com água gelada limão de manhã",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Iogurte magro pot",
+        "descricao": "Pote de iogurte zero açúcar consumido bem gelado colher",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Salada rúcula sal",
+        "descricao": "Rúcula fresca lavada com azeite comum e sal de cozinha",
+        "emoji": "🥬"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Morango com mel",
+        "descricao": "Morangos limpos picados com um fio de mel puro por cima",
+        "emoji": "🍓"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Suco de acerola g",
+        "descricao": "Acerola batida com água fria coada com pouco açúcar",
+        "emoji": "🥤"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Pão integral requ",
+        "descricao": "Uma fatia de pão integral com requeijão light gelado",
+        "emoji": "🍞"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Melancia pedaços",
+        "descricao": "Fatia de melancia cortada guardada no pote plástico frio",
+        "emoji": "🍉"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Chá camomila gel",
+        "descricao": "Infusão de camomila fria com cubos de gelo para relaxar",
+        "emoji": "🧊"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Goiaba vermelha f",
+        "descricao": "Goiaba lavada cortada em quatro partes consumida fria",
+        "emoji": "🥑"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Salada de chuchu",
+        "descricao": "Chuchu cozido frio picado com vinagre branco e sal",
+        "emoji": "🥗"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Vitamina de mamão",
+        "descricao": "Mamão batido com leite integral bem gelado copo grande",
+        "emoji": "🥛"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Abacaxi hortelã c",
+        "descricao": "Suco de abacaxi com folhas de hortelã bastante gelo",
+        "emoji": "🍍"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Biscoito água sal",
+        "descricao": "Três bolachas água e sal puras lanche rápido de tarde",
+        "emoji": "🍪"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Ricota pura fria",
+        "descricao": "Pedaço de ricota fresca comido com garfo lanche leve",
+        "emoji": "🧀"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Salada alface tom",
+        "descricao": "Alface picada com rodelas de tomate tempero simples",
+        "emoji": "🥗"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Água mineral gel",
+        "descricao": "Copo grande de água mineral bem gelada mata sede dia",
+        "emoji": "💧"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Melão fatia fria",
+        "descricao": "Fatia de melão amarelo fresquinha lanche tarde calor",
+        "emoji": "🍈"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Suco de limão ref",
+        "descricao": "Limonada simples com água da geladeira açúcar copo",
+        "emoji": "🍋"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Uva verde lavada",
+        "descricao": "Uvas sem semente geladas colhidas do cacho lanche tarde",
+        "emoji": "🍇"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Pepino rodelas cx",
+        "descricao": "Pepino fatiado fino com gotas de vinagre salada jantar",
+        "emoji": "🥒"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Gelatina de uva p",
+        "descricao": "Copinho de gelatina roxa firme tirada do refrigerador",
+        "emoji": "🍇"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Sanduíche alface",
+        "descricao": "Pão integral com maionese leve e folha alface fresca",
+        "emoji": "🥪"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Mamão papaia lim",
+        "descricao": "Meio mamão com gotas de limão espremido por cima azedo",
+        "emoji": "🥭"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Chá de hortelã g",
+        "descricao": "Chá de hortelã feito antes deixado na geladeira copo",
+        "emoji": "🌿"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Salada beterraba",
+        "descricao": "Beterraba cozida fria fatiada vinagre salada jantinha",
+        "emoji": "🥗"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Coalhada gelada m",
+        "descricao": "Coalhada fresca servida fria com uma colher de mel doce",
+        "emoji": "🍯"
+    },
+    {
+        "faixa": "intenso",
+        "nome": "Suco maracujá cl",
+        "descricao": "Polpa maracujá batida com muito gelo pouco açúcar copo",
+        "emoji": "🥤"
+    }
 ]
