@@ -2147,7 +2147,7 @@ illumination: `${formattedIllumination}%`
 
 if (illumination < 3 && phase.includes('waning')) {
 return {
-emoji: '🌒',
+emoji: '🌘',
 pt: 'Minguante Final',
 illumination: `${formattedIllumination}%`
 };
@@ -2155,13 +2155,13 @@ illumination: `${formattedIllumination}%`
 
 const phases = {
 'new': { emoji: '🌑', pt: 'Nova' },
-'waxing crescent': { emoji: '🌘', pt: 'Crescente' },
-'first quarter': { emoji: '🌓', pt: 'Quarto Crescente' },
-'waxing gibbous': { emoji: '🌔', pt: 'Gibosa Crescente' },
+'waxing crescent': { emoji: '🌒', pt: 'Crescente' },
+'first quarter': { emoji: '🌗', pt: 'Quarto Crescente' },
+'waxing gibbous': { emoji: '🌖', pt: 'Gibosa Crescente' },
 'full': { emoji: '🌕', pt: 'Cheia' },
-'waning gibbous': { emoji: '🌖', pt: 'Gibosa Minguante' },
-'last quarter': { emoji: '🌗', pt: 'Quarto Minguante' },
-'waning crescent': { emoji: '🌒', pt: 'Minguante' }
+'waning gibbous': { emoji: '🌔', pt: 'Gibosa Minguante' },
+'last quarter': { emoji: '🌓', pt: 'Quarto Minguante' },
+'waning crescent': { emoji: '🌘', pt: 'Minguante' }
 };
 
 for (const [key, value] of Object.entries(phases)) {
