@@ -1394,7 +1394,7 @@ if (min !== null && max !== null) {
 const tempParaEmoji = temp !== null ? temp : (min + max) / 2;
 const emojiInfo = emojiByTemperature.find(f => tempParaEmoji >= f.min && tempParaEmoji <= f.max);
 const emojiTemp = emojiInfo ? emojiInfo.emoji : '🌡️';
-minMaxLinha = `entre ${min.toFixed(0)}° e ${max.toFixed(0)}°`;
+minMaxLinha = `hoje entre ${min.toFixed(0)}° e ${max.toFixed(0)}°`;
 }
 }
 
