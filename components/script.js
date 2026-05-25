@@ -1292,7 +1292,7 @@ const mensagensEspeciais = {
 '5-6'  : { msg: 'Tudo começou! 💞', tipo: 'romantico' },
 '12-6' : { msg: 'Amor no ar! 💕', tipo: 'romantico' },
 '5-7'  : { msg: `Débora é aniversariante! 🎂`, tipo: 'aniversario' },
-'25-5' : { msg: 'Cláudia merece festa! 🍷', tipo: 'aniversario' },
+'5-9' : { msg: 'Cláudia merece festa! 🍷', tipo: 'aniversario' },
 '23-10': { msg: 'Mamãe faz anos! 🌹', tipo: 'aniversario' },
 '3-11' : { msg: 'Hora do vinho! 🍷', tipo: 'romantico' },
 '25-11': { msg: `Morgama tá de festa! 🎈`, tipo: 'aniversario' },
@@ -1414,7 +1414,7 @@ if (!texto.includes('!')) texto = texto + '!';
 
 if (isDataEspecial) {
 // Data especial: linha 1 = comemoração, linha 2 = clima + min/max
-messageDiv.innerHTML = texto + (minMaxLinha ? `<br><span style="margin-top:6px;display:block;">🌡️ ${minMaxLinha}</span>` : '');: '');
+messageDiv.innerHTML = texto + (minMaxLinha ? `<br>🌡️ ${minMaxLinha}` : '');
 } else {
 // Dia normal: tudo numa linha (igual ao print)
 messageDiv.innerHTML = texto + (minMaxLinha ? ` ${minMaxLinha}` : '');
