@@ -1414,7 +1414,7 @@ if (!texto.includes('!')) texto = texto + '!';
 
 if (isDataEspecial) {
 // Data especial: linha 1 = comemoração, linha 2 = clima + min/max
-messageDiv.innerHTML = texto + (minMaxLinha ? `<br>🌡️ ${minMaxLinha}` : '');
+messageDiv.innerHTML = texto + (minMaxLinha ? `<br><span style="margin-top:6px;display:block;">🌡️ ${minMaxLinha}</span>` : '');: '');
 } else {
 // Dia normal: tudo numa linha (igual ao print)
 messageDiv.innerHTML = texto + (minMaxLinha ? ` ${minMaxLinha}` : '');
