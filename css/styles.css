@@ -48,6 +48,35 @@ body.loading #main-content {
 }
 
 /* ========================================
+   2b. PULL TO REFRESH
+   ======================================== */
+
+#pullToRefresh {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    opacity: 0;
+    background-color: #002244;
+    transition: opacity 0.3s;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 25px;
+    height: 25px;
+    border: 3px solid #ccc;
+    border-top: 3px solid #ffeb3b;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-top: 5px;
+}
+
+/* ========================================
    3. TELA DE SPLASH (CARREGAMENTO INICIAL)
    ======================================== */
 
@@ -59,6 +88,7 @@ body.loading #main-content {
     height: 100%;
     background-color: #002244;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 99999;
@@ -289,7 +319,7 @@ canvas {
     color: #ffeb3b;
     font-weight: 500;
     border-radius: 8px;
-    font-size: 14px !important;
+    font-size: 1.4em;
 }
 
 #weatherResult {
@@ -305,7 +335,7 @@ canvas {
 
 #status {
     margin-top: 8px;
-    font-size: 1em;
+    font-size: 1.3em;
     color: #fff;
     font-weight: bold;
 }
@@ -465,7 +495,8 @@ canvas {
    11. MODAIS (ESCALAS DE CHUVA, VENTO E GRÁFICOS)
    ======================================== */
 
-#telaEscalas {
+#telaEscalas,
+#telaGraficos {
     display: none;
     position: fixed;
     top: 0;
@@ -477,10 +508,15 @@ canvas {
     color: white;
     overflow-y: auto;
     padding: 20px;
+    box-sizing: border-box;
     font-family: sans-serif;
-    font-size: 11px;
+    font-size: 13px;
     opacity: 0;
     transition: opacity 0.3s ease;
+}
+
+#telaGraficos {
+    font-size: 11px;
 }
 
 #telaEscalas.mostrar {
