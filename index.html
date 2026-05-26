@@ -27,14 +27,14 @@ RECURSOS EXTERNOS (CSS E FONTES)
 <!-- ========================================
 TELA DE SPLASH (CARREGAMENTO INICIAL)
 ======================================== -->
-<div id="splashScreen" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: #002244;display: flex;justify-content: center;align-items: center;z-index: 99999;flex-direction: column;color: white;font-family: sans-serif;text-align: center;">
+<div id="splashScreen">
 <img src="img/splash.png" alt="Meu Clima" style="width: 120px; height: auto; margin-bottom: 12px;">
 <div style="font-size: 0.65rem; display: flex; flex-direction: column; align-items: center; transform: translateY(-2px);">
 <div>Carregando previsão do tempo</div>
 <div class="loading-dots" style="display: flex; margin-top: 20px;">
-<span class="dot" style="width: 3px; height: 3px; border-radius: 50%; background-color: white; margin: 0 2px; opacity: 0; animation: dot-fade 1.5s infinite 0.1s;"></span>
-<span class="dot" style="width: 3px; height: 3px; border-radius: 50%; background-color: white; margin: 0 2px; opacity: 0; animation: dot-fade 1.5s infinite 0.3s;"></span>
-<span class="dot" style="width: 3px; height: 3px; border-radius: 50%; background-color: white; margin: 0 2px; opacity: 0; animation: dot-fade 1.5s infinite 0.5s;"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
 </div>
 </div>
 </div>
@@ -42,8 +42,8 @@ TELA DE SPLASH (CARREGAMENTO INICIAL)
 <!-- ========================================
 PULL TO REFRESH (PUXAR PARA ATUALIZAR)
 ======================================== -->
-<div id="pullToRefresh" style="position: fixed;top: 0;left: 0;right: 0;height: 30px;display: flex;align-items: flex-start;justify-content: center;opacity: 0;background-color: #002244;transition: opacity 0.3s;z-index: 9999;">
-<div class="spinner" style="width: 25px;height: 25px;border: 3px solid #ccc;border-top: 3px solid #ffeb3b;border-radius: 50%;animation: spin 1s linear infinite;margin-top: 5px;"></div>
+<div id="pullToRefresh">
+<div class="spinner"></div>
 </div>
 
 <!-- ========================================
@@ -64,8 +64,8 @@ CONTEÚDO PRINCIPAL DA APLICAÇÃO
 <div style="margin: 15px auto 2px; padding: 0; border-top: 1px solid rgba(255, 255, 255, 0.3); width: 90%;"></div>
 
 <!-- Status e Mensagens do Clima -->
-<div id="status" style="font-size: 1.3em;"></div>
-<div id="weatherMessage" style="font-size: 1.4em;"></div>
+<div id="status"></div>
+<div id="weatherMessage"></div>
 <div id="sugestaoReceita" class="receita-box" style="display: none;"></div>
 </div>
 
@@ -150,7 +150,7 @@ MODAIS (JANELAS POPUP)
 ======================================== -->
 
 <!-- Modal: Escalas de Chuva e Vento -->
-<div id="telaEscalas" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:#002244; z-index:10000; color:white; overflow-y:auto; padding:20px; box-sizing:border-box; font-family:sans-serif; font-size:13px;">
+<div id="telaEscalas">
 <div style="max-width: 800px; margin: 0 auto;">
 <!-- Tabela de Intensidade da Chuva -->
 <h2 style="color:#ffeb3b; border-left: 6px solid #ffffff; padding-left: 10px; margin-bottom: 10px; font-size: 13px; text-align: left;">Intensidade da chuva 🌧️</h2>
@@ -260,7 +260,7 @@ MODAIS (JANELAS POPUP)
 </div>
 
 <!-- Modal: Gráficos -->
-<div id="telaGraficos" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:#002244; z-index:10000; color:white; overflow-y:auto; padding:20px; box-sizing:border-box; font-family:sans-serif; font-size:11px;">
+<div id="telaGraficos">
 <div style="max-width: 800px; margin: 0 auto;">
 <!-- Cabeçalho dos Gráficos -->
 <h2 style="color:#ffeb3b; border-left: 6px solid #ffffff; padding-left: 10px; margin-bottom: 10px; font-size: 13px;">
