@@ -53,6 +53,49 @@ opacity: 1;
 transform: scale(1);
 }
 }
+.erro-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.85);
+z-index: 50000;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+animation: erroSlideIn 0.3s ease-out;
+box-sizing: border-box;
+}
+.erro-card {
+background: linear-gradient(135deg, #001133 0%, #00081a 100%);
+border-radius: 24px;
+padding: 32px 24px;
+max-width: 280px;
+width: 100%;
+text-align: center;
+}
+.erro-card--gps    { border: 1px solid rgba(255, 87, 34, 0.2); }
+.erro-card--rede   { border: 1px solid rgba(255, 152, 0, 0.2); }
+.erro-card--outro  { border: 1px solid rgba(124, 77, 255, 0.2); }
+.erro-icone  { font-size: 48px; margin-bottom: 12px; }
+.erro-titulo { color: #fff; font-size: 18px; font-weight: 600; margin: 0 0 8px; }
+.erro-desc   { color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 24px; line-height: 1.5; }
+.erro-btn {
+width: 100%;
+padding: 14px;
+border-radius: 40px;
+border: none;
+color: #fff;
+font-size: 15px;
+font-weight: 600;
+cursor: pointer;
+transition: opacity 0.2s;
+}
+.erro-btn--gps   { background: #ff5722; }
+.erro-btn--rede  { background: #ff9800; }
+.erro-btn--outro { background: #7c4dff; }
 `;
 document.head.appendChild(styleErroModal);
 
@@ -128,7 +171,7 @@ UI_STATE.isPulling = false;
 
 async function atualizarDados() {
 console.log('Atualizando dados...');
-location.reload();
+await buscarPrevisaoPorGeolocalizacao(false);
 }
 
 // ============================================
@@ -171,52 +214,25 @@ descricao: 'Tente novamente'
 
 const err = erros[tipoErro] || erros['erro-desconhecido'];
 
+// Determina variante de cor pela categoria do ícone
+const isGps  = err.icone === '📍';
+const isRede = err.icone === '📡';
+const variante = isGps ? 'gps' : isRede ? 'rede' : 'outro';
+
 // Remove modal anterior se existir
 document.getElementById('modal-erro-wrap')?.remove();
 
 // Cria o modal minimalista
 const modal = document.createElement('div');
 modal.id = 'modal-erro-wrap';
-modal.style.cssText = `
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.85);
-z-index: 50000;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 20px;
-animation: erroSlideIn 0.3s ease-out;
-`;
+modal.className = 'erro-overlay';
 
 modal.innerHTML = `
-<div style="
-background: linear-gradient(135deg, #001133 0%, #00081a 100%);
-border-radius: 24px;
-padding: 32px 24px;
-max-width: 280px;
-width: 100%;
-text-align: center;
-border: 1px solid ${err.icone === '📍' ? '#ff5722' : err.icone === '📡' ? '#ff9800' : '#7c4dff'}33;
-">
-<div style="font-size: 48px; margin-bottom: 12px;">${err.icone}</div>
-<h3 style="color: #fff; font-size: 18px; font-weight: 600; margin: 0 0 8px;">${err.titulo}</h3>
-<p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 24px; line-height: 1.5;">${err.descricao}</p>
-<button id="btn-erro-retry" style="
-width: 100%;
-padding: 14px;
-border-radius: 40px;
-background: ${err.icone === '📍' ? '#ff5722' : err.icone === '📡' ? '#ff9800' : '#7c4dff'};
-border: none;
-color: #fff;
-font-size: 15px;
-font-weight: 600;
-cursor: pointer;
-transition: opacity 0.2s;
-">
+<div class="erro-card erro-card--${variante}">
+<div class="erro-icone">${err.icone}</div>
+<h3 class="erro-titulo">${err.titulo}</h3>
+<p class="erro-desc">${err.descricao}</p>
+<button id="btn-erro-retry" class="erro-btn erro-btn--${variante}">
 🔄 Tentar novamente
 </button>
 </div>
@@ -244,10 +260,6 @@ if (statusDiv) statusDiv.innerHTML = '';
 }
 
 function abrirConfiguracoes() {
-if (window.webkit && window.webkit.messageHandlers && window.cordova) {
-cordova.plugins.settings.openSettings();
-}
-
 if (navigator.userAgent.match(/Android/i)) {
 window.location.href = 'app-settings:';
 }
@@ -324,12 +336,13 @@ to { opacity: 0; transform: translateX(-50%) translateY(20px); }
 document.head.appendChild(toastStyle);
 
 // NOVA FUNÇÃO: Recuperação automática inteligente
-let tentativasRecuperacao = 0;
-function recuperacaoInteligente() {
-tentativasRecuperacao++;
+const recuperacaoInteligente = (() => {
+let tentativas = 0;
+return function recuperacaoInteligente() {
+tentativas++;
 
-if (tentativasRecuperacao <= 3) {
-mostrarToast(`🔄 Tentativa ${tentativasRecuperacao} de recuperação...`, 'info');
+if (tentativas <= 3) {
+mostrarToast(`🔄 Tentativa ${tentativas} de recuperação...`, 'info');
 
 setTimeout(() => {
 if (navigator.onLine) {
@@ -340,13 +353,14 @@ window.removeEventListener('online', onOnline);
 buscarPrevisaoPorGeolocalizacao(false);
 });
 }
-}, tentativasRecuperacao * 2000);
+}, tentativas * 2000);
 } else {
 mostrarMensagemAmigavel('erro-desconhecido');
 mostrarToast('❌ Não foi possível recuperar automaticamente', 'erro');
-tentativasRecuperacao = 0;
+tentativas = 0;
 }
-}
+};
+})();
 
 function limparCachePorPrioridade() {
 const itens = [];
@@ -2221,7 +2235,7 @@ buscarPrevisaoPorGeolocalizacao(false);
 }, 5 * 60 * 1000);
 }
 
-let intervaloAtualizacao = setInterval(() => buscarPrevisaoPorGeolocalizacao(false), UPDATE_INTERVAL);
+let intervaloAtualizacao = null;
 
 document.addEventListener('visibilitychange', function() {
 if (document.hidden) {
