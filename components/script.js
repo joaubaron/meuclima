@@ -781,7 +781,7 @@ ventoFinal = ventoRaw.slice(pontoIdx + 2); // já começa com maiúscula
 ventoDesc  = ventoRaw.toLowerCase();
 ventoFinal = '';
 }
-frase = `${parteTemp}, ${parteChuva.toLowerCase()}, ${ventoDesc}.`;
+frase = `${parteTemp}, ${parteChuva.toLowerCase()}, ${ventoDesc}`;
 if (ventoFinal) frase += ` ${ventoFinal}`;
 frase = frase.charAt(0).toUpperCase() + frase.slice(1);
 } else {
