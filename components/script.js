@@ -573,170 +573,77 @@ box.innerHTML = '';
 }
 
 function gerarSugestaoVestuario(temp, precip_mm, wind_kph) {
-const faixaTemp = obterFaixaTemperatura(temp);
+    const faixaTemp = obterFaixaTemperatura(temp);
 
-// Parte 1 — temperatura: declaração limpa, sem pontuação final
-const sugestoesTemp = {
-frio: [
-"Dia frio e gelado hoje aqui no local",
-"Temperatura bem baixa agora pela manhã",
-"Friozinho intenso hoje durante o dia",
-"Frio de doer forte hoje em toda região",
-"Dia de frio forte agora neste momento"
-],
-fresco: [
-"Clima ameno e gostoso hoje pela cidade",
-"Temperatura amena agora durante o dia",
-"Fresquinho muito bom hoje para sair",
-"Clima fresco e agradável neste local",
-"Está fresco e bom agora aqui na área"
-],
-agradável: [
-"Temperatura ideal hoje para qualquer atividade",
-"Dia perfeito pra sair e aproveitar o clima",
-"Dia de clima ideal agora pela manhã cedo",
-"Clima ótimo hoje aqui em toda a região",
-"Clima agradável agora neste momento do dia"
-],
-calor: [
-"Calor moderado lá fora durante todo o dia",
-"Bastante calor lá fora agora pela cidade",
-"Temperatura alta hoje em toda esta região",
-"Está quente demais hoje aqui no momento",
-"Calor forte e intenso agora pela manhã"
-],
-muitoCalor: [
-"Dia de muito calor intenso hoje aqui na área",
-"Temperatura muito alta agora durante o dia",
-"Calor extremo hoje neste local da cidade",
-"Calorão forte demais aqui pela região toda",
-"Muito calor e abafado hoje neste momento"
-]
-};
+    const sugestoesTemp = {
+        frio: ["Dia frio e gelado hoje aqui no local", "Temperatura bem baixa agora pela manhã", "Friozinho intenso hoje durante o dia", "Frio de doer forte hoje em toda região", "Dia de frio forte agora neste momento"],
+        fresco: ["Clima ameno e gostoso hoje pela cidade", "Temperatura amena agora durante o dia", "Fresquinho muito bom hoje para sair", "Clima fresco e agradável neste local", "Está fresco e bom agora aqui na área"],
+        agradável: ["Temperatura ideal hoje para qualquer atividade", "Dia perfeito pra sair e aproveitar o clima", "Dia de clima ideal agora pela manhã cedo", "Clima ótimo hoje aqui em toda a região", "Clima agradável agora neste momento do dia"],
+        calor: ["Calor moderado lá fora durante todo o dia", "Bastante calor lá fora agora pela cidade", "Temperatura alta hoje em toda esta região", "Está quente demais hoje aqui no momento", "Calor forte e intenso agora pela manhã"],
+        muitoCalor: ["Dia de muito calor intenso hoje aqui na área", "Temperatura muito alta agora durante o dia", "Calor extremo hoje neste local da cidade", "Calorão forte demais aqui pela região toda", "Muito calor e abafado hoje neste momento"]
+    };
 
-// Parte 2 — chuva: contexto + conselho, minúsculo para encaixar após vírgula
-const sugestoesChuva = {
-garoa: [
-"com garoa fina no caminho hoje de manhã",
-"com chuvisco previsto para a região agora",
-"pode cair uma garoa durante o dia hoje",
-"garoa leve e bem rápida neste momento",
-"possível garoa agora pela manhã cedo"
-],
-fraca: [
-"com chuva fraca agora durante a manhã",
-"chuvinha leve caindo neste exato momento",
-"chuva fraca no local por toda a manhã",
-"chuva leve no momento em toda a região",
-"com chuva fina e leve agora pela cidade"
-],
-moderada: [
-"com chuva moderada agora durante o dia",
-"chuva firme caindo neste local da cidade",
-"chuva média no local por algumas horas",
-"chuva constante agora em toda a região",
-"com precipitação média hoje pela manhã"
-],
-forte: [
-"com chuva forte agora durante a manhã",
-"chuva pesada caindo neste momento aqui",
-"chuva intensa no local por toda a manhã",
-"chuva forte no momento em toda a região",
-"com precipitação forte agora pela cidade"
-],
-intensa: [
-"com chuva extrema agora neste local todo",
-"chuva torrencial caindo durante toda manhã",
-"tempestade forte agora em toda a região",
-"chuva intensa no local por várias horas",
-"com precipitação extrema agora pela área"
-],
-semChuva: [
-"tempo seco e bom hoje durante todo o dia",
-"sem chuva nenhuma agora nesta região toda",
-"céu limpo e seco em toda a área hoje",
-"dia aberto e seco agora neste local aqui",
-"sem precipitação hoje pela manhã e tarde"
-]
-};
+    const sugestoesChuva = {
+        garoa: ["com garoa fina no caminho hoje de manhã", "com chuvisco previsto para a região agora", "pode cair uma garoa durante o dia hoje", "garoa leve e bem rápida neste momento", "possível garoa agora pela manhã cedo"],
+        fraca: ["com chuva fraca agora durante a manhã", "chuvinha leve caindo neste exato momento", "chuva fraca no local por toda a manhã", "chuva leve no momento em toda a região", "com chuva fina e leve agora pela cidade"],
+        moderada: ["com chuva moderada agora durante o dia", "chuva firme caindo neste local da cidade", "chuva média no local por algumas horas", "chuva constante agora em toda a região", "com precipitação média hoje pela manhã"],
+        forte: ["com chuva forte agora durante a manhã", "chuva pesada caindo neste momento aqui", "chuva intensa no local por toda a manhã", "chuva forte no momento em toda a região", "com precipitação forte agora pela cidade"],
+        intensa: ["com chuva extrema agora neste local todo", "chuva torrencial caindo durante toda manhã", "tempestade forte agora em toda a região", "chuva intensa no local por várias horas", "com precipitação extrema agora pela área"],
+        semChuva: ["tempo seco e bom hoje durante todo o dia", "sem chuva nenhuma agora nesta região toda", "céu limpo e seco em toda a área hoje", "dia aberto e seco agora neste local aqui", "sem precipitação hoje pela manhã e tarde"]
+    };
 
-// Parte 3a — vento sem chuva: já traz o finalizador embutido
-const sugestoesVento = {
-calminho: [
-"e vento calmo. Aproveite o dia!",
-"e sem vento nenhum. Bom dia!",
-"com vento zero. Aproveite!",
-"e clima parado. Tenha um bom dia!",
-"e vento tranquilo. Aproveite!"
-],
-brisaLeve: [
-"e brisa leve e suave. Bom dia!",
-"com vento suave. Aproveite o dia!",
-"e vento leve e gostoso. Bom dia!",
-"e brisa fresca. Aproveite!",
-"e ventinho bom. Tenha um bom dia!"
-],
-moderado: [
-"e vento moderado durante o dia.",
-"com vento médio no local agora.",
-"e vento presente agora. Fique de olho.",
-"e ventania leve por aqui.",
-"e vento constante durante o dia."
-],
-forte: [
-"e vento forte no local hoje.",
-"com ventania forte agora por aqui.",
-"e rajadas fortes durante o dia.",
-"e vento intenso no momento.",
-"e ventos fortes hoje na região."
-],
-muitoForte: [
-"e vendaval forte por aqui hoje.",
-"com vento extremo agora na região.",
-"e vento muito intenso neste momento.",
-"e rajadas severas agora pelo local.",
-"e tempestade de vento agora aqui."
-]
-};
+    const sugestoesVento = {
+        calminho: ["e vento calmo", "e sem vento nenhum", "com vento zero", "e clima parado", "e vento tranquilo"],
+        brisaLeve: ["e brisa leve e suave", "com vento suave", "e vento leve e gostoso", "e brisa fresca", "e ventinho bom"],
+        moderado: ["e vento moderado durante o dia", "com vento médio no local agora", "e vento presente agora", "e ventania leve por aqui", "e vento constante durante o dia"],
+        forte: ["e vento forte no local hoje", "com ventania forte agora por aqui", "e rajadas fortes durante o dia", "e vento intenso no momento", "e ventos fortes hoje na região"],
+        muitoForte: ["e vendaval forte por aqui hoje", "com vento extremo agora na região", "e vento muito intenso neste momento", "e rajadas severas agora pelo local", "e tempestade de vento agora aqui"]
+    };
 
-// Parte 3b — vento com chuva: segunda sentença autônoma (já com espaço e ponto)
-const sugestoesVentoComChuva = {
-calminho: [
-" O vento está bem calmo ao menos.",
-" Sem vento forte hoje, apenas a chuva.",
-" O vento está tranquilo apesar da chuva.",
-" O vento não preocupa neste momento.",
-" Apenas vento leve e suave hoje."
-],
-brisaLeve: [
-" O vento está leve junto com a chuva.",
-" A brisa é suave apesar da chuva hoje.",
-" O ventinho está fraco com a chuva agora.",
-" O vento está calmo com a chuva no local.",
-" A brisa leve acompanha a chuva hoje."
-],
-moderado: [
-" O vento está moderado com a chuva agora.",
-" A ventania leve vem com a chuva no local.",
-" O vento médio acompanha a precipitação.",
-" O vento presente vem junto da chuva hoje.",
-" As rajadas médias vêm com a chuva agora."
-],
-forte: [
-" O vento está forte com a chuva intensa hoje.",
-" A ventania e a chuva estão bem intensas.",
-" O vento intenso vem com a chuva no local.",
-" As rajadas fortes acompanham a precipitação.",
-" A tempestade de vento vem com chuva agora."
-],
-muitoForte: [
-" O vento extremo vem com chuva forte hoje.",
-" O vendaval e a chuva torrencial estão aí.",
-" A tempestade severa de vento e chuva chegou.",
-" O vento perigoso vem com precipitação agora.",
-" As rajadas extremas vêm com chuva intensa."
-]
-};
+    const sugestoesVentoComChuva = {
+        calminho: ["O vento está bem calmo ao menos", "Sem vento forte hoje, apenas a chuva", "O vento está tranquilo apesar da chuva", "O vento não preocupa neste momento", "Apenas vento leve e suave hoje"],
+        brisaLeve: ["O vento está leve junto com a chuva", "A brisa é suave apesar da chuva hoje", "O ventinho está fraco com a chuva agora", "O vento está calmo com a chuva no local", "A brisa leve acompanha a chuva hoje"],
+        moderado: ["O vento está moderado com a chuva agora", "A ventania leve vem com a chuva no local", "O vento médio acompanha a precipitação", "O vento presente vem junto da chuva hoje", "As rajadas médias vêm com a chuva agora"],
+        forte: ["O vento está forte com a chuva intensa hoje", "A ventania e a chuva estão bem intensas", "O vento intenso vem com a chuva no local", "As rajadas fortes acompanham a precipitação", "A tempestade de vento vem com chuva agora"],
+        muitoForte: ["O vento extremo vem com chuva forte hoje", "O vendaval e a chuva torrencial estão aí", "A tempestade severa de vento e chuva chegou", "O vento perigoso vem com precipitação agora", "As rajadas extremas vêm com chuva intensa"]
+    };
+
+    function pegarAleatorio(lista) {
+        return lista[Math.floor(Math.random() * lista.length)];
+    }
+
+    let chaveTemp = faixaTemp === "muito calor" ? "muitoCalor" : faixaTemp;
+    let parteTemp = pegarAleatorio(sugestoesTemp[chaveTemp] || ["Clima desconhecido"]);
+
+    let chaveChuva = "semChuva";
+    if (precip_mm > 0.2) {
+        if (precip_mm <= 1) chaveChuva = "garoa";
+        else if (precip_mm <= 4) chaveChuva = "fraca";
+        else if (precip_mm <= 10) chaveChuva = "moderada";
+        else if (precip_mm <= 20) chaveChuva = "forte";
+        else chaveChuva = "intensa";
+    }
+    let parteChuva = pegarAleatorio(sugestoesChuva[chaveChuva]);
+
+    const temChuva = chaveChuva !== "semChuva";
+    let chaveVento = "calminho";
+    if (wind_kph > 10 && wind_kph <= 20) chaveVento = "brisaLeve";
+    else if (wind_kph <= 30) chaveVento = "moderado";
+    else if (wind_kph <= 45) chaveVento = "forte";
+    else if (wind_kph > 45) chaveVento = "muitoForte";
+
+    let frase;
+    if (!temChuva) {
+        const parteVento = pegarAleatorio(sugestoesVento[chaveVento]);
+        frase = `${parteTemp}, ${parteChuva}, ${parteVento}.`;
+    } else {
+        const parteVento = pegarAleatorio(sugestoesVentoComChuva[chaveVento]);
+        frase = `${parteTemp}, ${parteChuva}. ${parteVento}.`;
+    }
+    
+    frase = frase.charAt(0).toUpperCase() + frase.slice(1);
+    return frase;
+}
 
 function pegarAleatorio(lista) {
 return lista[Math.floor(Math.random() * lista.length)];
