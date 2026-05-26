@@ -1257,7 +1257,7 @@ const descricoes = {
 };
 
 const emojiByTemperature = [
-{ min: -Infinity, max: -0.1, emoji: "🧊" },
+{ min: -50, max: -0.1, emoji: "🧊" },
 { min: 0,   max: 2.9, emoji: "🥶" },
 { min: 3,   max: 5.9, emoji: "❄️" },
 { min: 6,   max: 8.9, emoji: "🧥" },
@@ -1903,7 +1903,7 @@ const moonDiv = document.getElementById('moonInfo');
 const now = Date.now();
 
 try {
-const weatherData = UI_STATE.weatherCache;
+const weatherData = await fetchAllWeatherData(lat, lon);
 
 if (!weatherData.astronomy || !weatherData.forecast) {
 throw new Error("Dados astronômicos ou de previsão insuficientes.");
@@ -2178,3 +2178,185 @@ return {
 emoji: '🌑',
 pt: 'Fase desconhecida',
 illumination: `${formattedIllumination}%`
+};
+}
+
+function lerCache(chave) {
+try {
+const chaveCompleta = `${CACHE_PREFIX}${chave}`;
+const item = localStorage.getItem(chaveCompleta);
+if (!item) return null;
+
+const registro = JSON.parse(item);
+
+if (typeof registro !== 'object' || registro === null) {
+localStorage.removeItem(chaveCompleta);
+return null;
+}
+
+const { timestamp, expira, dados } = registro;
+
+if (typeof timestamp !== 'number' || typeof expira !== 'number') {
+localStorage.removeItem(chaveCompleta);
+return null;
+}
+
+if ((Date.now() - timestamp) < expira) {
+return dados;
+} else {
+localStorage.removeItem(chaveCompleta);
+return null;
+}
+
+} catch (e) {
+console.warn("Erro ao ler cache localStorage:", e);
+return null;
+}
+}
+
+function iniciarAtualizacaoPeriodica() {
+clearInterval(intervaloAtualizacao);
+intervaloAtualizacao = setInterval(() => {
+buscarPrevisaoPorGeolocalizacao(false);
+}, 5 * 60 * 1000);
+}
+
+let intervaloAtualizacao = setInterval(() => buscarPrevisaoPorGeolocalizacao(false), UPDATE_INTERVAL);
+
+document.addEventListener('visibilitychange', function() {
+if (document.hidden) {
+clearInterval(intervaloAtualizacao);
+}
+});
+
+window.onload = async function () {
+const splashScreen = document.getElementById('splashScreen');
+document.body.classList.add('loading');
+let splashHidden = false;
+
+const hideSplashScreen = () => {
+if (splashHidden) return;
+splashHidden = true;
+if (splashScreen) {
+splashScreen.style.opacity = '0';
+setTimeout(() => {
+splashScreen.style.display = 'none';
+document.body.classList.remove('loading');
+}, 500);
+}
+};
+
+const isRunningInApp = () => {
+return window.cordova || window.Capacitor || /CrossWalk/i.test(navigator.userAgent);
+};
+
+window.addEventListener('offline', () => {
+const statusDiv = document.getElementById('status');
+if (statusDiv) {
+statusDiv.innerHTML = '<p style="color:#ff6f00; font-size: 15px;">Você está offline. Conecte-se à internet para atualizar os dados.</p>';
+}
+});
+
+window.addEventListener('online', () => {
+const statusDiv = document.getElementById('status');
+if (statusDiv) {
+statusDiv.innerHTML = '<p style="color:#4bc194;">Conexão restaurada. Atualizando dados...</p>';
+}
+buscarPrevisaoPorGeolocalizacao(false);
+});
+
+splashTimeoutId = setTimeout(() => {
+const essentialDataLoaded =
+UI_STATE.weatherCache !== null &&
+document.getElementById('weatherResult')?.innerHTML.includes('big-icon') &&
+document.getElementById('locationDate')?.innerHTML.trim() !== '';
+
+if (!essentialDataLoaded) {
+console.warn('Splash travado – tempo esgotado, forçando fechamento.');
+hideSplashScreen();
+mostrarErroSplash('Não foi possível carregar os dados essenciais. Verifique sua conexão e tente novamente.');
+} else {
+hideSplashScreen();
+}
+}, SPLASH_TIMEOUT);
+
+try {
+await carregarTudo(true);
+iniciarAtualizacaoPeriodica();
+hideSplashScreen();
+clearTimeout(splashTimeoutId);
+} catch (error) {
+console.error("Erro no carregamento:", error);
+hideSplashScreen();
+clearTimeout(splashTimeoutId);
+if (!isRunningInApp()) {
+reiniciarBuscaAutomatica();
+}
+}
+};
+
+async function carregarTudo(isInitialLoad = true) {
+try {
+const statusDiv = document.getElementById('status');
+statusDiv.innerHTML = `
+<p style="color: #ccc; font-size: 0.85em;">Buscando dados do tempo...</p>
+<div class="progress-bar-small">
+<div class="progress"></div>
+</div>
+`;
+await buscarPrevisaoPorGeolocalizacao(isInitialLoad);
+} catch (erro) {
+console.error("Erro ao carregar dados:", erro);
+}
+}
+
+function abrirStarWalkMoon() {
+const modal = document.createElement('div');
+modal.id = 'modalStarWalk';
+modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000000;z-index:20000;display:flex;flex-direction:column;';
+
+history.pushState({modal: 'StarWalk'}, '');
+
+const header = document.createElement('div');
+header.style.cssText = 'display:flex;justify-content:flex-end;padding:12px;background:#0a0a1a;';
+
+const closeBtn = document.createElement('button');
+closeBtn.textContent = 'Fechar';
+closeBtn.style.cssText = 'background:transparent;border:none;color:#ffeb3b;font-size:14px;font-weight:bold;cursor:pointer;padding:12px 20px;';
+closeBtn.onclick = () => {
+document.body.removeChild(modal);
+if (history.state && history.state.modal === 'StarWalk') {
+history.back();
+}
+};
+
+header.appendChild(closeBtn);
+
+const iframe = document.createElement('iframe');
+iframe.src = 'https://starwalk.space/pt/moon-calendar';
+iframe.style.cssText = 'width:100%;flex:1;border:none;background:#fff;';
+
+modal.appendChild(header);
+modal.appendChild(iframe);
+document.body.appendChild(modal);
+}
+
+window.addEventListener('popstate', function(event) {
+const modalGraficos = document.getElementById('telaGraficos');
+const modalEscalas = document.getElementById('telaEscalas');
+const modalStarWalk = document.getElementById('modalStarWalk');
+
+if (modalGraficos && modalGraficos.style.display === 'block') {
+fecharModal('Graficos');
+event.preventDefault();
+event.stopPropagation();
+} else if (modalEscalas && modalEscalas.style.display === 'block') {
+fecharModal('Escalas');
+event.preventDefault();
+event.stopPropagation();
+} else if (modalStarWalk) {
+document.body.removeChild(modalStarWalk);
+event.preventDefault();
+event.stopPropagation();
+}
+});
