@@ -1257,7 +1257,7 @@ const descricoes = {
 };
 
 const emojiByTemperature = [
-{ min: -50, max: -0.1, emoji: "🧊" },
+{ min: -Infinity, max: -0.1, emoji: "🧊" },
 { min: 0,   max: 2.9, emoji: "🥶" },
 { min: 3,   max: 5.9, emoji: "❄️" },
 { min: 6,   max: 8.9, emoji: "🧥" },
@@ -1903,7 +1903,7 @@ const moonDiv = document.getElementById('moonInfo');
 const now = Date.now();
 
 try {
-const weatherData = await fetchAllWeatherData(lat, lon);
+const weatherData = UI_STATE.weatherCache;
 
 if (!weatherData.astronomy || !weatherData.forecast) {
 throw new Error("Dados astronômicos ou de previsão insuficientes.");
