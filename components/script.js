@@ -648,7 +648,7 @@ intensa: [
 "com chuva extrema agora neste local todo",
 "chuva torrencial caindo durante toda manhã",
 "tempestade forte agora em toda a região",
-"chuva perigosa no local por várias horas",
+"chuva intensa no local por várias horas",
 "com precipitação extrema agora pela área"
 ],
 semChuva: [
@@ -677,25 +677,25 @@ brisaLeve: [
 "e ventinho bom. Tenha um bom dia!"
 ],
 moderado: [
-"e vento moderado. Atenção total!",
-"com vento médio no local. Cuidado!",
-"e vento presente agora. Atenção!",
-"e ventania leve. Fique atento!",
-"e vento constante. Tenha cuidado!"
+"e vento moderado durante o dia.",
+"com vento médio no local agora.",
+"e vento presente agora. Fique de olho.",
+"e ventania leve por aqui.",
+"e vento constante durante o dia."
 ],
 forte: [
-"e vento forte no local. Cuidado!",
-"com ventania forte agora. Atenção!",
-"e rajadas fortes. Muito cuidado!",
-"e vento intenso. Atenção total!",
-"e ventos fortes hoje. Não arrisque!"
+"e vento forte no local hoje.",
+"com ventania forte agora por aqui.",
+"e rajadas fortes durante o dia.",
+"e vento intenso no momento.",
+"e ventos fortes hoje na região."
 ],
 muitoForte: [
-"e vendaval forte. Não saia de casa!",
-"com vento extremo. Fique em segurança!",
-"e vento perigoso. Evite sair agora!",
-"e rajadas severas. Muito cuidado!",
-"e tempestade de vento. Não arrisque!"
+"e vendaval forte por aqui hoje.",
+"com vento extremo agora na região.",
+"e vento muito intenso neste momento.",
+"e rajadas severas agora pelo local.",
+"e tempestade de vento agora aqui."
 ]
 };
 
@@ -724,7 +724,7 @@ moderado: [
 ],
 forte: [
 " O vento está forte com a chuva intensa hoje.",
-" A ventania e a chuva estão bem perigosas.",
+" A ventania e a chuva estão bem intensas.",
 " O vento intenso vem com a chuva no local.",
 " As rajadas fortes acompanham a precipitação.",
 " A tempestade de vento vem com chuva agora."
