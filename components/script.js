@@ -44,58 +44,43 @@ extrasCache: { extras: "", moon: "" }
 const styleErroModal = document.createElement('style');
 styleErroModal.textContent = `
 @keyframes erroSlideIn {
-from {
-opacity: 0;
-transform: scale(0.95);
-}
-to {
-opacity: 1;
-transform: scale(1);
-}
+from { opacity: 0; transform: scale(0.95); }
+to   { opacity: 1; transform: scale(1); }
 }
 .erro-overlay {
 position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.85);
+top: 0; left: 0;
+width: 100%; height: 100%;
+background: rgba(0,0,0,0.85);
 z-index: 50000;
 display: flex;
 align-items: center;
 justify-content: center;
 padding: 20px;
-animation: erroSlideIn 0.3s ease-out;
 box-sizing: border-box;
+animation: erroSlideIn 0.3s ease-out;
 }
 .erro-card {
-background: linear-gradient(135deg, #001133 0%, #00081a 100%);
-border-radius: 24px;
+background: #001133;
+border-radius: 20px;
 padding: 32px 24px;
-max-width: 280px;
+max-width: 260px;
 width: 100%;
 text-align: center;
 }
-.erro-card--gps    { border: 1px solid rgba(255, 87, 34, 0.2); }
-.erro-card--rede   { border: 1px solid rgba(255, 152, 0, 0.2); }
-.erro-card--outro  { border: 1px solid rgba(124, 77, 255, 0.2); }
-.erro-icone  { font-size: 48px; margin-bottom: 12px; }
-.erro-titulo { color: #fff; font-size: 18px; font-weight: 600; margin: 0 0 8px; }
-.erro-desc   { color: rgba(255,255,255,0.5); font-size: 13px; margin: 0 0 24px; line-height: 1.5; }
+.erro-icone { font-size: 40px; margin-bottom: 16px; }
+.erro-desc  { color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.5; margin: 0 0 24px; }
 .erro-btn {
 width: 100%;
 padding: 14px;
 border-radius: 40px;
 border: none;
-color: #fff;
+background: #ffeb3b;
+color: #001133;
 font-size: 15px;
-font-weight: 600;
+font-weight: 700;
 cursor: pointer;
-transition: opacity 0.2s;
 }
-.erro-btn--gps   { background: #ff5722; }
-.erro-btn--rede  { background: #ff9800; }
-.erro-btn--outro { background: #7c4dff; }
 `;
 document.head.appendChild(styleErroModal);
 
@@ -175,192 +160,33 @@ await buscarPrevisaoPorGeolocalizacao(false);
 }
 
 // ============================================
-// TELA DE ERRO MINIMALISTA COM MODAL
+// MODAL DE ERRO
 // ============================================
-function mostrarMensagemAmigavel(tipoErro, detalhes = {}) {
-// Mapeamento rápido de erros
-const erros = {
-'sem-internet': { 
-icone: '📡', 
-titulo: 'Sem internet',
-descricao: 'Verifique sua conexão'
-},
-'gps-off': { 
-icone: '📍', 
-titulo: 'GPS desligado',
-descricao: 'Ative a localização do dispositivo'
-},
-'permissao-negada': { 
-icone: '🔒', 
-titulo: 'Permissão negada',
-descricao: 'Permita o acesso à localização'
-},
-'timeout': { 
-icone: '⏱️', 
-titulo: 'GPS demorou',
-descricao: 'Tente em um local aberto'
-},
-'api-falhou': { 
-icone: '🌩️', 
-titulo: 'Serviço indisponível',
-descricao: 'Tente novamente em instantes'
-},
-'erro-desconhecido': { 
-icone: '⚠️', 
-titulo: 'Algo deu errado',
-descricao: 'Tente novamente'
-}
-};
-
-const err = erros[tipoErro] || erros['erro-desconhecido'];
-
-// Determina variante de cor pela categoria do ícone
-const isGps  = err.icone === '📍';
-const isRede = err.icone === '📡';
-const variante = isGps ? 'gps' : isRede ? 'rede' : 'outro';
-
-// Remove modal anterior se existir
+function mostrarErro() {
 document.getElementById('modal-erro-wrap')?.remove();
 
-// Cria o modal minimalista
 const modal = document.createElement('div');
 modal.id = 'modal-erro-wrap';
 modal.className = 'erro-overlay';
-
 modal.innerHTML = `
-<div class="erro-card erro-card--${variante}">
-<div class="erro-icone">${err.icone}</div>
-<h3 class="erro-titulo">${err.titulo}</h3>
-<p class="erro-desc">${err.descricao}</p>
-<button id="btn-erro-retry" class="erro-btn erro-btn--${variante}">
-🔄 Tentar novamente
-</button>
+<div class="erro-card">
+<div class="erro-icone">⚠️</div>
+<p class="erro-desc">Não foi possível carregar.<br>Verifique sua conexão ou GPS.</p>
+<button id="btn-erro-retry" class="erro-btn">Tentar novamente</button>
 </div>
 `;
-
 document.body.appendChild(modal);
 
-// Adiciona evento ao botão
-const btn = document.getElementById('btn-erro-retry');
-if (btn) {
-btn.addEventListener('click', function() {
-if (this.disabled) return;
-this.disabled = true;
-this.textContent = '⏳ Buscando...';
+document.getElementById('btn-erro-retry').addEventListener('click', function () {
 modal.remove();
-reiniciarBusca(); // Chama imediatamente
+buscarPrevisaoPorGeolocalizacao(false);
 });
-}
 
-// Limpa o status e result
 const resultDiv = document.getElementById(DOM_IDS.WEATHER_RESULT);
 const statusDiv = document.getElementById(DOM_IDS.STATUS);
 if (resultDiv) resultDiv.innerHTML = '';
 if (statusDiv) statusDiv.innerHTML = '';
 }
-
-function abrirConfiguracoes() {
-if (navigator.userAgent.match(/Android/i)) {
-window.location.href = 'app-settings:';
-}
-}
-
-// Substitua a função existente por esta:
-function mostrarMensagemErro(mensagem, tipoErro = 'erro-desconhecido') {
-console.log(`Erro: ${tipoErro} - ${mensagem}`);
-
-// Detecta automaticamente o tipo de erro pela mensagem
-if (mensagem.includes('Sem conexão') || mensagem.includes('offline')) {
-tipoErro = 'sem-internet';
-} else if (mensagem.includes('Permissão negada')) {
-tipoErro = 'permissao-negada';
-} else if (mensagem.includes('GPS') || mensagem.includes('localização')) {
-tipoErro = 'gps-off';
-} else if (mensagem.includes('Timeout') || mensagem.includes('demorou')) {
-tipoErro = 'timeout';
-} else if (mensagem.includes('API') || mensagem.includes('servidor')) {
-tipoErro = 'api-falhou';
-}
-
-mostrarMensagemAmigavel(tipoErro);
-}
-
-// NOVA FUNÇÃO: Notificação toast amigável
-function mostrarToast(mensagem, tipo = 'info') {
-const toast = document.createElement('div');
-const cores = {
-sucesso: '#4caf50',
-erro: '#f44336',
-info: '#2196f3',
-alerta: '#ff9800'
-};
-
-toast.style.cssText = `
-position: fixed;
-bottom: 20px;
-left: 50%;
-transform: translateX(-50%);
-background: ${cores[tipo] || cores.info};
-color: white;
-padding: 12px 24px;
-border-radius: 30px;
-font-size: 14px;
-z-index: 40000;
-animation: slideUp 0.3s ease-out;
-box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-max-width: 80%;
-text-align: center;
-`;
-
-toast.textContent = mensagem;
-document.body.appendChild(toast);
-
-setTimeout(() => {
-toast.style.animation = 'slideDown 0.3s ease-out';
-setTimeout(() => toast.remove(), 300);
-}, 3000);
-}
-
-// Adicionar animações CSS para toast
-const toastStyle = document.createElement('style');
-toastStyle.textContent = `
-@keyframes slideUp {
-from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-to { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-@keyframes slideDown {
-from { opacity: 1; transform: translateX(-50%) translateY(0); }
-to { opacity: 0; transform: translateX(-50%) translateY(20px); }
-}
-`;
-document.head.appendChild(toastStyle);
-
-// NOVA FUNÇÃO: Recuperação automática inteligente
-const recuperacaoInteligente = (() => {
-let tentativas = 0;
-return function recuperacaoInteligente() {
-tentativas++;
-
-if (tentativas <= 3) {
-mostrarToast(`🔄 Tentativa ${tentativas} de recuperação...`, 'info');
-
-setTimeout(() => {
-if (navigator.onLine) {
-buscarPrevisaoPorGeolocalizacao(false);
-} else {
-window.addEventListener('online', function onOnline() {
-window.removeEventListener('online', onOnline);
-buscarPrevisaoPorGeolocalizacao(false);
-});
-}
-}, tentativas * 2000);
-} else {
-mostrarMensagemAmigavel('erro-desconhecido');
-mostrarToast('❌ Não foi possível recuperar automaticamente', 'erro');
-tentativas = 0;
-}
-};
-})();
 
 function limparCachePorPrioridade() {
 const itens = [];
@@ -1769,50 +1595,8 @@ console.warn('Erro ao carregar dados extras:', e);
 
 } catch (error) {
 console.error('Erro ao buscar previsão:', error);
-
-let tipoErro = 'erro-desconhecido';
-
-if (error instanceof GeolocationPositionError) {
-switch (error.code) {
-case error.PERMISSION_DENIED:
-tipoErro = 'permissao-negada';
-mostrarMensagemAmigavel(tipoErro);
-mostrarToast('📍 Ative a localização nas configurações', 'alerta');
-break;
-case error.POSITION_UNAVAILABLE:
-tipoErro = 'gps-off';
-mostrarMensagemAmigavel(tipoErro);
-mostrarToast('📡 Sinal de GPS fraco', 'alerta');
-break;
-case error.TIMEOUT:
-tipoErro = 'timeout';
-mostrarMensagemAmigavel(tipoErro);
-mostrarToast('⏰ Aguardando sinal de GPS', 'info');
-break;
-default:
-mostrarMensagemAmigavel(tipoErro);
-}
-} else if (error.message === "Sem conexão com a internet") {
-tipoErro = 'sem-internet';
-mostrarMensagemAmigavel(tipoErro);
-mostrarToast('🌐 Conecte-se à internet', 'alerta');
-} else if (error.message.includes("instável") || error.message.includes("Rede")) {
-tipoErro = 'sem-internet';
-mostrarMensagemAmigavel(tipoErro);
-mostrarToast('📶 Rede instável. Aguarde e tente novamente.', 'alerta');
-setTimeout(() => reiniciarBusca(), 8000); // retry automático após 8s
-} else if (error.message.includes("HTTP error") || error.message.includes("API")) {
-tipoErro = 'api-falhou';
-mostrarMensagemAmigavel(tipoErro);
-mostrarToast('☁️ Serviço temporariamente indisponível', 'info');
-} else {
-mostrarMensagemAmigavel(tipoErro);
-mostrarToast('🤔 Ops! Algo deu errado', 'erro');
-}
-
-if (statusDiv) {
-statusDiv.innerHTML = '';
-}
+mostrarErro();
+if (statusDiv) statusDiv.innerHTML = '';
 } finally {
 finalizarPullToRefresh?.();
 if (typeof splashTimeoutId !== 'undefined') clearTimeout(splashTimeoutId);
@@ -1855,61 +1639,14 @@ splash.style.opacity = '0';
 setTimeout(() => (splash.style.display = 'none'), 500);
 }
 
-function esconderSplashComErro(msg) {
-esconderSplashSuavemente();
-const resultDiv = document.getElementById('weatherResult');
-resultDiv.innerHTML = `
-<div style="color:#ff6f00;text-align:center;padding:20px;">
-<p>${msg}</p>
-<p style="font-size: 0.8em; color: #ccc; margin-top: 10px;">Tentando novamente...</p>
-</div>`;
-reiniciarBuscaAutomatica();
-}
 
-function reiniciarBuscaComRetry(maxTentativas = 3, intervalo = 5000) {
-const resultDiv = document.getElementById('weatherResult');
-const statusDiv = document.getElementById('status');
 
-if (resultDiv) {
-resultDiv.innerHTML = `
-<div style="color:#ff6f00;text-align:center;padding:20px;">
-<p>Não foi possível carregar os dados. Tentando novamente...</p>
-</div>`;
-}
 
-if (statusDiv) {
-statusDiv.innerHTML = `
-<p style="color:#ccc;font-size:0.75em;">Tentando reconectar...</p>
-<div class="progress-bar-small"><div class="progress"></div></div>`;
-}
 
-tentarComRetry(() => buscarPrevisaoPorGeolocalizacao(true), maxTentativas, intervalo)
-.catch(err => {
-if (resultDiv) {
-resultDiv.innerHTML = `
-<div style="color:#ff6f00;text-align:center;padding:20px;">
-<p>Erro após várias tentativas: ${err.message}</p>
-<button onclick="reiniciarBuscaComRetry()"
-style="margin-top:10px; background:#ff6f00; color:white; border:none; padding:5px 10px; border-radius:3px;">
-Tentar novamente
-</button>
-</div>`;
-}
-});
-}
 
-function mostrarErroSplash(mensagem) {
-const splash = document.getElementById('splashScreen');
-if (splash) {
-splash.innerHTML = `
-<div style="text-align: center; padding: 20px;">
-<p style="color: #ff6f00;">${mensagem}</p>
-<p style="font-size: 0.8em; color: #ccc; margin-top: 10px;">Tentando novamente...</p>
-</div>
-`;
-setTimeout(() => reiniciarBuscaComRetry(), 3000);
-}
-}
+
+
+
 
 async function buscarExtras(lat, lon) {
 const extrasDiv = document.getElementById('extras');
@@ -2288,7 +2025,7 @@ document.getElementById('locationDate')?.innerHTML.trim() !== '';
 if (!essentialDataLoaded) {
 console.warn('Splash travado – tempo esgotado, forçando fechamento.');
 hideSplashScreen();
-mostrarErroSplash('Não foi possível carregar os dados essenciais. Verifique sua conexão e tente novamente.');
+mostrarErro();
 } else {
 hideSplashScreen();
 }
