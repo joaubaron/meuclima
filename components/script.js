@@ -519,7 +519,7 @@ brisaLeve: [
 moderado: [
 "e vento moderado durante o dia.",
 "com vento médio no local agora.",
-"e vento presente agora. Fique de olho.",
+"e vento presente agora. Bom dia!",
 "e ventania leve por aqui.",
 "e vento constante durante o dia."
 ],
