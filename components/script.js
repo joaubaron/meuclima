@@ -892,7 +892,11 @@ return faixa.emoji;
 async function carregarGraficos() {
 if (!UI_STATE.weatherCache) {
 console.log("Aguardando dados do tempo…");
-return;
+for (let i = 0; i < 30; i++) {
+await new Promise(r => setTimeout(r, 100));
+if (UI_STATE.weatherCache) break;
+}
+if (!UI_STATE.weatherCache) return;
 }
 
 if (typeof Chart === "undefined") {
