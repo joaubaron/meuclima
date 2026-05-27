@@ -615,21 +615,20 @@ const ventoRaw = pegarAleatorio(sugestoesVento[chaveVento]).trim();
 const pontoIdx = ventoRaw.indexOf('. ');
 let ventoDesc, ventoFinal;
 if (pontoIdx !== -1) {
-ventoDesc  = ventoRaw.slice(0, pontoIdx).toLowerCase();
-ventoFinal = ventoRaw.slice(pontoIdx + 2); // já começa com maiúscula
+ventoDesc = ventoRaw.slice(0, pontoIdx).toLowerCase();
+ventoFinal = ventoRaw.slice(pontoIdx + 2);
 } else {
-ventoDesc  = ventoRaw.toLowerCase();
+ventoDesc = ventoRaw.slice(0, -1).toLowerCase();
 ventoFinal = '';
 }
-frase = `${parteTemp}, ${parteChuva.toLowerCase()}, ${ventoDesc}`;
-if (ventoFinal) frase += ` ${ventoFinal}`;
-else if (!frase.endsWith('.')) frase += '.';  // ← correção
+frase = `${parteTemp}, ${parteChuva.toLowerCase()}, ${ventoDesc}. ${ventoFinal}`;
 frase = frase.charAt(0).toUpperCase() + frase.slice(1);
 } else {
 const parteVento = pegarAleatorio(sugestoesVentoComChuva[chaveVento]).trim();
 frase = `${parteTemp}, ${parteChuva.toLowerCase()}. ${parteVento}`;
 frase = frase.charAt(0).toUpperCase() + frase.slice(1);
 }
+
 return frase;
 }
 
@@ -1571,7 +1570,7 @@ const astroSol = weatherData.forecast?.forecast?.forecastday?.[0]?.astro
 const nascerStr = converterHora12para24(astroSol?.sunrise);
 const porStr    = converterHora12para24(astroSol?.sunset);
 sunDivImediato.innerHTML = `
-<div class="info-inline moon-text" style="font-size: 0.75em; overflow-x: auto;">
+<div class="info-inline moon-text" style="font-size: 0.65em; overflow-x: auto;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
 <span>Hoje amanhece às ☀️ ${nascerStr} e anoitece às 🌙 ${porStr}</span>
 </div>
@@ -1835,7 +1834,7 @@ const amanhaHTML = `
 `;
 
 const htmlCompletoExtras = `
-<div class="info-inline" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; text-align: center; font-size: 0.9em;">
+<div class="info-inline" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; text-align: center; font-size: 1.1em;">
 ${periodosHTML}
 </div>
 <div style="margin: 10px 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, 0.3);"></div>
