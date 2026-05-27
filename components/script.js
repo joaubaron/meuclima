@@ -1834,7 +1834,7 @@ const amanhaHTML = `
 `;
 
 const htmlCompletoExtras = `
-<div class="info-inline" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; text-align: center; font-size: 1.1em;">
+<div class="info-inline" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; text-align: center; font-size: 1.4em;">
 ${periodosHTML}
 </div>
 <div style="margin: 10px 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, 0.3);"></div>
