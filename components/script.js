@@ -456,7 +456,7 @@ calor: [
 "Calor forte e intenso agora pela manhã"
 ],
 muitoCalor: [
-"Dia de muito calor intenso hoje aqui na área",
+"Dia de muito calor e intenso hoje",
 "Temperatura muito alta agora durante o dia",
 "Calor extremo hoje neste local da cidade",
 "Calorão forte demais aqui pela região toda",
@@ -469,9 +469,9 @@ const sugestoesChuva = {
 garoa: [
 "com garoa fina no caminho hoje de manhã",
 "com chuvisco previsto para a região agora",
-"pode cair uma garoa durante o dia hoje",
+"pode cair uma garoa durante o dia",
 "garoa leve e bem rápida neste momento",
-"possível garoa agora pela manhã cedo"
+"possível garoa agora pela manhã"
 ],
 fraca: [
 "com chuva fraca agora durante a manhã",
@@ -489,13 +489,13 @@ moderada: [
 ],
 forte: [
 "com chuva forte agora durante a manhã",
-"chuva pesada caindo neste momento aqui",
+"chuva pesada caindo neste momento",
 "chuva intensa no local por toda a manhã",
 "chuva forte no momento em toda a região",
 "com precipitação forte agora pela cidade"
 ],
 intensa: [
-"com chuva extrema agora neste local todo",
+"com chuva extrema agora neste local",
 "chuva torrencial caindo durante toda manhã",
 "tempestade forte agora em toda a região",
 "chuva intensa no local por várias horas",
@@ -505,7 +505,7 @@ semChuva: [
 "tempo seco e bom hoje durante todo o dia",
 "sem chuva nenhuma agora nesta região toda",
 "céu limpo e seco em toda a área hoje",
-"dia aberto e seco agora neste local aqui",
+"dia aberto e seco agora neste local",
 "sem precipitação hoje pela manhã e tarde"
 ]
 };
