@@ -177,9 +177,19 @@ modal.innerHTML = `
 `;
 document.body.appendChild(modal);
 
-document.getElementById('btn-erro-retry').addEventListener('click', function () {
+document.getElementById('btn-erro-retry').addEventListener('click', async function () {
+// Mantém o overlay visível durante a tentativa — evita mostrar a tela de carregamento feia
+modal.querySelector('.erro-card').innerHTML = `
+<div class="erro-icone" style="font-size:32px;">⏳</div>
+<p class="erro-desc">Conectando...</p>
+<div class="spinner" style="margin: 0 auto;"></div>
+`;
+
+await buscarPrevisaoPorGeolocalizacao(false);
+
+// Se foi sucesso: o modal ainda está no DOM, removemos aqui.
+// Se falhou: mostrarErro() já removeu e substituiu por novo modal de erro — remove() vira no-op.
 modal.remove();
-buscarPrevisaoPorGeolocalizacao(false);
 });
 
 const resultDiv = document.getElementById(DOM_IDS.WEATHER_RESULT);
