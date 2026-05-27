@@ -892,6 +892,27 @@ return faixa.emoji;
 async function carregarGraficos() {
 if (!UI_STATE.weatherCache) {
 console.log("Aguardando dados do tempo…");
+
+// Mostra "Carregando" nos gráficos
+const canvasTemperatura = document.getElementById('temperaturaChart');
+const canvasPrecipitacao = document.getElementById('precipitacaoChart');
+const canvasVento = document.getElementById('ventoChart');
+
+const mostrarMensagem = (canvas, msg) => {
+if (canvas) {
+const ctx = canvas.getContext('2d');
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.fillStyle = '#ccc';
+ctx.font = '14px sans-serif';
+ctx.textAlign = 'center';
+ctx.fillText(msg, canvas.width/2, canvas.height/2);
+}
+};
+
+mostrarMensagem(canvasTemperatura, '⏳ Carregando temperatura...');
+mostrarMensagem(canvasPrecipitacao, '⏳ Carregando precipitação...');
+mostrarMensagem(canvasVento, '⏳ Carregando vento...');
+
 for (let i = 0; i < 30; i++) {
 await new Promise(r => setTimeout(r, 100));
 if (UI_STATE.weatherCache) break;
