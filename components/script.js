@@ -393,7 +393,7 @@ r.faixa && r.nome && !r._comentario && r.faixa === faixa
 if (receitasDaFaixa.length > 0) {
 const receita = receitasDaFaixa[Math.floor(Math.random() * receitasDaFaixa.length)];
 box.innerHTML = `
-<p style="margin-bottom: 0.6em; font-size: 1.0em; margin-top: 6px;">
+<p style="margin-bottom: 0.6em; font-size: 1.1em; margin-top: 6px;">
 Hoje pede: ${receita.emoji}
 <strong>${receita.nome}</strong>
 </p>
