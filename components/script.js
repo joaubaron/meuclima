@@ -623,13 +623,13 @@ ventoFinal = '';
 }
 frase = `${parteTemp}, ${parteChuva.toLowerCase()}, ${ventoDesc}`;
 if (ventoFinal) frase += ` ${ventoFinal}`;
+else if (!frase.endsWith('.')) frase += '.';  // ← correção
 frase = frase.charAt(0).toUpperCase() + frase.slice(1);
 } else {
 const parteVento = pegarAleatorio(sugestoesVentoComChuva[chaveVento]).trim();
 frase = `${parteTemp}, ${parteChuva.toLowerCase()}. ${parteVento}`;
 frase = frase.charAt(0).toUpperCase() + frase.slice(1);
 }
-
 return frase;
 }
 
