@@ -2197,7 +2197,7 @@ const lat = _coordsCache.lat;
 const lon = _coordsCache.lon;
 
 // Open-Meteo: daily com temperatura, vento, precipitação, ícone do tempo
-const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,weathercode&timezone=auto&forecast_days=7`;
+const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,weathercode&hourly=weathercode&timezone=auto&forecast_days=7`;
 
 const resp = await fetch(url);
 if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
@@ -2294,6 +2294,32 @@ const map = {
 return map[code] || '☁️';
 }
 
+// Retorna emojis por período (manhã/tarde/noite) usando dados horários
+function getEmojisPorPeriodo(forecastData, dateStr) {
+const hourly = forecastData.hourly;
+if (!hourly?.time || !hourly?.weathercode) return null;
+
+const manha = [], tarde = [], noite = [];
+
+hourly.time.forEach((t, idx) => {
+if (!t.startsWith(dateStr)) return;
+const hora = parseInt(t.split('T')[1]);
+const code = hourly.weathercode[idx];
+if (hora >= 6  && hora < 12) manha.push(code);
+else if (hora >= 12 && hora < 18) tarde.push(code);
+else noite.push(code);
+});
+
+const pior = arr => arr.length ? Math.max(...arr) : null;
+const pm = pior(manha), pt = pior(tarde), pn = pior(noite);
+
+return {
+manha: pm !== null ? getOpenMeteoEmoji(pm) : null,
+tarde: pt !== null ? getOpenMeteoEmoji(pt) : null,
+noite: pn !== null ? getOpenMeteoEmoji(pn) : null,
+};
+}
+
 function renderizar5Dias(forecastData) {
 const conteudo = document.getElementById('conteudo5Dias');
 if (!conteudo) return;
@@ -2375,7 +2401,20 @@ const minTemp = Math.round(dia.minTemp ?? dia.day?.mintemp_c ?? 0);
 const ventoMedio = dia.wind_kph ?? dia.day?.maxwind_kph ?? 0;
 const precipMm = dia.precip_mm ?? dia.day?.totalprecip_mm ?? 0;
 
-// Emoji baseado no código do tempo (Open-Meteo ou WeatherAPI)
+// Emoji por período (manhã/tarde/noite) se houver dados horários
+const periodos = forecastData.hourly
+? getEmojisPorPeriodo(forecastData, dia.date)
+: null;
+
+let emojiHTML;
+if (periodos && (periodos.manha || periodos.tarde || periodos.noite)) {
+emojiHTML = `<div style="display:flex;gap:2px;justify-content:center;font-size:1.05em;line-height:1;">
+${periodos.manha ? `<span title="Manhã">${periodos.manha}</span>` : ''}
+${periodos.tarde ? `<span title="Tarde">${periodos.tarde}</span>` : ''}
+${periodos.noite ? `<span title="Noite">${periodos.noite}</span>` : ''}
+</div>`;
+} else {
+// Fallback: emoji diário único
 let emoji = '☁️';
 if (dia.weatherCode !== undefined) {
 emoji = getOpenMeteoEmoji(dia.weatherCode);
@@ -2390,13 +2429,15 @@ else if (code >= 1066 && code <= 1117) emoji = '❄️';
 else if (code >= 1150 && code <= 1282) emoji = '🌧️';
 else emoji = '☁️';
 }
+emojiHTML = `<div style="font-size:1.4em;">${emoji}</div>`;
+}
 
 // Formato original: max em destaque, min abaixo
 cardsHTML += `
 <div class="cinco-dias-card${i === 0 ? ' cinco-dias-card--hoje' : ''}">
 <div class="cinco-dias-label">${labelDia}</div>
 <div class="cinco-dias-data">${dataStr}</div>
-<div class="cinco-dias-emoji">${emoji}</div>
+<div class="cinco-dias-emoji">${emojiHTML}</div>
 <div class="cinco-dias-max">${maxTemp}°</div>
 <div class="cinco-dias-min">${minTemp}°</div>
 <div class="cinco-dias-vento" style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;"><span>🍃 ${ventoMedio.toFixed(1)} km/h</span><span style="font-size:0.82em;opacity:0.75;">🌧️ ${precipMm.toFixed(1)} mm</span></div>
