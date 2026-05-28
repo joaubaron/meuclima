@@ -300,7 +300,7 @@ style="background:none; border:none; color:white; padding: 4px 0; cursor:pointer
 </div>
 </div>
 
-<!-- Modal: Previsão 5 Dias -->
+<!-- Modal: Previsão 5 Dias (COM BOTÃO CHUVA E VENTO MOVIDO PARA CÁ) -->
 <div id="tela5Dias">
 <div style="max-width: 800px; margin: 0 auto;">
 <h2 style="color:#ffeb3b; border-left: 6px solid #ffffff; padding-left: 10px; margin-bottom: 16px; font-size: 13px;">
@@ -308,15 +308,21 @@ Previsão 5 dias 📅
 </h2>
 <div id="conteudo5Dias"></div>
 
-<!-- ⬇️ ADICIONE ESTA LINHA AQUI ⬇️ -->
+<!-- ⬇️ Fonte da previsão ⬇️ -->
 <div style="font-size: 9px; opacity: 0.6; text-align: center; margin-top: 8px;">
 ⚠️ Fonte: Open-Meteo (pode variar ligeiramente do clima atual)
 </div>
 
 <br>
 <br>
+<!-- Rodapé com botões: Fechar e Chuva e vento (lado a lado) -->
 <div style="display: flex; align-items: center; justify-content: flex-start; width: 100%; margin-top: 20px; padding: 0 10px; gap: 25px;">
 <button onclick="fecharTela5Dias(event)" style="cursor: pointer; color: #ffeb3b; font-weight: bold; font-size: 12px; background: none; border: none; line-height: 1.5; padding: 4px 0;">Fechar</button>
+<button 
+onclick="abrirTelaEscalas()" 
+style="background:none; border:none; color:white; padding: 4px 0; cursor:pointer; font-size:12px; font-family:inherit; line-height: 1.5;">
+<span style="font-size:15px; line-height:1; vertical-align:middle; margin: 0 8px;">🌧️ </span>Chuva e vento
+</button>
 </div>
 </div>
 </div>
