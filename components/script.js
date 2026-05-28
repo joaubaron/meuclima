@@ -2309,12 +2309,7 @@ const hourly = forecastData.hourly;
 if (!hourly?.time || !hourly?.weathercode) return null;
 
 const periodo = getPeriodoAtual();
-const faixas = {
-aurora: [0,  6],
-manha:  [6,  12],
-tarde:  [12, 18],
-noite:  [18, 24],
-};
+const faixas = { aurora:[0,6], manha:[6,12], tarde:[12,18], noite:[18,24] };
 const [inicio, fim] = faixas[periodo];
 
 const codes = [];
@@ -2375,13 +2370,13 @@ return;
 
 // Dias da semana com nomes completos (sem ponto)
 const diasSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-const hoje = new Date();
+// Usa horário local do usuário (evita bug de UTC pular dia)
+const hoje = new Date().toLocaleDateString('en-CA');
 hoje.setHours(0, 0, 0, 0);
 
 // Filtra dias futuros (a partir de amanhã)
 const diasFuturos = dias.filter(d => {
-const dataDia = new Date(d.date);
-dataDia.setHours(0, 0, 0, 0);
+const dataDia = new Date(d.date + 'T12:00:00').toLocaleDateString('en-CA');
 return dataDia > hoje;
 });
 
