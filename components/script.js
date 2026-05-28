@@ -2373,6 +2373,7 @@ else         labelDia = diasSemana[dataObj.getDay()];
 const maxTemp = Math.round(dia.maxTemp ?? dia.day?.maxtemp_c ?? 0);
 const minTemp = Math.round(dia.minTemp ?? dia.day?.mintemp_c ?? 0);
 const ventoMedio = dia.wind_kph ?? dia.day?.maxwind_kph ?? 0;
+const precipMm = dia.precip_mm ?? dia.day?.totalprecip_mm ?? 0;
 
 // Emoji baseado no código do tempo (Open-Meteo ou WeatherAPI)
 let emoji = '☁️';
@@ -2399,6 +2400,7 @@ cardsHTML += `
 <div class="cinco-dias-max">${maxTemp}°</div>
 <div class="cinco-dias-min">${minTemp}°</div>
 <div class="cinco-dias-vento">💨 ${ventoMedio.toFixed(1)} km/h</div>
+<div class="cinco-dias-vento" style="font-size:0.82em;opacity:0.8;">🌧️ ${precipMm.toFixed(1)} mm</div>
 </div>`;
 }
 
