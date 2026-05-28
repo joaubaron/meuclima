@@ -2239,15 +2239,14 @@ function renderizar5Dias(forecastData) {
 
     let cardsHTML = '<div class="cinco-dias-grid">';
 
-    for (let i = 0; i < Math.min(dias.length, 5); i++) {
+    for (let i = 1; i < Math.min(dias.length, 6); i++) {
         const dia = dias[i];
         const dataObj = new Date(dia.date + 'T12:00:00');
         const dataStr = `${dataObj.getDate()}/${dataObj.getMonth() + 1}`;
 
         let labelDia;
-        if (i === 0)      labelDia = 'Hoje';
-        else if (i === 1) labelDia = 'Amanhã';
-        else              labelDia = diasSemana[dataObj.getDay()] + '.';
+        if (i === 1) labelDia = 'Amanhã';
+        else         labelDia = diasSemana[dataObj.getDay()] + '.';
 
         const noonHour  = dia.hour?.find(h => new Date(h.time).getHours() === 12);
         const nightHour = dia.hour?.find(h => new Date(h.time).getHours() === 21);
@@ -2263,7 +2262,7 @@ function renderizar5Dias(forecastData) {
             : (dia.day.maxwind_kph ?? 0);
 
         cardsHTML += `
-        <div class="cinco-dias-card${i === 0 ? ' cinco-dias-card--hoje' : ''}">
+        <div class="cinco-dias-card${i === 1 ? ' cinco-dias-card--hoje' : ''}">
             <div class="cinco-dias-label">${labelDia}</div>
             <div class="cinco-dias-data">${dataStr}</div>
             <img class="cinco-dias-icon" src="${iconDia}"   alt="" loading="lazy">
