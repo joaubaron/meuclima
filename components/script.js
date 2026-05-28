@@ -807,28 +807,21 @@ function fecharModal(tipo, event = null) {
     const tela5Dias = document.getElementById('tela5Dias');
 
     if (tipo === 'Escalas') {
-        // Fecha apenas a tela de Escalas
+        // VOLTAR: fecha Escalas e volta para tela anterior
         telaEscalas.style.display = 'none';
         
-        // Verifica de onde veio e volta para a tela anterior correta
+        // Reabre a tela que estava aberta antes
         if (tela5Dias && tela5Dias.style.display === 'block') {
-            // Veio da Previsão 5 Dias - mantém ela aberta
-            // Não faz nada, já está visível
-        } else if (telaGraficos && telaGraficos.style.display === 'block') {
-            // Veio dos Gráficos - mantém ela aberta
-            // Não faz nada, já está visível
-        } else {
-            // Fallback: reabre Gráficos
-            if (telaGraficos) {
-                telaGraficos.style.display = 'block';
-                document.body.classList.add('modal-aberto');
-                carregarGraficos();
-            }
+            // Já está aberta, não faz nada
+        } else if (telaGraficos) {
+            telaGraficos.style.display = 'block';
+            document.body.classList.add('modal-aberto');
+            carregarGraficos();
         }
         return;
     }
 
-    // Fechar Graficos ou qualquer outro -> Tela Inicial
+    // FECHAR (Graficos ou qualquer outro) -> Tela Inicial
     if (telaGraficos) telaGraficos.style.display = 'none';
     if (telaEscalas) telaEscalas.style.display = 'none';
     if (tela5Dias) tela5Dias.style.display = 'none';
@@ -2236,7 +2229,7 @@ function fecharTela5Dias(event = null) {
         event.stopPropagation();
     }
     
-    // Fecha tudo e volta para tela inicial
+    // FECHAR -> Tela Inicial
     const tela5Dias = document.getElementById('tela5Dias');
     const telaEscalas = document.getElementById('telaEscalas');
     const telaGraficos = document.getElementById('telaGraficos');
