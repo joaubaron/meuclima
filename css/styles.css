@@ -712,7 +712,7 @@ display: grid;
 grid-template-columns: 62px 44px 52px 36px 1fr;
 grid-template-rows: auto auto;
 align-items: center;
-column-gap: 10px;
+column-gap: 6px;
 row-gap: 2px;
 }
 
