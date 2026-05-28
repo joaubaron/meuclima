@@ -2356,7 +2356,6 @@ function renderizar5Dias(forecastData) {
         if (dia.weatherCode !== undefined) {
             emoji = getOpenMeteoEmoji(dia.weatherCode);
         } else if (dia.day?.condition?.code) {
-            // WeatherAPI fallback
             const code = dia.day.condition.code;
             if (code === 1000) emoji = '☀️';
             else if (code === 1003) emoji = '🌤️';
@@ -2368,6 +2367,7 @@ function renderizar5Dias(forecastData) {
             else emoji = '☁️';
         }
 
+        // Formato original: max em destaque, min abaixo
         cardsHTML += `
         <div class="cinco-dias-card${i === 0 ? ' cinco-dias-card--hoje' : ''}">
             <div class="cinco-dias-label">${labelDia}</div>
@@ -2382,6 +2382,7 @@ function renderizar5Dias(forecastData) {
     cardsHTML += '</div>';
     conteudo.innerHTML = cardsHTML;
 }
+
 // Listener de popstate para fechar modal 5 dias com botão voltar
 window.addEventListener('popstate', function (event) {
     const tela5Dias = document.getElementById('tela5Dias');
