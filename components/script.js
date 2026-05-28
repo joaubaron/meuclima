@@ -2372,7 +2372,6 @@ return;
 const diasSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
 // Usa horário local do usuário (evita bug de UTC pular dia)
 const hoje = new Date().toLocaleDateString('en-CA');
-hoje.setHours(0, 0, 0, 0);
 
 // Filtra dias futuros (a partir de amanhã)
 const diasFuturos = dias.filter(d => {
