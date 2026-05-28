@@ -800,3 +800,7 @@ canvas {
     justify-self: end;
     align-self: center;
 }
+
+.cinco-dias-emoji {
+    font-size: 2.2em;
+}
