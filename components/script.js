@@ -2317,7 +2317,8 @@ function renderizar5Dias(forecastData) {
         return;
     }
 
-    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    // Dias da semana com nomes completos (sem ponto)
+    const diasSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
 
@@ -2345,7 +2346,7 @@ function renderizar5Dias(forecastData) {
 
         let labelDia;
         if (i === 0) labelDia = 'Amanhã';
-        else         labelDia = diasSemana[dataObj.getDay()] + '.';
+        else         labelDia = diasSemana[dataObj.getDay()];
 
         const maxTemp = Math.round(dia.maxTemp ?? dia.day?.maxtemp_c ?? 0);
         const minTemp = Math.round(dia.minTemp ?? dia.day?.mintemp_c ?? 0);
