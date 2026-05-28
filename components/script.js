@@ -781,10 +781,8 @@ carregarGraficos();
 }
 
 function abrirTelaEscalas() {
-fecharModal('Graficos');
-
+// NÃO FECHA nada - apenas abre Escalas por cima
 const tela = document.getElementById('telaEscalas');
-
 if (tela) {
 tela.style.display = 'block';
 document.body.classList.add('modal-aberto');
@@ -797,40 +795,48 @@ tela.style.opacity = '1';
 }
 
 function fecharModal(tipo, event = null) {
-    if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
+if (event) {
+event.preventDefault();
+event.stopPropagation();
+}
 
-    const telaGraficos = document.getElementById('telaGraficos');
-    const telaEscalas = document.getElementById('telaEscalas');
-    const tela5Dias = document.getElementById('tela5Dias');
+const telaGraficos = document.getElementById('telaGraficos');
+const telaEscalas = document.getElementById('telaEscalas');
+const tela5Dias = document.getElementById('tela5Dias');
 
-    if (tipo === 'Escalas') {
-        // VOLTAR: fecha Escalas e volta para tela anterior
-        telaEscalas.style.display = 'none';
-        
-        // Reabre a tela que estava aberta antes
-        if (tela5Dias && tela5Dias.style.display === 'block') {
-            // Já está aberta, não faz nada
-        } else if (telaGraficos) {
-            telaGraficos.style.display = 'block';
-            document.body.classList.add('modal-aberto');
-            carregarGraficos();
-        }
-        return;
-    }
+if (tipo === 'Escalas') {
+// VOLTAR: fecha Escalas e volta para a tela anterior
+telaEscalas.style.display = 'none';
 
-    // FECHAR (Graficos ou qualquer outro) -> Tela Inicial
-    if (telaGraficos) telaGraficos.style.display = 'none';
-    if (telaEscalas) telaEscalas.style.display = 'none';
-    if (tela5Dias) tela5Dias.style.display = 'none';
-    
-    document.body.classList.remove('modal-aberto');
+// Verifica qual tela estava aberta antes
+if (tela5Dias && tela5Dias.style.display === 'block') {
+// Já está aberta - não faz nada, só fechou Escalas
+document.body.classList.add('modal-aberto');
+} else if (telaGraficos) {
+telaGraficos.style.display = 'block';
+document.body.classList.add('modal-aberto');
+carregarGraficos();
+} else {
+// Fallback
+if (telaGraficos) {
+telaGraficos.style.display = 'block';
+document.body.classList.add('modal-aberto');
+carregarGraficos();
+}
+}
+return;
+}
 
-    if (temperaturaChart) { temperaturaChart.destroy(); temperaturaChart = null; }
-    if (precipitacaoChart) { precipitacaoChart.destroy(); precipitacaoChart = null; }
-    if (ventoChart) { ventoChart.destroy(); ventoChart = null; }
+// FECHAR (Graficos ou qualquer outro) -> Tela Inicial
+if (telaGraficos) telaGraficos.style.display = 'none';
+if (telaEscalas) telaEscalas.style.display = 'none';
+if (tela5Dias) tela5Dias.style.display = 'none';
+
+document.body.classList.remove('modal-aberto');
+
+if (temperaturaChart) { temperaturaChart.destroy(); temperaturaChart = null; }
+if (precipitacaoChart) { precipitacaoChart.destroy(); precipitacaoChart = null; }
+if (ventoChart) { ventoChart.destroy(); ventoChart = null; }
 }
 
 function mapearFaixa(valor, faixas) {
@@ -2160,241 +2166,241 @@ event.stopPropagation();
 // ============================================
 
 async function abrirTela5Dias() {
-    // Oculta telaGraficos sem destruir gráficos
-    const telaGraficos = document.getElementById('telaGraficos');
-    if (telaGraficos) telaGraficos.style.display = 'none';
+// Oculta telaGraficos sem destruir gráficos
+const telaGraficos = document.getElementById('telaGraficos');
+if (telaGraficos) telaGraficos.style.display = 'none';
 
-    const tela = document.getElementById('tela5Dias');
-    if (!tela) return;
-    tela.style.display = 'block';
-    document.body.classList.add('modal-aberto');
-    history.pushState({ modal: '5Dias' }, '');
-    setTimeout(() => { tela.style.opacity = '1'; }, 10);
+const tela = document.getElementById('tela5Dias');
+if (!tela) return;
+tela.style.display = 'block';
+document.body.classList.add('modal-aberto');
+history.pushState({ modal: '5Dias' }, '');
+setTimeout(() => { tela.style.opacity = '1'; }, 10);
 
-    const conteudo = document.getElementById('conteudo5Dias');
-    conteudo.innerHTML = `
-        <div style="text-align:center;padding:40px 20px;color:#ccc;font-size:13px;">
-            <div class="spinner" style="margin:0 auto 14px;"></div>
-            Carregando previsão...
-        </div>`;
+const conteudo = document.getElementById('conteudo5Dias');
+conteudo.innerHTML = `
+<div style="text-align:center;padding:40px 20px;color:#ccc;font-size:13px;">
+<div class="spinner" style="margin:0 auto 14px;"></div>
+Carregando previsão...
+</div>`;
 
-    try {
-        let forecastData;
-        const agora = Date.now();
+try {
+let forecastData;
+const agora = Date.now();
 
-        // Tenta cache primeiro (30 minutos)
-        if (_forecast5Cache && (agora - _forecast5Cache.timestamp) < 30 * 60 * 1000) {
-            forecastData = _forecast5Cache.data;
-        } else if (_coordsCache) {
-            // Usando Open-Meteo (gratuito, 7 dias, sem chave)
-            const lat = _coordsCache.lat;
-            const lon = _coordsCache.lon;
-            
-            // Open-Meteo: daily com temperatura, vento, precipitação, ícone do tempo
-            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,weathercode&timezone=auto&forecast_days=7`;
-            
-            const resp = await fetch(url);
-            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-            
-            const data = await resp.json();
-            if (!data.daily || !data.daily.time.length) throw new Error('Sem dados');
-            
-            forecastData = data;
-            _forecast5Cache = { data: forecastData, timestamp: agora };
-        } else if (UI_STATE.weatherCache?.forecast) {
-            // Fallback: se não tem coordenadas, tenta usar cache da WeatherAPI
-            forecastData = UI_STATE.weatherCache.forecast;
-        } else {
-            throw new Error('Localização não disponível');
-        }
+// Tenta cache primeiro (30 minutos)
+if (_forecast5Cache && (agora - _forecast5Cache.timestamp) < 30 * 60 * 1000) {
+forecastData = _forecast5Cache.data;
+} else if (_coordsCache) {
+// Usando Open-Meteo (gratuito, 7 dias, sem chave)
+const lat = _coordsCache.lat;
+const lon = _coordsCache.lon;
 
-        renderizar5Dias(forecastData);
-    } catch (e) {
-        console.error('Erro ao carregar 5 dias:', e);
-        conteudo.innerHTML = `
-            <div style="text-align:center;padding:30px;color:#ff6f00;font-size:13px;">
-                Não foi possível carregar a previsão.<br>
-                <button onclick="abrirTela5Dias()"
-                    style="margin-top:14px;background:none;border:1px solid #ffeb3b;color:#ffeb3b;
-                           padding:7px 18px;border-radius:20px;cursor:pointer;font-size:12px;font-family:inherit;">
-                    Tentar novamente
-                </button>
-            </div>`;
-    }
+// Open-Meteo: daily com temperatura, vento, precipitação, ícone do tempo
+const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,weathercode&timezone=auto&forecast_days=7`;
+
+const resp = await fetch(url);
+if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
+const data = await resp.json();
+if (!data.daily || !data.daily.time.length) throw new Error('Sem dados');
+
+forecastData = data;
+_forecast5Cache = { data: forecastData, timestamp: agora };
+} else if (UI_STATE.weatherCache?.forecast) {
+// Fallback: se não tem coordenadas, tenta usar cache da WeatherAPI
+forecastData = UI_STATE.weatherCache.forecast;
+} else {
+throw new Error('Localização não disponível');
+}
+
+renderizar5Dias(forecastData);
+} catch (e) {
+console.error('Erro ao carregar 5 dias:', e);
+conteudo.innerHTML = `
+<div style="text-align:center;padding:30px;color:#ff6f00;font-size:13px;">
+Não foi possível carregar a previsão.<br>
+<button onclick="abrirTela5Dias()"
+style="margin-top:14px;background:none;border:1px solid #ffeb3b;color:#ffeb3b;
+padding:7px 18px;border-radius:20px;cursor:pointer;font-size:12px;font-family:inherit;">
+Tentar novamente
+</button>
+</div>`;
+}
 }
 
 function fecharTela5Dias(event = null) {
-    if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
-    
-    // FECHAR -> Tela Inicial
-    const tela5Dias = document.getElementById('tela5Dias');
-    const telaEscalas = document.getElementById('telaEscalas');
-    const telaGraficos = document.getElementById('telaGraficos');
-    
-    if (tela5Dias) tela5Dias.style.display = 'none';
-    if (telaEscalas) telaEscalas.style.display = 'none';
-    if (telaGraficos) telaGraficos.style.display = 'none';
-    
-    document.body.classList.remove('modal-aberto');
+if (event) {
+event.preventDefault();
+event.stopPropagation();
+}
+
+// FECHAR -> Tela Inicial
+const tela5Dias = document.getElementById('tela5Dias');
+const telaEscalas = document.getElementById('telaEscalas');
+const telaGraficos = document.getElementById('telaGraficos');
+
+if (tela5Dias) tela5Dias.style.display = 'none';
+if (telaEscalas) telaEscalas.style.display = 'none';
+if (telaGraficos) telaGraficos.style.display = 'none';
+
+document.body.classList.remove('modal-aberto');
 }
 
 // Mapeamento de weathercode da Open-Meteo para emoji/ícone (opcional, mas consistente)
 function getOpenMeteoEmoji(code) {
-    // Códigos WMO: https://open-meteo.com/en/docs
-    const map = {
-        0: '☀️',      // Céu limpo
-        1: '🌤️',      // Principalmente limpo
-        2: '⛅',       // Parcialmente nublado
-        3: '☁️',       // Nublado
-        45: '🌫️',     // Nevoeiro
-        48: '🌫️',     // Nevoeiro com gelo
-        51: '🌧️',     // Garoa leve
-        53: '🌧️',     // Garoa moderada
-        55: '🌧️',     // Garoa densa
-        56: '🌧️❄️',   // Garoa congelante leve
-        57: '🌧️❄️',   // Garoa congelante densa
-        61: '🌧️',     // Chuva fraca
-        63: '🌧️',     // Chuva moderada
-        65: '🌧️',     // Chuva forte
-        66: '🌧️❄️',   // Chuva congelante leve
-        67: '🌧️❄️',   // Chuva congelante forte
-        71: '❄️',      // Neve fraca
-        73: '❄️',      // Neve moderada
-        75: '❄️',      // Neve forte
-        77: '🌨️',      // Grãos de neve
-        80: '🌦️',      // Pancadas de chuva fracas
-        81: '🌦️',      // Pancadas de chuva moderadas
-        82: '⛈️',      // Pancadas de chuva violentas
-        85: '🌨️',      // Pancadas de neve leves
-        86: '🌨️',      // Pancadas de neve fortes
-        95: '⛈️',      // Trovoada
-        96: '⛈️🌨️',   // Trovoada com granizo leve
-        99: '⛈️🌨️'    // Trovoada com granizo forte
-    };
-    return map[code] || '☁️';
+// Códigos WMO: https://open-meteo.com/en/docs
+const map = {
+0: '☀️',      // Céu limpo
+1: '🌤️',      // Principalmente limpo
+2: '⛅',       // Parcialmente nublado
+3: '☁️',       // Nublado
+45: '🌫️',     // Nevoeiro
+48: '🌫️',     // Nevoeiro com gelo
+51: '🌧️',     // Garoa leve
+53: '🌧️',     // Garoa moderada
+55: '🌧️',     // Garoa densa
+56: '🌧️❄️',   // Garoa congelante leve
+57: '🌧️❄️',   // Garoa congelante densa
+61: '🌧️',     // Chuva fraca
+63: '🌧️',     // Chuva moderada
+65: '🌧️',     // Chuva forte
+66: '🌧️❄️',   // Chuva congelante leve
+67: '🌧️❄️',   // Chuva congelante forte
+71: '❄️',      // Neve fraca
+73: '❄️',      // Neve moderada
+75: '❄️',      // Neve forte
+77: '🌨️',      // Grãos de neve
+80: '🌦️',      // Pancadas de chuva fracas
+81: '🌦️',      // Pancadas de chuva moderadas
+82: '⛈️',      // Pancadas de chuva violentas
+85: '🌨️',      // Pancadas de neve leves
+86: '🌨️',      // Pancadas de neve fortes
+95: '⛈️',      // Trovoada
+96: '⛈️🌨️',   // Trovoada com granizo leve
+99: '⛈️🌨️'    // Trovoada com granizo forte
+};
+return map[code] || '☁️';
 }
 
 function renderizar5Dias(forecastData) {
-    const conteudo = document.getElementById('conteudo5Dias');
-    if (!conteudo) return;
+const conteudo = document.getElementById('conteudo5Dias');
+if (!conteudo) return;
 
-    let dias = [];
-    
-    // Detectar se veio da Open-Meteo (formato com daily.time)
-    if (forecastData.daily && forecastData.daily.time) {
-        const daily = forecastData.daily;
-        const times = daily.time;
-        const maxTemps = daily.temperature_2m_max;
-        const minTemps = daily.temperature_2m_min;
-        const precip = daily.precipitation_sum;
-        const vento = daily.wind_speed_10m_max;
-        const weatherCodes = daily.weathercode;
-        
-        for (let i = 0; i < times.length; i++) {
-            dias.push({
-                date: times[i],
-                maxTemp: maxTemps[i],
-                minTemp: minTemps[i],
-                precip_mm: precip[i],
-                wind_kph: vento[i],
-                weatherCode: weatherCodes[i],
-                condition: { text: '', code: weatherCodes[i] }
-            });
-        }
-    } 
-    // Fallback para WeatherAPI
-    else if (forecastData?.forecast?.forecastday) {
-        dias = forecastData.forecast.forecastday;
-    } 
-    else if (Array.isArray(forecastData)) {
-        dias = forecastData;
-    }
-    else {
-        conteudo.innerHTML = '<div style="text-align:center;padding:20px;color:#ccc;">Formato de dados inválido.</div>';
-        return;
-    }
+let dias = [];
 
-    if (!dias.length) {
-        conteudo.innerHTML = '<div style="text-align:center;padding:20px;color:#ccc;">Sem dados disponíveis.</div>';
-        return;
-    }
+// Detectar se veio da Open-Meteo (formato com daily.time)
+if (forecastData.daily && forecastData.daily.time) {
+const daily = forecastData.daily;
+const times = daily.time;
+const maxTemps = daily.temperature_2m_max;
+const minTemps = daily.temperature_2m_min;
+const precip = daily.precipitation_sum;
+const vento = daily.wind_speed_10m_max;
+const weatherCodes = daily.weathercode;
 
-    // Dias da semana com nomes completos (sem ponto)
-    const diasSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
+for (let i = 0; i < times.length; i++) {
+dias.push({
+date: times[i],
+maxTemp: maxTemps[i],
+minTemp: minTemps[i],
+precip_mm: precip[i],
+wind_kph: vento[i],
+weatherCode: weatherCodes[i],
+condition: { text: '', code: weatherCodes[i] }
+});
+}
+} 
+// Fallback para WeatherAPI
+else if (forecastData?.forecast?.forecastday) {
+dias = forecastData.forecast.forecastday;
+} 
+else if (Array.isArray(forecastData)) {
+dias = forecastData;
+}
+else {
+conteudo.innerHTML = '<div style="text-align:center;padding:20px;color:#ccc;">Formato de dados inválido.</div>';
+return;
+}
 
-    // Filtra dias futuros (a partir de amanhã)
-    const diasFuturos = dias.filter(d => {
-        const dataDia = new Date(d.date);
-        dataDia.setHours(0, 0, 0, 0);
-        return dataDia > hoje;
-    });
+if (!dias.length) {
+conteudo.innerHTML = '<div style="text-align:center;padding:20px;color:#ccc;">Sem dados disponíveis.</div>';
+return;
+}
 
-    // Pega no máximo 5 dias (amanhã + 4)
-    const diasParaMostrar = diasFuturos.slice(0, 5);
+// Dias da semana com nomes completos (sem ponto)
+const diasSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+const hoje = new Date();
+hoje.setHours(0, 0, 0, 0);
 
-    if (diasParaMostrar.length === 0) {
-        conteudo.innerHTML = '<div style="text-align:center;padding:20px;color:#ccc;">Sem previsão para os próximos dias.</div>';
-        return;
-    }
+// Filtra dias futuros (a partir de amanhã)
+const diasFuturos = dias.filter(d => {
+const dataDia = new Date(d.date);
+dataDia.setHours(0, 0, 0, 0);
+return dataDia > hoje;
+});
 
-    let cardsHTML = '<div class="cinco-dias-grid">';
+// Pega no máximo 5 dias (amanhã + 4)
+const diasParaMostrar = diasFuturos.slice(0, 5);
 
-    for (let i = 0; i < diasParaMostrar.length; i++) {
-        const dia = diasParaMostrar[i];
-        const dataObj = new Date(dia.date + 'T12:00:00');
-        const dataStr = `${dataObj.getDate()}/${dataObj.getMonth() + 1}`;
+if (diasParaMostrar.length === 0) {
+conteudo.innerHTML = '<div style="text-align:center;padding:20px;color:#ccc;">Sem previsão para os próximos dias.</div>';
+return;
+}
 
-        let labelDia;
-        if (i === 0) labelDia = 'Amanhã';
-        else         labelDia = diasSemana[dataObj.getDay()];
+let cardsHTML = '<div class="cinco-dias-grid">';
 
-        const maxTemp = Math.round(dia.maxTemp ?? dia.day?.maxtemp_c ?? 0);
-        const minTemp = Math.round(dia.minTemp ?? dia.day?.mintemp_c ?? 0);
-        const ventoMedio = dia.wind_kph ?? dia.day?.maxwind_kph ?? 0;
-        
-        // Emoji baseado no código do tempo (Open-Meteo ou WeatherAPI)
-        let emoji = '☁️';
-        if (dia.weatherCode !== undefined) {
-            emoji = getOpenMeteoEmoji(dia.weatherCode);
-        } else if (dia.day?.condition?.code) {
-            const code = dia.day.condition.code;
-            if (code === 1000) emoji = '☀️';
-            else if (code === 1003) emoji = '🌤️';
-            else if (code === 1006 || code === 1009) emoji = '☁️';
-            else if (code === 1030 || code === 1135) emoji = '🌫️';
-            else if (code >= 1063 && code <= 1087) emoji = '🌧️';
-            else if (code >= 1066 && code <= 1117) emoji = '❄️';
-            else if (code >= 1150 && code <= 1282) emoji = '🌧️';
-            else emoji = '☁️';
-        }
+for (let i = 0; i < diasParaMostrar.length; i++) {
+const dia = diasParaMostrar[i];
+const dataObj = new Date(dia.date + 'T12:00:00');
+const dataStr = `${dataObj.getDate()}/${dataObj.getMonth() + 1}`;
 
-        // Formato original: max em destaque, min abaixo
-        cardsHTML += `
-        <div class="cinco-dias-card${i === 0 ? ' cinco-dias-card--hoje' : ''}">
-            <div class="cinco-dias-label">${labelDia}</div>
-            <div class="cinco-dias-data">${dataStr}</div>
-            <div class="cinco-dias-emoji">${emoji}</div>
-            <div class="cinco-dias-max">${maxTemp}°</div>
-            <div class="cinco-dias-min">${minTemp}°</div>
-            <div class="cinco-dias-vento">💨 ${ventoMedio.toFixed(1)} km/h</div>
-        </div>`;
-    }
+let labelDia;
+if (i === 0) labelDia = 'Amanhã';
+else         labelDia = diasSemana[dataObj.getDay()];
 
-    cardsHTML += '</div>';
-    conteudo.innerHTML = cardsHTML;
+const maxTemp = Math.round(dia.maxTemp ?? dia.day?.maxtemp_c ?? 0);
+const minTemp = Math.round(dia.minTemp ?? dia.day?.mintemp_c ?? 0);
+const ventoMedio = dia.wind_kph ?? dia.day?.maxwind_kph ?? 0;
+
+// Emoji baseado no código do tempo (Open-Meteo ou WeatherAPI)
+let emoji = '☁️';
+if (dia.weatherCode !== undefined) {
+emoji = getOpenMeteoEmoji(dia.weatherCode);
+} else if (dia.day?.condition?.code) {
+const code = dia.day.condition.code;
+if (code === 1000) emoji = '☀️';
+else if (code === 1003) emoji = '🌤️';
+else if (code === 1006 || code === 1009) emoji = '☁️';
+else if (code === 1030 || code === 1135) emoji = '🌫️';
+else if (code >= 1063 && code <= 1087) emoji = '🌧️';
+else if (code >= 1066 && code <= 1117) emoji = '❄️';
+else if (code >= 1150 && code <= 1282) emoji = '🌧️';
+else emoji = '☁️';
+}
+
+// Formato original: max em destaque, min abaixo
+cardsHTML += `
+<div class="cinco-dias-card${i === 0 ? ' cinco-dias-card--hoje' : ''}">
+<div class="cinco-dias-label">${labelDia}</div>
+<div class="cinco-dias-data">${dataStr}</div>
+<div class="cinco-dias-emoji">${emoji}</div>
+<div class="cinco-dias-max">${maxTemp}°</div>
+<div class="cinco-dias-min">${minTemp}°</div>
+<div class="cinco-dias-vento">💨 ${ventoMedio.toFixed(1)} km/h</div>
+</div>`;
+}
+
+cardsHTML += '</div>';
+conteudo.innerHTML = cardsHTML;
 }
 
 // Listener de popstate para fechar modal 5 dias com botão voltar
 window.addEventListener('popstate', function (event) {
-    const tela5Dias = document.getElementById('tela5Dias');
-    if (tela5Dias && tela5Dias.style.display === 'block') {
-        fecharTela5Dias();
-        event.preventDefault();
-        event.stopPropagation();
-    }
+const tela5Dias = document.getElementById('tela5Dias');
+if (tela5Dias && tela5Dias.style.display === 'block') {
+fecharTela5Dias();
+event.preventDefault();
+event.stopPropagation();
+}
 });
