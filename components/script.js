@@ -807,16 +807,23 @@ function fecharModal(tipo, event = null) {
     const tela5Dias = document.getElementById('tela5Dias');
 
     if (tipo === 'Escalas') {
-        // Voltar para tela anterior
+        // Fecha apenas a tela de Escalas
         telaEscalas.style.display = 'none';
         
-        // Reabre a tela que estava aberta antes
+        // Verifica de onde veio e volta para a tela anterior correta
         if (tela5Dias && tela5Dias.style.display === 'block') {
-            // Já está aberta, não faz nada
-        } else if (telaGraficos) {
-            telaGraficos.style.display = 'block';
-            document.body.classList.add('modal-aberto');
-            carregarGraficos();
+            // Veio da Previsão 5 Dias - mantém ela aberta
+            // Não faz nada, já está visível
+        } else if (telaGraficos && telaGraficos.style.display === 'block') {
+            // Veio dos Gráficos - mantém ela aberta
+            // Não faz nada, já está visível
+        } else {
+            // Fallback: reabre Gráficos
+            if (telaGraficos) {
+                telaGraficos.style.display = 'block';
+                document.body.classList.add('modal-aberto');
+                carregarGraficos();
+            }
         }
         return;
     }
