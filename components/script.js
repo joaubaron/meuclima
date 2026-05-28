@@ -41,6 +41,10 @@ weatherCache: null,
 extrasCache: { extras: "", moon: "" }
 };
 
+// === PREVISÃO 5 DIAS ===
+let _coordsCache = null;
+let _forecast5Cache = null;
+
 const styleErroModal = document.createElement('style');
 styleErroModal.textContent = `
 @keyframes erroSlideIn {
@@ -1521,6 +1525,7 @@ reject(err);
 
 const lat = position.coords.latitude;
 const lon = position.coords.longitude;
+_coordsCache = { lat, lon }; // guarda para previsão 5 dias
 
 // Usar coordenadas como fallback imediato (não esperar Nominatim)
 let cidade = `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
@@ -2144,4 +2149,141 @@ document.body.removeChild(modalStarWalk);
 event.preventDefault();
 event.stopPropagation();
 }
+});
+
+// ============================================
+// PREVISÃO 5 DIAS
+// ============================================
+
+async function abrirTela5Dias() {
+    // Oculta telaGraficos sem destruir gráficos
+    const telaGraficos = document.getElementById('telaGraficos');
+    if (telaGraficos) telaGraficos.style.display = 'none';
+
+    const tela = document.getElementById('tela5Dias');
+    if (!tela) return;
+    tela.style.display = 'block';
+    document.body.classList.add('modal-aberto');
+    history.pushState({ modal: '5Dias' }, '');
+    setTimeout(() => { tela.style.opacity = '1'; }, 10);
+
+    const conteudo = document.getElementById('conteudo5Dias');
+    conteudo.innerHTML = `
+        <div style="text-align:center;padding:40px 20px;color:#ccc;font-size:13px;">
+            <div class="spinner" style="margin:0 auto 14px;"></div>
+            Carregando previsão...
+        </div>`;
+
+    try {
+        let forecastData;
+        const agora = Date.now();
+
+        if (_forecast5Cache && (agora - _forecast5Cache.timestamp) < 30 * 60 * 1000) {
+            forecastData = _forecast5Cache.data;
+        } else if (_coordsCache) {
+            const resp = await fetch(
+                `https://api.weatherapi.com/v1/forecast.json?key=0c8c1be55b6c49d4a56141253252107&q=${_coordsCache.lat},${_coordsCache.lon}&days=6&lang=pt`
+            );
+            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            forecastData = await resp.json();
+            if (!forecastData.forecast?.forecastday?.length) throw new Error('Sem dados');
+            _forecast5Cache = { data: forecastData, timestamp: agora };
+        } else if (UI_STATE.weatherCache?.forecast) {
+            forecastData = UI_STATE.weatherCache.forecast;
+        } else {
+            throw new Error('Localização não disponível');
+        }
+
+        renderizar5Dias(forecastData);
+    } catch (e) {
+        console.error('Erro ao carregar 5 dias:', e);
+        conteudo.innerHTML = `
+            <div style="text-align:center;padding:30px;color:#ff6f00;font-size:13px;">
+                Não foi possível carregar a previsão.<br>
+                <button onclick="abrirTela5Dias()"
+                    style="margin-top:14px;background:none;border:1px solid #ffeb3b;color:#ffeb3b;
+                           padding:7px 18px;border-radius:20px;cursor:pointer;font-size:12px;font-family:inherit;">
+                    Tentar novamente
+                </button>
+            </div>`;
+    }
+}
+
+function fecharTela5Dias(event = null) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    const tela = document.getElementById('tela5Dias');
+    if (tela) {
+        tela.style.display = 'none';
+        tela.style.opacity = '0';
+        document.body.classList.remove('modal-aberto');
+    }
+}
+
+function renderizar5Dias(forecastData) {
+    const conteudo = document.getElementById('conteudo5Dias');
+    if (!conteudo) return;
+
+    const dias = forecastData?.forecast?.forecastday
+        || forecastData?.forecastday
+        || [];
+
+    if (!dias.length) {
+        conteudo.innerHTML = '<div style="text-align:center;padding:20px;color:#ccc;">Sem dados disponíveis.</div>';
+        return;
+    }
+
+    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+    let cardsHTML = '<div class="cinco-dias-grid">';
+
+    for (let i = 0; i < Math.min(dias.length, 5); i++) {
+        const dia = dias[i];
+        const dataObj = new Date(dia.date + 'T12:00:00');
+        const dataStr = `${dataObj.getDate()}/${dataObj.getMonth() + 1}`;
+
+        let labelDia;
+        if (i === 0)      labelDia = 'Hoje';
+        else if (i === 1) labelDia = 'Amanhã';
+        else              labelDia = diasSemana[dataObj.getDay()] + '.';
+
+        const noonHour  = dia.hour?.find(h => new Date(h.time).getHours() === 12);
+        const nightHour = dia.hour?.find(h => new Date(h.time).getHours() === 21);
+
+        const iconDia   = getWeatherIcon(noonHour?.condition?.code  ?? dia.day.condition.code, 1);
+        const iconNoite = getWeatherIcon(nightHour?.condition?.code ?? dia.day.condition.code, 0);
+
+        const maxTemp = Math.round(dia.day.maxtemp_c);
+        const minTemp = Math.round(dia.day.mintemp_c);
+
+        const ventoMedio = dia.hour?.length
+            ? dia.hour.reduce((s, h) => s + h.wind_kph, 0) / dia.hour.length
+            : (dia.day.maxwind_kph ?? 0);
+
+        cardsHTML += `
+        <div class="cinco-dias-card${i === 0 ? ' cinco-dias-card--hoje' : ''}">
+            <div class="cinco-dias-label">${labelDia}</div>
+            <div class="cinco-dias-data">${dataStr}</div>
+            <img class="cinco-dias-icon" src="${iconDia}"   alt="" loading="lazy">
+            <div class="cinco-dias-max">${maxTemp}°</div>
+            <div class="cinco-dias-min">${minTemp}°</div>
+            <img class="cinco-dias-icon-n" src="${iconNoite}" alt="" loading="lazy">
+            <div class="cinco-dias-vento">▾ ${ventoMedio.toFixed(1)} km/h</div>
+        </div>`;
+    }
+
+    cardsHTML += '</div>';
+    conteudo.innerHTML = cardsHTML;
+}
+
+// Listener de popstate para fechar modal 5 dias com botão voltar
+window.addEventListener('popstate', function (event) {
+    const tela5Dias = document.getElementById('tela5Dias');
+    if (tela5Dias && tela5Dias.style.display === 'block') {
+        fecharTela5Dias();
+        event.preventDefault();
+        event.stopPropagation();
+    }
 });
