@@ -2399,8 +2399,7 @@ cardsHTML += `
 <div class="cinco-dias-emoji">${emoji}</div>
 <div class="cinco-dias-max">${maxTemp}°</div>
 <div class="cinco-dias-min">${minTemp}°</div>
-<div class="cinco-dias-vento">💨 ${ventoMedio.toFixed(1)} km/h</div>
-<div class="cinco-dias-vento" style="font-size:0.82em;opacity:0.8;">🌧️ ${precipMm.toFixed(1)} mm</div>
+<div class="cinco-dias-vento" style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;"><span>💨 ${ventoMedio.toFixed(1)} km/h</span><span style="font-size:0.82em;opacity:0.75;">🌧️ ${precipMm.toFixed(1)} mm</span></div>
 </div>`;
 }
 
