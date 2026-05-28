@@ -311,13 +311,20 @@ Previsão 5 dias 📅
 
 <br>
 <br>
-<!-- Rodapé com botões: Fechar e Chuva e vento (APENAS AQUI) -->
+<!-- Rodapé com botões: Fechar, Voltar e Escala -->
 <div style="display: flex; align-items: center; justify-content: flex-start; width: 100%; margin-top: 20px; padding: 0 10px; gap: 25px;">
-<button onclick="fecharTela5Dias(event)" style="cursor: pointer; color: #ffeb3b; font-weight: bold; font-size: 12px; background: none; border: none; line-height: 1.5; padding: 4px 0;">Fechar</button>
+<button onclick="fecharTela5Dias(event, false)" 
+style="cursor: pointer; color: #ffeb3b; font-weight: bold; font-size: 12px; background: none; border: none; line-height: 1.5; padding: 4px 0;">
+Fechar
+</button>
+<button onclick="fecharTela5Dias(event, true)" 
+style="cursor: pointer; color: #ffeb3b; font-weight: bold; font-size: 12px; background: none; border: none; line-height: 1.5; padding: 4px 0;">
+← Voltar
+</button>
 <button 
 onclick="abrirTelaEscalas()" 
 style="background:none; border:none; color:white; padding: 4px 0; cursor:pointer; font-size:12px; font-family:inherit; line-height: 1.5;">
-<span style="font-size:15px; line-height:1; vertical-align:middle; margin: 0 8px;">🌧️ </span>Escala de chuva e vento
+<span style="font-size:15px; line-height:1; vertical-align:middle; margin: 0 8px;">🌧️ </span>Escala
 </button>
 </div>
 </div>
