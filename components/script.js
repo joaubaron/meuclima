@@ -1569,6 +1569,23 @@ mostrarSugestaoReceita(temp_c);
 
 const weatherIcon = await getWeatherIcon(iconCode, isDay);
 
+// ========== ALTERAÇÃO: ÍCONE BASEADO NO CLIMA MAIS FREQUENTE DO DIA ==========
+let weatherIconFinal = weatherIcon;
+let condTextFinal = condText;
+
+try {
+const codigoFrequente = getMostFrequentWeatherCode(weatherData.forecast);
+if (codigoFrequente !== null) {
+const horaAtual = new Date().getHours();
+const isDayAtual = horaAtual >= 6 && horaAtual < 18;
+weatherIconFinal = await getWeatherIcon(String(codigoFrequente), isDayAtual);
+condTextFinal = getPredominantConditionText(weatherData);
+console.log(`🌤️ Clima predominante do dia: código ${codigoFrequente} (em vez do atual ${iconCode})`);
+}
+} catch(e) {
+console.warn('Erro ao obter clima predominante:', e);
+}
+
 // Pegar horários do sol
 const sunrise = weatherData.astronomy?.astro?.sunrise?.replace(' AM', '').replace(' PM', '') || '--:--';
 const sunset = weatherData.astronomy?.astro?.sunset?.replace(' AM', '').replace(' PM', '') || '--:--';
@@ -1576,7 +1593,7 @@ const sunset = weatherData.astronomy?.astro?.sunset?.replace(' AM', '').replace(
 if (resultDiv) {
 resultDiv.innerHTML = `
 <div class="big-icon">
-<img src="${weatherIcon}" class="weather-icon" alt="${condText}">
+<img src="${weatherIconFinal}" class="weather-icon" alt="${condTextFinal}">
 ${temp_c.toFixed(1)}°C
 </div>
 <div class="info-inline">
@@ -2450,3 +2467,106 @@ event.preventDefault();
 event.stopPropagation();
 }
 });
+
+// ============================================
+// FUNÇÕES PARA CLIMA PREDOMINANTE DO DIA
+// ============================================
+
+function getMostFrequentWeatherCode(forecastData) {
+try {
+const agora = new Date();
+const amanha = new Date(agora);
+amanha.setDate(agora.getDate() + 1);
+
+const horasDia1 = forecastData?.forecast?.forecastday?.[0]?.hour || [];
+const horasDia2 = forecastData?.forecast?.forecastday?.[1]?.hour || [];
+const todasHoras = [...horasDia1, ...horasDia2];
+
+const horasFiltradas = todasHoras.filter(h => {
+if (!h?.time) return false;
+const dataHora = new Date(h.time);
+return dataHora >= agora && dataHora < amanha;
+});
+
+if (horasFiltradas.length === 0) return null;
+
+const frequencia = {};
+horasFiltradas.forEach(h => {
+const code = h.condition?.code;
+if (code !== undefined) {
+frequencia[code] = (frequencia[code] || 0) + 1;
+}
+});
+
+let codigoMaisFrequente = null;
+let maiorFrequencia = 0;
+
+for (const [code, count] of Object.entries(frequencia)) {
+if (count > maiorFrequencia) {
+maiorFrequencia = count;
+codigoMaisFrequente = parseInt(code);
+}
+}
+
+return codigoMaisFrequente;
+} catch (e) {
+console.warn('Erro ao calcular código mais frequente:', e);
+return null;
+}
+}
+
+function getPredominantConditionText(weatherData) {
+const codigoMaisFrequente = getMostFrequentWeatherCode(weatherData.forecast);
+
+if (codigoMaisFrequente !== null) {
+const conditionMap = {
+1000: 'Sol',
+1003: 'Parcialmente nublado',
+1006: 'Nublado',
+1009: 'Encoberto',
+1030: 'Nevoeiro',
+1063: 'Chuva',
+1066: 'Neve',
+1069: 'Chuva congelante',
+1072: 'Garoa',
+1087: 'Trovoadas',
+1135: 'Nevoeiro',
+1147: 'Nevoeiro',
+1150: 'Garoa',
+1153: 'Garoa',
+1180: 'Chuva fraca',
+1183: 'Chuva',
+1186: 'Chuva',
+1189: 'Chuva',
+1192: 'Chuva',
+1195: 'Chuva forte',
+1198: 'Chuva congelante',
+1201: 'Chuva congelante',
+1204: 'Chuva com neve',
+1207: 'Chuva com neve',
+1210: 'Neve',
+1213: 'Neve',
+1216: 'Neve',
+1219: 'Neve',
+1222: 'Neve',
+1225: 'Neve forte',
+1237: 'Granizo',
+1240: 'Chuva',
+1243: 'Chuva forte',
+1246: 'Chuva extrema',
+1249: 'Chuva congelante',
+1252: 'Chuva congelante',
+1255: 'Neve',
+1258: 'Neve forte',
+1261: 'Granizo',
+1264: 'Granizo forte',
+1273: 'Trovoada',
+1276: 'Trovoada',
+1279: 'Trovoada com neve',
+1282: 'Trovoada com neve'
+};
+return conditionMap[codigoMaisFrequente] || 'Clima variado';
+}
+
+return weatherData.current?.condition?.text || 'Desconhecido';
+}
