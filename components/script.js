@@ -2229,22 +2229,33 @@ Tentar novamente
 }
 }
 
-function fecharTela5Dias(event = null) {
+function fecharTela5Dias(event = null, voltarParaGraficos = false) {
 if (event) {
 event.preventDefault();
 event.stopPropagation();
 }
 
-// FECHAR -> Tela Inicial
 const tela5Dias = document.getElementById('tela5Dias');
 const telaEscalas = document.getElementById('telaEscalas');
 const telaGraficos = document.getElementById('telaGraficos');
 
 if (tela5Dias) tela5Dias.style.display = 'none';
+
+// NOVO: Se voltarParaGraficos for true, reabre os gráficos
+if (voltarParaGraficos && telaGraficos) {
+telaGraficos.style.display = 'block';
+document.body.classList.add('modal-aberto');
+setTimeout(() => {
+if (typeof carregarGraficos === 'function') {
+carregarGraficos();
+}
+}, 100);
+} else {
+// Comportamento original: fecha tudo
 if (telaEscalas) telaEscalas.style.display = 'none';
 if (telaGraficos) telaGraficos.style.display = 'none';
-
 document.body.classList.remove('modal-aberto');
+}
 }
 
 // Mapeamento de weathercode da Open-Meteo para emoji/ícone (opcional, mas consistente)
