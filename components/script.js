@@ -797,40 +797,40 @@ tela.style.opacity = '1';
 }
 
 function fecharModal(tipo, event = null) {
-if (event) {
-event.preventDefault();
-event.stopPropagation();
-}
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
 
-const telaAtual = document.getElementById(`tela${tipo}`);
-if (telaAtual) {
-telaAtual.style.display = "none";
-document.body.classList.remove("modal-aberto");
-}
+    const telaGraficos = document.getElementById('telaGraficos');
+    const telaEscalas = document.getElementById('telaEscalas');
+    const tela5Dias = document.getElementById('tela5Dias');
 
-if (tipo === "Escalas") {
-const telaGraficos = document.getElementById("telaGraficos");
-if (telaGraficos) {
-telaGraficos.style.display = "block";
-document.body.classList.add("modal-aberto");
-carregarGraficos();
-}
+    if (tipo === 'Escalas') {
+        // Voltar para tela anterior
+        telaEscalas.style.display = 'none';
+        
+        // Reabre a tela que estava aberta antes
+        if (tela5Dias && tela5Dias.style.display === 'block') {
+            // Já está aberta, não faz nada
+        } else if (telaGraficos) {
+            telaGraficos.style.display = 'block';
+            document.body.classList.add('modal-aberto');
+            carregarGraficos();
+        }
+        return;
+    }
 
-UI_STATE.isRefreshing = false;
-const pullElement = document.getElementById('pullToRefresh');
-return;
-}
+    // Fechar Graficos ou qualquer outro -> Tela Inicial
+    if (telaGraficos) telaGraficos.style.display = 'none';
+    if (telaEscalas) telaEscalas.style.display = 'none';
+    if (tela5Dias) tela5Dias.style.display = 'none';
+    
+    document.body.classList.remove('modal-aberto');
 
-if (tipo === "Graficos") {
-const telaEscalas = document.getElementById("telaEscalas");
-if (telaEscalas) {
-telaEscalas.style.display = "none";
-}
-
-if (temperaturaChart) { temperaturaChart.destroy(); temperaturaChart = null; }
-if (precipitacaoChart) { precipitacaoChart.destroy(); precipitacaoChart = null; }
-if (ventoChart) { ventoChart.destroy(); ventoChart = null; }
-}
+    if (temperaturaChart) { temperaturaChart.destroy(); temperaturaChart = null; }
+    if (precipitacaoChart) { precipitacaoChart.destroy(); precipitacaoChart = null; }
+    if (ventoChart) { ventoChart.destroy(); ventoChart = null; }
 }
 
 function mapearFaixa(valor, faixas) {
@@ -2228,12 +2228,17 @@ function fecharTela5Dias(event = null) {
         event.preventDefault();
         event.stopPropagation();
     }
-    const tela = document.getElementById('tela5Dias');
-    if (tela) {
-        tela.style.display = 'none';
-        tela.style.opacity = '0';
-        document.body.classList.remove('modal-aberto');
-    }
+    
+    // Fecha tudo e volta para tela inicial
+    const tela5Dias = document.getElementById('tela5Dias');
+    const telaEscalas = document.getElementById('telaEscalas');
+    const telaGraficos = document.getElementById('telaGraficos');
+    
+    if (tela5Dias) tela5Dias.style.display = 'none';
+    if (telaEscalas) telaEscalas.style.display = 'none';
+    if (telaGraficos) telaGraficos.style.display = 'none';
+    
+    document.body.classList.remove('modal-aberto');
 }
 
 // Mapeamento de weathercode da Open-Meteo para emoji/ícone (opcional, mas consistente)
