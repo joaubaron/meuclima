@@ -2498,7 +2498,7 @@ const dateAtual = agora.toLocaleDateString('en-CA');
 
 // Pega as próximas 4 horas (hora atual + 3 seguintes)
 const proximasHoras = [];
-for (let h = horaAtual; h < horaAtual + 4; h++) {
+for (let h = horaAtual; h < horaAtual + 5; h++) {
 const horaReal = h % 24;
 const dateStr = h >= 24 ? new Date(agora.getTime() + 86400000).toLocaleDateString('en-CA') : dateAtual;
 const timeStr = `${dateStr}T${String(horaReal).padStart(2,'0')}:00`;
