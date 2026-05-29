@@ -350,7 +350,7 @@ alertas.push(`❄️ Frio intenso! ${current.temp_c}°C`);
 if (current.precip_mm > 20) {
 alertas.push(`🌧️ Chuva forte! ${current.precip_mm}mm`);
 }
-if (current.wind_kph > 40) {
+if (current.wind_kph > 38) {
 alertas.push(`💨 Vento forte! ${current.wind_kph.toFixed(1)} km/h`);
 }
 
