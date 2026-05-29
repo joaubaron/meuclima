@@ -2528,11 +2528,38 @@ return `
 </div>`;
 }).join('');
 
-const mensagem = !temChuva
-? '🌤️ Sem chuva nas próximas horas'
-: proximasHoras[0].mm > 0
-? '🌧️ Chuva agora'
-: `🌧️ Chuva em ${proximasHoras.findIndex(h => h.mm > 0)}h`;
+function classificarMm(mm) {
+if (mm <= 0.1) return { texto: 'Sem chuva',        emoji: '☀️' };
+if (mm < 2)    return { texto: 'Garoa',             emoji: '🌫️' };
+if (mm < 4)    return { texto: 'Chuva fraca',       emoji: '🌦️' };
+if (mm < 10)   return { texto: 'Chuva moderada',    emoji: '🌧️' };
+if (mm < 20)   return { texto: 'Chuva forte',       emoji: '⛈️' };
+if (mm < 50)   return { texto: 'Chuva muito forte', emoji: '⛈️' };
+return           { texto: 'Torrencial',             emoji: '🌊' };
+}
+const agora    = classificarMm(proximasHoras[0]?.mm ?? 0);
+const proxList = proximasHoras.slice(1);
+const mmAgora  = proximasHoras[0]?.mm ?? 0;
+const temChuvaFutura = proxList.some(h => h.mm > 0.1);
+const piora    = proxList.some(h => h.mm > mmAgora + 0.1);
+const melhora  = mmAgora > 0.1 && proxList.some(h => h.mm < mmAgora - 0.1);
+const proxComChuva = proxList.find(h => h.mm > 0.1);
+
+let mensagem;
+if (!temChuva && mmAgora <= 0.1) {
+mensagem = '☀️ Sem chuva nas próximas horas';
+} else if (mmAgora <= 0.1 && temChuvaFutura) {
+mensagem = `🌧️ ${classificarMm(proxComChuva.mm).texto} em ${proxComChuva.label}`;
+} else if (melhora && !temChuvaFutura) {
+mensagem = `${agora.emoji} ${agora.texto} agora, melhora em breve`;
+} else if (melhora) {
+mensagem = `${agora.emoji} ${agora.texto} agora, diminuindo`;
+} else if (piora) {
+const piorHora = proxList.find(h => h.mm > mmAgora + 0.1);
+mensagem = `${agora.emoji} ${agora.texto} agora, piorando em ${piorHora.label}`;
+} else {
+mensagem = `${agora.emoji} ${agora.texto} nas próximas horas`;
+}
 
 cardsHTML += `
 <div style="margin:12px 4px 0;padding:14px 16px;background:rgba(255,255,255,0.05);border-radius:14px;">
@@ -2548,6 +2575,12 @@ ${barras}
 }
 
 conteudo.innerHTML = cardsHTML;
+
+// Preenche o resumo de chuva no lugar do texto Fonte: Open-Meteo
+const divResumoChuva = document.getElementById('resumoChuvaHoras');
+if (divResumoChuva && typeof mensagem !== 'undefined') {
+divResumoChuva.textContent = mensagem;
+}
 }
 
 // Listener de popstate para fechar modal 5 dias com botão voltar
