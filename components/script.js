@@ -614,10 +614,10 @@ let parteChuva = pegarAleatorio(sugestoesChuva[chaveChuva]).trim();
 // Vento
 const temChuva = chaveChuva !== "semChuva";
 let chaveVento = "calminho";
-if (wind_kph > 10 && wind_kph <= 20) chaveVento = "brisaLeve";
-else if (wind_kph <= 30)             chaveVento = "moderado";
-else if (wind_kph <= 45)             chaveVento = "forte";
-else if (wind_kph > 45)             chaveVento = "muitoForte";
+if (wind_kph > 1  && wind_kph <= 19) chaveVento = "brisaLeve";
+else if (wind_kph <= 38)             chaveVento = "moderado";
+else if (wind_kph <= 74)             chaveVento = "forte";
+else if (wind_kph > 74)             chaveVento = "muitoForte";
 
 // Montar frase
 // Sem chuva: "Temperatura, chuva, vento descritivo. Finalizador!"
@@ -857,12 +857,12 @@ const FAIXAS_PRECIPITACAO = [
 ];
 
 const FAIXAS_VENTO = [
-{ min: 0, max: 1, label: "Sem vento" },
-{ min: 1, max: 9, label: "Brisinha leve" },
-{ min: 9, max: 30, label: "Vento moderado" },
-{ min: 30, max: 49, label: "Ventania" },
-{ min: 49, max: 74, label: "Quase voando" },
-{ min: 74, max: 102, label: "Muito forte" },
+{ min: 0,   max: 1,        label: "Sem vento" },
+{ min: 1,   max: 19,       label: "Brisinha leve" },
+{ min: 19,  max: 38,       label: "Vento moderado" },
+{ min: 38,  max: 49,       label: "Ventania" },
+{ min: 49,  max: 74,       label: "Quase voando" },
+{ min: 74,  max: 102,      label: "Muito forte" },
 { min: 102, max: Infinity, label: "Destrutivo" }
 ];
 
