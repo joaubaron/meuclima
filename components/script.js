@@ -2201,7 +2201,7 @@ const lat = _coordsCache.lat;
 const lon = _coordsCache.lon;
 
 // Open-Meteo: daily com temperatura, vento, precipitação, ícone do tempo
-const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,weathercode&hourly=weathercode&timezone=auto&forecast_days=7`;
+const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,weathercode&hourly=weathercode,precipitation&timezone=auto&forecast_days=7`;
 
 const resp = await fetch(url);
 if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
@@ -2420,6 +2420,64 @@ cardsHTML += `
 }
 
 cardsHTML += '</div>';
+
+// === WIDGET: CHUVA PRÓXIMAS HORAS ===
+if (forecastData.hourly?.time && forecastData.hourly?.precipitation) {
+const agora = new Date();
+const horaAtual = agora.getHours();
+const dateAtual = agora.toLocaleDateString('en-CA');
+
+// Pega as próximas 4 horas (hora atual + 3 seguintes)
+const proximasHoras = [];
+for (let h = horaAtual; h < horaAtual + 4; h++) {
+const horaReal = h % 24;
+const dateStr = h >= 24 ? new Date(agora.getTime() + 86400000).toLocaleDateString('en-CA') : dateAtual;
+const timeStr = `${dateStr}T${String(horaReal).padStart(2,'0')}:00`;
+const idx = forecastData.hourly.time.indexOf(timeStr);
+if (idx !== -1) {
+proximasHoras.push({
+label: h === horaAtual ? 'Agora' : `+${h - horaAtual}h`,
+mm: forecastData.hourly.precipitation[idx] ?? 0
+});
+}
+}
+
+if (proximasHoras.length) {
+const maxMm = Math.max(...proximasHoras.map(h => h.mm), 0.1);
+const temChuva = proximasHoras.some(h => h.mm > 0);
+
+const barras = proximasHoras.map(h => {
+const altura = Math.round((h.mm / maxMm) * 40);
+const cor = h.mm === 0 ? 'rgba(255,255,255,0.12)' : h.mm < 1 ? '#4bc194' : h.mm < 5 ? '#ffeb3b' : '#ff6f00';
+return `
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+<div style="font-size:10px;color:rgba(255,255,255,0.5);">${h.mm > 0 ? h.mm.toFixed(1) : '–'}</div>
+<div style="width:100%;max-width:32px;height:40px;display:flex;align-items:flex-end;">
+<div style="width:100%;height:${Math.max(altura,2)}px;background:${cor};border-radius:3px 3px 0 0;transition:height 0.3s;"></div>
+</div>
+<div style="font-size:11px;color:rgba(255,255,255,0.7);font-weight:${h.label==='Agora'?'700':'400'};">${h.label}</div>
+</div>`;
+}).join('');
+
+const mensagem = !temChuva
+? '🌤️ Sem chuva nas próximas horas'
+: proximasHoras[0].mm > 0
+? '🌧️ Chuva agora'
+: `🌧️ Chuva em +${proximasHoras.findIndex(h => h.mm > 0)}h`;
+
+cardsHTML += `
+<div style="margin:12px 4px 0;padding:14px 16px;background:rgba(255,255,255,0.05);border-radius:14px;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+<span style="font-size:12px;font-weight:600;color:#ffeb3b;">Chuva próximas horas</span>
+<span style="font-size:11px;color:rgba(255,255,255,0.6);">${mensagem}</span>
+</div>
+<div style="display:flex;gap:6px;align-items:flex-end;justify-content:space-around;">
+${barras}
+</div>
+</div>`;
+}
+}
+
 conteudo.innerHTML = cardsHTML;
 }
 
