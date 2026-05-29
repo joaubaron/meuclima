@@ -597,7 +597,7 @@ return lista[Math.floor(Math.random() * lista.length)];
 }
 
 // Temperatura
-let chaveTemp = faixaTemp === "muito calor" ? "muitoCalor" : faixaTemp;
+let chaveTemp = faixaTemp === "intenso" ? "muitoCalor" : faixaTemp;
 let parteTemp = pegarAleatorio(sugestoesTemp[chaveTemp] || ["Clima desconhecido"]);
 
 // Chuva
