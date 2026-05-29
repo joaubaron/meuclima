@@ -167,7 +167,9 @@ await buscarPrevisaoPorGeolocalizacao(false);
 // MODAL DE ERRO
 // ============================================
 function mostrarErro() {
-document.getElementById('modal-erro-wrap')?.remove();
+// Remove modal anterior se existir
+const modalExistente = document.getElementById('modal-erro-wrap');
+if (modalExistente) modalExistente.remove();
 
 const modal = document.createElement('div');
 modal.id = 'modal-erro-wrap';
@@ -181,21 +183,58 @@ modal.innerHTML = `
 `;
 document.body.appendChild(modal);
 
-document.getElementById('btn-erro-retry').addEventListener('click', async function () {
-// Mantém o overlay visível durante a tentativa — evita mostrar a tela de carregamento feia
-modal.querySelector('.erro-card').innerHTML = `
+const btnRetry = document.getElementById('btn-erro-retry');
+if (btnRetry) {
+btnRetry.addEventListener('click', async function tentarNovamente() {
+const modalAtual = document.getElementById('modal-erro-wrap');
+if (!modalAtual) return;
+
+// Mostra loading
+modalAtual.querySelector('.erro-card').innerHTML = `
 <div class="erro-icone" style="font-size:32px;">⏳</div>
 <p class="erro-desc">Conectando...</p>
-<div class="spinner" style="margin: 0 auto;"></div>
+<div class="spinner" style="margin:0 auto;"></div>
 `;
 
-await buscarPrevisaoPorGeolocalizacao(false);
+// RESETA ESTADOS
+UI_STATE.weatherCache = null;
+UI_STATE.isRefreshing = false;
+UI_STATE.isPulling = false;
 
-// Se foi sucesso: o modal ainda está no DOM, removemos aqui.
-// Se falhou: mostrarErro() já removeu e substituiu por novo modal de erro — remove() vira no-op.
-modal.remove();
+let sucesso = false;
+
+try {
+await new Promise(resolve => setTimeout(resolve, 500));
+await buscarPrevisaoPorGeolocalizacao(true);
+sucesso = true;
+} catch (error) {
+console.error('Falha na nova tentativa:', error);
+sucesso = false;
+}
+
+if (sucesso) {
+const modalParaRemover = document.getElementById('modal-erro-wrap');
+if (modalParaRemover) modalParaRemover.remove();
+} else {
+// Recria o modal de erro
+if (modalAtual) {
+modalAtual.innerHTML = `
+<div class="erro-card">
+<div class="erro-icone">⚠️</div>
+<p class="erro-desc">Falha na conexão.<br>Verifique sua internet e GPS.</p>
+<button id="btn-erro-retry" class="erro-btn">Tentar novamente</button>
+</div>
+`;
+const novoBtn = document.getElementById('btn-erro-retry');
+if (novoBtn) {
+novoBtn.addEventListener('click', () => mostrarErro());
+}
+}
+}
 });
+}
 
+// Limpa resultado anterior
 const resultDiv = document.getElementById(DOM_IDS.WEATHER_RESULT);
 const statusDiv = document.getElementById(DOM_IDS.STATUS);
 if (resultDiv) resultDiv.innerHTML = '';
@@ -2023,11 +2062,41 @@ buscarPrevisaoPorGeolocalizacao(false);
 
 let intervaloAtualizacao = null;
 
+// Adicione no final do arquivo, antes do window.onload
 document.addEventListener('visibilitychange', function() {
-if (document.hidden) {
-clearInterval(intervaloAtualizacao);
+if (!document.hidden) {
+// App voltou a ser visível
+console.log('PWA voltou ao foco, verificando conexão...');
+
+// Se não há dados e não está carregando, tenta novamente
+if (!UI_STATE.weatherCache && !UI_STATE.isRefreshing) {
+setTimeout(() => {
+buscarPrevisaoPorGeolocalizacao(false);
+}, 500);
+}
 }
 });
+
+// Forçar reinicialização do GPS se necessário
+function reiniciarGPS() {
+return new Promise((resolve, reject) => {
+// "Reseta" o GPS tentando uma posição de baixa precisão primeiro
+navigator.geolocation.getCurrentPosition(
+(pos) => resolve(pos),
+(err) => reject(err),
+{ enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
+);
+}).then(pos => {
+// Depois tenta com alta precisão
+return new Promise((resolve, reject) => {
+navigator.geolocation.getCurrentPosition(
+resolve,
+reject,
+{ enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+);
+});
+});
+}
 
 window.onload = async function () {
 const splashScreen = document.getElementById('splashScreen');
