@@ -2436,7 +2436,7 @@ const timeStr = `${dateStr}T${String(horaReal).padStart(2,'0')}:00`;
 const idx = forecastData.hourly.time.indexOf(timeStr);
 if (idx !== -1) {
 proximasHoras.push({
-label: h === horaAtual ? 'Agora' : `+${h - horaAtual}h`,
+label: h === horaAtual ? 'Agora' : `${h - horaAtual}h`,
 mm: forecastData.hourly.precipitation[idx] ?? 0
 });
 }
@@ -2463,7 +2463,7 @@ const mensagem = !temChuva
 ? '🌤️ Sem chuva nas próximas horas'
 : proximasHoras[0].mm > 0
 ? '🌧️ Chuva agora'
-: `🌧️ Chuva em +${proximasHoras.findIndex(h => h.mm > 0)}h`;
+: `🌧️ Chuva em ${proximasHoras.findIndex(h => h.mm > 0)}h`;
 
 cardsHTML += `
 <div style="margin:12px 4px 0;padding:14px 16px;background:rgba(255,255,255,0.05);border-radius:14px;">
