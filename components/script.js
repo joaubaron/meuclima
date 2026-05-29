@@ -2529,13 +2529,13 @@ return `
 }).join('');
 
 function classificarMm(mm) {
-if (mm <= 0.1) return { texto: 'Sem chuva',        emoji: '☀️' };
-if (mm < 2)    return { texto: 'Garoa',             emoji: '🌫️' };
+if (mm <= 0.1) return { texto: 'Sem chuva',        emoji: '🌤️' };
+if (mm < 2)    return { texto: 'Garoa',             emoji: '💧' };
 if (mm < 4)    return { texto: 'Chuva fraca',       emoji: '🌦️' };
-if (mm < 10)   return { texto: 'Chuva moderada',    emoji: '🌧️' };
-if (mm < 20)   return { texto: 'Chuva forte',       emoji: '⛈️' };
+if (mm < 10)   return { texto: 'Chuva moderada',    emoji: '☔' };
+if (mm < 20)   return { texto: 'Chuva forte',       emoji: '🌧️' };
 if (mm < 50)   return { texto: 'Chuva muito forte', emoji: '⛈️' };
-return           { texto: 'Torrencial',             emoji: '🌊' };
+return           { texto: 'Torrencial',             emoji: '🌪️' };
 }
 const agora    = classificarMm(proximasHoras[0]?.mm ?? 0);
 const proxList = proximasHoras.slice(1);
