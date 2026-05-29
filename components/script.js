@@ -442,11 +442,11 @@ fresco: [
 "Clima ameno e gostoso hoje pela cidade",
 "Temperatura amena agora durante o dia",
 "Fresquinho muito bom hoje para sair",
-"Clima fresco e agradável neste local",
+"Clima fresco e agradável hoje",
 "Está fresco e bom agora aqui na área"
 ],
 agradável: [
-"Temperatura ideal hoje para qualquer atividade",
+"Temperatura ideal hoje para atividades",
 "Dia perfeito pra sair e aproveitar o clima",
 "Dia de clima ideal agora pela manhã cedo",
 "Clima ótimo hoje aqui em toda a região",
@@ -455,15 +455,15 @@ agradável: [
 calor: [
 "Calor moderado lá fora durante todo o dia",
 "Bastante calor lá fora agora pela cidade",
-"Temperatura alta hoje em toda esta região",
-"Está quente demais hoje aqui no momento",
+"Temperatura alta hoje em toda a região",
+"Está quente demais hoje aqui hoje",
 "Calor forte e intenso agora pela manhã"
 ],
 muitoCalor: [
 "Dia de muito calor e intenso hoje",
 "Temperatura muito alta agora durante o dia",
-"Calor extremo hoje neste local da cidade",
-"Calorão forte demais aqui pela região toda",
+"Calor extremo hoje nesta cidade",
+"Calorão forte demais aqui por toda região",
 "Muito calor e abafado hoje neste momento"
 ]
 };
@@ -503,7 +503,7 @@ intensa: [
 "chuva torrencial caindo durante toda manhã",
 "tempestade forte agora em toda a região",
 "chuva intensa no local por várias horas",
-"com precipitação extrema agora pela área"
+"com precipitação extrema agora"
 ],
 semChuva: [
 "tempo seco e bom hoje durante todo o dia",
