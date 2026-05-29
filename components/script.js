@@ -2420,14 +2420,22 @@ const minTemp = Math.round(dia.minTemp ?? dia.day?.mintemp_c ?? 0);
 const ventoMedio = dia.wind_kph ?? dia.day?.maxwind_kph ?? 0;
 const precipMm = dia.precip_mm ?? dia.day?.totalprecip_mm ?? 0;
 
-// 1 emoji — período atual do dia (aurora/manhã/tarde/noite)
+// Emoji — código mais frequente das 24h do dia
 let emoji = '☁️';
-const emojiPeriodo = forecastData.hourly
-? getEmojiDoPeriodo(forecastData, dia.date)
-: null;
 
-if (emojiPeriodo) {
-emoji = emojiPeriodo;
+if (forecastData.hourly?.time && forecastData.hourly?.weathercode) {
+// Coleta todos os weathercodes do dia
+const codes = forecastData.hourly.time
+.map((t, idx) => t.startsWith(dia.date) ? forecastData.hourly.weathercode[idx] : null)
+.filter(c => c !== null);
+
+if (codes.length) {
+// Conta frequência de cada código
+const freq = {};
+codes.forEach(c => freq[c] = (freq[c] || 0) + 1);
+const maisFrequente = parseInt(Object.entries(freq).sort((a,b) => b[1]-a[1])[0][0]);
+emoji = getOpenMeteoEmoji(maisFrequente);
+}
 } else if (dia.weatherCode !== undefined) {
 emoji = getOpenMeteoEmoji(dia.weatherCode);
 } else if (dia.day?.condition?.code) {
