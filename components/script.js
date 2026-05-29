@@ -2520,7 +2520,7 @@ const altura = Math.round((h.mm / maxMm) * 40);
 const cor = h.mm === 0 ? 'rgba(255,255,255,0.12)' : h.mm < 1 ? '#4bc194' : h.mm < 5 ? '#ffeb3b' : '#ff6f00';
 return `
 <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
-<div style="font-size:10px;color:rgba(255,255,255,0.5);">${h.mm > 0 ? h.mm.toFixed(1) + ' mm' : '–'}</div>
+<div style="font-size:9px;color:rgba(255,255,255,0.5);">${h.mm > 0 ? h.mm.toFixed(1) + ' mm' : '–'}</div>
 <div style="width:100%;max-width:32px;height:40px;display:flex;align-items:flex-end;">
 <div style="width:100%;height:${Math.max(altura,2)}px;background:${cor};border-radius:3px 3px 0 0;transition:height 0.3s;"></div>
 </div>
