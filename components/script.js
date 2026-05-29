@@ -1569,22 +1569,9 @@ mostrarSugestaoReceita(temp_c);
 
 const weatherIcon = await getWeatherIcon(iconCode, isDay);
 
-// ========== ALTERAÇÃO: ÍCONE BASEADO NO CLIMA MAIS FREQUENTE DO DIA ==========
-let weatherIconFinal = weatherIcon;
-let condTextFinal = condText;
-
-try {
-const codigoFrequente = getMostFrequentWeatherCode(weatherData.forecast);
-if (codigoFrequente !== null) {
-const horaAtual = new Date().getHours();
-const isDayAtual = horaAtual >= 6 && horaAtual < 18;
-weatherIconFinal = await getWeatherIcon(String(codigoFrequente), isDayAtual);
-condTextFinal = getPredominantConditionText(weatherData);
-console.log(`🌤️ Clima predominante do dia: código ${codigoFrequente} (em vez do atual ${iconCode})`);
-}
-} catch(e) {
-console.warn('Erro ao obter clima predominante:', e);
-}
+// Tela principal sempre mostra o clima atual real
+const weatherIconFinal = weatherIcon;
+const condTextFinal = condText;
 
 // Pegar horários do sol
 const sunrise = weatherData.astronomy?.astro?.sunrise?.replace(' AM', '').replace(' PM', '') || '--:--';
@@ -2312,34 +2299,6 @@ return map[code] || '☁️';
 }
 
 // Retorna qual período é agora: 'aurora' | 'manha' | 'tarde' | 'noite'
-function getPeriodoAtual() {
-const hora = new Date().getHours();
-if (hora >= 0  && hora < 6)  return 'aurora';
-if (hora >= 6  && hora < 12) return 'manha';
-if (hora >= 12 && hora < 18) return 'tarde';
-return 'noite';
-}
-
-// Retorna 1 emoji do período atual para aquele dia
-function getEmojiDoPeriodo(forecastData, dateStr) {
-const hourly = forecastData.hourly;
-if (!hourly?.time || !hourly?.weathercode) return null;
-
-const periodo = getPeriodoAtual();
-const faixas = { aurora:[0,6], manha:[6,12], tarde:[12,18], noite:[18,24] };
-const [inicio, fim] = faixas[periodo];
-
-const codes = [];
-hourly.time.forEach((t, idx) => {
-if (!t.startsWith(dateStr)) return;
-const hora = parseInt(t.split('T')[1]);
-if (hora >= inicio && hora < fim) codes.push(hourly.weathercode[idx]);
-});
-
-if (!codes.length) return null;
-return getOpenMeteoEmoji(Math.max(...codes));
-}
-
 function renderizar5Dias(forecastData) {
 const conteudo = document.getElementById('conteudo5Dias');
 if (!conteudo) return;
@@ -2420,22 +2379,14 @@ const minTemp = Math.round(dia.minTemp ?? dia.day?.mintemp_c ?? 0);
 const ventoMedio = dia.wind_kph ?? dia.day?.maxwind_kph ?? 0;
 const precipMm = dia.precip_mm ?? dia.day?.totalprecip_mm ?? 0;
 
-// Emoji — código mais frequente das 24h do dia
+// 1 emoji — período atual do dia (aurora/manhã/tarde/noite)
 let emoji = '☁️';
+const emojiPeriodo = forecastData.hourly
+? getEmojiDoPeriodo(forecastData, dia.date)
+: null;
 
-if (forecastData.hourly?.time && forecastData.hourly?.weathercode) {
-// Coleta todos os weathercodes do dia
-const codes = forecastData.hourly.time
-.map((t, idx) => t.startsWith(dia.date) ? forecastData.hourly.weathercode[idx] : null)
-.filter(c => c !== null);
-
-if (codes.length) {
-// Conta frequência de cada código
-const freq = {};
-codes.forEach(c => freq[c] = (freq[c] || 0) + 1);
-const maisFrequente = parseInt(Object.entries(freq).sort((a,b) => b[1]-a[1])[0][0]);
-emoji = getOpenMeteoEmoji(maisFrequente);
-}
+if (emojiPeriodo) {
+emoji = emojiPeriodo;
 } else if (dia.weatherCode !== undefined) {
 emoji = getOpenMeteoEmoji(dia.weatherCode);
 } else if (dia.day?.condition?.code) {
