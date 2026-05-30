@@ -2525,7 +2525,7 @@ const cor = h.mm === 0 ? 'rgba(255,255,255,0.12)'
   : '#b71c1c';
 return `
 <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
-<div style="font-size:10px;color:rgba(255,255,255,0.5);">${h.mm > 0 ? h.mm.toFixed(1) + ' mm' : '–'}</div>
+<div style="font-size:10px;color:rgba(255,255,255,0.5);">${h.mm > 0 ? h.mm.toFixed(1) : '–'}</div>
 <div style="width:100%;max-width:32px;height:40px;display:flex;align-items:flex-end;">
 <div style="width:100%;height:${Math.max(altura,2)}px;background:${cor};border-radius:3px 3px 0 0;transition:height 0.3s;"></div>
 </div>
