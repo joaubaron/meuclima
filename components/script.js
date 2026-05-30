@@ -2498,7 +2498,7 @@ const dateAtual = agora.toLocaleDateString('en-CA');
 
 // Pega as próximas 4 horas (hora atual + 3 seguintes)
 const proximasHoras = [];
-for (let h = horaAtual; h < horaAtual + 6; h++) {
+for (let h = horaAtual; h < horaAtual + 5; h++) {
 const horaReal = h % 24;
 const dateStr = h >= 24 ? new Date(agora.getTime() + 86400000).toLocaleDateString('en-CA') : dateAtual;
 const timeStr = `${dateStr}T${String(horaReal).padStart(2,'0')}:00`;
@@ -2517,10 +2517,16 @@ const temChuva = proximasHoras.some(h => h.mm > 0);
 
 const barras = proximasHoras.map(h => {
 const altura = Math.round((h.mm / maxMm) * 40);
-const cor = h.mm === 0 ? 'rgba(255,255,255,0.12)' : h.mm < 1 ? '#4bc194' : h.mm < 5 ? '#ffeb3b' : '#ff6f00';
+const cor = h.mm === 0 ? 'rgba(255,255,255,0.12)'
+  : h.mm < 2   ? '#4bc194'
+  : h.mm < 5   ? '#90caf9'
+  : h.mm < 25  ? '#1976d2'
+  : h.mm < 50  ? '#4527a0'
+  : h.mm < 100 ? '#ff6f00'
+  : '#b71c1c';
 return `
 <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
-<div style="font-size:9px;color:rgba(255,255,255,0.5);">${h.mm > 0 ? h.mm.toFixed(1) + ' mm' : '–'}</div>
+<div style="font-size:10px;color:rgba(255,255,255,0.5);">${h.mm > 0 ? h.mm.toFixed(1) + ' mm' : '–'}</div>
 <div style="width:100%;max-width:32px;height:40px;display:flex;align-items:flex-end;">
 <div style="width:100%;height:${Math.max(altura,2)}px;background:${cor};border-radius:3px 3px 0 0;transition:height 0.3s;"></div>
 </div>
@@ -2528,44 +2534,27 @@ return `
 </div>`;
 }).join('');
 
-function classificarMm(mm) {
-if (mm <= 0.1) return { texto: 'Sem chuva',        emoji: '🌤️' };
-if (mm < 2)    return { texto: 'Garoa',             emoji: '💧' };
-if (mm < 4)    return { texto: 'Chuva fraca',       emoji: '🌦️' };
-if (mm < 10)   return { texto: 'Chuva moderada',    emoji: '☔' };
-if (mm < 20)   return { texto: 'Chuva forte',       emoji: '🌧️' };
-if (mm < 50)   return { texto: 'Chuva muito forte', emoji: '⛈️' };
-return           { texto: 'Torrencial',             emoji: '🌪️' };
+function classificarChuva(mm) {
+	if (mm === 0)    return null;
+	if (mm < 2)      return '🌫️ Garoa';
+	if (mm < 5)      return '🌦️ Chuva fraca';
+	if (mm < 25)     return '🌧️ Chuva moderada';
+	if (mm < 50)     return '⛈️ Chuva forte';
+	if (mm < 100)    return '⛈️ Chuva muito forte';
+	return '🌊 Torrencial';
 }
-const agora    = classificarMm(proximasHoras[0]?.mm ?? 0);
-const proxList = proximasHoras.slice(1);
-const mmAgora  = proximasHoras[0]?.mm ?? 0;
-const temChuvaFutura = proxList.some(h => h.mm > 0.1);
-const piora    = proxList.some(h => h.mm > mmAgora + 0.1);
-const melhora  = mmAgora > 0.1 && proxList.some(h => h.mm < mmAgora - 0.1);
-const proxComChuva = proxList.find(h => h.mm > 0.1);
 
-let mensagem;
-if (!temChuva && mmAgora <= 0.1) {
-mensagem = '☀️ Sem chuva nas próximas horas';
-} else if (mmAgora <= 0.1 && temChuvaFutura) {
-mensagem = `🌧️ ${classificarMm(proxComChuva.mm).texto} em ${proxComChuva.label}`;
-} else if (melhora && !temChuvaFutura) {
-mensagem = `${agora.emoji} ${agora.texto} agora, melhora em breve`;
-} else if (melhora) {
-mensagem = `${agora.emoji} ${agora.texto} agora, diminuindo`;
-} else if (piora) {
-const piorHora = proxList.find(h => h.mm > mmAgora + 0.1);
-mensagem = `${agora.emoji} ${agora.texto} agora, piorando em ${piorHora.label}`;
-} else {
-mensagem = `${agora.emoji} ${agora.texto} nas próximas horas`;
-}
+const horaPico = proximasHoras.reduce((a, b) => b.mm > a.mm ? b : a);
+const classePico = classificarChuva(horaPico.mm);
+const mensagem = !temChuva
+? '🌤️ Sem chuva nas próximas horas'
+: `${classePico} ${horaPico.label === 'Agora' ? 'agora' : 'em ' + horaPico.label}`;
 
 cardsHTML += `
 <div style="margin:12px 4px 0;padding:14px 16px;background:rgba(255,255,255,0.05);border-radius:14px;">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-<span style="font-size:12px;font-weight:600;color:#ffeb3b;">Chuva</span>
-<span style="font-size:11px;color:rgba(255,255,255,0.6);">${mensagem}</span>
+<span style="font-size:12px;font-weight:600;color:#ffeb3b;">Chuva próximas horas</span>
+<span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);">${mensagem}</span>
 </div>
 <div style="display:flex;gap:6px;align-items:flex-end;justify-content:space-around;">
 ${barras}
@@ -2575,12 +2564,6 @@ ${barras}
 }
 
 conteudo.innerHTML = cardsHTML;
-
-// Preenche o resumo de chuva no lugar do texto Fonte: Open-Meteo
-const divResumoChuva = document.getElementById('resumoChuvaHoras');
-if (divResumoChuva && typeof mensagem !== 'undefined') {
-divResumoChuva.textContent = mensagem;
-}
 }
 
 // Listener de popstate para fechar modal 5 dias com botão voltar
