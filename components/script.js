@@ -2553,7 +2553,7 @@ const mensagem = !temChuva
 cardsHTML += `
 <div style="margin:12px 4px 0;padding:14px 16px;background:rgba(255,255,255,0.05);border-radius:14px;">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-<span style="font-size:12px;font-weight:600;color:#ffeb3b;">Chuva próximas horas</span>
+<span style="font-size:12px;font-weight:600;color:#ffeb3b;">Chuvas</span>
 <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);">${mensagem}</span>
 </div>
 <div style="display:flex;gap:6px;align-items:flex-end;justify-content:space-around;">
