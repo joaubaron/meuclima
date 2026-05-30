@@ -1,4 +1,3 @@
-const API_BASE = 'https://meu-projeto-clima.vercel.app/api/weather';
 const CACHE_PREFIX = 'cache_';
 const UPDATE_INTERVAL = 5 * 60 * 1000;
 const SPLASH_TIMEOUT = 30000;
