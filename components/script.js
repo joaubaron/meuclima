@@ -2559,6 +2559,15 @@ cardsHTML += `
 <div style="display:flex;gap:6px;align-items:flex-end;justify-content:space-around;">
 ${barras}
 </div>
+</div>
+
+<div style="margin:8px 4px 0;padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:12px;display:flex;flex-wrap:wrap;gap:8px 14px;">
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#4bc194;flex-shrink:0;"></span>Garoa 0.1–1.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#90caf9;flex-shrink:0;"></span>Fraca 2–4.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#1976d2;flex-shrink:0;"></span>Moderada 5–24.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#4527a0;flex-shrink:0;"></span>Forte 25–49.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff6f00;flex-shrink:0;"></span>Muito forte 50–99.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#b71c1c;flex-shrink:0;"></span>Torrencial ≥100mm</span>
 </div>`;
 }
 }
