@@ -2504,7 +2504,7 @@ const timeStr = `${dateStr}T${String(horaReal).padStart(2,'0')}:00`;
 const idx = forecastData.hourly.time.indexOf(timeStr);
 if (idx !== -1) {
 proximasHoras.push({
-label: h === horaAtual ? 'Agora' : `${h - horaAtual}h`,
+label: h === horaAtual ? `${horaReal}h` : `${horaReal}h`,
 mm: forecastData.hourly.precipitation[idx] ?? 0
 });
 }
@@ -2529,7 +2529,7 @@ return `
 <div style="width:100%;max-width:32px;height:40px;display:flex;align-items:flex-end;">
 <div style="width:100%;height:${Math.max(altura,2)}px;background:${cor};border-radius:3px 3px 0 0;transition:height 0.3s;"></div>
 </div>
-<div style="font-size:11px;color:rgba(255,255,255,0.7);font-weight:${h.label==='Agora'?'700':'400'};">${h.label}</div>
+<div style="font-size:11px;color:rgba(255,255,255,0.7);font-weight:${h.label===`${horaAtual}h`?'700':'400'};">${h.label}</div>
 </div>`;
 }).join('');
 
@@ -2545,9 +2545,10 @@ function classificarChuva(mm) {
 
 const horaPico = proximasHoras.reduce((a, b) => b.mm > a.mm ? b : a);
 const classePico = classificarChuva(horaPico.mm);
+const labelPico = horaPico.label === `${horaAtual}h` ? 'agora' : `às ${horaPico.label}`;
 const mensagem = !temChuva
 ? '🌤️ Sem chuva nas próximas horas'
-: `${classePico} ${horaPico.label === 'Agora' ? 'agora' : 'em ' + horaPico.label}`;
+: `${classePico} ${labelPico}`;
 
 cardsHTML += `
 <div style="margin:12px 4px 0;padding:14px 16px;background:rgba(255,255,255,0.05);border-radius:14px;">
