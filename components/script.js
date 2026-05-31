@@ -2431,63 +2431,7 @@ conteudo.innerHTML = '<div style="text-align:center;padding:20px;color:#ccc;">Se
 return;
 }
 
-let cardsHTML = '<div class="cinco-dias-grid">';
-
-for (let i = 0; i < diasParaMostrar.length; i++) {
-const dia = diasParaMostrar[i];
-const dataObj = new Date(dia.date + 'T12:00:00');
-const dataStr = `${dataObj.getDate()}/${dataObj.getMonth() + 1}`;
-
-let labelDia;
-if (i === 0) labelDia = 'Amanhã';
-else         labelDia = diasSemana[dataObj.getDay()];
-
-const maxTemp = Math.round(dia.maxTemp ?? dia.day?.maxtemp_c ?? 0);
-const minTemp = Math.round(dia.minTemp ?? dia.day?.mintemp_c ?? 0);
-const ventoMedio = dia.wind_kph ?? dia.day?.maxwind_kph ?? 0;
-const precipMm = dia.precip_mm ?? dia.day?.totalprecip_mm ?? 0;
-
-// Emoji — código mais frequente das 24h do dia
-let emoji = '☁️';
-
-if (forecastData.hourly?.time && forecastData.hourly?.weathercode) {
-const codes = forecastData.hourly.time
-.map((t, idx) => t.startsWith(dia.date) ? forecastData.hourly.weathercode[idx] : null)
-.filter(c => c !== null);
-
-if (codes.length) {
-const freq = {};
-codes.forEach(c => freq[c] = (freq[c] || 0) + 1);
-const maisFrequente = parseInt(Object.entries(freq).sort((a,b) => b[1]-a[1])[0][0]);
-emoji = getOpenMeteoEmoji(maisFrequente);
-}
-} else if (dia.weatherCode !== undefined) {
-emoji = getOpenMeteoEmoji(dia.weatherCode);
-} else if (dia.day?.condition?.code) {
-const code = dia.day.condition.code;
-if (code === 1000) emoji = '☀️';
-else if (code === 1003) emoji = '🌤️';
-else if (code === 1006 || code === 1009) emoji = '☁️';
-else if (code === 1030 || code === 1135) emoji = '🌫️';
-else if (code >= 1063 && code <= 1087) emoji = '🌧️';
-else if (code >= 1066 && code <= 1117) emoji = '❄️';
-else if (code >= 1150 && code <= 1282) emoji = '🌧️';
-else emoji = '☁️';
-}
-
-// Formato original: max em destaque, min abaixo
-cardsHTML += `
-<div class="cinco-dias-card${i === 0 ? ' cinco-dias-card--hoje' : ''}">
-<div class="cinco-dias-label">${labelDia}</div>
-<div class="cinco-dias-data">${dataStr}</div>
-<div class="cinco-dias-emoji">${emoji}</div>
-<div class="cinco-dias-max">${maxTemp}°</div>
-<div class="cinco-dias-min">${minTemp}°</div>
-<div class="cinco-dias-vento" style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;"><span style="font-size:0.82em;opacity:0.75;">🍃 ${ventoMedio.toFixed(1)} km/h</span><span style="font-size:0.82em;opacity:0.75;">🌧️ ${precipMm.toFixed(1)} mm</span></div>
-</div>`;
-}
-
-cardsHTML += '</div>';
+let cardsHTML = '';
 
 // === WIDGET: CHUVA PRÓXIMAS HORAS ===
 if (forecastData.hourly?.time && forecastData.hourly?.precipitation) {
@@ -2570,6 +2514,63 @@ ${barras}
 </div>`;
 }
 }
+
+// === GRID 5 DIAS ===
+cardsHTML += '<div class="cinco-dias-grid">';
+
+for (let i = 0; i < diasParaMostrar.length; i++) {
+const dia = diasParaMostrar[i];
+const dataObj = new Date(dia.date + 'T12:00:00');
+const dataStr = `${dataObj.getDate()}/${dataObj.getMonth() + 1}`;
+
+let labelDia;
+if (i === 0) labelDia = 'Amanhã';
+else         labelDia = diasSemana[dataObj.getDay()];
+
+const maxTemp = Math.round(dia.maxTemp ?? dia.day?.maxtemp_c ?? 0);
+const minTemp = Math.round(dia.minTemp ?? dia.day?.mintemp_c ?? 0);
+const ventoMedio = dia.wind_kph ?? dia.day?.maxwind_kph ?? 0;
+const precipMm = dia.precip_mm ?? dia.day?.totalprecip_mm ?? 0;
+
+let emoji = '☁️';
+
+if (forecastData.hourly?.time && forecastData.hourly?.weathercode) {
+const codes = forecastData.hourly.time
+.map((t, idx) => t.startsWith(dia.date) ? forecastData.hourly.weathercode[idx] : null)
+.filter(c => c !== null);
+
+if (codes.length) {
+const freq = {};
+codes.forEach(c => freq[c] = (freq[c] || 0) + 1);
+const maisFrequente = parseInt(Object.entries(freq).sort((a,b) => b[1]-a[1])[0][0]);
+emoji = getOpenMeteoEmoji(maisFrequente);
+}
+} else if (dia.weatherCode !== undefined) {
+emoji = getOpenMeteoEmoji(dia.weatherCode);
+} else if (dia.day?.condition?.code) {
+const code = dia.day.condition.code;
+if (code === 1000) emoji = '☀️';
+else if (code === 1003) emoji = '🌤️';
+else if (code === 1006 || code === 1009) emoji = '☁️';
+else if (code === 1030 || code === 1135) emoji = '🌫️';
+else if (code >= 1063 && code <= 1087) emoji = '🌧️';
+else if (code >= 1066 && code <= 1117) emoji = '❄️';
+else if (code >= 1150 && code <= 1282) emoji = '🌧️';
+else emoji = '☁️';
+}
+
+cardsHTML += `
+<div class="cinco-dias-card${i === 0 ? ' cinco-dias-card--hoje' : ''}">
+<div class="cinco-dias-label">${labelDia}</div>
+<div class="cinco-dias-data">${dataStr}</div>
+<div class="cinco-dias-emoji">${emoji}</div>
+<div class="cinco-dias-max">${maxTemp}°</div>
+<div class="cinco-dias-min">${minTemp}°</div>
+<div class="cinco-dias-vento" style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;"><span style="font-size:0.82em;opacity:0.75;">🍃 ${ventoMedio.toFixed(1)} km/h</span><span style="font-size:0.82em;opacity:0.75;">🌧️ ${precipMm.toFixed(1)} mm</span></div>
+</div>`;
+}
+
+cardsHTML += '</div>';
 
 conteudo.innerHTML = cardsHTML;
 }
