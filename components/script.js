@@ -2467,12 +2467,12 @@ const temChuva = proximasHoras.some(h => h.mm > 0);
 const barras = proximasHoras.map(h => {
 const altura = Math.round((h.mm / maxMm) * 40);
 const cor = h.mm === 0 ? 'rgba(255,255,255,0.12)'
-  : h.mm < 2   ? '#4bc194'
-  : h.mm < 4   ? '#90caf9'
-  : h.mm < 10  ? '#1976d2'
-  : h.mm < 20  ? '#4527a0'
-  : h.mm < 50  ? '#ffcc00'
-  : '#ff3300';
+: h.mm < 2   ? '#4bc194'
+: h.mm < 4   ? '#90caf9'
+: h.mm < 10  ? '#1976d2'
+: h.mm < 20  ? '#4527a0'
+: h.mm < 50  ? '#ffcc00'
+: '#ff3300';
 return `
 <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
 <div style="font-size:10px;color:rgba(255,255,255,0.5);">${h.mm > 0 ? h.mm.toFixed(1) : '–'}</div>
@@ -2484,13 +2484,13 @@ return `
 }).join('');
 
 function classificarChuva(mm) {
-	if (mm === 0)     return null;
-	if (mm < 2)       return '💧 Garoa';
-	if (mm < 4)       return '🌦️ Chuva fraca';
-	if (mm < 10)      return '🌧️ Chuva moderada';
-	if (mm < 20)      return '🌩️ Chuva forte';
-	if (mm < 50)      return '⛈️ Chuva muito forte';
-	return '💦 Torrencial';
+if (mm === 0)     return null;
+if (mm < 2)       return '💧 Garoa';
+if (mm < 4)       return '🌦️ Chuva fraca';
+if (mm < 10)      return '🌧️ Chuva moderada';
+if (mm < 20)      return '🌩️ Chuva forte';
+if (mm < 50)      return '⛈️ Chuva muito forte';
+return '💦 Torrencial';
 }
 
 const horaPico = proximasHoras.reduce((a, b) => b.mm > a.mm ? b : a);
