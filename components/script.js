@@ -555,7 +555,7 @@ semChuva: [
 // Parte 3a — vento sem chuva: já traz o finalizador embutido
 const sugestoesVento = {
 calminho: [
-"e vento calmo. Aproveite o dia!",
+"e vento calmo. Aproveite!",
 "e sem vento nenhum. Bom dia!",
 "com vento zero. Aproveite!",
 "e clima parado. Tenha um bom dia!",
@@ -563,7 +563,7 @@ calminho: [
 ],
 brisaLeve: [
 "e brisa leve e suave. Bom dia!",
-"com vento suave. Aproveite o dia!",
+"com vento suave. Curta!",
 "e vento leve e gostoso. Bom dia!",
 "e brisa fresca. Aproveite!",
 "e ventinho bom. Tenha um bom dia!"
@@ -1295,7 +1295,7 @@ faixa => temp >= faixa.min && temp <= faixa.max
 const emoji = emojiInfo ? emojiInfo.emoji : '';
 UI_STATE.currentTemperatureMessage = `${emoji} ${group.messages[randomIndex]}`;
 } else {
-UI_STATE.currentTemperatureMessage = 'Aproveite o dia!';
+UI_STATE.currentTemperatureMessage = 'Aproveite!';
 }
 }
 
