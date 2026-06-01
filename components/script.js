@@ -2691,6 +2691,7 @@ const conditionMap = {
 1276: 'Trovoada',
 1279: 'Trovoada com neve',
 1282: 'Trovoada com neve'
+};
 return conditionMap[codigoMaisFrequente] || 'Clima variado';
 }
 
