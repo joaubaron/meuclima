@@ -2485,12 +2485,12 @@ return `
 
 function classificarChuva(mm) {
 	if (mm === 0)     return null;
-	if (mm < 2)       return '🌫️ Garoa';
+	if (mm < 2)       return '💧 Garoa';
 	if (mm < 4)       return '🌦️ Chuva fraca';
 	if (mm < 10)      return '🌧️ Chuva moderada';
-	if (mm < 20)      return '⛈️ Chuva forte';
+	if (mm < 20)      return '🌩️ Chuva forte';
 	if (mm < 50)      return '⛈️ Chuva muito forte';
-	return '🌊 Torrencial';
+	return '💦 Torrencial';
 }
 
 const horaPico = proximasHoras.reduce((a, b) => b.mm > a.mm ? b : a);
