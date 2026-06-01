@@ -948,7 +948,7 @@ top: 5px;
   font-size: 11px !important;
   font-weight: 600 !important;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
+  text-transform: none;
   padding: 6px 10px !important;
   border-radius: 6px;
   transition: background 0.15s;
