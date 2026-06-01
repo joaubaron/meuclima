@@ -1657,10 +1657,16 @@ const astroSol = weatherData.forecast?.forecast?.forecastday?.[0]?.astro
 || weatherData.astronomy;
 const nascerStr = converterHora12para24(astroSol?.sunrise);
 const porStr    = converterHora12para24(astroSol?.sunset);
+const agoraMin = new Date().getHours() * 60 + new Date().getMinutes();
+const [porH, porM] = porStr.split(':').map(Number);
+const porMin = porH * 60 + (porM || 0);
+const fraseSol = agoraMin >= porMin
+? `Anoiteceu às 🌙 ${porStr} e amanhece às ☀️ ${nascerStr}`
+: `Hoje amanhece às ☀️ ${nascerStr} e anoitece às 🌙 ${porStr}`;
 sunDivImediato.innerHTML = `
 <div class="info-inline moon-text" style="font-size: 0.62em; overflow-x: auto;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
-<span>Hoje amanhece às ☀️ ${nascerStr} e anoitece às 🌙 ${porStr}</span>
+<span>${fraseSol}</span>
 </div>
 </div>
 `;
