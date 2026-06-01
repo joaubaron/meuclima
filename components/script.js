@@ -2516,7 +2516,7 @@ ${barras}
 <span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#1976d2;flex-shrink:0;"></span>Moderada 5–24.9mm</span>
 <span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#4527a0;flex-shrink:0;"></span>Forte 25–49.9mm</span>
 <span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff6f00;flex-shrink:0;"></span>Muito forte 50–99.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#b71c1c;flex-shrink:0;"></span>Torrencial ≥100mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#b71c1c;flex-shrink:0;"></span>Torrencial mais de 100mm</span>
 </div>`;
 }
 }
