@@ -1665,7 +1665,7 @@ const porMin = ph * 60 + pm;
 const jaAnoiteceu = horaAtualMin >= porMin;
 const nascerStr = converterHora12para24(astroSol?.sunrise);
 const textoSol = jaAnoiteceu
-? `Anoiteceu às 🌙 ${porStr} e amanhã amanhece às ☀️ ${nascerStrAmanha}`
+? `Anoiteceu às 🌙 ${porStr} e amanhece às ☀️ ${nascerStrAmanha}`
 : `Hoje amanhece às ☀️ ${nascerStr} e anoitece às 🌙 ${porStr}`;
 sunDivImediato.innerHTML = `
 <div class="info-inline moon-text" style="font-size: 0.62em; overflow-x: auto;">
@@ -1734,16 +1734,6 @@ function esconderSplashSuavemente() {
 const splash = document.getElementById('splashScreen');
 splash.style.opacity = '0';
 setTimeout(() => (splash.style.display = 'none'), 500);
-}
-
-
-
-
-
-
-
-
-
 
 async function buscarExtras(lat, lon) {
 const extrasDiv = document.getElementById('extras');
@@ -1790,7 +1780,7 @@ const [ph2, pm2] = porStr.split(':').map(Number);
 const porMin2 = ph2 * 60 + pm2;
 const jaAnoiteceu2 = horaAtualMin2 >= porMin2;
 const textoSol2 = jaAnoiteceu2
-? `Anoiteceu às 🌙 ${porStr} e amanhã amanhece às ☀️ ${nascerStrAmanha2}`
+? `Anoiteceu às 🌙 ${porStr} e amanhece às ☀️ ${nascerStrAmanha2}`
 : `Hoje amanhece às ☀️ ${nascerStr} e anoitece às 🌙 ${porStr}`;
 sunDiv.innerHTML = `
 <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto; margin: 0; padding: 4px;">
