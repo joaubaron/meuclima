@@ -383,7 +383,7 @@ if (current.temp_c >= 35) {
 alertas.push(`🔥 Calor extremo! ${current.temp_c}°C`);
 }
 if (current.temp_c <= 5) {
-alertas.push(`❄️ Frio intenso! ${current.temp_c}°C`);
+alertas.push(`🥶 Frio intenso! ${current.temp_c}°C`);
 }
 if (current.precip_mm >= 10) {
 alertas.push(`🌧️ Chuva forte! ${current.precip_mm}mm`);
@@ -687,7 +687,7 @@ return frase;
 function getPreciseSeasonDates(year) {
 return {
 OUTONO:    { date: new Date(year, 2, 20, 12, 0, 0), emoji: "🍂" },    // 20 março
-INVERNO:   { date: new Date(year, 5, 20, 12, 0, 0), emoji: "❄️" },    // 20 junho
+INVERNO:   { date: new Date(year, 5, 20, 12, 0, 0), emoji: "🧊" },    // 20 junho
 PRIMAVERA: { date: new Date(year, 8, 22, 12, 0, 0), emoji: "🌸" },    // 22 setembro
 VERÃO:     { date: new Date(year, 11, 21, 12, 0, 0), emoji: "☀️" }    // 21 dezembro
 };
@@ -1138,7 +1138,7 @@ const messagesByTemperature = [
 {
 min: -Infinity,
 max: 0.9,
-messages: ['Frio intenso! ❄️', 'Muito frio! 🥶']
+messages: ['Frio intenso! 🥶', 'Muito frio! 🥶']
 },
 {
 min: 1.0,
@@ -1148,12 +1148,12 @@ messages: ['Frio! 🧣', 'Temperatura baixa! 🧥']
 {
 min: 11.0,
 max: 20.9,
-messages: ['Temperatura amena! 🍃', 'Clima agradável! ⛅']
+messages: ['Temperatura amena! 🍃', 'Clima agradável! 🌤️']
 },
 {
 min: 21.0,
 max: 30.9,
-messages: ['Clima quente! ☀️', 'Dia ensolarado! 😎']
+messages: ['Clima quente! ☀️', 'Dia ensolarado! ☀️']
 },
 {
 min: 31.0,
@@ -1164,16 +1164,14 @@ messages: ['Calor intenso! 🔥', 'Muito calor! 🥵']
 
 const descricoes = {
 "🧊": "Congelante",
-"🥶": "Gélido",
-"❄️": "Frio",
+"🥶": "Frio",
 "🧥": "Fresco",
 "🧣": "Suave",
 "🍃": "Ameno",
-"⛅": "Temperado",
-"🌤️": "Quente",
-"☀️": "Tórrido",
-"😎": "Escaldante",
-"🔥": "Abrassador",
+"🌤️": "Temperado",
+"☀️": "Quente",
+"😎": "Tórrido",
+"🔥": "Abrasador",
 "🥵": "Intenso",
 "♨️": "Extremo"
 };
@@ -1181,16 +1179,16 @@ const descricoes = {
 const emojiByTemperature = [
 { min: -Infinity, max: -0.1, emoji: "🧊" },
 { min: 0,   max: 2.9, emoji: "🥶" },
-{ min: 3,   max: 5.9, emoji: "❄️" },
+{ min: 3,   max: 5.9, emoji: "🥶" },
 { min: 6,   max: 8.9, emoji: "🧥" },
 { min: 9,   max: 11.9, emoji: "🧣" },
 { min: 12,  max: 14.9, emoji: "🍃" },
-{ min: 15,  max: 17.9, emoji: "⛅" },
-{ min: 18,  max: 20.9, emoji: "🌤️" },
-{ min: 21,  max: 24.9, emoji: "☀️" },
-{ min: 25,  max: 28.9, emoji: "😎" },
-{ min: 29,  max: 32.9, emoji: "🔥" },
-{ min: 33,  max: 36.9, emoji: "🥵" },
+{ min: 15,  max: 17.9, emoji: "🌤️" },
+{ min: 18,  max: 20.9, emoji: "☀️" },
+{ min: 21,  max: 24.9, emoji: "😎" },
+{ min: 25,  max: 28.9, emoji: "🔥" },
+{ min: 29,  max: 32.9, emoji: "🥵" },
+{ min: 33,  max: 36.9, emoji: "♨️" },
 { min: 37,  max: 100, emoji: "♨️" }
 ];
 
@@ -2340,34 +2338,34 @@ document.body.classList.remove('modal-aberto');
 function getOpenMeteoEmoji(code) {
 // Códigos WMO: https://open-meteo.com/en/docs
 const map = {
-0: '☀️',      // Céu limpo
-1: '🌤️',      // Principalmente limpo
-2: '⛅',       // Parcialmente nublado
-3: '☁️',       // Nublado
-45: '🌫️',     // Nevoeiro
-48: '🌫️',     // Nevoeiro com gelo
-51: '🌧️',     // Garoa leve
-53: '🌧️',     // Garoa moderada
-55: '🌧️',     // Garoa densa
-56: '🌧️❄️',   // Garoa congelante leve
-57: '🌧️❄️',   // Garoa congelante densa
-61: '🌧️',     // Chuva fraca
-63: '🌧️',     // Chuva moderada
-65: '🌧️',     // Chuva forte
-66: '🌧️❄️',   // Chuva congelante leve
-67: '🌧️❄️',   // Chuva congelante forte
-71: '❄️',      // Neve fraca
-73: '❄️',      // Neve moderada
-75: '❄️',      // Neve forte
-77: '🌨️',      // Grãos de neve
-80: '🌦️',      // Pancadas de chuva fracas
-81: '🌦️',      // Pancadas de chuva moderadas
-82: '⛈️',      // Pancadas de chuva violentas
-85: '🌨️',      // Pancadas de neve leves
-86: '🌨️',      // Pancadas de neve fortes
-95: '⛈️',      // Trovoada
-96: '⛈️🌨️',   // Trovoada com granizo leve
-99: '⛈️🌨️'    // Trovoada com granizo forte
+0:  '☀️',    // Céu limpo
+1:  '🌤️',   // Principalmente limpo
+2:  '🌥️',   // Parcialmente nublado
+3:  '☁️',    // Nublado / encoberto
+45: '🌫️',   // Nevoeiro
+48: '🌫️',   // Nevoeiro com gelo
+51: '🌧️',   // Garoa leve
+53: '🌧️',   // Garoa moderada
+55: '🌧️',   // Garoa densa
+56: '🌧️',   // Garoa congelante leve
+57: '🌧️',   // Garoa congelante densa
+61: '🌧️',   // Chuva fraca
+63: '🌧️',   // Chuva moderada
+65: '🌧️',   // Chuva forte
+66: '🌧️',   // Chuva congelante leve
+67: '🌧️',   // Chuva congelante forte
+71: '🌧️',   // Neve fraca → sem ❄️ para evitar quadrado
+73: '🌧️',   // Neve moderada
+75: '🌧️',   // Neve forte
+77: '🌧️',   // Grãos de neve
+80: '🌧️',   // Pancadas de chuva fracas
+81: '🌧️',   // Pancadas de chuva moderadas
+82: '⛈️',   // Pancadas de chuva violentas
+85: '🌧️',   // Pancadas de neve leves
+86: '🌧️',   // Pancadas de neve fortes
+95: '⛈️',   // Trovoada
+96: '⛈️',   // Trovoada com granizo leve
+99: '⛈️'    // Trovoada com granizo forte
 };
 return map[code] || '☁️';
 }
@@ -2486,9 +2484,9 @@ return `
 function classificarChuva(mm) {
 if (mm === 0)     return null;
 if (mm < 2)       return '💧 Garoa';
-if (mm < 4)       return '🌦️ Chuva fraca';
+if (mm < 4)       return '🌧️ Chuva fraca';
 if (mm < 10)      return '🌧️ Chuva moderada';
-if (mm < 20)      return '🌩️ Chuva forte';
+if (mm < 20)      return '⛈️ Chuva forte';
 if (mm < 50)      return '⛈️ Chuva muito forte';
 return '💦 Torrencial';
 }
@@ -2560,7 +2558,7 @@ else if (code === 1003) emoji = '🌤️';
 else if (code === 1006 || code === 1009) emoji = '☁️';
 else if (code === 1030 || code === 1135) emoji = '🌫️';
 else if (code >= 1063 && code <= 1087) emoji = '🌧️';
-else if (code >= 1066 && code <= 1117) emoji = '❄️';
+else if (code >= 1066 && code <= 1117) emoji = '🌧️';
 else if (code >= 1150 && code <= 1282) emoji = '🌧️';
 else emoji = '☁️';
 }
