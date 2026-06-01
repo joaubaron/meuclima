@@ -2342,8 +2342,8 @@ const map = {
 1:  '🌤️',   // Principalmente limpo
 2:  '🌥️',   // Parcialmente nublado
 3:  '☁️',    // Nublado / encoberto
-45: '🌫️',   // Nevoeiro
-48: '🌫️',   // Nevoeiro com gelo
+45: '☁️',   // Nevoeiro
+48: '☁️',   // Nevoeiro com gelo
 51: '🌧️',   // Garoa leve
 53: '🌧️',   // Garoa moderada
 55: '🌧️',   // Garoa densa
@@ -2556,7 +2556,7 @@ const code = dia.day.condition.code;
 if (code === 1000) emoji = '☀️';
 else if (code === 1003) emoji = '🌤️';
 else if (code === 1006 || code === 1009) emoji = '☁️';
-else if (code === 1030 || code === 1135) emoji = '🌫️';
+else if (code === 1030 || code === 1135) emoji = '☁️';
 else if (code >= 1063 && code <= 1087) emoji = '🌧️';
 else if (code >= 1066 && code <= 1117) emoji = '🌧️';
 else if (code >= 1150 && code <= 1282) emoji = '🌧️';
