@@ -385,10 +385,10 @@ alertas.push(`🔥 Calor extremo! ${current.temp_c}°C`);
 if (current.temp_c <= 5) {
 alertas.push(`❄️ Frio intenso! ${current.temp_c}°C`);
 }
-if (current.precip_mm > 20) {
+if (current.precip_mm >= 10) {
 alertas.push(`🌧️ Chuva forte! ${current.precip_mm}mm`);
 }
-if (current.wind_kph > 38) {
+if (current.wind_kph >= 31) {
 alertas.push(`💨 Vento forte! ${current.wind_kph.toFixed(1)} km/h`);
 }
 
@@ -641,21 +641,21 @@ let parteTemp = pegarAleatorio(sugestoesTemp[chaveTemp] || ["Clima desconhecido"
 // Chuva
 let chaveChuva = "semChuva";
 if (precip_mm > 0.2) {
-if (precip_mm <= 1)       chaveChuva = "garoa";
-else if (precip_mm <= 4)  chaveChuva = "fraca";
-else if (precip_mm <= 10) chaveChuva = "moderada";
-else if (precip_mm <= 20) chaveChuva = "forte";
-else                      chaveChuva = "intensa";
+if (precip_mm <= 1.9)      chaveChuva = "garoa";
+else if (precip_mm <= 3.9) chaveChuva = "fraca";
+else if (precip_mm <= 9.9) chaveChuva = "moderada";
+else if (precip_mm <= 19.9) chaveChuva = "forte";
+else                        chaveChuva = "intensa";
 }
 let parteChuva = pegarAleatorio(sugestoesChuva[chaveChuva]).trim();
 
 // Vento
 const temChuva = chaveChuva !== "semChuva";
 let chaveVento = "calminho";
-if (wind_kph > 1  && wind_kph <= 19) chaveVento = "brisaLeve";
-else if (wind_kph <= 38)             chaveVento = "moderado";
-else if (wind_kph <= 74)             chaveVento = "forte";
-else if (wind_kph > 74)             chaveVento = "muitoForte";
+if (wind_kph >= 2  && wind_kph <= 9.9)  chaveVento = "brisaLeve";
+else if (wind_kph <= 30.9)              chaveVento = "moderado";
+else if (wind_kph <= 74.9)              chaveVento = "forte";
+else if (wind_kph > 74.9)              chaveVento = "muitoForte";
 
 // Montar frase
 // Sem chuva: "Temperatura, chuva, vento descritivo. Finalizador!"
@@ -2468,10 +2468,10 @@ const barras = proximasHoras.map(h => {
 const altura = Math.round((h.mm / maxMm) * 40);
 const cor = h.mm === 0 ? 'rgba(255,255,255,0.12)'
   : h.mm < 2   ? '#4bc194'
-  : h.mm < 5   ? '#90caf9'
-  : h.mm < 25  ? '#1976d2'
-  : h.mm < 50  ? '#4527a0'
-  : h.mm < 100 ? '#ff6f00'
+  : h.mm < 4   ? '#90caf9'
+  : h.mm < 10  ? '#1976d2'
+  : h.mm < 20  ? '#4527a0'
+  : h.mm < 50  ? '#ff6f00'
   : '#b71c1c';
 return `
 <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
@@ -2484,12 +2484,12 @@ return `
 }).join('');
 
 function classificarChuva(mm) {
-	if (mm === 0)    return null;
-	if (mm < 2)      return '🌫️ Garoa';
-	if (mm < 5)      return '🌦️ Chuva fraca';
-	if (mm < 25)     return '🌧️ Chuva moderada';
-	if (mm < 50)     return '⛈️ Chuva forte';
-	if (mm < 100)    return '⛈️ Chuva muito forte';
+	if (mm === 0)     return null;
+	if (mm < 2)       return '🌫️ Garoa';
+	if (mm < 4)       return '🌦️ Chuva fraca';
+	if (mm < 10)      return '🌧️ Chuva moderada';
+	if (mm < 20)      return '⛈️ Chuva forte';
+	if (mm < 50)      return '⛈️ Chuva muito forte';
 	return '🌊 Torrencial';
 }
 
@@ -2512,11 +2512,11 @@ ${barras}
 
 <div style="margin:8px 4px 0;padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:12px;display:flex;flex-wrap:wrap;gap:8px 14px;">
 <span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#4bc194;flex-shrink:0;"></span>Garoa 0.1–1.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#90caf9;flex-shrink:0;"></span>Fraca 2–4.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#1976d2;flex-shrink:0;"></span>Moderada 5–24.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#4527a0;flex-shrink:0;"></span>Forte 25–49.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff6f00;flex-shrink:0;"></span>Muito forte 50–99.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#b71c1c;flex-shrink:0;"></span>Torrencial mais de 100mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#90caf9;flex-shrink:0;"></span>Fraca 2–3.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#1976d2;flex-shrink:0;"></span>Moderada 4–9.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#4527a0;flex-shrink:0;"></span>Forte 10–19.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff6f00;flex-shrink:0;"></span>Muito forte 20–49.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#b71c1c;flex-shrink:0;"></span>Torrencial mais de 50mm</span>
 </div>`;
 }
 }
