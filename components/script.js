@@ -1655,22 +1655,12 @@ if (sunDivImediato) {
 const astroSol = weatherData.forecast?.forecast?.forecastday?.[0]?.astro
 || weatherData.astronomy?.astro
 || weatherData.astronomy;
-const astroAmanha = weatherData.forecast?.forecast?.forecastday?.[1]?.astro;
-const porStr    = converterHora12para24(astroSol?.sunset);
-const nascerStrAmanha = astroAmanha ? converterHora12para24(astroAmanha?.sunrise) : '--:--';
-const agora = new Date();
-const horaAtualMin = agora.getHours() * 60 + agora.getMinutes();
-const [ph, pm] = porStr.split(':').map(Number);
-const porMin = ph * 60 + pm;
-const jaAnoiteceu = horaAtualMin >= porMin;
 const nascerStr = converterHora12para24(astroSol?.sunrise);
-const textoSol = jaAnoiteceu
-? `Anoiteceu às 🌙 ${porStr} · Amanhã amanhece às ☀️ ${nascerStrAmanha}`
-: `Hoje amanhece às ☀️ ${nascerStr} e anoitece às 🌙 ${porStr}`;
+const porStr    = converterHora12para24(astroSol?.sunset);
 sunDivImediato.innerHTML = `
 <div class="info-inline moon-text" style="font-size: 0.62em; overflow-x: auto;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap;">
-<span>${textoSol}</span>
+<span>Hoje amanhece às ☀️ ${nascerStr} e anoitece às 🌙 ${porStr}</span>
 </div>
 </div>
 `;
@@ -1780,22 +1770,12 @@ medias.mediaVento
 const sunDiv = document.getElementById(DOM_IDS.SUN_INFO);
 if (sunDiv && !sunDiv.querySelector('.info-inline')) {
 const astroSol = forecast.forecast?.forecastday?.[0]?.astro || astronomy.astro || astronomy;
-const astroAmanha2 = forecast.forecast?.forecastday?.[1]?.astro;
 const nascerStr = converterHora12para24(astroSol.sunrise);
 const porStr    = converterHora12para24(astroSol.sunset);
-const nascerStrAmanha2 = astroAmanha2 ? converterHora12para24(astroAmanha2.sunrise) : '--:--';
-const agora2 = new Date();
-const horaAtualMin2 = agora2.getHours() * 60 + agora2.getMinutes();
-const [ph2, pm2] = porStr.split(':').map(Number);
-const porMin2 = ph2 * 60 + pm2;
-const jaAnoiteceu2 = horaAtualMin2 >= porMin2;
-const textoSol2 = jaAnoiteceu2
-? `Anoiteceu às 🌙 ${porStr} · Amanhã amanhece às ☀️ ${nascerStrAmanha2}`
-: `Hoje amanhece às ☀️ ${nascerStr} e anoitece às 🌙 ${porStr}`;
 sunDiv.innerHTML = `
 <div class="info-inline moon-text" style="font-size: 1.2em; overflow-x: auto; margin: 0; padding: 4px;">
 <div class="info-item" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px; white-space: nowrap; margin: 0; padding: 0;">
-<span>${textoSol2}</span>
+<span>☀️ ${nascerStr} &nbsp; &nbsp; 🌙 ${porStr}</span>
 </div>
 </div>
 `;
