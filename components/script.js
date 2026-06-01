@@ -2471,7 +2471,7 @@ const cor = h.mm === 0 ? 'rgba(255,255,255,0.12)'
   : h.mm < 4   ? '#90caf9'
   : h.mm < 10  ? '#1976d2'
   : h.mm < 20  ? '#4527a0'
-  : h.mm < 50  ? '#ff6f00'
+  : h.mm < 50  ? '#ffcc00'
   : '#ff3300';
 return `
 <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
@@ -2515,7 +2515,7 @@ ${barras}
 <span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#90caf9;flex-shrink:0;"></span>Fraca 2–3.9mm</span>
 <span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#1976d2;flex-shrink:0;"></span>Moderada 4–9.9mm</span>
 <span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#4527a0;flex-shrink:0;"></span>Forte 10–19.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff6f00;flex-shrink:0;"></span>Muito forte 20–49.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ffd700;flex-shrink:0;"></span> Muito forte 20–49.9mm</span>
 <span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff3300;flex-shrink:0;"></span>Torrencial mais de 50mm</span>
 </div>`;
 }
