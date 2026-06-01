@@ -1665,7 +1665,7 @@ const porMin = ph * 60 + pm;
 const jaAnoiteceu = horaAtualMin >= porMin;
 const nascerStr = converterHora12para24(astroSol?.sunrise);
 const textoSol = jaAnoiteceu
-? `Anoiteceu às 🌙 ${porStr} · Amanhã amanhece às ☀️ ${nascerStrAmanha}`
+? `Anoiteceu às 🌙 ${porStr} e amanhece às ☀️ ${nascerStrAmanha}`
 : `Hoje amanhece às ☀️ ${nascerStr} e anoitece às 🌙 ${porStr}`;
 sunDivImediato.innerHTML = `
 <div class="info-inline moon-text" style="font-size: 0.62em; overflow-x: auto;">
