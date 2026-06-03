@@ -808,6 +808,14 @@ let precipitacaoChart = null;
 let ventoChart = null;
 
 function abrirTelaGraficos() {
+// Fix: garante _coordsCache mesmo se GPS demorou
+if (!_coordsCache && UI_STATE.weatherCache) {
+const loc = UI_STATE.weatherCache?.current?.location
+           || UI_STATE.weatherCache?.forecast?.location;
+if (loc?.lat && loc?.lon) {
+_coordsCache = { lat: parseFloat(loc.lat), lon: parseFloat(loc.lon) };
+}
+}
 const tela = document.getElementById('telaGraficos');
 tela.style.display = 'block';
 document.body.classList.add('modal-aberto');
@@ -961,11 +969,24 @@ mostrarMensagem(canvasTemperatura, '⏳ Carregando temperatura...');
 mostrarMensagem(canvasPrecipitacao, '⏳ Carregando precipitação...');
 mostrarMensagem(canvasVento, '⏳ Carregando vento...');
 
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 80; i++) {
 await new Promise(r => setTimeout(r, 100));
 if (UI_STATE.weatherCache) break;
 }
-if (!UI_STATE.weatherCache) return;
+if (!UI_STATE.weatherCache) {
+// Avisa no canvas em vez de sumir silenciosamente
+[canvasTemperatura, canvasPrecipitacao, canvasVento].forEach(c => {
+if (!c) return;
+const ctx = c.getContext('2d');
+ctx.clearRect(0, 0, c.width, c.height);
+ctx.fillStyle = '#ffeb3b';
+ctx.font = '13px sans-serif';
+ctx.textAlign = 'center';
+ctx.fillText('Dados não disponíveis.', c.width / 2, c.height / 2 - 10);
+ctx.fillText('Feche e tente novamente.', c.width / 2, c.height / 2 + 10);
+});
+return;
+}
 }
 
 if (typeof Chart === "undefined") {
@@ -2263,6 +2284,32 @@ Carregando previsão...
 try {
 let forecastData;
 const agora = Date.now();
+
+// Fix: se _coordsCache ainda não está disponível, tenta extrair do weatherCache
+if (!_coordsCache && UI_STATE.weatherCache) {
+const loc = UI_STATE.weatherCache?.current?.location
+           || UI_STATE.weatherCache?.forecast?.location;
+if (loc?.lat && loc?.lon) {
+_coordsCache = { lat: parseFloat(loc.lat), lon: parseFloat(loc.lon) };
+console.log('_coordsCache recuperado do weatherCache:', _coordsCache);
+}
+}
+
+// Fix: se ainda sem coords e sem dados, aguarda até 5s pelo carregamento
+if (!_coordsCache && !_forecast5Cache && !UI_STATE.weatherCache?.forecast) {
+for (let i = 0; i < 50; i++) {
+await new Promise(r => setTimeout(r, 100));
+if (_coordsCache || UI_STATE.weatherCache?.forecast) break;
+}
+// Tenta extrair coords novamente após espera
+if (!_coordsCache && UI_STATE.weatherCache) {
+const loc2 = UI_STATE.weatherCache?.current?.location
+            || UI_STATE.weatherCache?.forecast?.location;
+if (loc2?.lat && loc2?.lon) {
+_coordsCache = { lat: parseFloat(loc2.lat), lon: parseFloat(loc2.lon) };
+}
+}
+}
 
 // Tenta cache primeiro (30 minutos)
 if (_forecast5Cache && (agora - _forecast5Cache.timestamp) < 30 * 60 * 1000) {
