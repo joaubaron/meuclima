@@ -2234,10 +2234,50 @@ modal.appendChild(iframe);
 document.body.appendChild(modal);
 }
 
+// Abre qualquer URL dentro do PWA em modal iframe (igual à Lua)
+function abrirModalIframe(url, titulo) {
+const modalId = 'modalIframeExterno';
+const existente = document.getElementById(modalId);
+if (existente) existente.remove();
+
+const modal = document.createElement('div');
+modal.id = modalId;
+modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000000;z-index:20000;display:flex;flex-direction:column;';
+
+history.pushState({ modal: modalId }, '');
+
+const header = document.createElement('div');
+header.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#0a0a1a;flex-shrink:0;';
+
+const tituloEl = document.createElement('span');
+tituloEl.textContent = titulo || '';
+tituloEl.style.cssText = 'color:#ffeb3b;font-size:13px;font-weight:bold;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;';
+
+const closeBtn = document.createElement('button');
+closeBtn.textContent = 'Fechar';
+closeBtn.style.cssText = 'background:transparent;border:none;color:#ffeb3b;font-size:14px;font-weight:bold;cursor:pointer;padding:8px 16px;flex-shrink:0;';
+closeBtn.onclick = () => {
+if (document.body.contains(modal)) document.body.removeChild(modal);
+if (history.state && history.state.modal === modalId) history.back();
+};
+
+header.appendChild(tituloEl);
+header.appendChild(closeBtn);
+
+const iframe = document.createElement('iframe');
+iframe.src = url;
+iframe.style.cssText = 'width:100%;flex:1;border:none;background:#fff;';
+
+modal.appendChild(header);
+modal.appendChild(iframe);
+document.body.appendChild(modal);
+}
+
 window.addEventListener('popstate', function(event) {
 const modalGraficos = document.getElementById('telaGraficos');
 const modalEscalas = document.getElementById('telaEscalas');
 const modalStarWalk = document.getElementById('modalStarWalk');
+const modalIframe = document.getElementById('modalIframeExterno');
 
 if (modalGraficos && modalGraficos.style.display === 'block') {
 fecharModal('Graficos');
@@ -2245,6 +2285,10 @@ event.preventDefault();
 event.stopPropagation();
 } else if (modalEscalas && modalEscalas.style.display === 'block') {
 fecharModal('Escalas');
+event.preventDefault();
+event.stopPropagation();
+} else if (modalIframe) {
+modalIframe.remove();
 event.preventDefault();
 event.stopPropagation();
 } else if (modalStarWalk) {
