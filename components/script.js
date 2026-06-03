@@ -1035,6 +1035,9 @@ return Math.abs(diff) > 0.5 ? diff : 0;
 const setaTendencia = tendencia > 0 ? "▲" : tendencia < 0 ? "▼" : "⬤";
 
 const tempCtx = document.getElementById('temperaturaChart').getContext('2d');
+const tempGrad = tempCtx.createLinearGradient(0, 0, 0, 180);
+tempGrad.addColorStop(0, 'rgba(255,235,59,0.35)');
+tempGrad.addColorStop(1, 'rgba(255,235,59,0.01)');
 temperaturaChart = new Chart(tempCtx, {
 type: 'line',
 data: {
@@ -1043,31 +1046,61 @@ datasets: [{
 label: `🌡️ min ${minTemp24h.toFixed(1)}° / max ${maxTemp24h.toFixed(1)}° ${legendaTemp} ${setaTendencia}`,
 data: tempData,
 borderColor: '#ffeb3b',
-backgroundColor: 'rgba(255, 235, 59, 0.1)',
-borderWidth: 2,
-fill: true
+backgroundColor: tempGrad,
+borderWidth: 1.5,
+fill: true,
+tension: 0.4,
+pointRadius: 3,
+pointHoverRadius: 5,
+pointBackgroundColor: '#002244',
+pointBorderColor: '#ffeb3b',
+pointBorderWidth: 1.5
 }]
 },
 options: {
 responsive: true,
+interaction: { mode: 'index', intersect: false },
 plugins: {
 legend: {
 labels: {
 color: '#ffeb3b',
-font: { size: 15 },
+font: { size: 12 },
 usePointStyle: true,
-boxWidth: 0
+boxWidth: 0,
+padding: 8
+}
+},
+tooltip: {
+backgroundColor: 'rgba(0,20,50,0.92)',
+titleColor: '#ffeb3b',
+bodyColor: '#ffffff',
+borderColor: 'rgba(255,235,59,0.3)',
+borderWidth: 1,
+padding: 8,
+titleFont: { size: 11 },
+bodyFont: { size: 11 },
+callbacks: {
+label: ctx => ` ${ctx.parsed.y.toFixed(1)} °C`
 }
 }
 },
 scales: {
-x: { ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' } },
-y: { ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' } }
+x: {
+ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 10 }, maxRotation: 0 },
+grid: { color: 'rgba(255,255,255,0.06)' }
+},
+y: {
+ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 10 } },
+grid: { color: 'rgba(255,255,255,0.06)' }
+}
 }
 }
 });
 
 const precipCtx = document.getElementById('precipitacaoChart').getContext('2d');
+const precipGrad = precipCtx.createLinearGradient(0, 0, 0, 180);
+precipGrad.addColorStop(0, 'rgba(66,165,245,0.35)');
+precipGrad.addColorStop(1, 'rgba(66,165,245,0.01)');
 precipitacaoChart = new Chart(precipCtx, {
 type: 'line',
 data: {
@@ -1076,31 +1109,61 @@ datasets: [{
 label: `🌧️ Média ${mediaPrecip24h.toFixed(1)} mm – ${descricaoPrecip}`,
 data: precipData,
 borderColor: '#42a5f5',
-backgroundColor: 'rgba(66, 165, 245, 0.1)',
-borderWidth: 2,
-fill: true
+backgroundColor: precipGrad,
+borderWidth: 1.5,
+fill: true,
+tension: 0.4,
+pointRadius: 3,
+pointHoverRadius: 5,
+pointBackgroundColor: '#002244',
+pointBorderColor: '#42a5f5',
+pointBorderWidth: 1.5
 }]
 },
 options: {
 responsive: true,
+interaction: { mode: 'index', intersect: false },
 plugins: {
 legend: {
 labels: {
 color: '#42a5f5',
-font: { size: 15 },
+font: { size: 12 },
 usePointStyle: true,
-boxWidth: 0
+boxWidth: 0,
+padding: 8
+}
+},
+tooltip: {
+backgroundColor: 'rgba(0,20,50,0.92)',
+titleColor: '#42a5f5',
+bodyColor: '#ffffff',
+borderColor: 'rgba(66,165,245,0.3)',
+borderWidth: 1,
+padding: 8,
+titleFont: { size: 11 },
+bodyFont: { size: 11 },
+callbacks: {
+label: ctx => ` ${ctx.parsed.y.toFixed(2)} mm`
 }
 }
 },
 scales: {
-x: { ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' } },
-y: { ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' } }
+x: {
+ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 10 }, maxRotation: 0 },
+grid: { color: 'rgba(255,255,255,0.06)' }
+},
+y: {
+ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 10 } },
+grid: { color: 'rgba(255,255,255,0.06)' }
+}
 }
 }
 });
 
 const ventoCtx = document.getElementById('ventoChart').getContext('2d');
+const ventoGrad = ventoCtx.createLinearGradient(0, 0, 0, 180);
+ventoGrad.addColorStop(0, 'rgba(76,175,80,0.35)');
+ventoGrad.addColorStop(1, 'rgba(76,175,80,0.01)');
 ventoChart = new Chart(ventoCtx, {
 type: 'line',
 data: {
@@ -1109,26 +1172,53 @@ datasets: [{
 label: `🍃 Média ${mediaVento24h.toFixed(1)} km/h – ${descricaoVento}`,
 data: ventoData,
 borderColor: '#4caf50',
-backgroundColor: 'rgba(76, 175, 80, 0.1)',
-borderWidth: 2,
-fill: true
+backgroundColor: ventoGrad,
+borderWidth: 1.5,
+fill: true,
+tension: 0.4,
+pointRadius: 3,
+pointHoverRadius: 5,
+pointBackgroundColor: '#002244',
+pointBorderColor: '#4caf50',
+pointBorderWidth: 1.5
 }]
 },
 options: {
 responsive: true,
+interaction: { mode: 'index', intersect: false },
 plugins: {
 legend: {
 labels: {
 color: '#4caf50',
-font: { size: 15 },
+font: { size: 12 },
 usePointStyle: true,
-boxWidth: 0
+boxWidth: 0,
+padding: 8
+}
+},
+tooltip: {
+backgroundColor: 'rgba(0,20,50,0.92)',
+titleColor: '#4caf50',
+bodyColor: '#ffffff',
+borderColor: 'rgba(76,175,80,0.3)',
+borderWidth: 1,
+padding: 8,
+titleFont: { size: 11 },
+bodyFont: { size: 11 },
+callbacks: {
+label: ctx => ` ${ctx.parsed.y.toFixed(1)} km/h`
 }
 }
 },
 scales: {
-x: { ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' } },
-y: { ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' } }
+x: {
+ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 10 }, maxRotation: 0 },
+grid: { color: 'rgba(255,255,255,0.06)' }
+},
+y: {
+ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 10 } },
+grid: { color: 'rgba(255,255,255,0.06)' }
+}
 }
 }
 });
