@@ -2375,29 +2375,38 @@ try {
 let forecastData;
 const agora = Date.now();
 
-// Fix: se _coordsCache ainda não está disponível, tenta extrair do weatherCache
-if (!_coordsCache && UI_STATE.weatherCache) {
-const loc = UI_STATE.weatherCache?.current?.location
-           || UI_STATE.weatherCache?.forecast?.location;
+// Tenta extrair coords do weatherCache (location fica em forecast, não em current)
+if (!_coordsCache) {
+const loc = UI_STATE.weatherCache?.forecast?.location;
 if (loc?.lat && loc?.lon) {
 _coordsCache = { lat: parseFloat(loc.lat), lon: parseFloat(loc.lon) };
 console.log('_coordsCache recuperado do weatherCache:', _coordsCache);
 }
 }
 
-// Fix: se ainda sem coords e sem dados, aguarda até 5s pelo carregamento
-if (!_coordsCache && !_forecast5Cache && !UI_STATE.weatherCache?.forecast) {
+// Aguarda até 5s pelo carregamento do weatherCache
+if (!_coordsCache && !_forecast5Cache) {
 for (let i = 0; i < 50; i++) {
 await new Promise(r => setTimeout(r, 100));
-if (_coordsCache || UI_STATE.weatherCache?.forecast) break;
+const loc = UI_STATE.weatherCache?.forecast?.location;
+if (loc?.lat && loc?.lon) {
+_coordsCache = { lat: parseFloat(loc.lat), lon: parseFloat(loc.lon) };
+break;
 }
-// Tenta extrair coords novamente após espera
-if (!_coordsCache && UI_STATE.weatherCache) {
-const loc2 = UI_STATE.weatherCache?.current?.location
-            || UI_STATE.weatherCache?.forecast?.location;
-if (loc2?.lat && loc2?.lon) {
-_coordsCache = { lat: parseFloat(loc2.lat), lon: parseFloat(loc2.lon) };
+if (_coordsCache) break;
 }
+}
+
+// Último recurso: pede geolocalização direto ao browser
+if (!_coordsCache && navigator.geolocation) {
+try {
+const pos = await new Promise((res, rej) =>
+navigator.geolocation.getCurrentPosition(res, rej, { timeout: 5000, maximumAge: 60000 })
+);
+_coordsCache = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+console.log('_coordsCache recuperado via geolocalização:', _coordsCache);
+} catch (e) {
+console.warn('Geolocalização indisponível no fallback:', e);
 }
 }
 
