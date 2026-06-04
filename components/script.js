@@ -687,7 +687,7 @@ return frase;
 function getPreciseSeasonDates(year) {
 return {
 OUTONO:    { date: new Date(year, 2, 20, 12, 0, 0), emoji: "🍂" },    // 20 março
-INVERNO:   { date: new Date(year, 5, 20, 12, 0, 0), emoji: "🧊" },    // 20 junho
+INVERNO:   { date: new Date(year, 5, 20, 12, 0, 0), emoji: "❄️" },    // 20 junho
 PRIMAVERA: { date: new Date(year, 8, 22, 12, 0, 0), emoji: "🌸" },    // 22 setembro
 VERÃO:     { date: new Date(year, 11, 21, 12, 0, 0), emoji: "☀️" }    // 21 dezembro
 };
