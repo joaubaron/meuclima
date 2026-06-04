@@ -1522,7 +1522,7 @@ throw error;
 async function getCurrentWeather(lat, lon, signal) {
 try {
 const response = await fetch(
-`https://api.weatherapi.com/v1/current.json?key=0c8c1be55b6c49d4a56141253252107&q=${lat},${lon}&lang=pt`,
+`https://api.weatherapi.com/v1/current.json?key=6dfcee75db614193a74140421260406&q=${lat},${lon}&lang=pt`,
 { signal }
 );
 
@@ -1546,7 +1546,7 @@ return null;
 
 async function getForecast(lat, lon, days = 2) {
 try {
-const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=0c8c1be55b6c49d4a56141253252107&q=${lat},${lon}&days=${days}&lang=pt`);
+const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=6dfcee75db614193a74140421260406&q=${lat},${lon}&days=${days}&lang=pt`);
 
 if (!response.ok) {
 throw new Error(`HTTP error! status: ${response.status}`);
@@ -1567,7 +1567,7 @@ return null;
 
 async function getAstronomy(lat, lon, date = 'today') {
 try {
-const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=0c8c1be55b6c49d4a56141253252107&q=${lat},${lon}&dt=${date}`);
+const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=6dfcee75db614193a74140421260406&q=${lat},${lon}&dt=${date}`);
 const data = await response.json();
 
 if (data.error) {
