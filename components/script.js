@@ -941,8 +941,9 @@ ventoChart = null;
 }
 
 function getEmojiFromTemperature(temp) {
+if (temp === null || temp === undefined || isNaN(temp)) return '🌡️';
 const faixa = emojiByTemperature.find(range => temp >= range.min && temp <= range.max);
-return faixa.emoji;
+return faixa ? faixa.emoji : '🌡️';
 }
 
 async function carregarGraficos() {
@@ -1837,6 +1838,7 @@ return null;
 
 function esconderSplashSuavemente() {
 const splash = document.getElementById('splashScreen');
+if (!splash) return;
 splash.style.opacity = '0';
 setTimeout(() => (splash.style.display = 'none'), 500);
 }
@@ -2018,8 +2020,8 @@ dataHora.getDate() === diaAmanha
 });
 
 const tempsAmanha = horasAmanha.map(h => h.temp_c);
-const minAmanha = Math.min(...tempsAmanha);
-const maxAmanha = Math.max(...tempsAmanha);
+const minAmanha = tempsAmanha.length ? Math.min(...tempsAmanha) : null;
+const maxAmanha = tempsAmanha.length ? Math.max(...tempsAmanha) : null;
 const iconUrl = await getWeatherIcon(amanha.day.condition.code, true);
 const nomeDia = diasSemana[dataAmanha.getDay()];
 const nomeDiaMinusculo = nomeDia;
@@ -2028,7 +2030,7 @@ const amanhaHTML = `
 <div class="previsao-amanha">
 <div class="info">
 <div class="titulo-previsao" style="font-size: 12px;">Previsão para amanhã,&nbsp;${nomeDiaMinusculo}</div>
-<div class="temp-previsao" style="font-size: 12px;">Mín: ${minAmanha.toFixed(1)}°C / Máx: ${maxAmanha.toFixed(1)}°C</div>
+<div class="temp-previsao" style="font-size: 12px;">${minAmanha !== null ? `Mín: ${minAmanha.toFixed(1)}°C / Máx: ${maxAmanha.toFixed(1)}°C` : 'Dados indisponíveis'}</div>
 </div>
 <div class="icon">
 <img src="${iconUrl}" alt="Ícone da previsão">
@@ -2516,6 +2518,16 @@ const map = {
 return map[code] || '☁️';
 }
 
+function classificarChuva(mm) {
+if (mm === 0)     return null;
+if (mm < 2)       return '💧 Garoa';
+if (mm < 4)       return '🌧️ Chuva fraca';
+if (mm < 10)      return '🌧️ Chuva moderada';
+if (mm < 20)      return '⛈️ Chuva forte';
+if (mm < 50)      return '⛈️ Chuva muito forte';
+return '💦 Torrencial';
+}
+
 // Retorna qual período é agora: 'aurora' | 'manha' | 'tarde' | 'noite'
 function renderizar5Dias(forecastData) {
 const conteudo = document.getElementById('conteudo5Dias');
@@ -2574,7 +2586,7 @@ return dataDia > hoje;
 });
 
 // Pega no máximo 5 dias (amanhã + 4)
-const diasParaMostrar = diasFuturos.slice(0, 5);
+const diasParaMostrar = diasFuturos.length > 0 ? diasFuturos.slice(0, 5) : dias.slice(-5);
 
 if (diasParaMostrar.length === 0) {
 conteudo.innerHTML = '<div style="text-align:center;padding:20px;color:#ccc;">Sem previsão para os próximos dias.</div>';
@@ -2596,15 +2608,14 @@ const horaReal = h % 24;
 const dateStr = h >= 24 ? new Date(agora.getTime() + 86400000).toLocaleDateString('en-CA') : dateAtual;
 const timeStr = `${dateStr}T${String(horaReal).padStart(2,'0')}:00`;
 const idx = forecastData.hourly.time.indexOf(timeStr);
-if (idx !== -1) {
+if (idx === -1) continue;
 proximasHoras.push({
 label: h === horaAtual ? `${horaReal}h` : `${horaReal}h`,
 mm: forecastData.hourly.precipitation[idx] ?? 0
 });
 }
-}
 
-if (proximasHoras.length) {
+if (proximasHoras.length > 0) {
 const maxMm = Math.max(...proximasHoras.map(h => h.mm), 0.1);
 const temChuva = proximasHoras.some(h => h.mm > 0);
 
@@ -2626,16 +2637,6 @@ return `
 <div style="font-size:11px;color:rgba(255,255,255,0.7);font-weight:${h.label===`${horaAtual}h`?'700':'400'};">${h.label}</div>
 </div>`;
 }).join('');
-
-function classificarChuva(mm) {
-if (mm === 0)     return null;
-if (mm < 2)       return '💧 Garoa';
-if (mm < 4)       return '🌧️ Chuva fraca';
-if (mm < 10)      return '🌧️ Chuva moderada';
-if (mm < 20)      return '⛈️ Chuva forte';
-if (mm < 50)      return '⛈️ Chuva muito forte';
-return '💦 Torrencial';
-}
 
 const horaPico = proximasHoras.reduce((a, b) => b.mm > a.mm ? b : a);
 const classePico = classificarChuva(horaPico.mm);
