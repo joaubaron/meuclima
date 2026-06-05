@@ -1843,15 +1843,6 @@ splash.style.opacity = '0';
 setTimeout(() => (splash.style.display = 'none'), 500);
 }
 
-
-
-
-
-
-
-
-
-
 async function buscarExtras(lat, lon) {
 const extrasDiv = document.getElementById('extras');
 const moonDiv = document.getElementById('moonInfo');
