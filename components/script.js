@@ -2621,13 +2621,13 @@ const temChuva = proximasHoras.some(h => h.mm > 0);
 
 const barras = proximasHoras.map(h => {
 const altura = Math.round((h.mm / maxMm) * 40);
-const cor = h.mm === 0 ? '#ffffff'
-: h.mm < 2   ? '#78909c'
-: h.mm < 4   ? '#90caf9'
-: h.mm < 10  ? '#42a5f5'
-: h.mm < 20  ? '#1565c0'
-: h.mm < 50  ? '#ff6f00'
-: '#7f0000';
+const cor = h.mm === 0 ? '#FFFFFF'
+: h.mm < 2   ? '#A0A0A0'
+: h.mm < 4   ? '#22C55E'
+: h.mm < 10  ? '#FACC15'
+: h.mm < 20  ? '#EA580C'
+: h.mm < 50  ? '#991B1B'
+: '#9333EA';
 return `
 <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
 <div style="font-size:10px;color:rgba(255,255,255,0.5);">${h.mm > 0 ? h.mm.toFixed(1) : '–'}</div>
@@ -2656,13 +2656,13 @@ ${barras}
 </div>
 
 <div style="margin:8px 4px 0;padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:12px;display:flex;flex-wrap:wrap;gap:8px 14px;">
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ffffff;flex-shrink:0;"></span>Sem chuva</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#78909c;flex-shrink:0;"></span>Garoa 0.1–1.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#90caf9;flex-shrink:0;"></span>Fraca 2–3.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#42a5f5;flex-shrink:0;"></span>Moderada 4–9.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#1565c0;flex-shrink:0;"></span>Forte 10–19.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff6f00;flex-shrink:0;"></span>Muito forte 20–49.9mm</span>
-<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#7f0000;flex-shrink:0;"></span>Torrencial mais de 50mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#FFFFFF;flex-shrink:0;"></span>Sem chuva</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#A0A0A0;flex-shrink:0;"></span>Garoa 0.1–1.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22C55E;flex-shrink:0;"></span>Fraca 2–3.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#FACC15;flex-shrink:0;"></span>Moderada 4–9.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#EA580C;flex-shrink:0;"></span>Forte 10–19.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#991B1B;flex-shrink:0;"></span>Muito forte 20–49.9mm</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.6);"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#9333EA;flex-shrink:0;"></span>Torrencial mais de 50mm</span>
 </div>`;
 }
 }
