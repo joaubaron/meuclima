@@ -1,4 +1,4 @@
-const CACHE_VERSION = '07.06.2026-2259';
+const CACHE_VERSION = '07.06.2026-2309';
 const CACHE_NAME = `cozinha-baron-${CACHE_VERSION}`;
 const ASSETS = [
 '/meuclima/',
