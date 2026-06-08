@@ -470,163 +470,163 @@ const faixaTemp = obterFaixaTemperatura(temp);
 // Parte 1 — temperatura: declaração limpa, sem pontuação final
 const sugestoesTemp = {
 frio: [
-"Temperatura bem baixa hoje",
-"Bastante frio no ar",
-"Friozinho forte e intenso",
-"Faz frio de verdade hoje",
-"O frio está pesado"
+"Temperatura bem baixa e fria lá fora hoje",
+"Bastante frio e gelado no ar hoje",
+"Friozinho forte e intenso por aqui hoje",
+"Faz frio de verdade lá fora hoje",
+"O frio está pesado e intenso agora"
 ],
 fresco: [
-"Clima ameno e gostoso hoje",
-"Temperatura fresca e agradável",
-"Está fresquinho e bem agradável",
-"Clima fresco e tranquilo hoje",
-"Temperatura leve e gostosa"
+"Clima ameno, fresco e gostoso lá fora hoje",
+"Temperatura fresca, leve e agradável por aqui",
+"Está fresquinho e bem agradável lá fora hoje",
+"Clima fresco e tranquilo lá fora hoje",
+"Temperatura leve, fresca e gostosa por aqui"
 ],
 agradável: [
-"Temperatura ideal para sair hoje",
-"Dia perfeito pra aproveitar",
-"Clima ótimo e equilibrado hoje",
-"Está muito agradável",
-"Clima equilibrado e gostoso hoje"
+"Temperatura ideal e agradável para sair hoje",
+"Dia perfeito e gostoso pra aproveitar lá fora",
+"Clima ótimo e equilibrado lá fora hoje",
+"Está muito agradável e confortável lá fora",
+"Clima equilibrado, gostoso e agradável por aqui"
 ],
 calor: [
-"Bastante calor no ar hoje",
-"Está bem quente hoje",
-"Temperatura alta e abafada",
-"Calor moderado e constante",
-"Faz bastante calor hoje"
+"Bastante calor e abafamento no ar hoje",
+"Está bem quente e abafado lá fora hoje",
+"Temperatura alta e bem abafada por aqui",
+"Calor moderado e constante no ar hoje",
+"Faz bastante calor e abafamento lá fora"
 ],
 muitoCalor: [
-"Calor intenso e pesado hoje",
-"Temperatura muito alta hoje",
-"Está abafado e muito quente",
-"Calor extremo no ar hoje",
-"Muito calor e abafamento"
+"Calor intenso, pesado e abafado lá fora",
+"Temperatura muito alta e sufocante por aqui hoje",
+"Está abafado e extremamente quente lá fora",
+"Calor extremo e pesado no ar hoje",
+"Muito calor e abafamento no ar agora"
 ]
 };
 
 // Parte 2 — chuva: contexto + conselho, minúsculo para encaixar após vírgula
 const sugestoesChuva = {
 garoa: [
-"com garoa fina caindo",
-"com um chuvisco no ar",
-"garoa leve passando",
-"com garoa passageira",
-"chuvisco fino no ar"
+"com garoa fina e passageira caindo",
+"com um chuvisco leve e fino no ar",
+"garoa leve e rápida caindo agora",
+"com garoa fina e bem passageira",
+"chuvisco fino e leve no ar agora"
 ],
 fraca: [
-"com chuva fraca caindo",
-"chuvinha leve no momento",
-"com chuva fina e leve",
-"chuva leve caindo",
-"com chuva fraca no ar"
+"com chuva fraca e leve caindo agora",
+"chuvinha leve e fina caindo no momento",
+"com chuva fina e bem fraca caindo",
+"chuva leve e fraca caindo agora",
+"com chuva fraca e fina no ar"
 ],
 moderada: [
-"com chuva moderada caindo",
-"chuva constante no momento",
-"com chuva firme e contínua",
-"chuva moderada no ar",
-"com precipitação moderada"
+"com chuva moderada e constante caindo",
+"chuva constante e firme caindo agora",
+"com chuva firme e moderada caindo",
+"chuva moderada e regular caindo agora",
+"com precipitação moderada e contínua caindo"
 ],
 forte: [
-"com chuva forte caindo",
-"chuva pesada no momento",
-"com chuva intensa e forte",
-"chuva forte no ar",
-"com precipitação intensa"
+"com chuva forte e pesada caindo",
+"chuva pesada e intensa caindo agora",
+"com chuva intensa e forte caindo",
+"chuva forte e volumosa caindo agora",
+"com precipitação forte e intensa caindo"
 ],
 intensa: [
-"com chuva torrencial",
-"tempestade forte no momento",
-"com chuva extremamente intensa",
-"chuva muito forte caindo",
-"com precipitação extrema"
+"com chuva torrencial e muito forte caindo",
+"tempestade forte e intensa caindo agora",
+"com chuva extremamente intensa caindo",
+"chuva muito forte e torrencial caindo",
+"com precipitação extrema e intensa no ar"
 ],
 semChuva: [
-"céu aberto e sem nenhuma chuva",
-"sem chuva nenhuma no momento",
-"tempo seco e bem limpo",
-"sem nenhuma precipitação",
-"céu limpo e sem chuva"
+"céu bem aberto e completamente sem chuva",
+"sem nenhuma chuva no momento por aqui",
+"tempo seco, limpo e bem aberto",
+"sem nenhuma precipitação no ar agora",
+"céu limpo e totalmente sem chuva"
 ]
 };
 
 // Parte 3a — vento sem chuva: já traz o finalizador embutido
 const sugestoesVento = {
 calminho: [
-"e vento bem calmo. Aproveite!",
-"e ar totalmente parado. Bom dia!",
-"e sem nenhum vento. Aproveite!",
-"e vento tranquilo. Tenha um bom dia!",
-"e ar bem parado. Aproveite!"
+"e vento bem calmo por aqui. Aproveite!",
+"e ar totalmente parado e calmo. Bom dia!",
+"e sem nenhum vento agora. Aproveite!",
+"e vento bem tranquilo por aqui. Tenha um bom dia!",
+"e ar bem parado e calmo. Aproveite!"
 ],
 brisaLeve: [
-"e brisa leve e suave. Bom dia!",
-"com ventinho bem suave. Curta!",
-"e brisa agradável e fresca. Bom dia!",
-"e vento leve e tranquilo. Aproveite!",
-"e brisa fresca e gostosa. Tenha um bom dia!"
+"e brisa leve e bem suave. Bom dia!",
+"com ventinho suave e bem gostoso. Curta!",
+"e brisa agradável e bem fresca. Bom dia!",
+"e vento leve e bem tranquilo. Aproveite!",
+"e brisa fresca e bem gostosa. Tenha um bom dia!"
 ],
 moderado: [
-"e vento moderado soprando.",
-"com vento médio e constante.",
-"e vento presente. Bom dia!",
-"e ventania leve soprando.",
-"e vento constante no ar."
+"e vento moderado soprando por aqui.",
+"com vento médio e bem constante.",
+"e vento moderado e presente. Bom dia!",
+"e ventania leve soprando por aqui.",
+"e vento constante soprando no ar."
 ],
 forte: [
-"e vento forte soprando.",
-"com ventania forte no ar.",
-"e rajadas fortes soprando.",
-"e vento bastante intenso.",
-"e ventos fortes e constantes."
+"e vento forte soprando por aqui.",
+"com ventania forte no ar agora.",
+"e rajadas fortes soprando por aqui.",
+"e vento bastante forte e intenso.",
+"e ventos fortes e bem constantes."
 ],
 muitoForte: [
-"e vendaval forte soprando.",
-"com vento muito forte e intenso.",
-"e vento extremamente forte.",
-"e rajadas severas soprando.",
-"e tempestade de vento forte."
+"e vendaval muito forte por aqui.",
+"com vento muito forte e bem intenso.",
+"e vento extremamente forte por aqui.",
+"e rajadas severas soprando bem forte.",
+"e tempestade de vento muito forte."
 ]
 };
 
 // Parte 3b — vento com chuva: segunda sentença autônoma (já com espaço e ponto)
 const sugestoesVentoComChuva = {
 calminho: [
-" O vento ao menos está calmo.",
-" Sem vento forte, só a chuva.",
-" O vento está tranquilo apesar da chuva.",
-" O vento não preocupa.",
-" Vento leve, só a chuva incomoda."
+" O vento ao menos está bem calmo.",
+" Sem vento forte, só a chuva mesmo.",
+" O vento está tranquilo apesar de tudo.",
+" O vento não preocupa nada agora.",
+" Vento leve, só a chuva incomoda mesmo."
 ],
 brisaLeve: [
-" O vento está leve junto com a chuva.",
-" A brisa é suave apesar da chuva.",
-" Ventinho fraco acompanha a chuva.",
-" O vento está calmo com a chuva.",
-" Brisa leve junto com a chuva."
+" O vento está leve e suave com a chuva.",
+" A brisa é suave apesar da chuva forte.",
+" Ventinho fraco acompanha a chuva agora.",
+" O vento está calmo apesar da chuva.",
+" Brisa bem leve junto com a chuva."
 ],
 moderado: [
-" O vento está moderado com a chuva.",
-" Ventania leve acompanha a chuva.",
-" O vento médio vem junto da chuva.",
-" Vento moderado junto com a chuva.",
-" Rajadas médias acompanham a chuva."
+" O vento está moderado junto com a chuva.",
+" Ventania leve acompanha bem a chuva.",
+" O vento médio vem junto com a chuva.",
+" Vento moderado caindo junto com a chuva.",
+" Rajadas médias acompanham a chuva agora."
 ],
 forte: [
-" O vento forte piora a chuva.",
-" Ventania e chuva intensa juntas.",
-" O vento intenso vem com a chuva.",
-" Rajadas fortes acompanham a chuva.",
-" Tempestade com vento e chuva forte."
+" O vento forte piora bastante a chuva.",
+" Ventania e chuva bem intensa juntas.",
+" O vento intenso vem forte com a chuva.",
+" Rajadas fortes acompanham bem a chuva.",
+" Tempestade com vento e chuva bem forte."
 ],
 muitoForte: [
-" Vento extremo junto com chuva forte.",
-" Vendaval e chuva torrencial por aqui.",
-" Tempestade severa de vento e chuva.",
-" Vento perigoso com muita chuva.",
-" Rajadas extremas com chuva intensa."
+" Vento extremo junto com chuva muito forte.",
+" Vendaval e chuva torrencial bem fortes.",
+" Tempestade severa de vento e chuva forte.",
+" Vento perigoso com muita chuva intensa.",
+" Rajadas extremas com chuva muito intensa."
 ]
 };
 
