@@ -506,7 +506,7 @@ muitoCalor: [
 ]
 };
 
-// Parte 2 — chuva (sem conectivos, apenas o fenômeno)
+// Parte 2 — chuva
 const sugestoesChuva = {
 garoa: ["com garoa fina", "com chuvisco leve", "com garoa passageira"],
 fraca: ["com chuva fraca", "com chuvinha leve", "com chuva leve"],
@@ -525,13 +525,13 @@ forte: ["e vento forte", "e ventania forte", "e rajadas fortes"],
 muitoForte: ["e vendaval", "e vento muito forte", "e rajadas severas"]
 };
 
-// Finalizadores por tipo de vento
+// Finalizadores variados (sem repetir "Aproveite!" toda hora)
 const finalizadores = {
-calminho: ["Aproveite o dia!", "Bom dia!", "Tenha um ótimo dia!"],
-brisaLeve: ["Aproveite!", "Bom dia!", "Curta o dia!"],
-moderado: ["Aproveite!", "Bom dia!", "Ótimo dia!"],
-forte: ["Aproveite com cuidado!", "Fique atento!", "Bom dia!"],
-muitoForte: ["Cuidado lá fora!", "Fique seguro!", "Atenção ao vento!"]
+calminho: ["Que dia gostoso!", "Tudo de bom!", "Ótimo dia!", "Bom dia!", "Aproveite!"],
+brisaLeve: ["Bom dia!", "Que delícia!", "Curta bastante!", "Dia bom!", "Aproveite!"],
+moderado: ["Dia legal!", "Bom dia!", "Ótimo!", "Aproveite!", "Fique bem!"],
+forte: ["Fique esperto!", "Cuidado lá fora!", "Atenção!", "Bom dia!", "Se cuide!"],
+muitoForte: ["Cuidado!", "Fique seguro!", "Atenção total!", "Proteja-se!", "Vai ventar muito!"]
 };
 
 function pegarAleatorio(lista) {
@@ -565,24 +565,20 @@ let finalizador = pegarAleatorio(finalizadores[chaveVento]);
 // Montar frase
 let frase = `${parteTemp} ${parteChuva} ${parteVento}. ${finalizador}`;
 
-// Remover espaços duplicados e garantir primeira letra maiúscula
+// Limpar espaços e capitalizar
 frase = frase.replace(/\s+/g, ' ').trim();
 frase = frase.charAt(0).toUpperCase() + frase.slice(1);
 
-// Garantir tamanho entre 80-90 caracteres
-let tamanho = frase.length;
-
-if (tamanho < 80) {
-// Adiciona emoji até atingir 80
-const emojis = [" ☀️", " 🌡️", " ⛅", " 🌤️", " 🌈"];
+// Garantir tamanho entre 80-90
+if (frase.length < 80) {
+const emojis = [" ☀️", " 🌡️", " ⛅", " 🌤️", " 🌈", " 😊", " 👍"];
 for (let emoji of emojis) {
 if (frase.length + emoji.length <= 90) {
-  frase += emoji;
-  if (frase.length >= 80) break;
+frase += emoji;
+if (frase.length >= 80) break;
 }
 }
-} else if (tamanho > 90) {
-// Remove palavras curtas
+} else if (frase.length > 90) {
 frase = frase.replace(" hoje", "");
 frase = frase.replace(" bastante", "");
 frase = frase.replace(" muito", "");
@@ -591,8 +587,8 @@ frase = frase.replace(" pesado", "");
 frase = frase.replace(" constante", "");
 frase = frase.replace("moderado", "médio");
 frase = frase.replace("agradável", "bom");
+frase = frase.replace("Aproveite!", "Bom dia!");
 
-// Se ainda maior que 90, força corte limpo
 if (frase.length > 90) {
 frase = frase.substring(0, 87) + "...";
 }
