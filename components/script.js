@@ -478,17 +478,17 @@ frio: [
 ],
 fresco: [
 "Clima ameno, fresco e gostoso lá fora",
-"Temperatura fresca, leve e agradável",
+"Temperatura fresca, leve e agradável por aqui",
 "Está fresquinho e bem agradável lá fora",
 "Clima fresco e tranquilo lá fora hoje",
 "Temperatura leve, fresca e gostosa por aqui"
 ],
 agradável: [
-"Temperatura leve e gostosa por aqui",
-"Dia perfeito e gostoso pra aproveitar",
-"Clima ótimo e equilibrado lá fora",
-"Temperatura agradável e fresca",
-"Clima equilibrado e gostoso por aqui"
+"Temperatura ideal e agradável lá fora hoje",
+"Dia perfeito e gostoso pra aproveitar por aqui",
+"Clima ótimo e equilibrado lá fora hoje",
+"Está muito agradável e confortável lá fora",
+"Clima equilibrado, gostoso e agradável por aqui"
 ],
 calor: [
 "Bastante calor e abafamento lá fora hoje",
@@ -523,7 +523,7 @@ fraca: [
 "com chuva fraca e fina"
 ],
 moderada: [
-"com chuva moderada caindo",
+"com chuva moderada e constante caindo",
 "chuva constante e firme caindo",
 "com chuva firme e moderada",
 "chuva moderada e regular caindo",
@@ -544,11 +544,11 @@ intensa: [
 "com precipitação extrema e intensa"
 ],
 semChuva: [
-"com céu bem aberto e limpo",
-"com tempo seco e limpo",
-"com céu limpo e sem chuva",
-"com tempo seco e bem aberto",
-"com céu aberto e sem chuva"
+"céu bem aberto e completamente limpo",
+"sem nenhuma chuva e tempo seco",
+"tempo seco, limpo e bem aberto",
+"sem nenhuma precipitação no ar",
+"céu limpo e totalmente sem chuva"
 ]
 };
 
@@ -558,15 +558,15 @@ calminho: [
 "e vento bem calmo e parado. Aproveite!",
 "e ar totalmente parado e calmo. Bom dia!",
 "e sem nenhum vento soprando. Aproveite!",
-"e vento bem tranquilo e calmo. Bom dia!",
+"e vento bem tranquilo e calmo. Tenha um bom dia!",
 "e ar bem parado e tranquilo. Aproveite!"
 ],
 brisaLeve: [
-"e vento leve e tranquilo. Aproveite!",
-"e brisa leve e suave. Bom dia!",
-"com ventinho suave e gostoso. Curta!",
-"e brisa agradável e fresca. Bom dia!",
-"e brisa fresca e gostosa. Bom dia!"
+"e brisa leve e bem suave. Bom dia!",
+"com ventinho suave e bem gostoso. Curta!",
+"e brisa agradável e bem fresca. Bom dia!",
+"e vento leve e bem tranquilo. Aproveite!",
+"e brisa fresca e bem gostosa. Tenha um bom dia!"
 ],
 moderado: [
 "e vento moderado soprando.",
@@ -622,11 +622,11 @@ forte: [
 " Tempestade com vento e chuva bem forte."
 ],
 muitoForte: [
-" Vento extremo e chuva muito forte.",
+" Vento extremo junto com chuva muito forte.",
 " Vendaval e chuva torrencial bem fortes.",
-" Tempestade severa e chuva muito forte.",
+" Tempestade severa de vento e chuva forte.",
 " Vento perigoso com muita chuva intensa.",
-" Rajadas extremas e chuva muito intensa."
+" Rajadas extremas com chuva muito intensa."
 ]
 };
 
