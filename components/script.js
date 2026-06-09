@@ -631,10 +631,15 @@ let parteChuva = pegarAleatorio(sugestoesChuva[chaveChuva]).trim();
 // Vento
 const temChuva = chaveChuva !== "semChuva";
 let chaveVento = "calminho";
-if (wind_kph >= 2  && wind_kph <= 9.9)  chaveVento = "brisaLeve";
-else if (wind_kph <= 30.9)              chaveVento = "moderado";
-else if (wind_kph <= 74.9)              chaveVento = "forte";
-else if (wind_kph > 74.9)              chaveVento = "muitoForte";
+if (wind_kph >= 2 && wind_kph < 10) {
+chaveVento = "brisaLeve";
+} else if (wind_kph >= 10 && wind_kph < 31) {
+chaveVento = "moderado";
+} else if (wind_kph >= 31 && wind_kph < 75) {
+chaveVento = "forte";
+} else if (wind_kph >= 75) {
+chaveVento = "muitoForte";
+}
 
 // Montar frase
 // Sem chuva: "Temperatura, chuva, vento descritivo. Finalizador!"
@@ -790,7 +795,7 @@ function abrirTelaGraficos() {
 // Fix: garante _coordsCache mesmo se GPS demorou
 if (!_coordsCache && UI_STATE.weatherCache) {
 const loc = UI_STATE.weatherCache?.current?.location
-           || UI_STATE.weatherCache?.forecast?.location;
+|| UI_STATE.weatherCache?.forecast?.location;
 if (loc?.lat && loc?.lon) {
 _coordsCache = { lat: parseFloat(loc.lat), lon: parseFloat(loc.lon) };
 }
@@ -1995,12 +2000,11 @@ const minAmanha = tempsAmanha.length ? Math.min(...tempsAmanha) : null;
 const maxAmanha = tempsAmanha.length ? Math.max(...tempsAmanha) : null;
 const iconUrl = await getWeatherIcon(amanha.day.condition.code, true);
 const nomeDia = diasSemana[dataAmanha.getDay()];
-const nomeDiaMinusculo = nomeDia;
 
 const amanhaHTML = `
 <div class="previsao-amanha">
 <div class="info">
-<div class="titulo-previsao" style="font-size: 12px;">Previsão para amanhã,&nbsp;${nomeDiaMinusculo}</div>
+<div class="titulo-previsao" style="font-size: 12px;">Previsão para amanhã,&nbsp;${nomeDia}</div>
 <div class="temp-previsao" style="font-size: 12px;">${minAmanha !== null ? `Mín: ${minAmanha.toFixed(1)}°C / Máx: ${maxAmanha.toFixed(1)}°C` : 'Dados indisponíveis'}</div>
 </div>
 <div class="icon">
