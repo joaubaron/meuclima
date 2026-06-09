@@ -87,10 +87,12 @@ cursor: pointer;
 `;
 document.head.appendChild(styleErroModal);
 
-async function tentarComRetry(fn, maxTentativas = 3, intervalo = 4000) {
+function tentarComRetry(fn, maxTentativas = 3, intervalo = 4000) {
+return new Promise(async (resolve, reject) => {
 for (let i = 0; i < maxTentativas; i++) {
 try {
-return await fn();
+const resultado = await fn();
+return resolve(resultado);
 } catch (err) {
 console.warn(`Tentativa ${i + 1}/${maxTentativas} falhou:`, err.message);
 if (i < maxTentativas - 1) {
@@ -98,7 +100,8 @@ await new Promise(r => setTimeout(r, intervalo));
 }
 }
 }
-throw new Error(`Falhou após ${maxTentativas} tentativas`);
+reject(new Error(`Falhou após ${maxTentativas} tentativas`));
+});
 }
 
 function reiniciarBuscaAutomatica() {
@@ -628,10 +631,11 @@ let parteChuva = pegarAleatorio(sugestoesChuva[chaveChuva]).trim();
 // Vento
 const temChuva = chaveChuva !== "semChuva";
 let chaveVento = "calminho";
-if (wind_kph >= 2  && wind_kph < 10)    chaveVento = "brisaLeve";
+if (wind_kph >= 2   && wind_kph < 10)  chaveVento = "brisaLeve";
 else if (wind_kph >= 10 && wind_kph < 31) chaveVento = "moderado";
 else if (wind_kph >= 31 && wind_kph < 75) chaveVento = "forte";
-else if (wind_kph >= 75)               chaveVento = "muitoForte";
+else if (wind_kph >= 75)               chaveVento = "muitoForte";)
+
 
 // Montar frase
 // Sem chuva: "Temperatura, chuva, vento descritivo. Finalizador!"
@@ -787,7 +791,7 @@ function abrirTelaGraficos() {
 // Fix: garante _coordsCache mesmo se GPS demorou
 if (!_coordsCache && UI_STATE.weatherCache) {
 const loc = UI_STATE.weatherCache?.current?.location
-|| UI_STATE.weatherCache?.forecast?.location;
+           || UI_STATE.weatherCache?.forecast?.location;
 if (loc?.lat && loc?.lon) {
 _coordsCache = { lat: parseFloat(loc.lat), lon: parseFloat(loc.lon) };
 }
@@ -1996,7 +2000,7 @@ const nomeDia = diasSemana[dataAmanha.getDay()];
 const amanhaHTML = `
 <div class="previsao-amanha">
 <div class="info">
-<div class="titulo-previsao" style="font-size: 12px;">Previsão para amanhã,&nbsp;${nomeDia}</div>
+<div class="titulo-previsao" style="font-size: 12px;">Previsão para amanhã,&nbsp;${nomeDiaMinusculo}</div>
 <div class="temp-previsao" style="font-size: 12px;">${minAmanha !== null ? `Mín: ${minAmanha.toFixed(1)}°C / Máx: ${maxAmanha.toFixed(1)}°C` : 'Dados indisponíveis'}</div>
 </div>
 <div class="icon">
