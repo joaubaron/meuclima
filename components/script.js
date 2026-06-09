@@ -631,11 +631,10 @@ let parteChuva = pegarAleatorio(sugestoesChuva[chaveChuva]).trim();
 // Vento
 const temChuva = chaveChuva !== "semChuva";
 let chaveVento = "calminho";
-if (wind_kph >= 2   && wind_kph < 10)  chaveVento = "brisaLeve";
-else if (wind_kph >= 10 && wind_kph < 31) chaveVento = "moderado";
-else if (wind_kph >= 31 && wind_kph < 75) chaveVento = "forte";
-else if (wind_kph >= 75)               chaveVento = "muitoForte";)
-
+if (wind_kph >= 2  && wind_kph <= 9.9)  chaveVento = "brisaLeve";
+else if (wind_kph <= 30.9)              chaveVento = "moderado";
+else if (wind_kph <= 74.9)              chaveVento = "forte";
+else if (wind_kph > 74.9)              chaveVento = "muitoForte";
 
 // Montar frase
 // Sem chuva: "Temperatura, chuva, vento descritivo. Finalizador!"
@@ -1996,6 +1995,7 @@ const minAmanha = tempsAmanha.length ? Math.min(...tempsAmanha) : null;
 const maxAmanha = tempsAmanha.length ? Math.max(...tempsAmanha) : null;
 const iconUrl = await getWeatherIcon(amanha.day.condition.code, true);
 const nomeDia = diasSemana[dataAmanha.getDay()];
+const nomeDiaMinusculo = nomeDia;
 
 const amanhaHTML = `
 <div class="previsao-amanha">
@@ -2316,6 +2316,10 @@ event.preventDefault();
 event.stopPropagation();
 }
 });
+
+// ============================================
+// PREVISÃO 5 DIAS
+// ============================================
 
 // ============================================
 // PREVISÃO 5 DIAS (com Open-Meteo - gratuita, 7 dias)
