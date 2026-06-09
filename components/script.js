@@ -478,17 +478,17 @@ frio: [
 ],
 fresco: [
 "Clima ameno, fresco e gostoso lá fora",
-"Temperatura fresca, leve e agradável por aqui",
+"Temperatura fresca, leve e agradável",
 "Está fresquinho e bem agradável lá fora",
 "Clima fresco e tranquilo lá fora hoje",
 "Temperatura leve, fresca e gostosa por aqui"
 ],
 agradável: [
 "Temperatura ideal e agradável lá fora hoje",
-"Dia perfeito e gostoso pra aproveitar por aqui",
+"Dia perfeito e gostoso pra aproveitar",
 "Clima ótimo e equilibrado lá fora hoje",
 "Está muito agradável e confortável lá fora",
-"Clima equilibrado, gostoso e agradável por aqui"
+"Clima equilibrado, gostoso e agradável"
 ],
 calor: [
 "Bastante calor e abafamento lá fora hoje",
@@ -523,7 +523,7 @@ fraca: [
 "com chuva fraca e fina"
 ],
 moderada: [
-"com chuva moderada e constante caindo",
+"com chuva moderada caindo",
 "chuva constante e firme caindo",
 "com chuva firme e moderada",
 "chuva moderada e regular caindo",
@@ -558,7 +558,7 @@ calminho: [
 "e vento bem calmo e parado. Aproveite!",
 "e ar totalmente parado e calmo. Bom dia!",
 "e sem nenhum vento soprando. Aproveite!",
-"e vento bem tranquilo e calmo. Tenha um bom dia!",
+"e vento bem tranquilo e calmo. Bom dia!",
 "e ar bem parado e tranquilo. Aproveite!"
 ],
 brisaLeve: [
@@ -566,7 +566,7 @@ brisaLeve: [
 "com ventinho suave e bem gostoso. Curta!",
 "e brisa agradável e bem fresca. Bom dia!",
 "e vento leve e bem tranquilo. Aproveite!",
-"e brisa fresca e bem gostosa. Tenha um bom dia!"
+"e brisa fresca e bem gostosa. Bom dia!"
 ],
 moderado: [
 "e vento moderado soprando.",
@@ -622,11 +622,11 @@ forte: [
 " Tempestade com vento e chuva bem forte."
 ],
 muitoForte: [
-" Vento extremo junto com chuva muito forte.",
+" Vento extremo e chuva muito forte.",
 " Vendaval e chuva torrencial bem fortes.",
-" Tempestade severa de vento e chuva forte.",
+" Tempestade severa e chuva muito forte.",
 " Vento perigoso com muita chuva intensa.",
-" Rajadas extremas com chuva muito intensa."
+" Rajadas extremas e chuva muito intensa."
 ]
 };
 
