@@ -1238,7 +1238,7 @@ sugestaoDiv.style.borderRadius = '8px';
 sugestaoDiv.style.fontSize = '12px';
 sugestaoDiv.style.textAlign = 'left';
 sugestaoDiv.style.lineHeight = '1.4';
-sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">Hoje o dia está com:</strong> ${sugestaoVestuario}`;
+sugestaoDiv.innerHTML = `<strong style="color: #ffeb3b;">🌤️ Hoje o dia está com:</strong> ${sugestaoVestuario}`;
 
 const ultimoGrafico = document.querySelector('.grafico:last-child');
 if (ultimoGrafico && ultimoGrafico.parentNode) {
@@ -1899,7 +1899,7 @@ dicasDiv.style.borderRadius = '8px';
 dicasDiv.style.fontSize = '12px';
 dicasDiv.style.textAlign = 'center';
 dicasDiv.style.lineHeight = '1.4';
-dicasDiv.innerHTML = `<strong style="color: #ffeb3b;">Clima:</strong> ${sugestaoVestuario}`;
+dicasDiv.innerHTML = `<strong style="color: #ffeb3b;">🌤️ Hoje o dia está com:</strong> ${sugestaoVestuario}`;
 moonDiv.appendChild(dicasDiv);
 
 // 3. FASE DA LUA
