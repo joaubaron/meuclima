@@ -36,3 +36,5 @@ HTML5 / CSS3 / JavaScript (ES6+) / Chart.js / WeatherAPI / Nominatim
 ## Autor
 
 [jabaron](https://www.instagram.com/joseaugustobaron/)
+
+Reset: https://joaubaron.github.io/meuclima/?t=${Date.now()}`;
