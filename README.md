@@ -35,6 +35,6 @@ HTML5 / CSS3 / JavaScript (ES6+) / Chart.js / WeatherAPI / Nominatim
 - [Defesa Civil Blumenau](https://defesacivil.blumenau.sc.gov.br)
 ## Autor
 
-[jabaron](https://www.instagram.com/joseaugustobaron/)
 
-Reset: https://joaubaron.github.io/meuclima/?t=${Date.now()}`;
+
+Reset: https://joaubaron.github.io/meuclima/?t=100
