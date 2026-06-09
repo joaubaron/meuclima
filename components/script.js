@@ -470,50 +470,50 @@ const faixaTemp = obterFaixaTemperatura(temp);
 // Parte 1 — temperatura
 const sugestoesTemp = {
 frio: [
-"Temperatura bem baixa",
-"Bastante frio hoje",
-"Friozinho forte",
-"Faz frio de verdade",
-"Frio está pesado"
+"Temperatura bem baixa e fria",
+"Bastante frio e gelado hoje",
+"Friozinho forte e intenso",
+"Faz frio de verdade hoje",
+"O frio está pesado e intenso"
 ],
 fresco: [
-"Clima ameno",
-"Temperatura fresca",
-"Está fresquinho",
-"Clima fresco",
-"Temperatura leve"
+"Clima ameno, fresco e gostoso",
+"Temperatura fresca e agradável",
+"Está fresquinho e agradável",
+"Clima fresco e tranquilo hoje",
+"Temperatura leve e fresca"
 ],
 agradável: [
-"Temperatura ideal",
-"Dia perfeito",
-"Clima ótimo",
-"Clima agradável",
-"Temperatura boa"
+"Temperatura ideal e agradável",
+"Dia perfeito e gostoso",
+"Clima ótimo e equilibrado",
+"Está muito agradável hoje",
+"Clima equilibrado e gostoso"
 ],
 calor: [
-"Bastante calor",
-"Está bem quente",
-"Temperatura alta",
-"Calor moderado",
-"Faz bastante calor"
+"Bastante calor e abafamento",
+"Está bem quente e abafado",
+"Temperatura alta e abafada",
+"Calor moderado e constante",
+"Faz bastante calor hoje"
 ],
 muitoCalor: [
-"Calor intenso",
+"Calor intenso e pesado",
 "Temperatura muito alta",
-"Está abafado",
-"Calor extremo",
-"Muito calor"
+"Está abafado e extremo",
+"Calor extremo e pesado",
+"Muito calor e abafamento"
 ]
 };
 
-// Parte 2 — chuva (sem conectivos, apenas o fenômeno)
+// Parte 2 — chuva
 const sugestoesChuva = {
-garoa: ["com garoa fina", "com chuvisco leve", "com garoa passageira"],
-fraca: ["com chuva fraca", "com chuvinha leve", "com chuva leve"],
-moderada: ["com chuva moderada", "com chuva constante", "com precipitação média"],
-forte: ["com chuva forte", "com chuva pesada", "com precipitação forte"],
-intensa: ["com chuva torrencial", "com tempestade", "com chuva extrema"],
-semChuva: ["com céu limpo", "com tempo seco", "com céu aberto"]
+garoa: ["garoa fina", "chuvisco leve", "garoa leve"],
+fraca: ["chuva fraca", "chuvinha leve", "chuva leve"],
+moderada: ["chuva moderada", "chuva constante", "precipitação moderada"],
+forte: ["chuva forte", "chuva pesada", "precipitação forte"],
+intensa: ["chuva torrencial", "tempestade", "chuva extrema"],
+semChuva: ["céu limpo", "tempo seco", "céu aberto", "sem nuvens"]
 };
 
 // Parte 3 — vento
@@ -525,23 +525,13 @@ forte: ["e vento forte", "e ventania forte", "e rajadas fortes"],
 muitoForte: ["e vendaval", "e vento muito forte", "e rajadas severas"]
 };
 
-// Finalizadores por tipo de vento
-// Finalizadores por tipo de vento (sem repetir "aproveite")
-const finalizadores = {
-calminho: ["Tenha um ótimo dia!", "Bom dia!", "Curta bastante!", "Excelente dia!", "Dia perfeito para sair!"],
-brisaLeve: ["Ótimo dia!", "Bom dia!", "Dia gostoso!", "Tenha um bom dia!", "Curta o momento!"],
-moderado: ["Bom dia!", "Tenha um excelente dia!", "Dia legal!", "Ótima oportunidade para sair!", "Boa caminhada!"],
-forte: ["Fique atento!", "Cuidado nas ruas!", "Bom dia com atenção!", "Segurança em primeiro lugar!", "Evite áreas abertas!"],
-muitoForte: ["Cuidado lá fora!", "Fique seguro!", "Atenção ao vento!", "Melhor evitar sair!", "Redobre os cuidados!"]
-};
-
 function pegarAleatorio(lista) {
 return lista[Math.floor(Math.random() * lista.length)];
 }
 
 // Temperatura
 let chaveTemp = faixaTemp === "intenso" ? "muitoCalor" : faixaTemp;
-let parteTemp = pegarAleatorio(sugestoesTemp[chaveTemp]);
+let parteTemp = pegarAleatorio(sugestoesTemp[chaveTemp] || ["Clima desconhecido"]);
 
 // Chuva
 let chaveChuva = "semChuva";
@@ -561,43 +551,129 @@ else if (wind_kph <= 30.9)             chaveVento = "moderado";
 else if (wind_kph <= 74.9)             chaveVento = "forte";
 else if (wind_kph > 74.9)              chaveVento = "muitoForte";
 let parteVento = pegarAleatorio(sugestoesVento[chaveVento]);
-let finalizador = pegarAleatorio(finalizadores[chaveVento]);
 
-// Montar frase
-let frase = `${parteTemp} ${parteChuva} ${parteVento}. ${finalizador}`;
+// Montar frase base
+let frase;
+if (chaveChuva === "semChuva") {
+    frase = `${parteTemp} com ${parteChuva} ${parteVento}`;
+} else {
+    frase = `${parteTemp} com ${parteChuva} ${parteVento}`;
+}
 
-// Remover espaços duplicados e garantir primeira letra maiúscula
+// Limpar espaços e capitalizar
 frase = frase.replace(/\s+/g, ' ').trim();
 frase = frase.charAt(0).toUpperCase() + frase.slice(1);
 
-// Garantir tamanho entre 80-90 caracteres
-let tamanho = frase.length;
-
-if (tamanho < 80) {
-    // Adiciona emoji até atingir 80
-    const emojis = [" ☀️", " 🌡️", " ⛅", " 🌤️", " 🌈"];
-    for (let emoji of emojis) {
-        if (frase.length + emoji.length <= 90) {
-            frase += emoji;
-            if (frase.length >= 80) break;
-        }
-    }
-} else if (tamanho > 90) {
-    // Remove palavras curtas
-    frase = frase.replace(" hoje", "");
-    frase = frase.replace(" bastante", "");
-    frase = frase.replace(" muito", "");
-    frase = frase.replace(" intenso", "");
-    frase = frase.replace(" pesado", "");
-    frase = frase.replace(" constante", "");
-    frase = frase.replace("moderado", "médio");
-    frase = frase.replace("agradável", "bom");
-    
-    // Se ainda maior que 90, força corte limpo
-    if (frase.length > 90) {
-        frase = frase.substring(0, 87) + "...";
-    }
+// Finalizador sem repetição de "Aproveite" - apenas pontuação final
+if (chaveVento === "muitoForte") {
+    frase += "! Cuidado!";
+} else {
+    frase += ".";
 }
+
+// ============================================
+// AJUSTE FORÇADO para 80-90 caracteres (sem emojis, sem cortes abruptos)
+// ============================================
+function ajustarTamanho(texto, min = 80, max = 90) {
+    let len = texto.length;
+    
+    if (len >= min && len <= max) {
+        return texto;
+    }
+    
+    if (len < min) {
+        // Estratégia para frases curtas: adicionar conectivos fluidos
+        let resultado = texto;
+        if (resultado.endsWith(".")) {
+            resultado = resultado.slice(0, -1);
+        }
+        if (resultado.endsWith("! Cuidado")) {
+            resultado = resultado.replace("! Cuidado", "");
+        }
+        
+        const extensoes = [
+            " hoje", 
+            " nessa manhã",
+            " durante o dia",
+            " por enquanto"
+        ];
+        
+        for (let ext of extensoes) {
+            let testado = resultado + ext;
+            if (testado.length + 1 <= max) {
+                resultado = testado;
+                if (resultado.length >= min) break;
+            }
+        }
+        
+        // Garantir pontuação final
+        if (!resultado.endsWith(".") && !resultado.endsWith("!")) {
+            if (chaveVento === "muitoForte" && !resultado.endsWith("Cuidado")) {
+                resultado += "! Cuidado!";
+            } else {
+                resultado += ".";
+            }
+        }
+        
+        return resultado;
+    }
+    
+    if (len > max) {
+        // Remover "hoje" se presente
+        let resultado = texto;
+        if (resultado.includes(" hoje")) {
+            resultado = resultado.replace(" hoje", "");
+            if (resultado.length <= max) return resultado;
+        }
+        
+        // Remover "bastante" / "muito"
+        if (resultado.includes(" bastante")) {
+            resultado = resultado.replace(" bastante", "");
+            if (resultado.length <= max) return resultado;
+        }
+        if (resultado.includes(" muito")) {
+            resultado = resultado.replace(" muito", "");
+            if (resultado.length <= max) return resultado;
+        }
+        
+        // Remover "bem"
+        if (resultado.includes(" bem ")) {
+            resultado = resultado.replace(" bem ", " ");
+            if (resultado.length <= max) return resultado;
+        }
+        
+        // "Temperatura" -> "Temp"
+        if (resultado.includes("Temperatura")) {
+            resultado = resultado.replace("Temperatura", "Temp");
+            if (resultado.length <= max) return resultado;
+        }
+        
+        // Reduzir "Cuidado!" para "Cuidado" (já tem exclamação antes)
+        if (resultado.includes("! Cuidado!")) {
+            resultado = resultado.replace("! Cuidado!", "! Cuidado");
+            if (resultado.length <= max) return resultado;
+        }
+        
+        // Remover adjetivos curtos
+        resultado = resultado.replace(" intenso", "");
+        resultado = resultado.replace(" pesado", "");
+        resultado = resultado.replace(" constante", "");
+        
+        if (resultado.length <= max) return resultado;
+        
+        // Último recurso: remover artigo "e" antes do vento quando possível
+        if (resultado.includes(" e " + parteVento.split(" ")[1])) {
+            resultado = resultado.replace(" e ", " ");
+            if (resultado.length <= max) return resultado;
+        }
+        
+        return resultado;
+    }
+    
+    return texto;
+}
+
+frase = ajustarTamanho(frase, 80, 90);
 
 return frase;
 }
