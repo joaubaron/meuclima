@@ -87,12 +87,10 @@ cursor: pointer;
 `;
 document.head.appendChild(styleErroModal);
 
-function tentarComRetry(fn, maxTentativas = 3, intervalo = 4000) {
-return new Promise(async (resolve, reject) => {
+async function tentarComRetry(fn, maxTentativas = 3, intervalo = 4000) {
 for (let i = 0; i < maxTentativas; i++) {
 try {
-const resultado = await fn();
-return resolve(resultado);
+return await fn();
 } catch (err) {
 console.warn(`Tentativa ${i + 1}/${maxTentativas} falhou:`, err.message);
 if (i < maxTentativas - 1) {
@@ -100,8 +98,7 @@ await new Promise(r => setTimeout(r, intervalo));
 }
 }
 }
-reject(new Error(`Falhou após ${maxTentativas} tentativas`));
-});
+throw new Error(`Falhou após ${maxTentativas} tentativas`);
 }
 
 function reiniciarBuscaAutomatica() {
@@ -791,7 +788,7 @@ function abrirTelaGraficos() {
 // Fix: garante _coordsCache mesmo se GPS demorou
 if (!_coordsCache && UI_STATE.weatherCache) {
 const loc = UI_STATE.weatherCache?.current?.location
-           || UI_STATE.weatherCache?.forecast?.location;
+|| UI_STATE.weatherCache?.forecast?.location;
 if (loc?.lat && loc?.lon) {
 _coordsCache = { lat: parseFloat(loc.lat), lon: parseFloat(loc.lon) };
 }
