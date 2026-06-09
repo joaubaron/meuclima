@@ -2085,13 +2085,13 @@ illumination: `${formattedIllumination}%`
 
 const phases = {
 'new': { emoji: '🌑', pt: 'Nova' },
-'waxing crescent': { emoji: '🌒', pt: 'Crescente' },
-'first quarter': { emoji: '🌗', pt: 'Quarto Crescente' },
-'waxing gibbous': { emoji: '🌖', pt: 'Gibosa Crescente' },
+'waxing crescent': { emoji: '🌘', pt: 'Crescente' },      // ← trocado
+'first quarter': { emoji: '🌓', pt: 'Quarto Crescente' },  // ← trocado
+'waxing gibbous': { emoji: '🌔', pt: 'Gibosa Crescente' }, // ← trocado
 'full': { emoji: '🌕', pt: 'Cheia' },
-'waning gibbous': { emoji: '🌔', pt: 'Gibosa Minguante' },
-'last quarter': { emoji: '🌓', pt: 'Quarto Minguante' },
-'waning crescent': { emoji: '🌘', pt: 'Minguante' }
+'waning gibbous': { emoji: '🌖', pt: 'Gibosa Minguante' }, // ← trocado
+'last quarter': { emoji: '🌗', pt: 'Quarto Minguante' },   // ← trocado
+'waning crescent': { emoji: '🌒', pt: 'Minguante' }        // ← mantido
 };
 
 for (const [key, value] of Object.entries(phases)) {
