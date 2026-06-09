@@ -484,11 +484,11 @@ fresco: [
 "Temperatura leve, fresca e gostosa por aqui"
 ],
 agradável: [
-"Temperatura ideal e agradável lá fora hoje",
+"Temperatura leve e gostosa por aqui",
 "Dia perfeito e gostoso pra aproveitar",
-"Clima ótimo e equilibrado lá fora hoje",
-"Está muito agradável e confortável lá fora",
-"Clima equilibrado, gostoso e agradável"
+"Clima ótimo e equilibrado lá fora",
+"Temperatura agradável e fresca",
+"Clima equilibrado e gostoso por aqui"
 ],
 calor: [
 "Bastante calor e abafamento lá fora hoje",
@@ -544,11 +544,11 @@ intensa: [
 "com precipitação extrema e intensa"
 ],
 semChuva: [
-"céu bem aberto e completamente limpo",
-"sem nenhuma chuva e tempo seco",
-"tempo seco, limpo e bem aberto",
-"sem nenhuma precipitação no ar",
-"céu limpo e totalmente sem chuva"
+"com céu bem aberto e limpo",
+"com tempo seco e limpo",
+"com céu limpo e sem chuva",
+"com tempo seco e bem aberto",
+"com céu aberto e sem chuva"
 ]
 };
 
@@ -562,11 +562,11 @@ calminho: [
 "e ar bem parado e tranquilo. Aproveite!"
 ],
 brisaLeve: [
-"e brisa leve e bem suave. Bom dia!",
-"com ventinho suave e bem gostoso. Curta!",
-"e brisa agradável e bem fresca. Bom dia!",
-"e vento leve e bem tranquilo. Aproveite!",
-"e brisa fresca e bem gostosa. Bom dia!"
+"e vento leve e tranquilo. Aproveite!",
+"e brisa leve e suave. Bom dia!",
+"com ventinho suave e gostoso. Curta!",
+"e brisa agradável e fresca. Bom dia!",
+"e brisa fresca e gostosa. Bom dia!"
 ],
 moderado: [
 "e vento moderado soprando.",
