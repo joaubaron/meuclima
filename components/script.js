@@ -526,12 +526,13 @@ muitoForte: ["e vendaval", "e vento muito forte", "e rajadas severas"]
 };
 
 // Finalizadores por tipo de vento
+// Finalizadores por tipo de vento (sem repetir "aproveite")
 const finalizadores = {
-calminho: ["Aproveite o dia!", "Bom dia!", "Tenha um ótimo dia!"],
-brisaLeve: ["Aproveite!", "Bom dia!", "Curta o dia!"],
-moderado: ["Aproveite!", "Bom dia!", "Ótimo dia!"],
-forte: ["Aproveite com cuidado!", "Fique atento!", "Bom dia!"],
-muitoForte: ["Cuidado lá fora!", "Fique seguro!", "Atenção ao vento!"]
+calminho: ["Tenha um ótimo dia!", "Bom dia!", "Curta bastante!", "Excelente dia!", "Dia perfeito para sair!"],
+brisaLeve: ["Ótimo dia!", "Bom dia!", "Dia gostoso!", "Tenha um bom dia!", "Curta o momento!"],
+moderado: ["Bom dia!", "Tenha um excelente dia!", "Dia legal!", "Ótima oportunidade para sair!", "Boa caminhada!"],
+forte: ["Fique atento!", "Cuidado nas ruas!", "Bom dia com atenção!", "Segurança em primeiro lugar!", "Evite áreas abertas!"],
+muitoForte: ["Cuidado lá fora!", "Fique seguro!", "Atenção ao vento!", "Melhor evitar sair!", "Redobre os cuidados!"]
 };
 
 function pegarAleatorio(lista) {
