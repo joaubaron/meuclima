@@ -24,20 +24,13 @@ PRECIPITACAO_CHART: 'precipitacaoChart',
 VENTO_CHART: 'ventoChart'
 };
 
-const STYLES = {
-ERROR_BOX: 'color:#ff6f00;text-align:center;padding:20px;',
-SUCCESS_TEXT: 'color:#4bc194;',
-WARNING_TEXT: 'color:#ccc;font-size:0.75em;',
-VALUE_TEXT: 'color:#ffeb3b;'
-};
-
 const UI_STATE = {
 touchStartY: 0,
 isPulling: false,
 isRefreshing: false,
 currentTemperatureMessage: '',
 weatherCache: null,
-extrasCache: { extras: "", moon: "" }
+extrasCache: { extras: "" }
 };
 
 // === PREVISÃO 5 DIAS ===
@@ -86,23 +79,6 @@ cursor: pointer;
 }
 `;
 document.head.appendChild(styleErroModal);
-
-function tentarComRetry(fn, maxTentativas = 3, intervalo = 4000) {
-return new Promise(async (resolve, reject) => {
-for (let i = 0; i < maxTentativas; i++) {
-try {
-const resultado = await fn();
-return resolve(resultado);
-} catch (err) {
-console.warn(`Tentativa ${i + 1}/${maxTentativas} falhou:`, err.message);
-if (i < maxTentativas - 1) {
-await new Promise(r => setTimeout(r, intervalo));
-}
-}
-}
-reject(new Error(`Falhou após ${maxTentativas} tentativas`));
-});
-}
 
 function reiniciarBuscaAutomatica() {
 setTimeout(() => buscarPrevisaoPorGeolocalizacao(false), 5000);
@@ -877,13 +853,13 @@ return faixas[faixas.length - 1].label;
 }
 
 const FAIXAS_PRECIPITACAO = [
-{ min: 0, max: 0.2, label: "Sem chuva" },
-{ min: 0.2, max: 1, label: "Garoa leve" },
-{ min: 1, max: 4, label: "Chuva fraca" },
-{ min: 4, max: 10, label: "Moderada" },
-{ min: 10, max: 20, label: "Chuva forte" },
-{ min: 20, max: 50, label: "Muito forte" },
-{ min: 50, max: Infinity, label: "Chuva extrema" }
+{ min: 0,    max: 0.1,      label: "Sem chuva" },
+{ min: 0.2,  max: 1.9,      label: "Garoa" },
+{ min: 2,    max: 3.9,      label: "Chuva fraca" },
+{ min: 4,    max: 9.9,      label: "Moderada" },
+{ min: 10,   max: 19.9,     label: "Chuva forte" },
+{ min: 20,   max: 49.9,     label: "Muito forte" },
+{ min: 50,   max: Infinity, label: "Torrencial" }
 ];
 
 const FAIXAS_VENTO = [
@@ -1490,10 +1466,6 @@ return data;
 } catch (error) {
 console.error("Erro ao buscar dados:", error.message || error);
 
-if (!cachedData) {
-cachedData = lerCache(cacheKey);
-}
-
 if (cachedData) {
 console.warn("⚠️ Usando dados em cache devido ao erro");
 return cachedData;
@@ -1699,7 +1671,7 @@ const condText = currentWeather?.condition?.text ?? 'Desconhecido';
 // Mostrar sugestão de receita em background (não bloqueia)
 mostrarSugestaoReceita(temp_c);
 
-const weatherIcon = await getWeatherIcon(iconCode, isDay);
+const weatherIcon = getWeatherIcon(iconCode, isDay);
 
 // Tela principal sempre mostra o clima atual real
 const weatherIconFinal = weatherIcon;
@@ -1970,7 +1942,7 @@ periodosHTML += `
 <div style="font-weight: 600; color: #ffffff;">${periodo.nome}</div>
 <div style="font-size: 1.1em; font-weight: bold; color: #ffeb3b;">${temp}°C</div>
 </div>
-<img src="${await getWeatherIcon(symbol, periodo.isDay)}" alt="" class="weather-icon small-weather-icon" style="margin-top: 4px;">
+<img src="${getWeatherIcon(symbol, periodo.isDay)}" alt="" class="weather-icon small-weather-icon" style="margin-top: 4px;">
 </div>
 `;
 }
@@ -1998,7 +1970,7 @@ dataHora.getDate() === diaAmanha
 const tempsAmanha = horasAmanha.map(h => h.temp_c);
 const minAmanha = tempsAmanha.length ? Math.min(...tempsAmanha) : null;
 const maxAmanha = tempsAmanha.length ? Math.max(...tempsAmanha) : null;
-const iconUrl = await getWeatherIcon(amanha.day.condition.code, true);
+const iconUrl = getWeatherIcon(amanha.day.condition.code, true);
 const nomeDia = diasSemana[dataAmanha.getDay()];
 
 const amanhaHTML = `
@@ -2024,8 +1996,7 @@ ${amanhaHTML}
 extrasDiv.innerHTML = htmlCompletoExtras;
 
 UI_STATE.extrasCache = {
-extras: htmlCompletoExtras,
-moon: ""
+extras: htmlCompletoExtras
 };
 UI_STATE.extrasLastFetch = now;
 
@@ -2168,27 +2139,6 @@ buscarPrevisaoPorGeolocalizacao(false);
 }
 });
 
-// Forçar reinicialização do GPS se necessário
-function reiniciarGPS() {
-return new Promise((resolve, reject) => {
-// "Reseta" o GPS tentando uma posição de baixa precisão primeiro
-navigator.geolocation.getCurrentPosition(
-(pos) => resolve(pos),
-(err) => reject(err),
-{ enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
-);
-}).then(pos => {
-// Depois tenta com alta precisão
-return new Promise((resolve, reject) => {
-navigator.geolocation.getCurrentPosition(
-resolve,
-reject,
-{ enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-);
-});
-});
-}
-
 window.onload = async function () {
 const splashScreen = document.getElementById('splashScreen');
 document.body.classList.add('loading');
@@ -2206,9 +2156,6 @@ document.body.classList.remove('loading');
 }
 };
 
-const isRunningInApp = () => {
-return window.cordova || window.Capacitor || /CrossWalk/i.test(navigator.userAgent);
-};
 
 window.addEventListener('offline', () => {
 const statusDiv = document.getElementById('status');
@@ -2249,9 +2196,7 @@ clearTimeout(splashTimeoutId);
 console.error("Erro no carregamento:", error);
 hideSplashScreen();
 clearTimeout(splashTimeoutId);
-if (!isRunningInApp()) {
 reiniciarBuscaAutomatica();
-}
 }
 };
 
@@ -2490,12 +2435,12 @@ return map[code] || '☁️';
 }
 
 function classificarChuva(mm) {
-if (mm === 0)     return null;
-if (mm < 2)       return '💧 Garoa';
-if (mm < 4)       return '🌧️ Chuva fraca';
-if (mm < 10)      return '🌧️ Chuva moderada';
-if (mm < 20)      return '⛈️ Chuva forte';
-if (mm < 50)      return '⛈️ Chuva muito forte';
+if (mm <= 0.1)  return null;
+if (mm <= 1.9)  return '💧 Garoa';
+if (mm <= 3.9)  return '🌧️ Chuva fraca';
+if (mm <= 9.9)  return '🌧️ Chuva moderada';
+if (mm <= 19.9) return '⛈️ Chuva forte';
+if (mm <= 49.9) return '⛈️ Chuva muito forte';
 return '💦 Torrencial';
 }
 
@@ -2588,16 +2533,16 @@ mm: forecastData.hourly.precipitation[idx] ?? 0
 
 if (proximasHoras.length > 0) {
 const maxMm = Math.max(...proximasHoras.map(h => h.mm), 0.1);
-const temChuva = proximasHoras.some(h => h.mm > 0);
+const temChuva = proximasHoras.some(h => h.mm > 0.1);
 
 const barras = proximasHoras.map(h => {
 const altura = Math.round((h.mm / maxMm) * 40);
-const cor = h.mm === 0 ? '#FFFFFF'
-: h.mm < 2   ? '#A0A0A0'
-: h.mm < 4   ? '#22C55E'
-: h.mm < 10  ? '#FACC15'
-: h.mm < 20  ? '#EA580C'
-: h.mm < 50  ? '#991B1B'
+const cor = h.mm <= 0.1 ? '#FFFFFF'
+: h.mm <= 1.9  ? '#A0A0A0'
+: h.mm <= 3.9  ? '#22C55E'
+: h.mm <= 9.9  ? '#FACC15'
+: h.mm <= 19.9 ? '#EA580C'
+: h.mm <= 49.9 ? '#991B1B'
 : '#9333EA';
 return `
 <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
@@ -2707,105 +2652,3 @@ event.preventDefault();
 event.stopPropagation();
 }
 });
-
-// ============================================
-// FUNÇÕES PARA CLIMA PREDOMINANTE DO DIA
-// ============================================
-
-function getMostFrequentWeatherCode(forecastData) {
-try {
-const agora = new Date();
-const amanha = new Date(agora);
-amanha.setDate(agora.getDate() + 1);
-
-const horasDia1 = forecastData?.forecast?.forecastday?.[0]?.hour || [];
-const horasDia2 = forecastData?.forecast?.forecastday?.[1]?.hour || [];
-const todasHoras = [...horasDia1, ...horasDia2];
-
-const horasFiltradas = todasHoras.filter(h => {
-if (!h?.time) return false;
-const dataHora = new Date(h.time);
-return dataHora >= agora && dataHora < amanha;
-});
-
-if (horasFiltradas.length === 0) return null;
-
-const frequencia = {};
-horasFiltradas.forEach(h => {
-const code = h.condition?.code;
-if (code !== undefined) {
-frequencia[code] = (frequencia[code] || 0) + 1;
-}
-});
-
-let codigoMaisFrequente = null;
-let maiorFrequencia = 0;
-
-for (const [code, count] of Object.entries(frequencia)) {
-if (count > maiorFrequencia) {
-maiorFrequencia = count;
-codigoMaisFrequente = parseInt(code);
-}
-}
-
-return codigoMaisFrequente;
-} catch (e) {
-console.warn('Erro ao calcular código mais frequente:', e);
-return null;
-}
-}
-
-function getPredominantConditionText(weatherData) {
-const codigoMaisFrequente = getMostFrequentWeatherCode(weatherData.forecast);
-
-if (codigoMaisFrequente !== null) {
-const conditionMap = {
-1000: 'Sol',
-1003: 'Parcialmente nublado',
-1006: 'Nublado',
-1009: 'Encoberto',
-1030: 'Nevoeiro',
-1063: 'Chuva',
-1066: 'Neve',
-1069: 'Chuva congelante',
-1072: 'Garoa',
-1087: 'Trovoadas',
-1135: 'Nevoeiro',
-1147: 'Nevoeiro',
-1150: 'Garoa',
-1153: 'Garoa',
-1180: 'Chuva fraca',
-1183: 'Chuva',
-1186: 'Chuva',
-1189: 'Chuva',
-1192: 'Chuva',
-1195: 'Chuva forte',
-1198: 'Chuva congelante',
-1201: 'Chuva congelante',
-1204: 'Chuva com neve',
-1207: 'Chuva com neve',
-1210: 'Neve',
-1213: 'Neve',
-1216: 'Neve',
-1219: 'Neve',
-1222: 'Neve',
-1225: 'Neve forte',
-1237: 'Granizo',
-1240: 'Chuva',
-1243: 'Chuva forte',
-1246: 'Chuva extrema',
-1249: 'Chuva congelante',
-1252: 'Chuva congelante',
-1255: 'Neve',
-1258: 'Neve forte',
-1261: 'Granizo',
-1264: 'Granizo forte',
-1273: 'Trovoada',
-1276: 'Trovoada',
-1279: 'Trovoada com neve',
-1282: 'Trovoada com neve'
-};
-return conditionMap[codigoMaisFrequente] || 'Clima variado';
-}
-return weatherData.current?.condition?.text || 'Desconhecido';
-}
