@@ -1225,6 +1225,7 @@ messages: ['Calor intenso! 🔥', 'Muito calor! 🥵']
 ];
 
 const descricoes = {
+"🌡️": "Termômetro",
 "🧊": "Congelante",
 "🥶": "Frio",
 "🧥": "Fresco",
@@ -2099,14 +2100,14 @@ return null;
 }
 }
 
+let intervaloAtualizacao = null;  // ← Movida para CIMA
+
 function iniciarAtualizacaoPeriodica() {
 clearInterval(intervaloAtualizacao);
 intervaloAtualizacao = setInterval(() => {
 buscarPrevisaoPorGeolocalizacao(false);
 }, 5 * 60 * 1000);
 }
-
-let intervaloAtualizacao = null;
 
 // Adicione no final do arquivo, antes do window.onload
 document.addEventListener('visibilitychange', function() {
