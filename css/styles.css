@@ -806,3 +806,8 @@ font-size: 2.2em;
 position: relative;
 top: 5px;
 }
+
+/* Ajuste de fonte para as tabelas de escala */
+#telaEscalas table td {
+font-size: 10px;
+}
