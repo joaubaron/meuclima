@@ -2522,7 +2522,7 @@ const temChuva = proximasHoras.some(h => h.mm > 0.1);
 
 const barras = proximasHoras.map(h => {
 const altura = Math.round((h.mm / maxMm) * 40);
-const cor = h.mm <= 0.1 ? 'rgba(255,255,255,0.15)'  // ← mudou: mais transparente
+const cor = h.mm <= 0.1 ? 'rgba(255,255,255,0.4)'  // ← mais opaco (40%)
 : h.mm <= 1.9  ? '#A0A0A0'
 : h.mm <= 3.9  ? '#22C55E'
 : h.mm <= 9.9  ? '#FACC15'
@@ -2533,7 +2533,7 @@ return `
 <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
 <div style="font-size:10px;color:rgba(255,255,255,0.5);">${h.mm > 0 ? h.mm.toFixed(1) : '–'}</div>
 <div style="width:100%;max-width:32px;height:40px;display:flex;align-items:flex-end;">
-<div style="width:100%;height:${h.mm <= 0.1 ? '1px' : Math.max(altura, 1)}px;background:${cor};border-radius:3px 3px 0 0;transition:height 0.3s;"></div>
+<div style="width:100%;height:${h.mm <= 0.1 ? '2px' : Math.max(altura, 1)}px;background:${cor};border-radius:3px 3px 0 0;transition:height 0.3s;"></div>
 </div>
 <div style="font-size:11px;color:rgba(255,255,255,0.7);font-weight:${h.label===`${horaAtual}h`?'700':'400'};">${h.label}</div>
 </div>`;
