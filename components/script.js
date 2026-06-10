@@ -84,9 +84,6 @@ function reiniciarBuscaAutomatica() {
 setTimeout(() => buscarPrevisaoPorGeolocalizacao(false), 5000);
 }
 
-function reiniciarBusca() {
-buscarPrevisaoPorGeolocalizacao(false);
-}
 document.addEventListener('touchstart', function (e) {
 if (window.scrollY === 0) {
 UI_STATE.touchStartY = e.touches[0].clientY;
@@ -822,13 +819,6 @@ document.body.classList.add('modal-aberto');
 telaGraficos.style.display = 'block';
 document.body.classList.add('modal-aberto');
 carregarGraficos();
-} else {
-// Fallback
-if (telaGraficos) {
-telaGraficos.style.display = 'block';
-document.body.classList.add('modal-aberto');
-carregarGraficos();
-}
 }
 return;
 }
@@ -1673,10 +1663,6 @@ mostrarSugestaoReceita(temp_c);
 
 const weatherIcon = getWeatherIcon(iconCode, isDay);
 
-// Tela principal sempre mostra o clima atual real
-const weatherIconFinal = weatherIcon;
-const condTextFinal = condText;
-
 // Pegar horários do sol
 const sunrise = weatherData.astronomy?.astro?.sunrise?.replace(' AM', '').replace(' PM', '') || '--:--';
 const sunset = weatherData.astronomy?.astro?.sunset?.replace(' AM', '').replace(' PM', '') || '--:--';
@@ -1684,7 +1670,7 @@ const sunset = weatherData.astronomy?.astro?.sunset?.replace(' AM', '').replace(
 if (resultDiv) {
 resultDiv.innerHTML = `
 <div class="big-icon">
-<img src="${weatherIconFinal}" class="weather-icon" alt="${condTextFinal}">
+<img src="${weatherIcon}" class="weather-icon" alt="${condText}">
 ${temp_c.toFixed(1)}°C
 </div>
 <div class="info-inline">
@@ -1802,7 +1788,6 @@ setTimeout(() => (splash.style.display = 'none'), 500);
 async function buscarExtras(lat, lon) {
 const extrasDiv = document.getElementById('extras');
 const moonDiv = document.getElementById('moonInfo');
-const now = Date.now();
 
 try {
 const weatherData = UI_STATE.weatherCache;
@@ -1998,7 +1983,6 @@ extrasDiv.innerHTML = htmlCompletoExtras;
 UI_STATE.extrasCache = {
 extras: htmlCompletoExtras
 };
-UI_STATE.extrasLastFetch = now;
 
 } catch (e) {
 console.error("Erro ao obter dados adicionais:", e);
