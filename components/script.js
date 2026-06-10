@@ -1468,22 +1468,28 @@ throw error;
 }
 
 async function getCurrentWeather(lat, lon, signal) {
-  try {
-    const response = await fetch(
-      `/api/weather?path=current&lat=${lat}&lon=${lon}`,
-      { signal }
-    );
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error ${response.status}`);
-    }
-    
-    const data = await response.json();
-    return data.current;
-  } catch (error) {
-    console.error("Erro ao obter clima atual:", error.message);
-    return null;
-  }
+try {
+const response = await fetch(
+`https://api.weatherapi.com/v1/current.json?key=6dfcee75db614193a74140421260406&q=${lat},${lon}&lang=pt`,
+{ signal }
+);
+
+if (!response.ok) {
+throw new Error(`HTTP error ${response.status}`);
+}
+
+const contentType = response.headers.get("content-type");
+if (!contentType || !contentType.includes("application/json")) {
+const text = await response.text();
+throw new Error("Resposta não é JSON. Conteúdo recebido: " + text.substring(0, 100));
+}
+
+const data = await response.json();
+return data.error ? null : data.current;
+} catch (error) {
+console.error("Erro ao obter clima atual:", error.message);
+return null;
+}
 }
 
 async function getForecast(lat, lon, days = 2) {
