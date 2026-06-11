@@ -12,7 +12,7 @@ const ASSETS = [
 '/receitas.json',
 '/components/script.js',
 '/css/styles.css',
-'/sw.js'  // ✅ Adicione o próprio sw.js ao cache
+'/sw.js'
 ];
 
 self.addEventListener('install', e => {
