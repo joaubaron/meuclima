@@ -765,6 +765,9 @@ let precipitacaoChart = null;
 let ventoChart = null;
 
 function abrirTelaGraficos() {
+// Fecha tela5Dias se estiver aberta
+const tela5DiasEl = document.getElementById('tela5Dias');
+if (tela5DiasEl) tela5DiasEl.style.display = 'none';
 // Fix: garante _coordsCache mesmo se GPS demorou
 if (!_coordsCache && UI_STATE.weatherCache) {
 const loc = UI_STATE.weatherCache?.current?.location
@@ -2366,17 +2369,11 @@ const telaGraficos = document.getElementById('telaGraficos');
 
 if (tela5Dias) tela5Dias.style.display = 'none';
 
-// NOVO: Se voltarParaGraficos for true, reabre os gráficos
-if (voltarParaGraficos && telaGraficos) {
-telaGraficos.style.display = 'block';
-document.body.classList.add('modal-aberto');
-setTimeout(() => {
-if (typeof carregarGraficos === 'function') {
-carregarGraficos();
-}
-}, 100);
+// Voltar e Fechar: fecha tudo, volta ao início
+if (false) {
+// bloco mantido por estrutura
 } else {
-// Comportamento original: fecha tudo
+// Fecha tudo
 if (telaEscalas) telaEscalas.style.display = 'none';
 if (telaGraficos) telaGraficos.style.display = 'none';
 document.body.classList.remove('modal-aberto');
