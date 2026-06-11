@@ -1,47 +1,34 @@
 name: Deploy para GitHub Pages
-
 on:
-push:
-branches:
-- main  # ou a branch que você usa para desenvolvimento
-paths-ignore:
-- '.github/**'  # Só ignore .github, não sw.js
-
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.github/**'
 jobs:
-deploy:
-runs-on: ubuntu-latest
-permissions:
-contents: write
-pages: write
-id-token: write
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-steps:
-- name: Checkout
-uses: actions/checkout@v4
+      - name: Atualizar CACHE_VERSION no sw.js
+        run: |
+          VERSION=$(TZ="America/Sao_Paulo" date +'%d.%m.%Y-%H%M')
+          sed -i "s/const CACHE_VERSION = '.*'/const CACHE_VERSION = '${VERSION}'/" sw.js
+          echo "Versão definida: $VERSION"
+          head -n 3 sw.js
 
-- name: Atualizar CACHE_VERSION no sw.js
-run: |
-VERSION=$(TZ="America/Sao_Paulo" date +'%d.%m.%Y-%H%M')
-sed -i "s/const CACHE_VERSION = '.*'/const CACHE_VERSION = '${VERSION}'/" sw.js
-
-# Debug: mostrar conteúdo
-echo "Conteúdo do sw.js após atualização:"
-head -n 3 sw.js
-
-- name: Commitar sw.js atualizado (opcional)
-run: |
-git config user.name "github-actions[bot]"
-git config user.email "github-actions[bot]@users.noreply.github.com"
-git add sw.js
-git diff --cached --quiet || git commit -m "chore: atualiza cache version [skip ci]"
-git push origin HEAD:main --force
-
-- name: Deploy para GitHub Pages
-uses: peaceiris/actions-gh-pages@v4
-with:
-github_token: ${{ secrets.GITHUB_TOKEN }}
-publish_dir: ./
-exclude_assets: '.github'
-keep_files: false
-user_name: 'github-actions[bot]'
-user_email: 'github-actions[bot]@users.noreply.github.com'
+      - name: Deploy para GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          exclude_assets: '.github'
+          keep_files: false
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
