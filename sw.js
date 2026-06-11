@@ -11,8 +11,7 @@ const ASSETS = [
 '/img/yr.png',
 '/receitas.json',
 '/components/script.js',
-'/css/styles.css',
-'/sw.js'
+'/css/styles.css'
 ];
 
 self.addEventListener('install', e => {
@@ -49,6 +48,12 @@ return self.clients.claim(); // ✅ Toma controle imediatamente
 
 self.addEventListener('fetch', e => {
 const url = e.request.url;
+
+// NUNCA cachear o próprio sw.js
+if (url.includes('sw.js')) {
+e.respondWith(fetch(e.request));
+return;
+}
 
 // Cache para CDN externo
 if (url.includes('cdn.weatherapi.com')) {
