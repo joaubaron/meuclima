@@ -2432,13 +2432,13 @@ return map[code] || '☁️';
 }
 
 function classificarChuva(mm) {
-if (mm <= 0.1)  return null;
-if (mm <= 1.9)  return '💧 Garoa';
-if (mm <= 3.9)  return '🌧️ Chuva fraca';
-if (mm <= 9.9)  return '🌧️ Chuva moderada';
-if (mm <= 19.9) return '⛈️ Chuva forte';
-if (mm <= 49.9) return '⛈️ Chuva muito forte';
-return '💦 Torrencial';
+  if (mm < 0.1)   return null;
+  if (mm <= 1.9)  return '💧 Garoa';
+  if (mm <= 3.9)  return '🌧️ Chuva fraca';
+  if (mm <= 9.9)  return '🌧️ Chuva moderada';
+  if (mm <= 19.9) return '⛈️ Chuva forte';
+  if (mm <= 49.9) return '⛈️ Chuva muito forte';
+  return '💦 Torrencial';
 }
 
 // Retorna qual período é agora: 'aurora' | 'manha' | 'tarde' | 'noite'
@@ -2530,7 +2530,7 @@ mm: forecastData.hourly.precipitation[idx] ?? 0
 
 if (proximasHoras.length > 0) {
 const maxMm = Math.max(...proximasHoras.map(h => h.mm), 0.1);
-const temChuva = proximasHoras.some(h => h.mm > 0.1);
+const temChuva = proximasHoras.some(h => h.mm >= 0.1);
 
 const barras = proximasHoras.map(h => {
 const altura = Math.round((h.mm / maxMm) * 40);
