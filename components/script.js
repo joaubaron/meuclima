@@ -2363,7 +2363,7 @@ setTimeout(() => { tela.style.opacity = '1'; }, 10);
 conteudo.innerHTML = `
 <div style="text-align:center;padding:30px;color:#ff6f00;font-size:13px;">
 Não foi possível carregar a previsão.<br>
-<button onclick="abrirTela5Dias()"
+<button onclick="fecharTela5Dias(null,false); abrirTela5Dias();"
 style="margin-top:14px;background:none;border:1px solid #ffeb3b;color:#ffeb3b;
 padding:7px 18px;border-radius:20px;cursor:pointer;font-size:12px;font-family:inherit;">
 Tentar novamente
