@@ -36,5 +36,5 @@ HTML5 / CSS3 / JavaScript (ES6+) / Chart.js / WeatherAPI / Nominatim
 ## Autor
 
 
-
-Reset: https://joaubaron.github.io/meuclima/?t=100
+1. Reset: https://joaubaron.github.io/meuclima/?t=100
+2. Vercel: https://meuclima-seven.vercel.app/

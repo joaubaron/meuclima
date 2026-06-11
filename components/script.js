@@ -765,6 +765,9 @@ let precipitacaoChart = null;
 let ventoChart = null;
 
 function abrirTelaGraficos() {
+// Fecha tela5Dias se estiver aberta
+const tela5DiasEl = document.getElementById('tela5Dias');
+if (tela5DiasEl) tela5DiasEl.style.display = 'none';
 // Fix: garante _coordsCache mesmo se GPS demorou
 if (!_coordsCache && UI_STATE.weatherCache) {
 const loc = UI_STATE.weatherCache?.current?.location
@@ -2260,19 +2263,18 @@ async function abrirTela5Dias() {
 const telaGraficos = document.getElementById('telaGraficos');
 if (telaGraficos) telaGraficos.style.display = 'none';
 
+// Overlay de carregamento
+const overlay = document.createElement('div');
+overlay.id = 'loadingOverlay5Dias';
+overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,20,50,0.85);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#ccc;font-size:13px;';
+overlay.innerHTML = '<div class="spinner"></div>Carregando previsão...';
+document.body.appendChild(overlay);
+
 const tela = document.getElementById('tela5Dias');
 if (!tela) return;
-tela.style.display = 'block';
-document.body.classList.add('modal-aberto');
-history.pushState({ modal: '5Dias' }, '');
-setTimeout(() => { tela.style.opacity = '1'; }, 10);
 
 const conteudo = document.getElementById('conteudo5Dias');
-conteudo.innerHTML = `
-<div style="text-align:center;padding:40px 20px;color:#ccc;font-size:13px;">
-<div class="spinner" style="margin:0 auto 14px;"></div>
-Carregando previsão...
-</div>`;
+conteudo.innerHTML = '';
 
 try {
 let forecastData;
@@ -2339,13 +2341,29 @@ forecastData = UI_STATE.weatherCache.forecast;
 throw new Error('Localização não disponível');
 }
 
+const _removerOverlay = () => {
+const ov = document.getElementById('loadingOverlay5Dias');
+if (ov) ov.remove();
+tela.style.display = 'block';
+document.body.classList.add('modal-aberto');
+history.pushState({ modal: '5Dias' }, '');
+setTimeout(() => { tela.style.opacity = '1'; }, 10);
+};
+
 renderizar5Dias(forecastData);
+_removerOverlay();
 } catch (e) {
 console.error('Erro ao carregar 5 dias:', e);
+const ov = document.getElementById('loadingOverlay5Dias');
+if (ov) ov.remove();
+tela.style.display = 'block';
+document.body.classList.add('modal-aberto');
+history.pushState({ modal: '5Dias' }, '');
+setTimeout(() => { tela.style.opacity = '1'; }, 10);
 conteudo.innerHTML = `
 <div style="text-align:center;padding:30px;color:#ff6f00;font-size:13px;">
 Não foi possível carregar a previsão.<br>
-<button onclick="abrirTela5Dias()"
+<button onclick="fecharTela5Dias(null,false); abrirTela5Dias();"
 style="margin-top:14px;background:none;border:1px solid #ffeb3b;color:#ffeb3b;
 padding:7px 18px;border-radius:20px;cursor:pointer;font-size:12px;font-family:inherit;">
 Tentar novamente
@@ -2366,17 +2384,11 @@ const telaGraficos = document.getElementById('telaGraficos');
 
 if (tela5Dias) tela5Dias.style.display = 'none';
 
-// NOVO: Se voltarParaGraficos for true, reabre os gráficos
-if (voltarParaGraficos && telaGraficos) {
-telaGraficos.style.display = 'block';
-document.body.classList.add('modal-aberto');
-setTimeout(() => {
-if (typeof carregarGraficos === 'function') {
-carregarGraficos();
-}
-}, 100);
+// Voltar e Fechar: fecha tudo, volta ao início
+if (false) {
+// bloco mantido por estrutura
 } else {
-// Comportamento original: fecha tudo
+// Fecha tudo
 if (telaEscalas) telaEscalas.style.display = 'none';
 if (telaGraficos) telaGraficos.style.display = 'none';
 document.body.classList.remove('modal-aberto');
