@@ -1,17 +1,17 @@
 const CACHE_VERSION = '11.06.2026-1200';
 const CACHE_NAME = `meuclima-${CACHE_VERSION}`;
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/img/splash.png',
-  '/img/meuclima.png',
-  '/img/yr.png',
-  '/receitas.json',
-  '/components/script.js',
-  '/css/styles.css',
+'/',
+'/index.html',
+'/manifest.json',
+'/icon-192.png',
+'/icon-512.png',
+'/img/splash.png',
+'/img/meuclima.png',
+'/img/yr.png',
+'/receitas.json',
+'/components/script.js',
+'/css/styles.css',
 ];
 
 self.addEventListener('install', e => {
