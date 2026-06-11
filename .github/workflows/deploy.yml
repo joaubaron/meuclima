@@ -3,9 +3,9 @@ name: Deploy para GitHub Pages
 on:
 push:
 branches:
-- main
+- main  # ou a branch que você usa para desenvolvimento
 paths-ignore:
-- 'sw.js'
+- '.github/**'  # Só ignore .github, não sw.js
 
 jobs:
 deploy:
@@ -24,7 +24,11 @@ run: |
 VERSION=$(TZ="America/Sao_Paulo" date +'%d.%m.%Y-%H%M')
 sed -i "s/const CACHE_VERSION = '.*'/const CACHE_VERSION = '${VERSION}'/" sw.js
 
-- name: Commitar sw.js atualizado
+# Debug: mostrar conteúdo
+echo "Conteúdo do sw.js após atualização:"
+head -n 3 sw.js
+
+- name: Commitar sw.js atualizado (opcional)
 run: |
 git config user.name "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -38,3 +42,6 @@ with:
 github_token: ${{ secrets.GITHUB_TOKEN }}
 publish_dir: ./
 exclude_assets: '.github'
+keep_files: false
+user_name: 'github-actions[bot]'
+user_email: 'github-actions[bot]@users.noreply.github.com'
