@@ -2516,7 +2516,7 @@ const dateAtual = agora.toLocaleDateString('en-CA');
 
 // Pega (hora atual + 8 seguintes)
 const proximasHoras = [];
-for (let h = horaAtual; h < horaAtual + 9; h++) {
+for (let h = horaAtual; h < horaAtual + 10; h++) {
 const horaReal = h % 24;
 const dateStr = h >= 24 ? new Date(agora.getTime() + 86400000).toLocaleDateString('en-CA') : dateAtual;
 const timeStr = `${dateStr}T${String(horaReal).padStart(2,'0')}:00`;
