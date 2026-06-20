@@ -1,4 +1,4 @@
-const CACHE_VERSION = '16.06.2026-2143';
+const CACHE_VERSION = '20.06.2026-1412';
 const CACHE_NAME = `meuclima-${CACHE_VERSION}`;
 const ASSETS = [
   '/',
