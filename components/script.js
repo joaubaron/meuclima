@@ -720,15 +720,13 @@ return { months, days };
 
 const { months: mesesRest, days: diasRest } = diffMesesDias(hoje, end);
 const textoRestante = mesesRest > 0
-? `${mesesRest} ${mesesRest === 1 ? 'mês' : 'meses'} e ${diasRest} dia${diasRest !== 1 ? 's' : ''}`
+? `${mesesRest} ${mesesRest === 1 ? 'mês' : 'meses'}${diasRest > 0 ? ` e ${diasRest} dia${diasRest !== 1 ? 's' : ''}` : ''}`
 : `${diasRest} dia${diasRest !== 1 ? 's' : ''}`;
 
 const formatarDataLonga = (data) => {
-const meses = [
-'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
-'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
-];
-return `${data.getDate()} de ${meses[data.getMonth()]}`;
+const dia = String(data.getDate()).padStart(2, '0');
+const mes = String(data.getMonth() + 1).padStart(2, '0');
+return `${dia}/${mes}`;
 };
 
 const info = document.getElementById("estacaoInfo");
@@ -736,7 +734,7 @@ const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase
 
 if (info) {
 info.innerHTML = `
-<div style="text-align:center; font-size:0.70rem; line-height:1.4;">
+<div style="text-align:center; font-size:0.80rem; line-height:1.4;">
 ${emoji} ${capitalize(estacao)} até ${formatarDataLonga(end)}  ${nextEmoji} ${capitalize(next)} em ${textoRestante}
 </div>
 `;
