@@ -1,8 +1,6 @@
-const CACHE_VERSION = '22.06.2026-0853';
+const CACHE_VERSION = '26.06.2026-0844';
 const CACHE_NAME = `meuclima-${CACHE_VERSION}`;
-const ASSETS = [
-  '/',
-  '/index.html',
+const STATIC_ASSETS = [
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
@@ -16,7 +14,13 @@ const ASSETS = [
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+    caches.open(CACHE_NAME).then(async cache => {
+      await cache.addAll(STATIC_ASSETS);
+      // index.html com cache-bust para garantir versão nova do CDN
+      const resp = await fetch(`/index.html?v=${CACHE_VERSION}`, { cache: 'no-store' });
+      await cache.put('/index.html', resp);
+      await cache.put('/', resp.clone());
+    })
   );
   self.skipWaiting();
 });
